@@ -6,23 +6,28 @@ const supabase = createClient(
 );
 
 /**
- * GET /api/compare?a=threadId&b=threadId
+ * GET /api/compare?a=threadId&b=threadId&token=xxx
  * Fetch two threads with their latest completed run for comparison.
  */
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const aId = searchParams.get("a");
   const bId = searchParams.get("b");
+  const token = searchParams.get("token");
 
   if (!aId || !bId) {
     return Response.json({ error: "Both thread IDs required" }, { status: 400 });
+  }
+
+  if (!token) {
+    return Response.json({ error: "Not found" }, { status: 404 });
   }
 
   async function getThreadWithLatestRun(threadId: string) {
     const [threadRes, runRes] = await Promise.all([
       supabase
         .from("threads")
-        .select("id, name, latest_verdict, latest_score, run_count, created_at")
+        .select("id, name, owner_token, latest_verdict, latest_score, run_count, created_at")
         .eq("id", threadId)
         .single(),
       supabase
@@ -36,8 +41,12 @@ export async function GET(req: Request) {
 
     if (threadRes.error || !threadRes.data) return null;
 
+    if (threadRes.data.owner_token !== token) return null;
+
+    const { owner_token: _, ...thread } = threadRes.data;
+
     return {
-      thread: threadRes.data,
+      thread,
       latestRun: runRes.data?.[0] ?? null,
     };
   }

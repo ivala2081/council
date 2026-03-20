@@ -6,7 +6,12 @@ const supabase = createClient(
 );
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  let body: Record<string, unknown>;
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON in request body" }, { status: 400 });
+  }
   const {
     event,
     owner_token,

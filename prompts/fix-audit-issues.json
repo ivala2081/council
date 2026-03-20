@@ -1,0 +1,321 @@
+{
+  "meta": {
+    "prompt_id": "council-audit-fix-v1",
+    "created": "2026-03-21",
+    "author": "prompt-engineer",
+    "project": "AiCompanyOS/Council",
+    "working_dir": "council/",
+    "description": "Proje denetim raporundaki 10 sorunu çözmek için detaylı talimatlar",
+    "priority_order": ["critical", "high", "medium"],
+    "total_issues": 10
+  },
+
+  "instructions": {
+    "general": [
+      "Tüm değişiklikler council/ dizini içinde yapılacak.",
+      "Mevcut dosyaları düzenle, gereksiz yeni dosya oluşturma.",
+      "TypeScript strict mode aktif — tip hatası bırakma.",
+      "Her düzeltmeden sonra `npm run build` ile doğrula.",
+      "Kod convention'ları için CLAUDE.md'yi referans al.",
+      "Commit YAPMA — sadece kodu düzelt."
+    ]
+  },
+
+  "tasks": [
+    {
+      "id": 1,
+      "priority": "critical",
+      "title": "Hardcoded admin key'i environment variable'a taşı",
+      "file": "src/app/api/admin/stats/route.ts",
+      "line": 3,
+      "current_code": "const ADMIN_KEY = \"council-admin-2026\";",
+      "problem": "Admin anahtarı kaynak kodda açık yazılmış. Repo'yu gören herkes admin dashboard'a erişebilir.",
+      "fix": {
+        "steps": [
+          "Satır 3'teki hardcoded string'i kaldır ve environment variable'dan oku: `const ADMIN_KEY = process.env.ADMIN_KEY;`",
+          "ADMIN_KEY tanımlı değilse early return yap: `if (!ADMIN_KEY) return NextResponse.json({ error: 'Admin endpoint not configured' }, { status: 503 });`",
+          "Mevcut key karşılaştırma mantığını (satır 10-14) koru, sadece kaynağı değiştir.",
+          ".env.local dosyasına `ADMIN_KEY=council-admin-2026` satırını ekle (mevcut key'i taşı).",
+          ".env.example dosyası varsa oraya da `ADMIN_KEY=` (değersiz) olarak ekle."
+        ],
+        "validation": "Build başarılı olmalı. Endpoint, env var olmadan 503 dönmeli."
+      }
+    },
+    {
+      "id": 2,
+      "priority": "critical",
+      "title": "key_findings insert'ine source_agent alanını ekle",
+      "file": "src/app/api/mission/route.ts",
+      "line_range": "314-356",
+      "problem": "extractKeyFindings() fonksiyonu Supabase'e insert yaparken `source_agent` alanını göndermiyor. Bu alan DB'de NOT NULL ise insert sessizce başarısız oluyor, key findings kayboluyor.",
+      "fix": {
+        "steps": [
+          "extractKeyFindings() fonksiyonundaki Supabase insert objesine `source_agent: \"strategist\"` alanını ekle.",
+          "Insert payload şu şekilde olmalı: `{ mission_id, company_id, content, section, finding_type, source_agent: 'strategist' }`",
+          "Mevcut try/catch yapısını koru — bu fire-and-forget bir işlem, mission'ı bloklamıyor."
+        ],
+        "validation": "Yeni bir mission oluştur, Supabase'te key_findings tablosunda source_agent='strategist' olarak kayıt göründüğünü doğrula."
+      }
+    },
+    {
+      "id": 3,
+      "priority": "critical",
+      "title": ".env.local dosyasını git tracking'den çıkar",
+      "file": ".env.local",
+      "problem": ".gitignore'da `.env*` pattern'i var (satır 34) ama dosya daha önce commit edilmişse hâlâ tracked kalır. Secrets commit history'de kalabilir.",
+      "fix": {
+        "steps": [
+          "Önce .gitignore'da `.env*.local` pattern'inin olduğunu doğrula.",
+          "`git ls-files --cached .env.local` komutuyla dosyanın tracked olup olmadığını kontrol et.",
+          "Eğer tracked ise: `git rm --cached .env.local` ile index'ten kaldır (dosya diskten silinmez).",
+          "Bu değişikliği NOT AL — commit'i kullanıcı yapacak.",
+          "NOT: Eğer .env.local daha önce commit edildiyse, içindeki secret'lar (Supabase key, Anthropic key) rotate edilmeli. Bunu kullanıcıya bildir."
+        ],
+        "validation": "`git status` çıktısında .env.local 'deleted from index' olarak görünmeli, `git ls-files --cached .env.local` boş dönmeli.",
+        "user_warning": "Eğer .env.local commit history'de varsa, Supabase anon key ve Anthropic API key'ini rotate etmeni öneririm. Bu secret'lar artık git history'de mevcut."
+      }
+    },
+    {
+      "id": 4,
+      "priority": "high",
+      "title": "Tüm API route'larına JSON parse güvenliği ekle",
+      "files": [
+        "src/app/api/feedback/route.ts",
+        "src/app/api/missions/route.ts",
+        "src/app/api/events/route.ts",
+        "src/app/api/mission/route.ts"
+      ],
+      "problem": "`await req.json()` çağrıları try/catch içinde değil. Geçersiz JSON gönderildiğinde 500 Internal Server Error dönüyor — bu hem kötü UX hem de potansiyel bilgi sızıntısı.",
+      "fix": {
+        "steps": [
+          "Her dosyada `await req.json()` çağrısını try/catch bloğuna al.",
+          "Catch bloğunda 400 status ile anlamlı hata mesajı dön.",
+          "Pattern şu şekilde olmalı:",
+          "",
+          "```typescript",
+          "let body: unknown;",
+          "try {",
+          "  body = await req.json();",
+          "} catch {",
+          "  return NextResponse.json(",
+          "    { error: 'Invalid JSON in request body' },",
+          "    { status: 400 }",
+          "  );",
+          "}",
+          "```",
+          "",
+          "Her dosya için aynı pattern'i uygula:",
+          "- feedback/route.ts → satır 9",
+          "- missions/route.ts → satır 9",
+          "- events/route.ts → satır 9",
+          "- mission/route.ts → ilgili req.json() satırı"
+        ],
+        "validation": "Her endpoint'e geçersiz JSON (örn: `{invalid`) POST edildiğinde 400 dönmeli, 500 değil."
+      }
+    },
+    {
+      "id": 5,
+      "priority": "high",
+      "title": "Thread ve compare route'larına owner_token doğrulaması ekle",
+      "files": [
+        "src/app/api/threads/[id]/route.ts",
+        "src/app/api/compare/route.ts"
+      ],
+      "problem": "Bu endpoint'lerde hiçbir auth kontrolü yok. Thread UUID'sini bilen herkes başka kullanıcının thread verilerini (isim, skor, verdict, tüm run prompt'ları ve sonuçları) görebilir.",
+      "fix": {
+        "steps": [
+          "Her iki route'a da `owner_token` query parameter kontrolü ekle.",
+          "",
+          "threads/[id]/route.ts için:",
+          "- Request'ten `owner_token` query param'ını al.",
+          "- Thread'i fetch ettikten sonra, thread'in owner_token'ı ile request'teki token'ı karşılaştır.",
+          "- Eşleşmiyorsa `{ error: 'Not found' }` ile 404 dön (403 değil — bilgi sızıntısını önle).",
+          "- Shared thread'ler (public link ile paylaşılanlar) için: eğer thread tablosunda `is_public` veya `share_token` gibi bir alan varsa, bu durumu da kontrol et. Yoksa sadece owner_token kontrolü yeterli.",
+          "",
+          "compare/route.ts için:",
+          "- Request'ten `owner_token` query param'ını al.",
+          "- Her iki thread'i fetch ettikten sonra, ikisinin de owner_token'ının request'teki token ile eşleştiğini doğrula.",
+          "- Herhangi biri eşleşmiyorsa 404 dön.",
+          "",
+          "Pattern:",
+          "```typescript",
+          "const token = url.searchParams.get('token');",
+          "if (!token) {",
+          "  return NextResponse.json({ error: 'Missing token' }, { status: 401 });",
+          "}",
+          "// ... fetch thread ...",
+          "if (thread.owner_token !== token) {",
+          "  return NextResponse.json({ error: 'Not found' }, { status: 404 });",
+          "}",
+          "```",
+          "",
+          "Frontend'de bu endpoint'leri çağıran yerlerde de owner_token'ı query param olarak ekle (localStorage'dan al)."
+        ],
+        "validation": "Yanlış token ile thread fetch etmeye çalışıldığında 404 dönmeli. Doğru token ile normal çalışmalı.",
+        "note": "Frontend'deki çağrı noktalarını da güncellemeyi unutma — aksi takdirde mevcut kullanıcılar kendi thread'lerini göremez."
+      }
+    },
+    {
+      "id": 6,
+      "priority": "high",
+      "title": "Feedback route'a Zod validation ekle",
+      "file": "src/app/api/feedback/route.ts",
+      "problem": "Gelen feedback verisi hiç validate edilmiyor. Score aralıkları, tipler, string uzunlukları kontrol dışı. Kötü veri DB'ye yazılabiliyor.",
+      "fix": {
+        "steps": [
+          "Zod schema tanımla (dosyanın üstüne veya src/lib/agents/types.ts'e ekle):",
+          "",
+          "```typescript",
+          "import { z } from 'zod';",
+          "",
+          "const FeedbackSchema = z.object({",
+          "  mission_id: z.string().uuid(),",
+          "  score: z.number().int().min(1).max(5),",
+          "  comment: z.string().max(1000).optional(),",
+          "  feedback_type: z.enum(['accuracy', 'usefulness', 'depth', 'general']).optional()",
+          "});",
+          "```",
+          "",
+          "Body'yi parse ettikten sonra schema ile validate et:",
+          "```typescript",
+          "const parsed = FeedbackSchema.safeParse(body);",
+          "if (!parsed.success) {",
+          "  return NextResponse.json(",
+          "    { error: 'Invalid feedback data', details: parsed.error.flatten() },",
+          "    { status: 400 }",
+          "  );",
+          "}",
+          "// parsed.data kullan, body değil",
+          "```",
+          "",
+          "DB insert'te `parsed.data` kullan, ham `body` değil."
+        ],
+        "validation": "Score=10 veya score='abc' ile POST yapıldığında 400 dönmeli. Score=3, valid UUID ile POST yapıldığında başarılı olmalı."
+      }
+    },
+    {
+      "id": 7,
+      "priority": "medium",
+      "title": "Root dizindeki gereksiz dosyaları sil",
+      "location": "council/ root",
+      "files_to_delete": [
+        "v5-test-report.json",
+        "v5.1-test-report.json",
+        "v5.2-spec.md",
+        "v5.2-test-report.json",
+        "v5.3-test-report.json",
+        "v5.6-test-report.json"
+      ],
+      "problem": "Eski test raporları ve spec dosyaları repo'yu gereksiz şişiriyor. Bunlar geliştirme sürecinin artıkları, production'da işe yaramaz.",
+      "fix": {
+        "steps": [
+          "Listelenen 6 dosyayı sil.",
+          "test-pipeline.ts zaten .gitignore'da — onu da kontrol et, eğer tracked değilse dokunma.",
+          "Silmeden önce içeriklerine bakıp hâlâ referans edilen bir şey olmadığını doğrula (grep ile)."
+        ],
+        "validation": "Dosyalar silinmiş olmalı. `npm run build` hâlâ başarılı olmalı."
+      }
+    },
+    {
+      "id": 8,
+      "priority": "medium",
+      "title": "Kullanılmayan /api/missions route'unu kaldır",
+      "file": "src/app/api/missions/route.ts",
+      "problem": "Bu route hiçbir frontend sayfasından veya component'ten çağrılmıyor. Dead code.",
+      "fix": {
+        "steps": [
+          "Önce gerçekten kullanılmadığını doğrula: tüm projede '/api/missions' string'ini ara (grep). `/api/mission` (tekil) ile karıştırma — o farklı ve aktif.",
+          "Eğer hiçbir yerden referans edilmiyorsa, `src/app/api/missions/` dizinini tamamen sil.",
+          "Eğer bir yerden referans ediliyorsa, SİLME ve bunu raporla."
+        ],
+        "validation": "Dizin silinmiş olmalı. Build başarılı olmalı. Hiçbir sayfa bozulmamalı."
+      }
+    },
+    {
+      "id": 9,
+      "priority": "medium",
+      "title": "Kullanılmayan pipeline/dual.ts'i kaldır",
+      "file": "src/lib/pipeline/dual.ts",
+      "problem": "`runDualPipeline()` fonksiyonu hiçbir yerden import/çağrılmıyor. 205 satır dead code.",
+      "fix": {
+        "steps": [
+          "Önce gerçekten kullanılmadığını doğrula: tüm projede 'dual' ve 'runDualPipeline' string'lerini ara.",
+          "Eğer hiçbir yerden import edilmiyorsa dosyayı sil.",
+          "pipeline/ dizininde başka dosya var mı kontrol et — eğer dual.ts tek dosyaysa ve dizin boş kalacaksa, dizini de sil.",
+          "Eğer bir yerden referans ediliyorsa, SİLME ve bunu raporla."
+        ],
+        "validation": "Dosya silinmiş olmalı. Build başarılı olmalı."
+      }
+    },
+    {
+      "id": 10,
+      "priority": "medium",
+      "title": "Layout'a metadataBase ekle",
+      "file": "src/app/layout.tsx",
+      "problem": "metadataBase tanımlı değil. Open Graph image'ları ve canonical URL'ler localhost'a fallback yapıyor — SEO ve sosyal medya paylaşımlarını etkiliyor.",
+      "fix": {
+        "steps": [
+          "layout.tsx'teki mevcut metadata objesine metadataBase ekle:",
+          "",
+          "```typescript",
+          "export const metadata: Metadata = {",
+          "  metadataBase: new URL('https://council-zeta.vercel.app'),",
+          "  // ... mevcut metadata alanları aynen kalsın",
+          "};",
+          "```",
+          "",
+          "Mevcut title, description vb. alanlara dokunma, sadece metadataBase ekle.",
+          "URL'in production URL olduğundan emin ol: https://council-zeta.vercel.app"
+        ],
+        "validation": "Build başarılı olmalı. `<meta property='og:image'>` tag'i artık tam URL içermeli (localhost değil)."
+      }
+    }
+  ],
+
+  "execution_order": {
+    "description": "Önerilen uygulama sırası — bağımlılıklar ve risk seviyesine göre",
+    "order": [
+      {
+        "step": 1,
+        "task_ids": [3],
+        "reason": ".env.local'ı tracking'den çıkar — diğer değişikliklerden önce secret güvenliğini sağla"
+      },
+      {
+        "step": 2,
+        "task_ids": [1],
+        "reason": "Hardcoded key'i env var'a taşı — .env.local artık güvende"
+      },
+      {
+        "step": 3,
+        "task_ids": [2],
+        "reason": "source_agent eksikliğini düzelt — data loss'u durdur"
+      },
+      {
+        "step": 4,
+        "task_ids": [4, 6],
+        "reason": "Input validation — paralel yapılabilir, birbirine bağımlı değil"
+      },
+      {
+        "step": 5,
+        "task_ids": [5],
+        "reason": "Auth ekleme — validation'dan sonra, çünkü auth route'ları da valid input bekler"
+      },
+      {
+        "step": 6,
+        "task_ids": [7, 8, 9, 10],
+        "reason": "Temizlik — paralel yapılabilir, birbirine bağımlı değil"
+      }
+    ]
+  },
+
+  "post_completion": {
+    "checklist": [
+      "`cd council && npm run build` — sıfır hata",
+      "`cd council && npx tsc --noEmit` — sıfır tip hatası",
+      "Tüm silinen dosyaların hiçbir yerden import edilmediğini doğrula",
+      "Frontend'in auth değişikliklerinden sonra hâlâ çalıştığını manual test et",
+      ".env.local'ın git status'ta görünmediğini doğrula",
+      "Kullanıcıya secret rotation hatırlatması yap (eğer .env.local commit history'deyse)"
+    ]
+  }
+}

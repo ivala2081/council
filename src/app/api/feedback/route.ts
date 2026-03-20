@@ -1,18 +1,41 @@
 import { createClient } from "@supabase/supabase-js";
+import { z } from "zod";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
+const FeedbackSchema = z.object({
+  missionId: z.string().uuid(),
+  overall_score: z.number().int().min(1).max(5),
+  specificity_score: z.number().int().min(1).max(5).nullable().optional(),
+  actionability_score: z.number().int().min(1).max(5).nullable().optional(),
+  depth_score: z.number().int().min(1).max(5).nullable().optional(),
+  accuracy_score: z.number().int().min(1).max(5).nullable().optional(),
+  decision_clarity_score: z.number().int().min(1).max(5).nullable().optional(),
+  free_text: z.string().max(2000).nullable().optional(),
+  would_pay: z.boolean().nullable().optional(),
+  would_use_again: z.boolean().nullable().optional(),
+});
+
 export async function POST(req: Request) {
-  const body = await req.json();
-
-  const { missionId, ...scores } = body;
-
-  if (!missionId) {
-    return Response.json({ error: "missionId required" }, { status: 400 });
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON in request body" }, { status: 400 });
   }
+
+  const parsed = FeedbackSchema.safeParse(body);
+  if (!parsed.success) {
+    return Response.json(
+      { error: "Invalid feedback data", details: parsed.error.flatten() },
+      { status: 400 }
+    );
+  }
+
+  const { missionId, ...scores } = parsed.data;
 
   const { error } = await supabase.from("feedback").insert({
     mission_id: missionId,

@@ -26,7 +26,19 @@ const supabase = createClient(
 );
 
 export async function POST(req: Request) {
-  const { prompt, companyId, mode = "full", threadId, ownerToken } = await req.json();
+  let body: Record<string, unknown>;
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON in request body" }, { status: 400 });
+  }
+  const { prompt, companyId, mode = "full", threadId, ownerToken } = body as {
+    prompt: string;
+    companyId?: string;
+    mode?: string;
+    threadId?: string;
+    ownerToken?: string;
+  };
   const isConcise = mode === "concise";
   const isDeep = mode === "deep"; // Extended thinking mode
 
@@ -305,6 +317,7 @@ async function extractKeyFindings(
     content: string;
     section: string;
     finding_type: string;
+    source_agent: string;
   }[] = [];
 
   try {
@@ -317,6 +330,7 @@ async function extractKeyFindings(
         content: `Verdict: ${verdict.verdict} (score: ${verdict.councilScore}). ${verdict.summary}`,
         section: "verdict",
         finding_type: "assessment",
+        source_agent: "strategist",
       });
     }
 
@@ -330,6 +344,7 @@ async function extractKeyFindings(
           content: risk,
           section: "risks",
           finding_type: "risk",
+          source_agent: "strategist",
         });
       }
     }
@@ -348,6 +363,7 @@ async function extractKeyFindings(
           content: a.assumption,
           section: "assumptions",
           finding_type: "assumption",
+          source_agent: "strategist",
         });
       }
     }

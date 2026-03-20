@@ -74,7 +74,8 @@ export default function ThreadPage() {
 
   // Fetch thread data
   useEffect(() => {
-    fetch(`/api/threads/${id}`)
+    const token = localStorage.getItem("council_owner_token") ?? "";
+    fetch(`/api/threads/${id}?token=${token}`)
       .then((r) => r.json())
       .then((data) => {
         setThread(data.thread);
@@ -128,7 +129,8 @@ export default function ThreadPage() {
     }
     if (newBrief && newMissionId) {
       // Re-fetch thread data to get the computed delta
-      fetch(`/api/threads/${id}`)
+      const token = localStorage.getItem("council_owner_token") ?? "";
+      fetch(`/api/threads/${id}?token=${token}`)
         .then((r) => r.json())
         .then((data) => {
           setThread(data.thread);

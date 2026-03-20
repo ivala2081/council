@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 
-const ADMIN_KEY = "council-admin-2026";
+const ADMIN_KEY = process.env.ADMIN_KEY;
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -10,6 +10,10 @@ const supabase = createClient(
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const key = url.searchParams.get("key");
+
+  if (!ADMIN_KEY) {
+    return Response.json({ error: "Admin endpoint not configured" }, { status: 503 });
+  }
 
   if (key !== ADMIN_KEY) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });

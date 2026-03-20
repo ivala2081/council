@@ -6,19 +6,25 @@ const supabase = createClient(
 );
 
 /**
- * GET /api/threads/[id]
+ * GET /api/threads/[id]?token=xxx
  * Fetch a single thread with all its runs (missions).
  */
 export async function GET(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+  const url = new URL(req.url);
+  const token = url.searchParams.get("token");
+
+  if (!token) {
+    return Response.json({ error: "Not found" }, { status: 404 });
+  }
 
   const [threadRes, runsRes] = await Promise.all([
     supabase
       .from("threads")
-      .select("id, name, latest_verdict, latest_score, run_count, created_at, updated_at")
+      .select("id, name, owner_token, latest_verdict, latest_score, run_count, created_at, updated_at")
       .eq("id", id)
       .single(),
     supabase
@@ -29,11 +35,17 @@ export async function GET(
   ]);
 
   if (threadRes.error || !threadRes.data) {
-    return Response.json({ error: "Thread not found" }, { status: 404 });
+    return Response.json({ error: "Not found" }, { status: 404 });
   }
 
+  if (threadRes.data.owner_token !== token) {
+    return Response.json({ error: "Not found" }, { status: 404 });
+  }
+
+  const { owner_token: _, ...thread } = threadRes.data;
+
   return Response.json({
-    thread: threadRes.data,
+    thread,
     runs: runsRes.data ?? [],
   });
 }

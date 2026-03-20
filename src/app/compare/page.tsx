@@ -97,7 +97,8 @@ function CompareContent() {
       return;
     }
 
-    fetch(`/api/compare?a=${aId}&b=${bId}`)
+    const token = localStorage.getItem("council_owner_token") ?? "";
+    fetch(`/api/compare?a=${aId}&b=${bId}&token=${token}`)
       .then((r) => r.json())
       .then((data) => {
         if (data.error) {
