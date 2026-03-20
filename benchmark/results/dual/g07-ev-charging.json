@@ -1,0 +1,502 @@
+{
+  "promptId": "g07-ev-charging",
+  "mode": "dual",
+  "triage": {
+    "output": {
+      "ideaType": "Infrastructure/Hardware - EV Charging Network",
+      "queryType": "Strategic positioning + go-to-market decision + funding strategy validation",
+      "founderProfile": {
+        "teamSize": 3,
+        "technicalAbility": "High (Tesla Supercharger veteran + hardware engineer)",
+        "businessExperience": "Strong (10 years energy sector + VC-backed)",
+        "budget": "$2M seed raised",
+        "stage": "Post-seed, pre-deployment at scale"
+      },
+      "extractedContext": {
+        "coreProblem": "EV charging infrastructure gap in suburban/rural areas; major players (ChargePoint, Electrify America) avoid low-density markets due to utilization risk",
+        "targetMarket": "Rural/suburban EV drivers + location partners (gas stations, convenience stores, restaurants) seeking new revenue streams",
+        "solution": "Co-located DC fast chargers (150kW+) with revenue-sharing partnerships + mobile app (payments, routing, loyalty)",
+        "revenueModel": "$0.35-0.45/kWh split with partner + $9.99/mo subscription tier",
+        "statedConcerns": [
+          "Unit economics: $50-150K capex per station with uncertain rural utilization",
+          "Rural EV adoption slower than urban; break-even threshold unclear",
+          "Capital intensity vs. competitor moats (utilities, oil majors)",
+          "NEVI program complexity (6-12 month approval cycle)",
+          "Highway vs. local community charging trade-off"
+        ],
+        "openDecisions": [
+          "Highway corridor (transient travelers) vs. local community (resident charging)",
+          "NEVI grant funding (slower, complex, but capital-efficient) vs. private capital only (faster, capital-intensive)"
+        ],
+        "constraints": [
+          "High capex per unit ($50-150K)",
+          "Rural utilization risk",
+          "Regulatory/incentive complexity",
+          "Incumbent competition with deeper pockets"
+        ]
+      },
+      "sectionPriorities": {
+        "marketAnalysis": "detailed",
+        "businessModel": "detailed",
+        "competitiveStrategy": "detailed",
+        "decisionAgenda": "detailed",
+        "technicalFeasibility": "standard",
+        "fundingStrategy": "detailed"
+      },
+      "keyQuestions": [
+        "What is the actual utilization threshold (kWh/day) needed to break even per station in rural vs. highway vs. suburban contexts, and what does EV adoption data suggest is realistic in each?",
+        "Should the go-to-market strategy prioritize high-traffic highway corridors first (to prove unit economics) before expanding to local community charging, or pursue both simultaneously?",
+        "What is the true competitive advantage of the co-location + revenue-sharing model vs. standalone stations, and how defensible is it against ChargePoint/Electrify America if they decide to enter these markets?",
+        "Is NEVI funding a strategic necessity (capital efficiency, credibility, scale) or a distraction (6-12 month delay, regulatory burden)—and what does the capital runway look like under each scenario?",
+        "How should the team think about location partner acquisition, retention, and incentive alignment as a go-to-market bottleneck?"
+      ],
+      "language": "en"
+    },
+    "rawText": "```json\n{\n  \"ideaType\": \"Infrastructure/Hardware - EV Charging Network\",\n  \"queryType\": \"Strategic positioning + go-to-market decision + funding strategy validation\",\n  \"founderProfile\": {\n    \"teamSize\": 3,\n    \"technicalAbility\": \"High (Tesla Supercharger veteran + hardware engineer)\",\n    \"businessExperience\": \"Strong (10 years energy sector + VC-backed)\",\n    \"budget\": \"$2M seed raised\",\n    \"stage\": \"Post-seed, pre-deployment at scale\"\n  },\n  \"extractedContext\": {\n    \"coreProblem\": \"EV charging infrastructure gap in suburban/rural areas; major players (ChargePoint, Electrify America) avoid low-density markets due to utilization risk\",\n    \"targetMarket\": \"Rural/suburban EV drivers + location partners (gas stations, convenience stores, restaurants) seeking new revenue streams\",\n    \"solution\": \"Co-located DC fast chargers (150kW+) with revenue-sharing partnerships + mobile app (payments, routing, loyalty)\",\n    \"revenueModel\": \"$0.35-0.45/kWh split with partner + $9.99/mo subscription tier\",\n    \"statedConcerns\": [\n      \"Unit economics: $50-150K capex per station with uncertain rural utilization\",\n      \"Rural EV adoption slower than urban; break-even threshold unclear\",\n      \"Capital intensity vs. competitor moats (utilities, oil majors)\",\n      \"NEVI program complexity (6-12 month approval cycle)\",\n      \"Highway vs. local community charging trade-off\"\n    ],\n    \"openDecisions\": [\n      \"Highway corridor (transient travelers) vs. local community (resident charging)\",\n      \"NEVI grant funding (slower, complex, but capital-efficient) vs. private capital only (faster, capital-intensive)\"\n    ],\n    \"constraints\": [\n      \"High capex per unit ($50-150K)\",\n      \"Rural utilization risk\",\n      \"Regulatory/incentive complexity\",\n      \"Incumbent competition with deeper pockets\"\n    ]\n  },\n  \"sectionPriorities\": {\n    \"marketAnalysis\": \"detailed\",\n    \"businessModel\": \"detailed\",\n    \"competitiveStrategy\": \"detailed\",\n    \"decisionAgenda\": \"detailed\",\n    \"technicalFeasibility\": \"standard\",\n    \"fundingStrategy\": \"detailed\"\n  },\n  \"keyQuestions\": [\n    \"What is the actual utilization threshold (kWh/day) needed to break even per station in rural vs. highway vs. suburban contexts, and what does EV adoption data suggest is realistic in each?\",\n    \"Should the go-to-market strategy prioritize high-traffic highway corridors first (to prove unit economics) before expanding to local community charging, or pursue both simultaneously?\",\n    \"What is the true competitive advantage of the co-location + revenue-sharing model vs. standalone stations, and how defensible is it against ChargePoint/Electrify America if they decide to enter these markets?\",\n    \"Is NEVI funding a strategic necessity (capital efficiency, credibility, scale) or a distraction (6-12 month delay, regulatory burden)—and what does the capital runway look like under each scenario?\",\n    \"How should the team think about location partner acquisition, retention, and incentive alignment as a go-to-market bottleneck?\"\n  ],\n  \"language\": \"en\"\n}\n```",
+    "model": "claude-haiku-4-5-20251001",
+    "inputTokens": 627,
+    "outputTokens": 811,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0037456,
+    "durationMs": 7476
+  },
+  "strategist": {
+    "brief": {
+      "executiveSummary": {
+        "verdict": "risky",
+        "summary": "Strong team and real market gap, but unit economics are precarious in rural markets. The co-location model is smart but not defensible long-term. Highway corridors offer better utilization but higher competition risk. NEVI funding could be strategic but creates 6-12 month delay you may not survive.",
+        "councilScore": 52
+      },
+      "marketAnalysis": {
+        "marketSize": {
+          "tam": "$100B+ global EV charging market by 2030 (BloombergNEF)",
+          "sam": "$8-12B US rural/suburban DC fast charging by 2030",
+          "som": "$50-100M realistic 5-year capture in target corridors",
+          "methodology": "Based on rural EV adoption curves, charging demand per vehicle, and geographic density constraints",
+          "confidence": "medium"
+        },
+        "competitors": [
+          {
+            "name": "ChargePoint",
+            "description": "Largest US charging network, 65,000+ ports",
+            "strength": "Scale, partnerships, software platform",
+            "weakness": "Avoid low-density markets, complex pricing",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "Electrify America",
+            "description": "VW-backed network, highway focus",
+            "strength": "Highway corridors, 150kW+ speeds, VW settlement funding",
+            "weakness": "Limited rural presence, reliability issues",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "EVgo",
+            "description": "Fast charging network, retail partnerships",
+            "strength": "Urban density, grocery store partnerships",
+            "weakness": "Slower expansion, lower power levels",
+            "isDirectCompetitor": false
+          },
+          {
+            "name": "Tesla Supercharger",
+            "description": "Tesla's proprietary network, opening to other EVs",
+            "strength": "Best reliability, strategic locations, vertical integration",
+            "weakness": "Tesla-first priority, limited rural coverage",
+            "isDirectCompetitor": true
+          }
+        ],
+        "positioning": "The rural EV charging solution that pays local businesses to host stations instead of competing with them",
+        "timing": "NEVI funding creating $7.5B infrastructure push, but rural EV adoption still 3-5 years behind urban",
+        "gaps": [
+          "Rural corridor coverage",
+          "Local business integration",
+          "Simplified NEVI compliance"
+        ]
+      },
+      "valueProposition": {
+        "coreProblem": "EV drivers in rural/suburban areas face 50+ mile gaps between charging stations, limiting EV adoption and creating range anxiety",
+        "targetCustomer": "Rural EV early adopters (household income $75K+) and highway travelers needing reliable charging in underserved corridors",
+        "uniqueAngle": "Revenue-sharing model turns local businesses into charging partners instead of competitors",
+        "whyNow": "EV sales hit 7% market share in 2023, NEVI funding available, but major players still avoiding rural markets due to utilization concerns"
+      },
+      "businessModel": {
+        "revenueStrategy": "Per-kWh charging fees split with location partners, plus subscription revenue for frequent users",
+        "pricingFramework": "$0.35-0.45/kWh competitive with gas equivalent, $9.99/mo subscription for 20% discount targeting local commuters",
+        "unitEconomics": {
+          "estimatedCAC": "$200-500 per customer through app marketing and location partner referrals",
+          "estimatedLTV": "$800-1,200 based on 2-year retention and 15 sessions/month average usage",
+          "paybackPeriod": "18-36 months per customer, 4-7 years per station depending on utilization",
+          "confidence": "low"
+        },
+        "scalabilityAssessment": "Network effects improve at 50+ stations, but capital requirements scale linearly. Need $5-15M per 100 stations."
+      },
+      "technicalFeasibility": {
+        "mvpScope": [
+          "Station monitoring and payments",
+          "Basic route planning",
+          "Partner revenue dashboard"
+        ],
+        "recommendedStack": "React Native app, AWS backend, Stripe payments, existing DC charger APIs",
+        "buildVsBuy": [
+          {
+            "component": "DC Fast Chargers",
+            "recommendation": "buy",
+            "rationale": "ABB, Tritium, ChargePoint hardware proven and NEVI-compliant"
+          },
+          {
+            "component": "Payment Processing",
+            "recommendation": "buy",
+            "rationale": "Stripe or existing charging payment platforms reduce compliance risk"
+          },
+          {
+            "component": "Station Management Software",
+            "recommendation": "build",
+            "rationale": "Core differentiator for partner revenue sharing and network optimization"
+          }
+        ],
+        "technicalRisks": [
+          "Charger reliability in rural locations",
+          "Cellular connectivity gaps",
+          "Grid capacity constraints"
+        ],
+        "estimatedMvpTimeline": "6-9 months for software, 12-18 months for first 5 stations including permitting"
+      },
+      "riskAssessment": {
+        "risks": [
+          {
+            "category": "financial",
+            "severity": "critical",
+            "description": "Rural utilization may never reach break-even threshold of 15-20 sessions/day",
+            "mitigation": "Start with highway corridors, require 12-month utilization commitments from anchor customers"
+          },
+          {
+            "category": "competitive",
+            "severity": "high",
+            "description": "ChargePoint or Tesla could enter rural markets once density improves",
+            "mitigation": "Lock in exclusive 5-year location partnerships, focus on areas too small for competitors"
+          },
+          {
+            "category": "regulatory",
+            "severity": "high",
+            "description": "NEVI requirements could change, utility interconnection delays could add 6+ months per site",
+            "mitigation": "Diversify across NEVI and private funding, pre-qualify utility connections"
+          },
+          {
+            "category": "market",
+            "severity": "medium",
+            "description": "Rural EV adoption slower than projected, could delay break-even by 2-3 years",
+            "mitigation": "Focus on highway travel demand first, partner with fleet customers for guaranteed utilization"
+          },
+          {
+            "category": "execution",
+            "severity": "medium",
+            "description": "Location partner acquisition harder than expected, revenue sharing disputes",
+            "mitigation": "Standardize partner agreements, provide clear revenue reporting, offer marketing support"
+          }
+        ]
+      },
+      "actionPlan": {
+        "week1to4": [
+          "Analyze utilization data from existing rural chargers",
+          "Interview 20 potential location partners about revenue expectations",
+          "Model break-even scenarios for highway vs local charging"
+        ],
+        "week5to8": [
+          "Secure LOIs from 3-5 highway corridor locations",
+          "Submit NEVI pre-application for 2 pilot sites",
+          "Negotiate equipment leasing terms with ABB/Tritium"
+        ],
+        "week9to12": [
+          "Launch pilot station procurement",
+          "Hire regulatory compliance specialist",
+          "Begin software development for partner revenue dashboard"
+        ]
+      },
+      "decisionAgenda": [
+        {
+          "priority": "critical",
+          "question": "Highway corridors vs local community charging priority",
+          "options": [
+            {
+              "option": "Highway first",
+              "tradeoff": "Better utilization and faster break-even vs higher competition risk and less defensible positioning"
+            },
+            {
+              "option": "Local community first",
+              "tradeoff": "More defensible local partnerships vs uncertain utilization and longer payback periods"
+            }
+          ],
+          "recommendation": "Highway first for initial 10 stations to prove unit economics, then expand to local community charging with proven model",
+          "deadline": "Next 2 weeks"
+        },
+        {
+          "priority": "critical",
+          "question": "NEVI funding strategy",
+          "options": [
+            {
+              "option": "Apply for NEVI grants",
+              "tradeoff": "50-80% cost reduction and credibility vs 6-12 month delay and compliance complexity"
+            },
+            {
+              "option": "Private capital only",
+              "tradeoff": "Speed to market and flexibility vs much higher capital requirements and cash burn"
+            }
+          ],
+          "recommendation": "Hybrid approach: NEVI for 3-5 strategic locations, private capital for 5-10 quick wins to maintain momentum",
+          "deadline": "Next 4 weeks"
+        },
+        {
+          "priority": "important",
+          "question": "Utilization guarantee requirements",
+          "options": [
+            {
+              "option": "Require location partner minimum guarantees",
+              "tradeoff": "Risk mitigation vs harder partner acquisition and relationship strain"
+            },
+            {
+              "option": "Pure revenue sharing model",
+              "tradeoff": "Easier partnerships vs full utilization risk on your balance sheet"
+            }
+          ],
+          "recommendation": "Require soft commitments (marketing support, preferred parking) rather than financial guarantees for first 10 partners",
+          "deadline": "Next 6 weeks"
+        }
+      ],
+      "metadata": {
+        "pipelineMode": "single",
+        "agentsUsed": [
+          "strategist"
+        ],
+        "totalTokens": 0,
+        "totalCostUsd": 0,
+        "durationMs": 0,
+        "language": "en"
+      }
+    },
+    "rawText": "{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"Strong team and real market gap, but unit economics are precarious in rural markets. The co-location model is smart but not defensible long-term. Highway corridors offer better utilization but higher competition risk. NEVI funding could be strategic but creates 6-12 month delay you may not survive.\",\n    \"councilScore\": 52\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$100B+ global EV charging market by 2030 (BloombergNEF)\",\n      \"sam\": \"$8-12B US rural/suburban DC fast charging by 2030\",\n      \"som\": \"$50-100M realistic 5-year capture in target corridors\",\n      \"methodology\": \"Based on rural EV adoption curves, charging demand per vehicle, and geographic density constraints\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"ChargePoint\",\n        \"description\": \"Largest US charging network, 65,000+ ports\",\n        \"strength\": \"Scale, partnerships, software platform\",\n        \"weakness\": \"Avoid low-density markets, complex pricing\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Electrify America\",\n        \"description\": \"VW-backed network, highway focus\",\n        \"strength\": \"Highway corridors, 150kW+ speeds, VW settlement funding\",\n        \"weakness\": \"Limited rural presence, reliability issues\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"EVgo\",\n        \"description\": \"Fast charging network, retail partnerships\",\n        \"strength\": \"Urban density, grocery store partnerships\",\n        \"weakness\": \"Slower expansion, lower power levels\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Tesla Supercharger\",\n        \"description\": \"Tesla's proprietary network, opening to other EVs\",\n        \"strength\": \"Best reliability, strategic locations, vertical integration\",\n        \"weakness\": \"Tesla-first priority, limited rural coverage\",\n        \"isDirectCompetitor\": true\n      }\n    ],\n    \"positioning\": \"The rural EV charging solution that pays local businesses to host stations instead of competing with them\",\n    \"timing\": \"NEVI funding creating $7.5B infrastructure push, but rural EV adoption still 3-5 years behind urban\",\n    \"gaps\": [\"Rural corridor coverage\", \"Local business integration\", \"Simplified NEVI compliance\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"EV drivers in rural/suburban areas face 50+ mile gaps between charging stations, limiting EV adoption and creating range anxiety\",\n    \"targetCustomer\": \"Rural EV early adopters (household income $75K+) and highway travelers needing reliable charging in underserved corridors\",\n    \"uniqueAngle\": \"Revenue-sharing model turns local businesses into charging partners instead of competitors\",\n    \"whyNow\": \"EV sales hit 7% market share in 2023, NEVI funding available, but major players still avoiding rural markets due to utilization concerns\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Per-kWh charging fees split with location partners, plus subscription revenue for frequent users\",\n    \"pricingFramework\": \"$0.35-0.45/kWh competitive with gas equivalent, $9.99/mo subscription for 20% discount targeting local commuters\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$200-500 per customer through app marketing and location partner referrals\",\n      \"estimatedLTV\": \"$800-1,200 based on 2-year retention and 15 sessions/month average usage\",\n      \"paybackPeriod\": \"18-36 months per customer, 4-7 years per station depending on utilization\",\n      \"confidence\": \"low\"\n    },\n    \"scalabilityAssessment\": \"Network effects improve at 50+ stations, but capital requirements scale linearly. Need $5-15M per 100 stations.\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Station monitoring and payments\", \"Basic route planning\", \"Partner revenue dashboard\"],\n    \"recommendedStack\": \"React Native app, AWS backend, Stripe payments, existing DC charger APIs\",\n    \"buildVsBuy\": [\n      {\n        \"component\": \"DC Fast Chargers\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"ABB, Tritium, ChargePoint hardware proven and NEVI-compliant\"\n      },\n      {\n        \"component\": \"Payment Processing\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"Stripe or existing charging payment platforms reduce compliance risk\"\n      },\n      {\n        \"component\": \"Station Management Software\",\n        \"recommendation\": \"build\",\n        \"rationale\": \"Core differentiator for partner revenue sharing and network optimization\"\n      }\n    ],\n    \"technicalRisks\": [\"Charger reliability in rural locations\", \"Cellular connectivity gaps\", \"Grid capacity constraints\"],\n    \"estimatedMvpTimeline\": \"6-9 months for software, 12-18 months for first 5 stations including permitting\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"financial\",\n        \"severity\": \"critical\",\n        \"description\": \"Rural utilization may never reach break-even threshold of 15-20 sessions/day\",\n        \"mitigation\": \"Start with highway corridors, require 12-month utilization commitments from anchor customers\"\n      },\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"high\",\n        \"description\": \"ChargePoint or Tesla could enter rural markets once density improves\",\n        \"mitigation\": \"Lock in exclusive 5-year location partnerships, focus on areas too small for competitors\"\n      },\n      {\n        \"category\": \"regulatory\",\n        \"severity\": \"high\",\n        \"description\": \"NEVI requirements could change, utility interconnection delays could add 6+ months per site\",\n        \"mitigation\": \"Diversify across NEVI and private funding, pre-qualify utility connections\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"medium\",\n        \"description\": \"Rural EV adoption slower than projected, could delay break-even by 2-3 years\",\n        \"mitigation\": \"Focus on highway travel demand first, partner with fleet customers for guaranteed utilization\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"medium\",\n        \"description\": \"Location partner acquisition harder than expected, revenue sharing disputes\",\n        \"mitigation\": \"Standardize partner agreements, provide clear revenue reporting, offer marketing support\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Analyze utilization data from existing rural chargers\", \"Interview 20 potential location partners about revenue expectations\", \"Model break-even scenarios for highway vs local charging\"],\n    \"week5to8\": [\"Secure LOIs from 3-5 highway corridor locations\", \"Submit NEVI pre-application for 2 pilot sites\", \"Negotiate equipment leasing terms with ABB/Tritium\"],\n    \"week9to12\": [\"Launch pilot station procurement\", \"Hire regulatory compliance specialist\", \"Begin software development for partner revenue dashboard\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Highway corridors vs local community charging priority\",\n      \"options\": [\n        { \"option\": \"Highway first\", \"tradeoff\": \"Better utilization and faster break-even vs higher competition risk and less defensible positioning\" },\n        { \"option\": \"Local community first\", \"tradeoff\": \"More defensible local partnerships vs uncertain utilization and longer payback periods\" }\n      ],\n      \"recommendation\": \"Highway first for initial 10 stations to prove unit economics, then expand to local community charging with proven model\",\n      \"deadline\": \"Next 2 weeks\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"NEVI funding strategy\",\n      \"options\": [\n        { \"option\": \"Apply for NEVI grants\", \"tradeoff\": \"50-80% cost reduction and credibility vs 6-12 month delay and compliance complexity\" },\n        { \"option\": \"Private capital only\", \"tradeoff\": \"Speed to market and flexibility vs much higher capital requirements and cash burn\" }\n      ],\n      \"recommendation\": \"Hybrid approach: NEVI for 3-5 strategic locations, private capital for 5-10 quick wins to maintain momentum\",\n      \"deadline\": \"Next 4 weeks\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Utilization guarantee requirements\",\n      \"options\": [\n        { \"option\": \"Require location partner minimum guarantees\", \"tradeoff\": \"Risk mitigation vs harder partner acquisition and relationship strain\" },\n        { \"option\": \"Pure revenue sharing model\", \"tradeoff\": \"Easier partnerships vs full utilization risk on your balance sheet\" }\n      ],\n      \"recommendation\": \"Require soft commitments (marketing support, preferred parking) rather than financial guarantees for first 10 partners\",\n      \"deadline\": \"Next 6 weeks\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"strategist\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}",
+    "model": "claude-sonnet-4-20250514",
+    "inputTokens": 994,
+    "outputTokens": 2302,
+    "cacheReadTokens": 1409,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.034952699999999996,
+    "durationMs": 43816
+  },
+  "totalCostUsd": 0.0386983,
+  "totalDurationMs": 51292,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "Strong team and real market gap, but unit economics are precarious in rural markets. The co-location model is smart but not defensible long-term. Highway corridors offer better utilization but higher competition risk. NEVI funding could be strategic but creates 6-12 month delay you may not survive.",
+      "councilScore": 52
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$100B+ global EV charging market by 2030 (BloombergNEF)",
+        "sam": "$8-12B US rural/suburban DC fast charging by 2030",
+        "som": "$50-100M realistic 5-year capture in target corridors",
+        "methodology": "Based on rural EV adoption curves, charging demand per vehicle, and geographic density constraints",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "ChargePoint",
+          "description": "Largest US charging network, 65,000+ ports",
+          "strength": "Scale, partnerships, software platform",
+          "weakness": "Avoid low-density markets, complex pricing",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Electrify America",
+          "description": "VW-backed network, highway focus",
+          "strength": "Highway corridors, 150kW+ speeds, VW settlement funding",
+          "weakness": "Limited rural presence, reliability issues",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "EVgo",
+          "description": "Fast charging network, retail partnerships",
+          "strength": "Urban density, grocery store partnerships",
+          "weakness": "Slower expansion, lower power levels",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Tesla Supercharger",
+          "description": "Tesla's proprietary network, opening to other EVs",
+          "strength": "Best reliability, strategic locations, vertical integration",
+          "weakness": "Tesla-first priority, limited rural coverage",
+          "isDirectCompetitor": true
+        }
+      ],
+      "positioning": "The rural EV charging solution that pays local businesses to host stations instead of competing with them",
+      "timing": "NEVI funding creating $7.5B infrastructure push, but rural EV adoption still 3-5 years behind urban",
+      "gaps": [
+        "Rural corridor coverage",
+        "Local business integration",
+        "Simplified NEVI compliance"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "EV drivers in rural/suburban areas face 50+ mile gaps between charging stations, limiting EV adoption and creating range anxiety",
+      "targetCustomer": "Rural EV early adopters (household income $75K+) and highway travelers needing reliable charging in underserved corridors",
+      "uniqueAngle": "Revenue-sharing model turns local businesses into charging partners instead of competitors",
+      "whyNow": "EV sales hit 7% market share in 2023, NEVI funding available, but major players still avoiding rural markets due to utilization concerns"
+    },
+    "businessModel": {
+      "revenueStrategy": "Per-kWh charging fees split with location partners, plus subscription revenue for frequent users",
+      "pricingFramework": "$0.35-0.45/kWh competitive with gas equivalent, $9.99/mo subscription for 20% discount targeting local commuters",
+      "unitEconomics": {
+        "estimatedCAC": "$200-500 per customer through app marketing and location partner referrals",
+        "estimatedLTV": "$800-1,200 based on 2-year retention and 15 sessions/month average usage",
+        "paybackPeriod": "18-36 months per customer, 4-7 years per station depending on utilization",
+        "confidence": "low"
+      },
+      "scalabilityAssessment": "Network effects improve at 50+ stations, but capital requirements scale linearly. Need $5-15M per 100 stations."
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Station monitoring and payments",
+        "Basic route planning",
+        "Partner revenue dashboard"
+      ],
+      "recommendedStack": "React Native app, AWS backend, Stripe payments, existing DC charger APIs",
+      "buildVsBuy": [
+        {
+          "component": "DC Fast Chargers",
+          "recommendation": "buy",
+          "rationale": "ABB, Tritium, ChargePoint hardware proven and NEVI-compliant"
+        },
+        {
+          "component": "Payment Processing",
+          "recommendation": "buy",
+          "rationale": "Stripe or existing charging payment platforms reduce compliance risk"
+        },
+        {
+          "component": "Station Management Software",
+          "recommendation": "build",
+          "rationale": "Core differentiator for partner revenue sharing and network optimization"
+        }
+      ],
+      "technicalRisks": [
+        "Charger reliability in rural locations",
+        "Cellular connectivity gaps",
+        "Grid capacity constraints"
+      ],
+      "estimatedMvpTimeline": "6-9 months for software, 12-18 months for first 5 stations including permitting"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "financial",
+          "severity": "critical",
+          "description": "Rural utilization may never reach break-even threshold of 15-20 sessions/day",
+          "mitigation": "Start with highway corridors, require 12-month utilization commitments from anchor customers"
+        },
+        {
+          "category": "competitive",
+          "severity": "high",
+          "description": "ChargePoint or Tesla could enter rural markets once density improves",
+          "mitigation": "Lock in exclusive 5-year location partnerships, focus on areas too small for competitors"
+        },
+        {
+          "category": "regulatory",
+          "severity": "high",
+          "description": "NEVI requirements could change, utility interconnection delays could add 6+ months per site",
+          "mitigation": "Diversify across NEVI and private funding, pre-qualify utility connections"
+        },
+        {
+          "category": "market",
+          "severity": "medium",
+          "description": "Rural EV adoption slower than projected, could delay break-even by 2-3 years",
+          "mitigation": "Focus on highway travel demand first, partner with fleet customers for guaranteed utilization"
+        },
+        {
+          "category": "execution",
+          "severity": "medium",
+          "description": "Location partner acquisition harder than expected, revenue sharing disputes",
+          "mitigation": "Standardize partner agreements, provide clear revenue reporting, offer marketing support"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Analyze utilization data from existing rural chargers",
+        "Interview 20 potential location partners about revenue expectations",
+        "Model break-even scenarios for highway vs local charging"
+      ],
+      "week5to8": [
+        "Secure LOIs from 3-5 highway corridor locations",
+        "Submit NEVI pre-application for 2 pilot sites",
+        "Negotiate equipment leasing terms with ABB/Tritium"
+      ],
+      "week9to12": [
+        "Launch pilot station procurement",
+        "Hire regulatory compliance specialist",
+        "Begin software development for partner revenue dashboard"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Highway corridors vs local community charging priority",
+        "options": [
+          {
+            "option": "Highway first",
+            "tradeoff": "Better utilization and faster break-even vs higher competition risk and less defensible positioning"
+          },
+          {
+            "option": "Local community first",
+            "tradeoff": "More defensible local partnerships vs uncertain utilization and longer payback periods"
+          }
+        ],
+        "recommendation": "Highway first for initial 10 stations to prove unit economics, then expand to local community charging with proven model",
+        "deadline": "Next 2 weeks"
+      },
+      {
+        "priority": "critical",
+        "question": "NEVI funding strategy",
+        "options": [
+          {
+            "option": "Apply for NEVI grants",
+            "tradeoff": "50-80% cost reduction and credibility vs 6-12 month delay and compliance complexity"
+          },
+          {
+            "option": "Private capital only",
+            "tradeoff": "Speed to market and flexibility vs much higher capital requirements and cash burn"
+          }
+        ],
+        "recommendation": "Hybrid approach: NEVI for 3-5 strategic locations, private capital for 5-10 quick wins to maintain momentum",
+        "deadline": "Next 4 weeks"
+      },
+      {
+        "priority": "important",
+        "question": "Utilization guarantee requirements",
+        "options": [
+          {
+            "option": "Require location partner minimum guarantees",
+            "tradeoff": "Risk mitigation vs harder partner acquisition and relationship strain"
+          },
+          {
+            "option": "Pure revenue sharing model",
+            "tradeoff": "Easier partnerships vs full utilization risk on your balance sheet"
+          }
+        ],
+        "recommendation": "Require soft commitments (marketing support, preferred parking) rather than financial guarantees for first 10 partners",
+        "deadline": "Next 6 weeks"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "strategist"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "error": null,
+  "timestamp": "2026-03-08T01:30:33.181Z"
+}

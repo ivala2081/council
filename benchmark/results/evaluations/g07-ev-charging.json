@@ -1,0 +1,54 @@
+{
+  "promptId": "g07-ev-charging",
+  "outputA": {
+    "mode": "council",
+    "scores": {
+      "specificity": 5,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific with real competitor names, concrete numbers ($100K stations, 15-20% utilization breakeven), and precise market sizing",
+      "Excellent decision agenda with clear options, tradeoffs, and specific recommendations with deadlines",
+      "Deep analysis of unit economics with specific utilization thresholds and payback periods",
+      "Realistic assessment of rural market challenges with honest about brutal economics"
+    ],
+    "weaknesses": [
+      "Some market sizing numbers seem optimistic ($2-4M annual revenue per station)",
+      "Technical feasibility section could be more detailed on implementation challenges"
+    ]
+  },
+  "outputB": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 3,
+      "actionability": 3,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 3
+    },
+    "strengths": [
+      "Conservative and realistic market sizing approach",
+      "Good coverage of competitive landscape including Shell Recharge",
+      "Honest about low confidence in unit economics",
+      "Practical phased rollout approach"
+    ],
+    "weaknesses": [
+      "Less specific on key metrics (vague 15-25 sessions/day vs precise 15-20% utilization)",
+      "Decision agenda lacks the depth and specificity of recommendations",
+      "Market sizing methodology less detailed and actionable",
+      "Generic advice that could apply to many charging startups"
+    ]
+  },
+  "preference": "A",
+  "preferenceReason": "Output A provides significantly more actionable specificity with concrete breakeven thresholds (15-20% utilization), specific highway corridors (I-80, I-40, I-10), and precise revenue sharing recommendations (25% starting point). The decision agenda is exceptionally clear with detailed tradeoffs and specific deadlines. While both outputs are realistic about rural market challenges, Output A gives the founder much more concrete guidance they can act on immediately.",
+  "keyDifferences": [
+    "Output A provides specific utilization breakeven thresholds while Output B gives vague session ranges",
+    "Output A names specific highway corridors and has detailed revenue sharing strategy, Output B is more generic",
+    "Output A's decision agenda has much more specific recommendations and reasoning",
+    "Output A has higher market sizing numbers but with more detailed methodology"
+  ],
+  "timestamp": "2026-03-08T01:16:59.349Z"
+}

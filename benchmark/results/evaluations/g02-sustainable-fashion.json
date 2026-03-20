@@ -1,0 +1,53 @@
+{
+  "promptId": "g02-sustainable-fashion",
+  "outputA": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific with named competitors like The Citizenry, Farfetch, and concrete market data from ThredUp 2023",
+      "Excellent decision agenda with clear options, tradeoffs, and deadlines",
+      "Realistic assessment of commission rate challenges and CAC concerns",
+      "Detailed technical feasibility analysis with specific build vs buy recommendations"
+    ],
+    "weaknesses": [
+      "SOM estimate of $500K-2M seems conservative compared to TAM claims",
+      "Some unit economics confidence marked as 'low' without clear path to validation"
+    ]
+  },
+  "outputB": {
+    "mode": "council",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Strong positioning statement comparing to known brands (Etsy + Net-a-Porter)",
+      "Practical pricing recommendation to start at 10% commission",
+      "Clear technical timeline of 10-12 weeks with Shopify Plus",
+      "Good focus on proving marketing value before raising rates"
+    ],
+    "weaknesses": [
+      "SOM of $50M seems overly optimistic compared to realistic early-stage expectations",
+      "Less detailed risk mitigation strategies compared to Output A",
+      "Decision agenda has fewer critical decisions identified"
+    ]
+  },
+  "preference": "B",
+  "preferenceReason": "Output A provides more comprehensive analysis with better decision framing. The decision agenda is more thorough with clearer tradeoffs and specific deadlines. The risk assessment is more detailed with concrete mitigation strategies. While both outputs are strong, Output A gives a founder more actionable decision-making framework.",
+  "keyDifferences": [
+    "Output A has more detailed risk mitigation strategies and technical feasibility analysis",
+    "Output A provides more conservative and realistic SOM estimates",
+    "Output A has a more comprehensive decision agenda with 3 critical decisions vs 2 in Output B",
+    "Output B is more optimistic about market capture but less detailed on execution risks"
+  ],
+  "timestamp": "2026-03-08T01:16:00.249Z"
+}

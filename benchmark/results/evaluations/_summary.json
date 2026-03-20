@@ -1,0 +1,530 @@
+[
+  {
+    "promptId": "g01-resume-screening",
+    "outputA": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 5,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Extremely specific with named competitors, real pricing data, and concrete market sizing",
+        "Decision agenda is exceptionally well-structured with clear options, tradeoffs, and deadlines",
+        "Deep analysis of regulatory risks with specific laws mentioned (NYC bias audit law, EU AI Act)",
+        "Realistic unit economics with detailed assumptions and confidence levels"
+      ],
+      "weaknesses": [
+        "Some market sizing assumptions may be optimistic (10% adoption rate)",
+        "Technical timeline might be slightly aggressive for compliance features"
+      ]
+    },
+    "outputB": {
+      "mode": "council",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good specific competitor analysis with clear strengths/weaknesses",
+        "Realistic pricing strategy with lower barrier to entry",
+        "Strong focus on integration approach as competitive advantage",
+        "Practical compliance strategy recommendations"
+      ],
+      "weaknesses": [
+        "Less detailed market sizing methodology",
+        "Decision agenda has fewer critical decisions identified",
+        "Some analysis is more surface-level compared to Output A",
+        "Less comprehensive risk assessment"
+      ]
+    },
+    "preference": "B",
+    "preferenceReason": "Output A provides significantly more depth and specificity across all dimensions. The market analysis includes more detailed methodology, the decision agenda is more comprehensive with clearer tradeoffs, and the risk assessment covers more scenarios with specific mitigation strategies. The level of detail in competitor analysis and regulatory considerations makes it more actionable for real decision-making.",
+    "keyDifferences": [
+      "Output A has much more detailed market sizing with specific methodology vs Output B's higher-level estimates",
+      "Output A identifies more critical decisions (3 vs 2) with clearer deadline urgency",
+      "Output A provides deeper regulatory analysis with specific laws vs Output B's more general compliance discussion",
+      "Output A has more comprehensive risk assessment (5 detailed risks vs 5 less detailed risks)"
+    ],
+    "timestamp": "2026-03-08T01:15:47.807Z"
+  },
+  {
+    "promptId": "g02-sustainable-fashion",
+    "outputA": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific with named competitors like The Citizenry, Farfetch, and concrete market data from ThredUp 2023",
+        "Excellent decision agenda with clear options, tradeoffs, and deadlines",
+        "Realistic assessment of commission rate challenges and CAC concerns",
+        "Detailed technical feasibility analysis with specific build vs buy recommendations"
+      ],
+      "weaknesses": [
+        "SOM estimate of $500K-2M seems conservative compared to TAM claims",
+        "Some unit economics confidence marked as 'low' without clear path to validation"
+      ]
+    },
+    "outputB": {
+      "mode": "council",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Strong positioning statement comparing to known brands (Etsy + Net-a-Porter)",
+        "Practical pricing recommendation to start at 10% commission",
+        "Clear technical timeline of 10-12 weeks with Shopify Plus",
+        "Good focus on proving marketing value before raising rates"
+      ],
+      "weaknesses": [
+        "SOM of $50M seems overly optimistic compared to realistic early-stage expectations",
+        "Less detailed risk mitigation strategies compared to Output A",
+        "Decision agenda has fewer critical decisions identified"
+      ]
+    },
+    "preference": "B",
+    "preferenceReason": "Output A provides more comprehensive analysis with better decision framing. The decision agenda is more thorough with clearer tradeoffs and specific deadlines. The risk assessment is more detailed with concrete mitigation strategies. While both outputs are strong, Output A gives a founder more actionable decision-making framework.",
+    "keyDifferences": [
+      "Output A has more detailed risk mitigation strategies and technical feasibility analysis",
+      "Output A provides more conservative and realistic SOM estimates",
+      "Output A has a more comprehensive decision agenda with 3 critical decisions vs 2 in Output B",
+      "Output B is more optimistic about market capture but less detailed on execution risks"
+    ],
+    "timestamp": "2026-03-08T01:16:00.249Z"
+  },
+  {
+    "promptId": "g03-restaurant-inventory",
+    "outputA": {
+      "mode": "council",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific market sizing with clear methodology",
+        "Excellent decision agenda with concrete options and deadlines",
+        "Realistic assessment of competitive threats from Toast/Square",
+        "Actionable weekly plans with specific deliverables"
+      ],
+      "weaknesses": [
+        "Some market size numbers seem inconsistent (660K vs 400K restaurants)",
+        "Could provide more specific competitor pricing details"
+      ]
+    },
+    "outputB": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Clear focus on solving the ML cold-start problem",
+        "Good emphasis on cost savings over waste reduction messaging",
+        "Realistic timeline and technical approach",
+        "Strong competitive positioning against POS systems"
+      ],
+      "weaknesses": [
+        "Less specific market sizing methodology",
+        "Generic competitor analysis without deep insights",
+        "Decision agenda less comprehensive than Output A"
+      ]
+    },
+    "preference": "A",
+    "preferenceReason": "Output A provides more rigorous market analysis with specific methodologies, deeper competitive insights, and a more comprehensive decision framework. The decision agenda in Output A is particularly strong with clear deadlines and well-reasoned recommendations. While both outputs address the core challenges, Output A demonstrates deeper strategic thinking.",
+    "keyDifferences": [
+      "Output A provides more detailed market sizing with specific restaurant counts and methodologies",
+      "Output A has a more comprehensive decision agenda with three critical decisions vs two",
+      "Output B focuses more heavily on the ML cold-start problem as the primary risk",
+      "Output A provides more specific competitor weaknesses and positioning insights"
+    ],
+    "timestamp": "2026-03-08T01:16:10.629Z"
+  },
+  {
+    "promptId": "g04-genz-finance",
+    "outputA": {
+      "mode": "council",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific with named competitors and real data points",
+        "Clear decision framework with well-reasoned tradeoffs and deadlines",
+        "Deep analysis of unit economics with realistic CAC/LTV estimates",
+        "Actionable weekly timeline with concrete deliverables"
+      ],
+      "weaknesses": [
+        "Some optimistic assumptions about conversion rates",
+        "Limited discussion of alternative positioning strategies"
+      ]
+    },
+    "outputB": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 3,
+        "actionability": 3,
+        "depth": 3,
+        "realism": 3,
+        "decisionClarity": 3
+      },
+      "strengths": [
+        "Good competitive analysis including lesser-known players",
+        "Realistic assessment of Gen Z willingness to pay challenges",
+        "Acknowledges Mint shutdown as market opportunity"
+      ],
+      "weaknesses": [
+        "Less specific on actionable next steps",
+        "Vague unit economics with low confidence ratings",
+        "Decision options lack clear reasoning for recommendations",
+        "More generic advice that could apply to many fintech startups"
+      ]
+    },
+    "preference": "A",
+    "preferenceReason": "Output A provides significantly more actionable guidance with specific timelines, clearer decision frameworks, and more confident unit economics. The decision agenda in A is particularly strong with clear options, tradeoffs, and reasoned recommendations with deadlines. While both outputs cover similar ground, A gives the founder much more concrete direction for immediate action.",
+    "keyDifferences": [
+      "Output A has much stronger decision clarity with specific deadlines and reasoning",
+      "Output A provides more confident unit economics estimates vs Output B's 'low confidence' ratings",
+      "Output A gives specific weekly action items vs Output B's more general timeline",
+      "Output A has a more optimistic verdict (68 vs 45 council score) while maintaining realism about risks"
+    ],
+    "timestamp": "2026-03-08T01:16:22.568Z"
+  },
+  {
+    "promptId": "g05-developer-docs",
+    "outputA": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific with real competitor data (GitBook $7B valuation, Mintlify YC-backed)",
+        "Very actionable timeline with concrete weekly tasks",
+        "Deep technical analysis including build vs buy recommendations",
+        "Excellent decision framework with clear tradeoffs and deadlines"
+      ],
+      "weaknesses": [
+        "Some inconsistency in market sizing methodology",
+        "LTV/CAC calculations seem optimistic for early stage"
+      ]
+    },
+    "outputB": {
+      "mode": "council",
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 3,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good balance of specific and strategic advice",
+        "Realistic assessment of competitive threats",
+        "Clear positioning against competitors",
+        "Practical technical recommendations"
+      ],
+      "weaknesses": [
+        "Less specific market data and competitor intelligence",
+        "Unit economics calculations appear overly optimistic (2-month payback)",
+        "Some generic advice that could apply to many startups"
+      ]
+    },
+    "preference": "B",
+    "preferenceReason": "Output A provides significantly more specific and actionable intelligence. It includes precise competitor valuations, detailed technical stack recommendations, and a superior decision framework with clear deadlines. The market analysis is more thorough with specific methodologies, and the weekly action plan is more concrete and executable.",
+    "keyDifferences": [
+      "Output A has much more specific competitor data (GitBook $7B valuation vs generic descriptions)",
+      "Output A provides more detailed technical feasibility analysis with specific stack recommendations",
+      "Output A has a more structured decision agenda with clear deadlines and tradeoffs",
+      "Output B has more optimistic but less realistic unit economics (2-month vs 6-12 month payback)"
+    ],
+    "timestamp": "2026-03-08T01:16:33.748Z"
+  },
+  {
+    "promptId": "g06-rural-telehealth",
+    "outputA": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 5,
+        "actionability": 5,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Extremely specific with named competitors, real market data, and concrete numbers",
+        "Highly actionable with clear weekly tasks and specific recommendations",
+        "Excellent decision framework with clear options, tradeoffs, and deadlines"
+      ],
+      "weaknesses": [
+        "Some market sizing estimates may be optimistic",
+        "Could provide more depth on technical implementation challenges"
+      ]
+    },
+    "outputB": {
+      "mode": "council",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 5,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Very realistic assessment of challenges and timelines",
+        "Good technical feasibility analysis with specific stack recommendations",
+        "Strong risk assessment with practical mitigation strategies"
+      ],
+      "weaknesses": [
+        "Less specific on market sizing methodology",
+        "Decision options could be more detailed with clearer tradeoffs"
+      ]
+    },
+    "preference": "B",
+    "preferenceReason": "Output A provides more actionable specificity with concrete numbers, named competitors, and a clearer decision framework. While both outputs are strong, Output A gives the founder more immediately actionable insights with specific market data, competitor analysis, and a well-structured decision agenda with clear deadlines and recommendations.",
+    "keyDifferences": [
+      "Output A provides more specific market sizing with detailed methodology and competitor analysis",
+      "Output A has a more structured and detailed decision agenda with clearer tradeoffs",
+      "Output B is more conservative in its assessments and focuses more on risk mitigation",
+      "Output A gives more concrete weekly action items while Output B provides broader strategic guidance"
+    ],
+    "timestamp": "2026-03-08T01:16:44.241Z"
+  },
+  {
+    "promptId": "g07-ev-charging",
+    "outputA": {
+      "mode": "council",
+      "scores": {
+        "specificity": 5,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific with real competitor names, concrete numbers ($100K stations, 15-20% utilization breakeven), and precise market sizing",
+        "Excellent decision agenda with clear options, tradeoffs, and specific recommendations with deadlines",
+        "Deep analysis of unit economics with specific utilization thresholds and payback periods",
+        "Realistic assessment of rural market challenges with honest about brutal economics"
+      ],
+      "weaknesses": [
+        "Some market sizing numbers seem optimistic ($2-4M annual revenue per station)",
+        "Technical feasibility section could be more detailed on implementation challenges"
+      ]
+    },
+    "outputB": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 3,
+        "actionability": 3,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 3
+      },
+      "strengths": [
+        "Conservative and realistic market sizing approach",
+        "Good coverage of competitive landscape including Shell Recharge",
+        "Honest about low confidence in unit economics",
+        "Practical phased rollout approach"
+      ],
+      "weaknesses": [
+        "Less specific on key metrics (vague 15-25 sessions/day vs precise 15-20% utilization)",
+        "Decision agenda lacks the depth and specificity of recommendations",
+        "Market sizing methodology less detailed and actionable",
+        "Generic advice that could apply to many charging startups"
+      ]
+    },
+    "preference": "A",
+    "preferenceReason": "Output A provides significantly more actionable specificity with concrete breakeven thresholds (15-20% utilization), specific highway corridors (I-80, I-40, I-10), and precise revenue sharing recommendations (25% starting point). The decision agenda is exceptionally clear with detailed tradeoffs and specific deadlines. While both outputs are realistic about rural market challenges, Output A gives the founder much more concrete guidance they can act on immediately.",
+    "keyDifferences": [
+      "Output A provides specific utilization breakeven thresholds while Output B gives vague session ranges",
+      "Output A names specific highway corridors and has detailed revenue sharing strategy, Output B is more generic",
+      "Output A's decision agenda has much more specific recommendations and reasoning",
+      "Output A has higher market sizing numbers but with more detailed methodology"
+    ],
+    "timestamp": "2026-03-08T01:16:59.349Z"
+  },
+  {
+    "promptId": "g08-ai-tutoring",
+    "outputA": {
+      "mode": "council",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific competitor analysis with real numbers (120M Khan Academy users, 200M+ Photomath downloads)",
+        "Clear decision framework with well-reasoned recommendations and deadlines",
+        "Realistic unit economics with honest confidence levels",
+        "Actionable weekly breakdown with concrete tasks"
+      ],
+      "weaknesses": [
+        "Some market sizing methodology could be more detailed",
+        "Technical risk assessment could be deeper on AI safety concerns"
+      ]
+    },
+    "outputB": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good competitor analysis with specific user numbers",
+        "Realistic assessment of budget constraints",
+        "Clear focus on Algebra 1 specialization",
+        "Honest about low confidence in unit economics"
+      ],
+      "weaknesses": [
+        "Less detailed decision framework compared to Output A",
+        "Shallower analysis of technical implementation details",
+        "Market sizing methodology less rigorous",
+        "Action plan items less specific than Output A"
+      ]
+    },
+    "preference": "A",
+    "preferenceReason": "Output A provides superior decision clarity with more detailed tradeoff analysis and specific deadlines. The decision agenda section is exceptionally well-structured with clear options, tradeoffs, and reasoned recommendations. While both outputs are quite similar in quality, Output A's decision framework would be more actionable for a real founder making critical early-stage choices.",
+    "keyDifferences": [
+      "Output A has more detailed decision agenda with specific deadlines and clearer tradeoff analysis",
+      "Output A provides more granular action plan items (e.g., 'Interview 20 parents' vs 'Validate demand with 50 parent interviews')",
+      "Output A includes more technical implementation details in the build vs buy analysis",
+      "Output B emphasizes family plans and has slightly different LTV calculations"
+    ],
+    "timestamp": "2026-03-08T01:17:10.972Z"
+  },
+  {
+    "promptId": "g09-cybersecurity-compliance",
+    "outputA": {
+      "mode": "council",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific with named competitors, real valuations, and concrete numbers",
+        "Excellent decision agenda with clear options, tradeoffs, and deadlines",
+        "Realistic unit economics and market sizing methodology",
+        "Actionable weekly plans with specific deliverables"
+      ],
+      "weaknesses": [
+        "Some market size discrepancies with Output B",
+        "Could provide more detail on technical implementation specifics"
+      ]
+    },
+    "outputB": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Strong vertical specialization focus with healthtech emphasis",
+        "Good competitive analysis with clear positioning",
+        "Realistic assessment of AI risks and mitigation strategies",
+        "Clear pricing strategy with implementation fees"
+      ],
+      "weaknesses": [
+        "Less detailed decision framework compared to Output A",
+        "Some generic advice mixed with specific recommendations",
+        "Market sizing methodology less detailed"
+      ]
+    },
+    "preference": "A",
+    "preferenceReason": "Output A provides a more comprehensive and structured decision framework with clearer priority levels, deadlines, and specific recommendations. The decision agenda section is particularly strong with well-reasoned tradeoffs. Both outputs are quite good, but A's superior decision clarity and slightly more detailed analysis make it more actionable for a founder.",
+    "keyDifferences": [
+      "Output A has a more structured decision agenda with priority levels and specific deadlines",
+      "Output B focuses more heavily on vertical specialization from the start",
+      "Output A provides more detailed unit economics breakdown",
+      "Output B emphasizes healthtech specialization more consistently throughout"
+    ],
+    "timestamp": "2026-03-08T01:17:21.565Z"
+  },
+  {
+    "promptId": "g10-social-commerce",
+    "outputA": {
+      "mode": "council",
+      "scores": {
+        "specificity": 5,
+        "actionability": 5,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Extremely specific with named competitors, real data points, and precise recommendations",
+        "Highly actionable with clear weekly timelines and concrete next steps",
+        "Excellent decision framework with well-reasoned tradeoffs and specific recommendations"
+      ],
+      "weaknesses": [
+        "Some unit economics estimates may be optimistic",
+        "Technical timeline estimates could be aggressive for a non-technical founder"
+      ]
+    },
+    "outputB": {
+      "mode": "baseline",
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good competitor analysis with specific companies and features",
+        "Realistic assessment of risks and challenges",
+        "Practical no-code MVP approach for non-technical founder"
+      ],
+      "weaknesses": [
+        "Less detailed market sizing methodology",
+        "Fewer specific actionable items in weekly plans",
+        "Decision options lack the depth of tradeoff analysis"
+      ]
+    },
+    "preference": "A",
+    "preferenceReason": "Output A provides significantly more specificity and actionability. It includes precise pricing recommendations (3.5% + $0.30), specific market sizing methodology referencing Goldman Sachs data, detailed competitor analysis with exact weaknesses, and a comprehensive decision framework with clear recommendations and deadlines. The weekly action plans are more concrete and immediately executable.",
+    "keyDifferences": [
+      "Output A provides much more specific pricing analysis and recommendations",
+      "Output A has more detailed market sizing with clear methodology and confidence levels",
+      "Output A offers more comprehensive decision framework with specific tradeoffs and deadlines",
+      "Output A includes more actionable weekly plans with concrete deliverables"
+    ],
+    "timestamp": "2026-03-08T01:17:32.380Z"
+  }
+]

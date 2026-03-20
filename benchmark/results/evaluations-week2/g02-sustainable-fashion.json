@@ -1,0 +1,92 @@
+{
+  "promptId": "g02-sustainable-fashion",
+  "mapping": {
+    "A": "baseline",
+    "B": "dual",
+    "C": "council"
+  },
+  "timestamp": "2026-03-08T01:34:02.332Z",
+  "council": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Clear value proposition and positioning",
+      "Practical approach to pricing strategy",
+      "Good balance of optimism and realism",
+      "Strong focus on execution timeline",
+      "Clear geographic focus recommendation"
+    ],
+    "weaknesses": [
+      "Less detailed competitor analysis",
+      "Market sizing methodology less rigorous",
+      "Risk assessment less comprehensive",
+      "Some generic advice mixed with specific insights",
+      "Limited discussion of scalability challenges"
+    ],
+    "total": 18
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good market analysis with realistic sizing",
+      "Strong focus on unit economics and financial viability",
+      "Practical build vs buy recommendations",
+      "Clear positioning against competitors",
+      "Realistic assessment of customer acquisition challenges"
+    ],
+    "weaknesses": [
+      "Less comprehensive risk assessment",
+      "Decision agenda could be more structured",
+      "Some repetition between sections",
+      "Limited technical detail on verification system"
+    ],
+    "total": 19
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific market sizing with clear methodology",
+      "Detailed competitor analysis with strengths/weaknesses",
+      "Comprehensive risk assessment with concrete mitigation strategies",
+      "Excellent decision framework with clear options and tradeoffs",
+      "Actionable weekly timeline with specific deliverables"
+    ],
+    "weaknesses": [
+      "Some unit economics estimates lack confidence",
+      "Technical feasibility section could be more detailed",
+      "Limited discussion of international expansion considerations"
+    ],
+    "total": 21
+  },
+  "ranking": [
+    "baseline",
+    "dual",
+    "council"
+  ],
+  "rankingReason": "Output A provides the most comprehensive and structured analysis with superior decision clarity. It offers the most detailed risk assessment, clearest decision framework with specific tradeoffs, and most actionable timeline. While all outputs are solid, A demonstrates the depth and specificity needed for real strategic decisions.",
+  "keyDifferences": [
+    "Output A has the most structured decision agenda with clear deadlines and tradeoffs",
+    "Output B focuses more heavily on unit economics but lacks comprehensive risk analysis",
+    "Output C is more optimistic (72 vs 52 council score) but provides less analytical depth",
+    "A and B both identify the commission rate as potentially too high, while C is more confident about pricing",
+    "Technical feasibility analysis is most detailed in A, with specific timeline estimates and platform recommendations"
+  ],
+  "winner": "baseline"
+}

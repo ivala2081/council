@@ -1,0 +1,231 @@
+{
+  "promptId": "g08-ai-tutoring",
+  "mode": "council",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 372,
+  "outputTokens": 2295,
+  "cacheReadTokens": 1338,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.03482640000000001,
+  "durationMs": 42060,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "Strong educational background meets a real need, but you're entering a crowded market dominated by Khan Academy with limited resources. The Socratic dialogue approach is differentiated but unproven at scale. Your constraints (solo, $10K) require extreme focus - likely on one math topic and B2C initially. Viable but needs strategic narrowing.",
+      "councilScore": 55
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$7.1B US K-12 tutoring market (IBISWorld 2023)",
+        "sam": "$2.1B online/digital tutoring segment for grades 6-12",
+        "som": "$50-100K realistic year 1 revenue (1,500-3,000 subscribers at $29/mo)",
+        "methodology": "Based on 50M US students grades 6-12, ~15% use paid tutoring, ~10% willing to try AI-first solution",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "Khan Academy (Khanmigo)",
+          "description": "Free platform with AI tutor powered by GPT-4",
+          "strength": "100M+ users, brand trust, free model",
+          "weakness": "Generic experience, limited Socratic method implementation",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Photomath",
+          "description": "Camera-based math problem solver",
+          "strength": "200M+ downloads, instant solutions",
+          "weakness": "Doesn't teach process, gives answers directly",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "IXL Learning",
+          "description": "Adaptive practice problems K-12",
+          "strength": "Comprehensive curriculum, school partnerships",
+          "weakness": "Drill-focused, not conversational",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Socratic by Google",
+          "description": "AI homework helper",
+          "strength": "Google backing, multi-subject",
+          "weakness": "Limited personalization, being discontinued",
+          "isDirectCompetitor": true
+        }
+      ],
+      "positioning": "The only AI tutor that teaches like a human - through questions, not answers",
+      "timing": "Post-COVID learning gaps create urgency, but AI fatigue in education is growing",
+      "gaps": [
+        "True Socratic dialogue at scale",
+        "Detailed parent insights",
+        "Affordable human-like tutoring"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Middle-class families can't afford $50-100/hr tutors but need more than Khan Academy videos for struggling students",
+      "targetCustomer": "Parents of grades 6-12 students earning $50-150K household income, child struggling with math concepts",
+      "uniqueAngle": "AI that asks questions instead of giving answers, forcing students to think through problems",
+      "whyNow": "GPT-4 level models finally enable natural Socratic dialogue that wasn't possible 2 years ago"
+    },
+    "businessModel": {
+      "revenueStrategy": "Subscription SaaS with freemium trial (7 days free, then $29/mo)",
+      "pricingFramework": "$29/mo positioned between free Khan Academy and $200+/mo human tutoring",
+      "unitEconomics": {
+        "estimatedCAC": "$40-60 via content marketing and parent Facebook groups",
+        "estimatedLTV": "$174 (6 months average retention at $29/mo)",
+        "paybackPeriod": "2-3 months",
+        "confidence": "low"
+      },
+      "scalabilityAssessment": "High marginal costs due to AI inference, but improves with scale and model efficiency gains"
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Algebra 1 Socratic tutor",
+        "Progress tracking",
+        "Parent dashboard",
+        "Problem generation"
+      ],
+      "recommendedStack": "Next.js frontend, Node.js backend, OpenAI API, PostgreSQL, Stripe",
+      "buildVsBuy": [
+        {
+          "component": "AI Model",
+          "recommendation": "buy",
+          "rationale": "OpenAI API cheaper than training custom model"
+        },
+        {
+          "component": "Payment Processing",
+          "recommendation": "buy",
+          "rationale": "Stripe handles compliance"
+        },
+        {
+          "component": "Socratic Engine",
+          "recommendation": "build",
+          "rationale": "Core differentiator requires custom prompt engineering"
+        }
+      ],
+      "technicalRisks": [
+        "OpenAI API costs scale with usage",
+        "Maintaining conversation quality",
+        "Handling edge cases in math problems"
+      ],
+      "estimatedMvpTimeline": "4-6 months for Algebra 1 focus"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "competitive",
+          "severity": "critical",
+          "description": "Khan Academy could improve Khanmigo's Socratic capabilities overnight",
+          "mitigation": "Focus on specific math topics they don't prioritize, build superior parent reporting"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Parent resistance to AI tutoring for children",
+          "mitigation": "Emphasize human oversight, transparent AI decision-making, focus on learning outcomes"
+        },
+        {
+          "category": "financial",
+          "severity": "high",
+          "description": "$10K insufficient for 6+ months of development and customer acquisition",
+          "mitigation": "Presell subscriptions, consider part-time development while freelancing"
+        },
+        {
+          "category": "technical",
+          "severity": "medium",
+          "description": "AI inference costs could exceed revenue per user",
+          "mitigation": "Monitor unit economics closely, optimize prompts for efficiency"
+        },
+        {
+          "category": "regulatory",
+          "severity": "medium",
+          "description": "Schools banning AI tools could limit adoption",
+          "mitigation": "Focus on after-school/homework help market initially"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Interview 20 parents of middle schoolers struggling with math",
+        "Build basic Algebra 1 prototype",
+        "Test Socratic dialogue prompts with 5 students"
+      ],
+      "week5to8": [
+        "Validate pricing with 10 parent interviews",
+        "Complete MVP for Algebra 1",
+        "Create parent dashboard mockups"
+      ],
+      "week9to12": [
+        "Launch beta with 25 families",
+        "Measure actual learning outcomes vs engagement",
+        "Refine Socratic dialogue based on usage data"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Should you focus on one math topic (Algebra 1) or cover grades 6-12 math?",
+        "options": [
+          {
+            "option": "Algebra 1 only",
+            "tradeoff": "Gain: faster MVP, better quality vs Loss: smaller addressable market"
+          },
+          {
+            "option": "Grades 6-12 math",
+            "tradeoff": "Gain: larger market vs Loss: 6+ month longer development, lower quality"
+          }
+        ],
+        "recommendation": "Start with Algebra 1 only. Your $10K constraint requires extreme focus. Algebra 1 is where most students first struggle with abstract math concepts - perfect for Socratic method.",
+        "deadline": "This week"
+      },
+      {
+        "priority": "critical",
+        "question": "Should you target parents (B2C) or schools (B2B)?",
+        "options": [
+          {
+            "option": "Direct to parents (B2C)",
+            "tradeoff": "Gain: faster sales cycles, higher margins vs Loss: higher CAC, individual convincing"
+          },
+          {
+            "option": "Schools (B2B)",
+            "tradeoff": "Gain: larger deals, built-in distribution vs Loss: 12+ month sales cycles, procurement complexity"
+          }
+        ],
+        "recommendation": "Start B2C. Schools have 12+ month procurement cycles you can't afford. Parents buy tutoring immediately when their child struggles. Pivot to B2B later with proven outcomes.",
+        "deadline": "This week"
+      },
+      {
+        "priority": "important",
+        "question": "How will you fund development beyond your $10K?",
+        "options": [
+          {
+            "option": "Presell subscriptions",
+            "tradeoff": "Gain: immediate validation and cash vs Loss: pressure to deliver quickly"
+          },
+          {
+            "option": "Part-time development while freelancing",
+            "tradeoff": "Gain: steady income vs Loss: slower progress, divided attention"
+          },
+          {
+            "option": "Seek pre-seed funding",
+            "tradeoff": "Gain: full focus vs Loss: dilution, time spent fundraising"
+          }
+        ],
+        "recommendation": "Presell subscriptions after beta validation. Offer 50% discount for annual prepay. This validates demand and extends runway without dilution.",
+        "deadline": "Week 8"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "strategist"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "```json\n{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"Strong educational background meets a real need, but you're entering a crowded market dominated by Khan Academy with limited resources. The Socratic dialogue approach is differentiated but unproven at scale. Your constraints (solo, $10K) require extreme focus - likely on one math topic and B2C initially. Viable but needs strategic narrowing.\",\n    \"councilScore\": 55\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$7.1B US K-12 tutoring market (IBISWorld 2023)\",\n      \"sam\": \"$2.1B online/digital tutoring segment for grades 6-12\",\n      \"som\": \"$50-100K realistic year 1 revenue (1,500-3,000 subscribers at $29/mo)\",\n      \"methodology\": \"Based on 50M US students grades 6-12, ~15% use paid tutoring, ~10% willing to try AI-first solution\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"Khan Academy (Khanmigo)\",\n        \"description\": \"Free platform with AI tutor powered by GPT-4\",\n        \"strength\": \"100M+ users, brand trust, free model\",\n        \"weakness\": \"Generic experience, limited Socratic method implementation\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Photomath\",\n        \"description\": \"Camera-based math problem solver\",\n        \"strength\": \"200M+ downloads, instant solutions\",\n        \"weakness\": \"Doesn't teach process, gives answers directly\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"IXL Learning\",\n        \"description\": \"Adaptive practice problems K-12\",\n        \"strength\": \"Comprehensive curriculum, school partnerships\",\n        \"weakness\": \"Drill-focused, not conversational\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Socratic by Google\",\n        \"description\": \"AI homework helper\",\n        \"strength\": \"Google backing, multi-subject\",\n        \"weakness\": \"Limited personalization, being discontinued\",\n        \"isDirectCompetitor\": true\n      }\n    ],\n    \"positioning\": \"The only AI tutor that teaches like a human - through questions, not answers\",\n    \"timing\": \"Post-COVID learning gaps create urgency, but AI fatigue in education is growing\",\n    \"gaps\": [\"True Socratic dialogue at scale\", \"Detailed parent insights\", \"Affordable human-like tutoring\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Middle-class families can't afford $50-100/hr tutors but need more than Khan Academy videos for struggling students\",\n    \"targetCustomer\": \"Parents of grades 6-12 students earning $50-150K household income, child struggling with math concepts\",\n    \"uniqueAngle\": \"AI that asks questions instead of giving answers, forcing students to think through problems\",\n    \"whyNow\": \"GPT-4 level models finally enable natural Socratic dialogue that wasn't possible 2 years ago\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Subscription SaaS with freemium trial (7 days free, then $29/mo)\",\n    \"pricingFramework\": \"$29/mo positioned between free Khan Academy and $200+/mo human tutoring\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$40-60 via content marketing and parent Facebook groups\",\n      \"estimatedLTV\": \"$174 (6 months average retention at $29/mo)\",\n      \"paybackPeriod\": \"2-3 months\",\n      \"confidence\": \"low\"\n    },\n    \"scalabilityAssessment\": \"High marginal costs due to AI inference, but improves with scale and model efficiency gains\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Algebra 1 Socratic tutor\", \"Progress tracking\", \"Parent dashboard\", \"Problem generation\"],\n    \"recommendedStack\": \"Next.js frontend, Node.js backend, OpenAI API, PostgreSQL, Stripe\",\n    \"buildVsBuy\": [\n      { \"component\": \"AI Model\", \"recommendation\": \"buy\", \"rationale\": \"OpenAI API cheaper than training custom model\" },\n      { \"component\": \"Payment Processing\", \"recommendation\": \"buy\", \"rationale\": \"Stripe handles compliance\" },\n      { \"component\": \"Socratic Engine\", \"recommendation\": \"build\", \"rationale\": \"Core differentiator requires custom prompt engineering\" }\n    ],\n    \"technicalRisks\": [\"OpenAI API costs scale with usage\", \"Maintaining conversation quality\", \"Handling edge cases in math problems\"],\n    \"estimatedMvpTimeline\": \"4-6 months for Algebra 1 focus\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"critical\",\n        \"description\": \"Khan Academy could improve Khanmigo's Socratic capabilities overnight\",\n        \"mitigation\": \"Focus on specific math topics they don't prioritize, build superior parent reporting\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"Parent resistance to AI tutoring for children\",\n        \"mitigation\": \"Emphasize human oversight, transparent AI decision-making, focus on learning outcomes\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"high\",\n        \"description\": \"$10K insufficient for 6+ months of development and customer acquisition\",\n        \"mitigation\": \"Presell subscriptions, consider part-time development while freelancing\"\n      },\n      {\n        \"category\": \"technical\",\n        \"severity\": \"medium\",\n        \"description\": \"AI inference costs could exceed revenue per user\",\n        \"mitigation\": \"Monitor unit economics closely, optimize prompts for efficiency\"\n      },\n      {\n        \"category\": \"regulatory\",\n        \"severity\": \"medium\",\n        \"description\": \"Schools banning AI tools could limit adoption\",\n        \"mitigation\": \"Focus on after-school/homework help market initially\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Interview 20 parents of middle schoolers struggling with math\", \"Build basic Algebra 1 prototype\", \"Test Socratic dialogue prompts with 5 students\"],\n    \"week5to8\": [\"Validate pricing with 10 parent interviews\", \"Complete MVP for Algebra 1\", \"Create parent dashboard mockups\"],\n    \"week9to12\": [\"Launch beta with 25 families\", \"Measure actual learning outcomes vs engagement\", \"Refine Socratic dialogue based on usage data\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Should you focus on one math topic (Algebra 1) or cover grades 6-12 math?\",\n      \"options\": [\n        { \"option\": \"Algebra 1 only\", \"tradeoff\": \"Gain: faster MVP, better quality vs Loss: smaller addressable market\" },\n        { \"option\": \"Grades 6-12 math\", \"tradeoff\": \"Gain: larger market vs Loss: 6+ month longer development, lower quality\" }\n      ],\n      \"recommendation\": \"Start with Algebra 1 only. Your $10K constraint requires extreme focus. Algebra 1 is where most students first struggle with abstract math concepts - perfect for Socratic method.\",\n      \"deadline\": \"This week\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Should you target parents (B2C) or schools (B2B)?\",\n      \"options\": [\n        { \"option\": \"Direct to parents (B2C)\", \"tradeoff\": \"Gain: faster sales cycles, higher margins vs Loss: higher CAC, individual convincing\" },\n        { \"option\": \"Schools (B2B)\", \"tradeoff\": \"Gain: larger deals, built-in distribution vs Loss: 12+ month sales cycles, procurement complexity\" }\n      ],\n      \"recommendation\": \"Start B2C. Schools have 12+ month procurement cycles you can't afford. Parents buy tutoring immediately when their child struggles. Pivot to B2B later with proven outcomes.\",\n      \"deadline\": \"This week\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"How will you fund development beyond your $10K?\",\n      \"options\": [\n        { \"option\": \"Presell subscriptions\", \"tradeoff\": \"Gain: immediate validation and cash vs Loss: pressure to deliver quickly\" },\n        { \"option\": \"Part-time development while freelancing\", \"tradeoff\": \"Gain: steady income vs Loss: slower progress, divided attention\" },\n        { \"option\": \"Seek pre-seed funding\", \"tradeoff\": \"Gain: full focus vs Loss: dilution, time spent fundraising\" }\n      ],\n      \"recommendation\": \"Presell subscriptions after beta validation. Offer 50% discount for annual prepay. This validates demand and extends runway without dilution.\",\n      \"deadline\": \"Week 8\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"strategist\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}\n```",
+  "error": null,
+  "timestamp": "2026-03-08T01:59:36.978Z"
+}

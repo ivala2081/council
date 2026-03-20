@@ -1,0 +1,91 @@
+{
+  "promptId": "g01-resume-screening",
+  "mapping": {
+    "A": "dual",
+    "B": "council",
+    "C": "baseline"
+  },
+  "timestamp": "2026-03-08T01:33:48.274Z",
+  "council": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Strong regulatory compliance focus",
+      "Realistic pricing with lower barrier to entry",
+      "Good technical risk assessment",
+      "Specific compliance timeline considerations",
+      "Clear positioning as screening assistant"
+    ],
+    "weaknesses": [
+      "Less detailed competitive analysis",
+      "Action plan less specific than other outputs",
+      "Some redundancy in risk assessment",
+      "Decision agenda less comprehensive"
+    ],
+    "total": 20
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 5,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly actionable weekly plan",
+      "Specific competitor analysis with real companies",
+      "Clear decision framework with tradeoffs",
+      "Realistic pricing strategy with usage-based model",
+      "Strong integration-first positioning"
+    ],
+    "weaknesses": [
+      "Some market size estimates lack clear sourcing",
+      "Technical timeline may be optimistic",
+      "Limited discussion of regulatory compliance depth"
+    ],
+    "total": 22
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Realistic market sizing methodology",
+      "Strong focus on human-in-the-loop positioning",
+      "Good vertical specialization recommendation",
+      "Comprehensive risk assessment",
+      "Realistic timeline expectations"
+    ],
+    "weaknesses": [
+      "Less specific competitor details",
+      "Market size estimates more conservative but less detailed",
+      "Action plan items less specific",
+      "Fewer concrete next steps"
+    ],
+    "total": 19
+  },
+  "ranking": [
+    "dual",
+    "council",
+    "baseline"
+  ],
+  "rankingReason": "Output A provides the most actionable guidance with specific weekly tasks, detailed competitor analysis, and a comprehensive decision framework. It offers concrete recommendations like starting with Workable integration and specific pricing models. Output B is strong on compliance but less actionable overall. Output C is solid but more generic in its recommendations.",
+  "keyDifferences": [
+    "Output A emphasizes integration-first strategy most strongly",
+    "Output B focuses heavily on regulatory compliance from day one",
+    "Output C recommends vertical focus on software engineering roles specifically",
+    "Pricing strategies vary significantly across outputs",
+    "Timeline estimates range from 8-10 weeks (A) to 4-5 months (C)"
+  ],
+  "winner": "dual"
+}

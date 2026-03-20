@@ -1,0 +1,51 @@
+{
+  "promptId": "g10-social-commerce",
+  "outputA": {
+    "mode": "council",
+    "scores": {
+      "specificity": 5,
+      "actionability": 5,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Extremely specific with named competitors, real data points, and precise recommendations",
+      "Highly actionable with clear weekly timelines and concrete next steps",
+      "Excellent decision framework with well-reasoned tradeoffs and specific recommendations"
+    ],
+    "weaknesses": [
+      "Some unit economics estimates may be optimistic",
+      "Technical timeline estimates could be aggressive for a non-technical founder"
+    ]
+  },
+  "outputB": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good competitor analysis with specific companies and features",
+      "Realistic assessment of risks and challenges",
+      "Practical no-code MVP approach for non-technical founder"
+    ],
+    "weaknesses": [
+      "Less detailed market sizing methodology",
+      "Fewer specific actionable items in weekly plans",
+      "Decision options lack the depth of tradeoff analysis"
+    ]
+  },
+  "preference": "A",
+  "preferenceReason": "Output A provides significantly more specificity and actionability. It includes precise pricing recommendations (3.5% + $0.30), specific market sizing methodology referencing Goldman Sachs data, detailed competitor analysis with exact weaknesses, and a comprehensive decision framework with clear recommendations and deadlines. The weekly action plans are more concrete and immediately executable.",
+  "keyDifferences": [
+    "Output A provides much more specific pricing analysis and recommendations",
+    "Output A has more detailed market sizing with clear methodology and confidence levels",
+    "Output A offers more comprehensive decision framework with specific tradeoffs and deadlines",
+    "Output A includes more actionable weekly plans with concrete deliverables"
+  ],
+  "timestamp": "2026-03-08T01:17:32.380Z"
+}

@@ -1,0 +1,898 @@
+[
+  {
+    "promptId": "g01-resume-screening",
+    "mapping": {
+      "A": "dual",
+      "B": "council",
+      "C": "baseline"
+    },
+    "timestamp": "2026-03-08T01:33:48.274Z",
+    "council": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Strong regulatory compliance focus",
+        "Realistic pricing with lower barrier to entry",
+        "Good technical risk assessment",
+        "Specific compliance timeline considerations",
+        "Clear positioning as screening assistant"
+      ],
+      "weaknesses": [
+        "Less detailed competitive analysis",
+        "Action plan less specific than other outputs",
+        "Some redundancy in risk assessment",
+        "Decision agenda less comprehensive"
+      ],
+      "total": 20
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 5,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly actionable weekly plan",
+        "Specific competitor analysis with real companies",
+        "Clear decision framework with tradeoffs",
+        "Realistic pricing strategy with usage-based model",
+        "Strong integration-first positioning"
+      ],
+      "weaknesses": [
+        "Some market size estimates lack clear sourcing",
+        "Technical timeline may be optimistic",
+        "Limited discussion of regulatory compliance depth"
+      ],
+      "total": 22
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Realistic market sizing methodology",
+        "Strong focus on human-in-the-loop positioning",
+        "Good vertical specialization recommendation",
+        "Comprehensive risk assessment",
+        "Realistic timeline expectations"
+      ],
+      "weaknesses": [
+        "Less specific competitor details",
+        "Market size estimates more conservative but less detailed",
+        "Action plan items less specific",
+        "Fewer concrete next steps"
+      ],
+      "total": 19
+    },
+    "ranking": [
+      "dual",
+      "council",
+      "baseline"
+    ],
+    "rankingReason": "Output A provides the most actionable guidance with specific weekly tasks, detailed competitor analysis, and a comprehensive decision framework. It offers concrete recommendations like starting with Workable integration and specific pricing models. Output B is strong on compliance but less actionable overall. Output C is solid but more generic in its recommendations.",
+    "keyDifferences": [
+      "Output A emphasizes integration-first strategy most strongly",
+      "Output B focuses heavily on regulatory compliance from day one",
+      "Output C recommends vertical focus on software engineering roles specifically",
+      "Pricing strategies vary significantly across outputs",
+      "Timeline estimates range from 8-10 weeks (A) to 4-5 months (C)"
+    ],
+    "winner": "dual"
+  },
+  {
+    "promptId": "g02-sustainable-fashion",
+    "mapping": {
+      "A": "baseline",
+      "B": "dual",
+      "C": "council"
+    },
+    "timestamp": "2026-03-08T01:34:02.332Z",
+    "council": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Clear value proposition and positioning",
+        "Practical approach to pricing strategy",
+        "Good balance of optimism and realism",
+        "Strong focus on execution timeline",
+        "Clear geographic focus recommendation"
+      ],
+      "weaknesses": [
+        "Less detailed competitor analysis",
+        "Market sizing methodology less rigorous",
+        "Risk assessment less comprehensive",
+        "Some generic advice mixed with specific insights",
+        "Limited discussion of scalability challenges"
+      ],
+      "total": 18
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good market analysis with realistic sizing",
+        "Strong focus on unit economics and financial viability",
+        "Practical build vs buy recommendations",
+        "Clear positioning against competitors",
+        "Realistic assessment of customer acquisition challenges"
+      ],
+      "weaknesses": [
+        "Less comprehensive risk assessment",
+        "Decision agenda could be more structured",
+        "Some repetition between sections",
+        "Limited technical detail on verification system"
+      ],
+      "total": 19
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific market sizing with clear methodology",
+        "Detailed competitor analysis with strengths/weaknesses",
+        "Comprehensive risk assessment with concrete mitigation strategies",
+        "Excellent decision framework with clear options and tradeoffs",
+        "Actionable weekly timeline with specific deliverables"
+      ],
+      "weaknesses": [
+        "Some unit economics estimates lack confidence",
+        "Technical feasibility section could be more detailed",
+        "Limited discussion of international expansion considerations"
+      ],
+      "total": 21
+    },
+    "ranking": [
+      "baseline",
+      "dual",
+      "council"
+    ],
+    "rankingReason": "Output A provides the most comprehensive and structured analysis with superior decision clarity. It offers the most detailed risk assessment, clearest decision framework with specific tradeoffs, and most actionable timeline. While all outputs are solid, A demonstrates the depth and specificity needed for real strategic decisions.",
+    "keyDifferences": [
+      "Output A has the most structured decision agenda with clear deadlines and tradeoffs",
+      "Output B focuses more heavily on unit economics but lacks comprehensive risk analysis",
+      "Output C is more optimistic (72 vs 52 council score) but provides less analytical depth",
+      "A and B both identify the commission rate as potentially too high, while C is more confident about pricing",
+      "Technical feasibility analysis is most detailed in A, with specific timeline estimates and platform recommendations"
+    ],
+    "winner": "baseline"
+  },
+  {
+    "promptId": "g03-restaurant-inventory",
+    "mapping": {
+      "A": "baseline",
+      "B": "council",
+      "C": "dual"
+    },
+    "timestamp": "2026-03-08T01:34:18.025Z",
+    "council": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good balance of optimism and realism",
+        "Clear identification of key risks",
+        "Practical mitigation strategies",
+        "Solid competitive landscape analysis",
+        "Reasonable unit economics estimates"
+      ],
+      "weaknesses": [
+        "Less specific on market sizing methodology",
+        "Action items are somewhat generic",
+        "Decision framework lacks urgency and deadlines",
+        "Limited technical depth on implementation",
+        "Some recommendations lack concrete next steps"
+      ],
+      "total": 18
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 3,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Comprehensive competitive analysis",
+        "Detailed technical feasibility assessment",
+        "Strong risk identification across multiple categories",
+        "Good integration of external factors (weather, events)",
+        "Thorough market context with post-COVID impacts"
+      ],
+      "weaknesses": [
+        "Unit economics seem pessimistic (12-18 month payback)",
+        "Some market size estimates appear inflated",
+        "Action plan timeline may be too aggressive",
+        "Pricing recommendations conflict with stated unit economics",
+        "Less decisive on key strategic choices"
+      ],
+      "total": 19
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 5,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific market sizing with clear methodology",
+        "Extremely actionable weekly plans",
+        "Strong decision framework with clear recommendations and deadlines",
+        "Realistic assessment of technical challenges",
+        "Concrete competitor analysis with specific strengths/weaknesses"
+      ],
+      "weaknesses": [
+        "Some market size estimates seem optimistic",
+        "Could provide more depth on ML technical implementation",
+        "Limited discussion of regulatory or compliance issues"
+      ],
+      "total": 22
+    },
+    "ranking": [
+      "baseline",
+      "dual",
+      "council"
+    ],
+    "rankingReason": "Output A provides the most actionable and decisive strategic guidance. It has the clearest decision framework with specific deadlines, most realistic unit economics, and most concrete action items. While Output C has good depth, its pessimistic unit economics and conflicting recommendations reduce trust. Output B is solid but less specific and actionable than A.",
+    "keyDifferences": [
+      "Output A is most decisive with clear recommendations and deadlines",
+      "Output C has most comprehensive risk analysis but conflicting financial projections",
+      "Output B takes middle ground but lacks specificity",
+      "Market sizing varies significantly across outputs ($2.4M vs $8M vs $65M SOM)",
+      "Unit economics range from optimistic (A: 4mo payback) to pessimistic (C: 12-18mo payback)",
+      "Technical implementation timelines differ (A: 4-5mo, B: 4-6mo, C: 4-6mo integrated)"
+    ],
+    "winner": "baseline"
+  },
+  {
+    "promptId": "g04-genz-finance",
+    "mapping": {
+      "A": "baseline",
+      "B": "dual",
+      "C": "council"
+    },
+    "timestamp": "2026-03-08T01:34:32.177Z",
+    "council": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 3,
+        "depth": 3,
+        "realism": 3,
+        "decisionClarity": 3
+      },
+      "strengths": [
+        "Good positioning statement",
+        "Reasonable timeline estimates",
+        "Balanced view of opportunities and risks",
+        "Clear value proposition articulation"
+      ],
+      "weaknesses": [
+        "Less specific on regulatory requirements",
+        "Vague on customer acquisition costs and strategies",
+        "Limited depth in competitive analysis",
+        "Unit economics seem overly optimistic",
+        "Less actionable weekly tasks compared to others"
+      ],
+      "total": 15
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 5,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Very realistic about budget constraints and unit economics challenges",
+        "Strong emphasis on regulatory compliance costs",
+        "Good analysis of why $25K budget is insufficient",
+        "Practical recommendation to apply for accelerators",
+        "Honest assessment of competitive threats"
+      ],
+      "weaknesses": [
+        "Less detailed technical implementation guidance",
+        "Market size estimates vary significantly from other outputs",
+        "Some repetition in risk assessment",
+        "Less comprehensive competitor analysis"
+      ],
+      "total": 20
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific competitor analysis with real companies and pricing",
+        "Concrete 12-week action plan with weekly tasks",
+        "Excellent decision framework with clear options and tradeoffs",
+        "Realistic assessment of regulatory complexity and costs",
+        "Strong technical feasibility section with specific stack recommendations"
+      ],
+      "weaknesses": [
+        "Market size calculations seem inconsistent across outputs",
+        "Some unit economics assumptions may be optimistic",
+        "Could provide more specific customer acquisition strategies"
+      ],
+      "total": 21
+    },
+    "ranking": [
+      "baseline",
+      "dual",
+      "council"
+    ],
+    "rankingReason": "Output A provides the most comprehensive and actionable strategic brief. It offers the most detailed competitor analysis, clearest decision framework with specific recommendations and deadlines, and most thorough technical implementation guidance. Output B is strong on realism about financial constraints but less comprehensive overall. Output C lacks the depth and specificity needed for real decision-making.",
+    "keyDifferences": [
+      "Market size estimates vary dramatically ($24M to $200M SAM)",
+      "Regulatory risk assessment depth varies significantly",
+      "Level of technical implementation detail differs substantially",
+      "Decision framework clarity and actionability varies",
+      "Realism about budget constraints and unit economics challenges"
+    ],
+    "winner": "baseline"
+  },
+  {
+    "promptId": "g05-developer-docs",
+    "mapping": {
+      "A": "baseline",
+      "B": "council",
+      "C": "dual"
+    },
+    "timestamp": "2026-03-08T01:34:43.945Z",
+    "council": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 3,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good balance of optimism and realism",
+        "Clear positioning statement",
+        "Practical MVP scope",
+        "Strong actionable timeline"
+      ],
+      "weaknesses": [
+        "Less specific on competitor weaknesses",
+        "Unit economics seem overly optimistic (2-month payback)",
+        "Shallow technical risk analysis"
+      ],
+      "total": 17
+    },
+    "dual": {
+      "scores": {
+        "specificity": 5,
+        "actionability": 4,
+        "depth": 5,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Most specific competitor details with funding amounts",
+        "Deep insight about positioning as workflow automation vs docs tool",
+        "Excellent technical feasibility analysis",
+        "Strong market timing rationale"
+      ],
+      "weaknesses": [
+        "Decision agenda could be clearer on recommendations",
+        "Some decisions marked as 'consider' rather than actionable"
+      ],
+      "total": 22
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Excellent decision framework with clear options and tradeoffs",
+        "Specific market sizing with methodology",
+        "Realistic unit economics with proper confidence labeling",
+        "Actionable weekly timeline"
+      ],
+      "weaknesses": [
+        "Some generic competitor analysis",
+        "Limited technical depth on AI implementation challenges"
+      ],
+      "total": 21
+    },
+    "ranking": [
+      "baseline",
+      "dual",
+      "council"
+    ],
+    "rankingReason": "Output A provides the clearest decision framework with specific recommendations and deadlines, making it most actionable for a founder. Output C has superior depth and specificity but slightly weaker decision clarity. Output B is solid but less distinctive and has some unrealistic assumptions.",
+    "keyDifferences": [
+      "Output A excels at decision clarity with explicit recommendations and deadlines",
+      "Output C provides the most market intelligence and technical depth",
+      "Output B is most optimistic but least specific about competitive landscape",
+      "All three agree on core strategy but differ in execution priorities"
+    ],
+    "winner": "baseline"
+  },
+  {
+    "promptId": "g06-rural-telehealth",
+    "mapping": {
+      "A": "baseline",
+      "B": "dual",
+      "C": "council"
+    },
+    "timestamp": "2026-03-08T01:34:59.065Z",
+    "council": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 3,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 3
+      },
+      "strengths": [
+        "Good balance of optimism and realism",
+        "Solid technical feasibility analysis",
+        "Reasonable market sizing approach",
+        "Good identification of key risks",
+        "Mentions NIH SBIR funding opportunity"
+      ],
+      "weaknesses": [
+        "Less specific than other outputs on many dimensions",
+        "Action plan lacks detail and urgency",
+        "Market analysis is more generic",
+        "Decision framework is less comprehensive",
+        "Fewer concrete next steps"
+      ],
+      "total": 16
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 5,
+        "realism": 5,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Brutally honest assessment of execution challenges",
+        "Deep insights into rural healthcare dynamics",
+        "Excellent use of founder's Epic background as competitive advantage",
+        "Very realistic about regulatory and adoption timeline challenges",
+        "Strong technical recommendations with clear rationale"
+      ],
+      "weaknesses": [
+        "Less specific on market sizing methodology",
+        "Action plan could be more detailed",
+        "Some recommendations lack specific deadlines",
+        "Decision options could be more comprehensive"
+      ],
+      "total": 22
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 5,
+        "actionability": 5,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Extremely specific market sizing with clear methodology",
+        "Highly actionable weekly plans with concrete tasks",
+        "Detailed competitor analysis with specific strengths/weaknesses",
+        "Clear decision framework with specific recommendations and deadlines",
+        "Realistic unit economics with proper confidence levels"
+      ],
+      "weaknesses": [
+        "Some market size estimates seem optimistic",
+        "Could provide more depth on technical implementation challenges",
+        "Limited discussion of team scaling needs"
+      ],
+      "total": 23
+    },
+    "ranking": [
+      "baseline",
+      "dual",
+      "council"
+    ],
+    "rankingReason": "Output A provides the most actionable and specific guidance a founder could actually execute on. It has the most detailed market sizing, clearest decision framework with specific deadlines, and most actionable weekly plans. Output B has excellent depth and realism but is less actionable. Output C is solid but generic compared to the others.",
+    "keyDifferences": [
+      "Output A is most specific with concrete numbers and methodologies",
+      "Output B is most realistic about execution challenges and regulatory complexity",
+      "Output C is most balanced but least distinctive",
+      "Output A has the most detailed action plans with specific weekly tasks",
+      "Output B leverages the founder's Epic background most strategically",
+      "Output A provides the clearest decision framework with specific recommendations and deadlines"
+    ],
+    "winner": "baseline"
+  },
+  {
+    "promptId": "g07-ev-charging",
+    "mapping": {
+      "A": "council",
+      "B": "dual",
+      "C": "baseline"
+    },
+    "timestamp": "2026-03-08T01:35:14.104Z",
+    "council": {
+      "scores": {
+        "specificity": 5,
+        "actionability": 5,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Extremely specific with real companies and concrete numbers",
+        "Highly actionable weekly tasks",
+        "Clear decision framework with specific recommendations",
+        "Realistic assessment of brutal rural unit economics",
+        "Strong competitive analysis with specific weaknesses"
+      ],
+      "weaknesses": [
+        "Some estimates may be overly optimistic",
+        "Could benefit from more technical risk detail"
+      ],
+      "total": 23
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 3,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good competitive landscape coverage",
+        "Realistic timeline estimates",
+        "Balanced risk assessment",
+        "Clear positioning strategy"
+      ],
+      "weaknesses": [
+        "Less specific on actionable next steps",
+        "Unit economics confidence marked as 'low' without clear path forward",
+        "Some generic advice mixed with specifics",
+        "Less decisive recommendations"
+      ],
+      "total": 18
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 3,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 3
+      },
+      "strengths": [
+        "Realistic market sizing methodology",
+        "Good technical feasibility breakdown",
+        "Honest about execution risks",
+        "Includes Shell Recharge as emerging competitor"
+      ],
+      "weaknesses": [
+        "Less specific actionable guidance",
+        "More conservative market estimates may be too pessimistic",
+        "Decision recommendations lack conviction",
+        "Generic strategic advice in places"
+      ],
+      "total": 16
+    },
+    "ranking": [
+      "council",
+      "dual",
+      "baseline"
+    ],
+    "rankingReason": "Output A provides the most actionable and specific guidance a founder could actually execute. It gives concrete numbers, specific highway corridors to target (I-80, I-40, I-10), exact utilization thresholds (15-20%), and decisive recommendations with clear deadlines. The competitive analysis is most detailed and the decision framework is most actionable. Output B is solid but less decisive, while Output C is more conservative and generic.",
+    "keyDifferences": [
+      "Output A is most decisive with specific highway recommendations and utilization targets",
+      "Output A provides most specific competitive intelligence and positioning",
+      "Output B focuses more on partnership dynamics but with less conviction",
+      "Output C is most conservative on market sizing and growth projections",
+      "Output A has clearest action items with specific deadlines and metrics"
+    ],
+    "winner": "council"
+  },
+  {
+    "promptId": "g08-ai-tutoring",
+    "mapping": {
+      "A": "baseline",
+      "B": "dual",
+      "C": "council"
+    },
+    "timestamp": "2026-03-08T01:35:28.285Z",
+    "council": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Clear value proposition articulation",
+        "Realistic timeline estimates",
+        "Good balance of technical and business considerations",
+        "Practical approach to bootstrapping",
+        "Strong focus on COPPA compliance"
+      ],
+      "weaknesses": [
+        "Less detailed market analysis methodology",
+        "Fewer specific competitor insights",
+        "Decision agenda less comprehensive",
+        "Unit economics estimates seem less grounded",
+        "Less detailed risk mitigation strategies"
+      ],
+      "total": 18
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Strong competitive analysis with specific user numbers",
+        "Realistic assessment of funding constraints",
+        "Good focus on learning outcomes vs engagement metrics",
+        "Clear positioning against established players",
+        "Practical technical stack recommendations"
+      ],
+      "weaknesses": [
+        "Less detailed decision framework compared to other outputs",
+        "Market sizing methodology less clear",
+        "Action plan could be more specific about validation methods",
+        "Some redundancy in risk assessment"
+      ],
+      "total": 19
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Highly specific market sizing with clear methodology",
+        "Detailed competitor analysis with concrete strengths/weaknesses",
+        "Well-structured decision agenda with clear recommendations and deadlines",
+        "Realistic assessment of $10K budget constraints",
+        "Actionable weekly timeline with specific tasks"
+      ],
+      "weaknesses": [
+        "Some market size estimates may be optimistic",
+        "Limited discussion of technical implementation details",
+        "Could provide more specific customer acquisition strategies"
+      ],
+      "total": 21
+    },
+    "ranking": [
+      "baseline",
+      "dual",
+      "council"
+    ],
+    "rankingReason": "Output A provides the most comprehensive and actionable strategic brief. It offers the most detailed decision framework with clear recommendations and deadlines, specific market sizing methodology, and thorough competitor analysis. The structured approach to critical decisions (narrow focus, B2C vs B2B, funding timing) with clear tradeoffs makes it most valuable for actual decision-making. Output B is strong but less structured in decision-making, while Output C is solid but less detailed overall.",
+    "keyDifferences": [
+      "Output A has the most structured decision agenda with specific deadlines and clear recommendations",
+      "Output B emphasizes learning outcomes measurement as a key differentiator more than others",
+      "Output C focuses more on technical implementation details and COPPA compliance",
+      "All three agree on the competitive threat from Khan Academy but differ in their strategic responses",
+      "Market sizing approaches vary significantly between outputs, with A being most methodical"
+    ],
+    "winner": "baseline"
+  },
+  {
+    "promptId": "g09-cybersecurity-compliance",
+    "mapping": {
+      "A": "dual",
+      "B": "council",
+      "C": "baseline"
+    },
+    "timestamp": "2026-03-08T01:35:42.367Z",
+    "council": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good focus on AI liability risks",
+        "Realistic assessment of competitive threats",
+        "Clear vertical vs horizontal decision framework",
+        "Appropriate caution about market maturity"
+      ],
+      "weaknesses": [
+        "Less specific market data and competitor intelligence",
+        "Generic action items without enough detail",
+        "Shorter timeline estimates may be unrealistic",
+        "Less comprehensive decision analysis"
+      ],
+      "total": 18
+    },
+    "dual": {
+      "scores": {
+        "specificity": 5,
+        "actionability": 5,
+        "depth": 5,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Extremely specific with real company data (Vanta 7,000+ customers, $100M ARR)",
+        "Highly actionable weekly plans with concrete tasks",
+        "Deep insights on vertical positioning and AI risk management",
+        "Comprehensive decision framework with clear recommendations and deadlines"
+      ],
+      "weaknesses": [
+        "Some unit economics assumptions may be optimistic",
+        "Could benefit from more conservative market sizing"
+      ],
+      "total": 24
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good balance of optimism and realism",
+        "Strong focus on vertical specialization benefits",
+        "Comprehensive risk assessment",
+        "Clear positioning recommendations"
+      ],
+      "weaknesses": [
+        "Less detailed competitor analysis",
+        "Higher pricing assumptions may not be market-tested",
+        "Action plan could be more specific",
+        "Missing some technical implementation details"
+      ],
+      "total": 20
+    },
+    "ranking": [
+      "dual",
+      "baseline",
+      "council"
+    ],
+    "rankingReason": "Output A provides the most actionable and specific strategic guidance with real market data, detailed competitor intelligence, and a comprehensive decision framework. It offers the deepest insights while maintaining realism about challenges. Output C is solid but less detailed, while Output B is too cautious and generic for effective decision-making.",
+    "keyDifferences": [
+      "Output A provides specific competitor metrics and market data vs generic assessments in B and C",
+      "Output A has more detailed weekly action plans vs high-level recommendations in others",
+      "Output A offers more comprehensive decision frameworks with clear tradeoffs and deadlines",
+      "Output B is most conservative about AI risks while A provides balanced risk mitigation strategies"
+    ],
+    "winner": "dual"
+  },
+  {
+    "promptId": "g10-social-commerce",
+    "mapping": {
+      "A": "council",
+      "B": "dual",
+      "C": "baseline"
+    },
+    "timestamp": "2026-03-08T01:35:58.068Z",
+    "council": {
+      "scores": {
+        "specificity": 5,
+        "actionability": 5,
+        "depth": 4,
+        "realism": 4,
+        "decisionClarity": 5
+      },
+      "strengths": [
+        "Extremely specific with real company names, exact pricing (3.5% + $0.30), and concrete market sizing",
+        "Highly actionable with detailed week-by-week plans and specific tools (Bubble, Stripe Connect)",
+        "Deep competitive analysis with specific strengths/weaknesses for each competitor",
+        "Clear decision framework with explicit tradeoffs and deadlines"
+      ],
+      "weaknesses": [
+        "Some market sizing confidence labeled as 'medium' but estimates seem optimistic",
+        "Technical timeline estimates may be aggressive for solo founder"
+      ],
+      "total": 23
+    },
+    "dual": {
+      "scores": {
+        "specificity": 4,
+        "actionability": 4,
+        "depth": 4,
+        "realism": 3,
+        "decisionClarity": 4
+      },
+      "strengths": [
+        "Good specificity with real competitors and market data",
+        "Actionable recommendations with clear timelines",
+        "Identifies key risks like API dependencies",
+        "Addresses technical co-founder challenge directly"
+      ],
+      "weaknesses": [
+        "Unit economics seem overly optimistic (3.2 month payback)",
+        "Some claims about GMV increases (25%+) lack supporting evidence",
+        "Less detailed on specific implementation steps"
+      ],
+      "total": 19
+    },
+    "baseline": {
+      "scores": {
+        "specificity": 3,
+        "actionability": 4,
+        "depth": 3,
+        "realism": 4,
+        "decisionClarity": 3
+      },
+      "strengths": [
+        "Realistic assessment of challenges and risks",
+        "Good focus on no-code MVP approach",
+        "Honest about low confidence in unit economics",
+        "Practical advice about starting with specific niche"
+      ],
+      "weaknesses": [
+        "Less specific on exact pricing and competitive positioning",
+        "Shorter action plan with less detail",
+        "Decision agenda less comprehensive than other outputs",
+        "Market analysis less detailed"
+      ],
+      "total": 17
+    },
+    "ranking": [
+      "council",
+      "dual",
+      "baseline"
+    ],
+    "rankingReason": "Output A provides the most comprehensive and actionable strategic brief. It offers specific pricing recommendations (3.5% + $0.30), detailed competitive analysis with exact fee structures, and a thorough decision framework with clear tradeoffs and deadlines. The week-by-week action plan is highly specific and immediately actionable. While Output B has good insights, its unit economics seem less realistic. Output C is solid but less detailed and specific overall.",
+    "keyDifferences": [
+      "Output A provides most specific pricing strategy and competitive positioning",
+      "Output A has most detailed decision framework with explicit tradeoffs",
+      "Output B focuses heavily on creator collaboration as differentiator",
+      "Output C is most conservative in projections but less comprehensive",
+      "All three recommend no-code MVP but A provides most specific implementation guidance"
+    ],
+    "winner": "council"
+  }
+]

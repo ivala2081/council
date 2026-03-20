@@ -1,0 +1,93 @@
+{
+  "promptId": "g06-rural-telehealth",
+  "mapping": {
+    "A": "baseline",
+    "B": "dual",
+    "C": "council"
+  },
+  "timestamp": "2026-03-08T01:34:59.065Z",
+  "council": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 3,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 3
+    },
+    "strengths": [
+      "Good balance of optimism and realism",
+      "Solid technical feasibility analysis",
+      "Reasonable market sizing approach",
+      "Good identification of key risks",
+      "Mentions NIH SBIR funding opportunity"
+    ],
+    "weaknesses": [
+      "Less specific than other outputs on many dimensions",
+      "Action plan lacks detail and urgency",
+      "Market analysis is more generic",
+      "Decision framework is less comprehensive",
+      "Fewer concrete next steps"
+    ],
+    "total": 16
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 5,
+      "realism": 5,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Brutally honest assessment of execution challenges",
+      "Deep insights into rural healthcare dynamics",
+      "Excellent use of founder's Epic background as competitive advantage",
+      "Very realistic about regulatory and adoption timeline challenges",
+      "Strong technical recommendations with clear rationale"
+    ],
+    "weaknesses": [
+      "Less specific on market sizing methodology",
+      "Action plan could be more detailed",
+      "Some recommendations lack specific deadlines",
+      "Decision options could be more comprehensive"
+    ],
+    "total": 22
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 5,
+      "actionability": 5,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Extremely specific market sizing with clear methodology",
+      "Highly actionable weekly plans with concrete tasks",
+      "Detailed competitor analysis with specific strengths/weaknesses",
+      "Clear decision framework with specific recommendations and deadlines",
+      "Realistic unit economics with proper confidence levels"
+    ],
+    "weaknesses": [
+      "Some market size estimates seem optimistic",
+      "Could provide more depth on technical implementation challenges",
+      "Limited discussion of team scaling needs"
+    ],
+    "total": 23
+  },
+  "ranking": [
+    "baseline",
+    "dual",
+    "council"
+  ],
+  "rankingReason": "Output A provides the most actionable and specific guidance a founder could actually execute on. It has the most detailed market sizing, clearest decision framework with specific deadlines, and most actionable weekly plans. Output B has excellent depth and realism but is less actionable. Output C is solid but generic compared to the others.",
+  "keyDifferences": [
+    "Output A is most specific with concrete numbers and methodologies",
+    "Output B is most realistic about execution challenges and regulatory complexity",
+    "Output C is most balanced but least distinctive",
+    "Output A has the most detailed action plans with specific weekly tasks",
+    "Output B leverages the founder's Epic background most strategically",
+    "Output A provides the clearest decision framework with specific recommendations and deadlines"
+  ],
+  "winner": "baseline"
+}

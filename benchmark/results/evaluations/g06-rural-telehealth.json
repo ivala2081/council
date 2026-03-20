@@ -1,0 +1,50 @@
+{
+  "promptId": "g06-rural-telehealth",
+  "outputA": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 5,
+      "actionability": 5,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Extremely specific with named competitors, real market data, and concrete numbers",
+      "Highly actionable with clear weekly tasks and specific recommendations",
+      "Excellent decision framework with clear options, tradeoffs, and deadlines"
+    ],
+    "weaknesses": [
+      "Some market sizing estimates may be optimistic",
+      "Could provide more depth on technical implementation challenges"
+    ]
+  },
+  "outputB": {
+    "mode": "council",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 5,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Very realistic assessment of challenges and timelines",
+      "Good technical feasibility analysis with specific stack recommendations",
+      "Strong risk assessment with practical mitigation strategies"
+    ],
+    "weaknesses": [
+      "Less specific on market sizing methodology",
+      "Decision options could be more detailed with clearer tradeoffs"
+    ]
+  },
+  "preference": "B",
+  "preferenceReason": "Output A provides more actionable specificity with concrete numbers, named competitors, and a clearer decision framework. While both outputs are strong, Output A gives the founder more immediately actionable insights with specific market data, competitor analysis, and a well-structured decision agenda with clear deadlines and recommendations.",
+  "keyDifferences": [
+    "Output A provides more specific market sizing with detailed methodology and competitor analysis",
+    "Output A has a more structured and detailed decision agenda with clearer tradeoffs",
+    "Output B is more conservative in its assessments and focuses more on risk mitigation",
+    "Output A gives more concrete weekly action items while Output B provides broader strategic guidance"
+  ],
+  "timestamp": "2026-03-08T01:16:44.241Z"
+}

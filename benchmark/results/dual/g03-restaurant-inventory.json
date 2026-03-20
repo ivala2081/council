@@ -1,0 +1,554 @@
+{
+  "promptId": "g03-restaurant-inventory",
+  "mode": "dual",
+  "triage": {
+    "output": {
+      "ideaType": "B2B SaaS - Restaurant Operations Software",
+      "queryType": "Strategic positioning decision + competitive threat assessment + product architecture choice",
+      "founderProfile": {
+        "teamSize": 2,
+        "technicalCapability": "high",
+        "budget": "$150K pre-seed raised",
+        "experience": "product/business + ML engineering",
+        "stage": "early validation (3 beta customers)"
+      },
+      "extractedContext": {
+        "coreProblem": "Independent restaurants waste significant food costs and struggle with inventory planning; current manual processes are inefficient and error-prone",
+        "targetMarket": "Independent restaurants (non-chains), likely 1-10 locations, price-sensitive, low-tech adoption",
+        "solution": "Predictive inventory management SaaS using sales history, weather, local events to forecast ingredient needs and automate supplier ordering",
+        "revenueModel": "$199/month per location",
+        "statedConcerns": [
+          "Restaurant industry has low software adoption and price sensitivity",
+          "Toast/Square/Clover adding native inventory features (direct competition)",
+          "Long onboarding ramp (3 months data needed) before ML accuracy and value realization",
+          "Sales difficulty in restaurant vertical"
+        ],
+        "openDecisions": [
+          "POS integration strategy: build integrations vs. standalone tool",
+          "Primary value metric: waste reduction vs. cost savings messaging"
+        ],
+        "constraints": [
+          "2-person team (limited sales/marketing bandwidth)",
+          "$150K runway (need to extend or raise)",
+          "Dependent on ML engineer for core product"
+        ]
+      },
+      "sectionPriorities": {
+        "decisionAgenda": "detailed",
+        "marketAnalysis": "detailed",
+        "competitivePosition": "detailed",
+        "businessModel": "standard",
+        "technicalFeasibility": "standard",
+        "goToMarket": "detailed"
+      },
+      "keyQuestions": [
+        "Is the POS integration decision primarily about distribution (easier sales) or product necessity (data access)? What's the realistic timeline and cost to build integrations vs. standalone?",
+        "How defensible is your ML model against Toast/Square/Clover? What's your moat if incumbents improve their inventory features?",
+        "Can you compress the 3-month onboarding period with synthetic data, benchmarking, or a freemium tier to show value faster?",
+        "What's your actual go-to-market motion with 2 people? Direct sales, restaurant networks, POS partnerships, or something else?",
+        "Should you pivot the positioning from 'inventory management' to 'waste reduction' or 'supplier cost negotiation' to differentiate from POS add-ons?"
+      ],
+      "language": "en"
+    },
+    "rawText": "```json\n{\n  \"ideaType\": \"B2B SaaS - Restaurant Operations Software\",\n  \"queryType\": \"Strategic positioning decision + competitive threat assessment + product architecture choice\",\n  \"founderProfile\": {\n    \"teamSize\": 2,\n    \"technicalCapability\": \"high\",\n    \"budget\": \"$150K pre-seed raised\",\n    \"experience\": \"product/business + ML engineering\",\n    \"stage\": \"early validation (3 beta customers)\"\n  },\n  \"extractedContext\": {\n    \"coreProblem\": \"Independent restaurants waste significant food costs and struggle with inventory planning; current manual processes are inefficient and error-prone\",\n    \"targetMarket\": \"Independent restaurants (non-chains), likely 1-10 locations, price-sensitive, low-tech adoption\",\n    \"solution\": \"Predictive inventory management SaaS using sales history, weather, local events to forecast ingredient needs and automate supplier ordering\",\n    \"revenueModel\": \"$199/month per location\",\n    \"statedConcerns\": [\n      \"Restaurant industry has low software adoption and price sensitivity\",\n      \"Toast/Square/Clover adding native inventory features (direct competition)\",\n      \"Long onboarding ramp (3 months data needed) before ML accuracy and value realization\",\n      \"Sales difficulty in restaurant vertical\"\n    ],\n    \"openDecisions\": [\n      \"POS integration strategy: build integrations vs. standalone tool\",\n      \"Primary value metric: waste reduction vs. cost savings messaging\"\n    ],\n    \"constraints\": [\n      \"2-person team (limited sales/marketing bandwidth)\",\n      \"$150K runway (need to extend or raise)\",\n      \"Dependent on ML engineer for core product\"\n    ]\n  },\n  \"sectionPriorities\": {\n    \"decisionAgenda\": \"detailed\",\n    \"marketAnalysis\": \"detailed\",\n    \"competitivePosition\": \"detailed\",\n    \"businessModel\": \"standard\",\n    \"technicalFeasibility\": \"standard\",\n    \"goToMarket\": \"detailed\"\n  },\n  \"keyQuestions\": [\n    \"Is the POS integration decision primarily about distribution (easier sales) or product necessity (data access)? What's the realistic timeline and cost to build integrations vs. standalone?\",\n    \"How defensible is your ML model against Toast/Square/Clover? What's your moat if incumbents improve their inventory features?\",\n    \"Can you compress the 3-month onboarding period with synthetic data, benchmarking, or a freemium tier to show value faster?\",\n    \"What's your actual go-to-market motion with 2 people? Direct sales, restaurant networks, POS partnerships, or something else?\",\n    \"Should you pivot the positioning from 'inventory management' to 'waste reduction' or 'supplier cost negotiation' to differentiate from POS add-ons?\"\n  ],\n  \"language\": \"en\"\n}\n```",
+    "model": "claude-haiku-4-5-20251001",
+    "inputTokens": 523,
+    "outputTokens": 686,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0031624,
+    "durationMs": 6699
+  },
+  "strategist": {
+    "brief": {
+      "executiveSummary": {
+        "verdict": "risky",
+        "summary": "You're tackling a real problem with a solid technical approach, but you're fighting uphill against low-tech adoption, price sensitivity, and well-funded incumbents adding competing features. The 3-month value delay is a sales killer in this market. Your best shot is aggressive niche positioning and rapid POS integration to reduce friction.",
+        "councilScore": 55
+      },
+      "marketAnalysis": {
+        "marketSize": {
+          "tam": "$12B global restaurant management software market",
+          "sam": "$2.8B US independent restaurant software market (650K independent restaurants × ~$4K annual software spend)",
+          "som": "$65M realistic addressable market (65K restaurants × $1K annual spend for inventory-focused tools)",
+          "methodology": "Based on National Restaurant Association data on independent restaurants, estimated software penetration rates, and category-specific spending",
+          "confidence": "medium"
+        },
+        "competitors": [
+          {
+            "name": "Toast",
+            "description": "POS system with native inventory management features",
+            "strength": "Already embedded in restaurant operations, massive distribution",
+            "weakness": "Inventory is secondary feature, not ML-powered",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "Square for Restaurants",
+            "description": "POS with inventory tracking and low-stock alerts",
+            "strength": "Easy setup, integrated payments and inventory",
+            "weakness": "Basic inventory features, no predictive capabilities",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "Upserve (now part of Lightspeed)",
+            "description": "Restaurant management platform with inventory tools",
+            "strength": "Comprehensive restaurant operations suite",
+            "weakness": "Enterprise-focused, expensive for independents",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "BevSpot",
+            "description": "Beverage inventory management for bars/restaurants",
+            "strength": "Category expertise, proven ROI metrics",
+            "weakness": "Beverage-only, not food inventory",
+            "isDirectCompetitor": false
+          },
+          {
+            "name": "MarketMan",
+            "description": "Food cost management and inventory for restaurants",
+            "strength": "Established in the space, supplier integrations",
+            "weakness": "Manual data entry, not predictive",
+            "isDirectCompetitor": true
+          }
+        ],
+        "positioning": "The only predictive food inventory system that prevents waste before it happens, specifically built for independent restaurants under 10 locations",
+        "timing": "Post-COVID supply chain disruptions made inventory planning critical; rising food costs (up 25% since 2020) create urgency for waste reduction",
+        "gaps": [
+          "True ML-powered demand forecasting",
+          "Weather/events integration",
+          "Focus on sub-10 location independents"
+        ]
+      },
+      "valueProposition": {
+        "coreProblem": "Independent restaurants waste 4-10% of food purchases ($4,000-15,000 annually per location) due to poor demand forecasting and manual inventory planning",
+        "targetCustomer": "Independent restaurant owners with 1-3 locations, $500K-2M annual revenue, currently using spreadsheets or basic POS inventory",
+        "uniqueAngle": "Only solution that predicts demand using external factors (weather, events) + ML, not just historical sales",
+        "whyNow": "Food costs hit 28-35% of revenue post-COVID vs. 25-30% pre-pandemic, making waste reduction mission-critical for survival"
+      },
+      "businessModel": {
+        "revenueStrategy": "Monthly SaaS subscription at $199/location with annual discounts, potential add-on revenue from supplier marketplace commissions",
+        "pricingFramework": "$199/month justified by preventing $500-1,500 monthly waste per location (3-8x ROI), positioned between basic POS inventory (free-$50) and enterprise solutions ($500+)",
+        "unitEconomics": {
+          "estimatedCAC": "$2,400-3,600 (6-9 months sales cycle, high-touch onboarding, demo requirements)",
+          "estimatedLTV": "$7,164 (30 months average retention × $199/month × 1.2 locations per customer)",
+          "paybackPeriod": "12-18 months",
+          "confidence": "low"
+        },
+        "scalabilityAssessment": "At 10x scale, need dedicated sales team, customer success, and multi-tenant ML infrastructure. Margins improve with scale due to ML model efficiency gains."
+      },
+      "technicalFeasibility": {
+        "mvpScope": [
+          "POS data ingestion",
+          "Basic demand forecasting",
+          "Automated ordering suggestions",
+          "Waste tracking dashboard"
+        ],
+        "recommendedStack": "Python/Django backend, React frontend, PostgreSQL + time-series DB, AWS/GCP ML services, POS API integrations",
+        "buildVsBuy": [
+          {
+            "component": "POS integrations",
+            "recommendation": "buy",
+            "rationale": "Use Revel, Tray.io, or similar integration platforms to accelerate time-to-market"
+          },
+          {
+            "component": "ML forecasting engine",
+            "recommendation": "build",
+            "rationale": "Core differentiator, need custom models for restaurant-specific factors"
+          },
+          {
+            "component": "Weather/events data",
+            "recommendation": "buy",
+            "rationale": "OpenWeatherMap, Eventbrite APIs are cheap and reliable"
+          }
+        ],
+        "technicalRisks": [
+          "POS API rate limits and reliability",
+          "ML model accuracy with limited initial data",
+          "Real-time inventory sync challenges"
+        ],
+        "estimatedMvpTimeline": "4-6 months for POS-integrated version, 2-3 months for standalone"
+      },
+      "riskAssessment": {
+        "risks": [
+          {
+            "category": "competitive",
+            "severity": "critical",
+            "description": "Toast/Square add ML-powered inventory features with their distribution advantage",
+            "mitigation": "Focus on restaurant-specific ML models they can't replicate quickly; build deep supplier integrations"
+          },
+          {
+            "category": "market",
+            "severity": "high",
+            "description": "Restaurant owners resist paying $199/month for inventory software during economic uncertainty",
+            "mitigation": "Offer 90-day money-back guarantee tied to measurable waste reduction; freemium tier"
+          },
+          {
+            "category": "execution",
+            "severity": "high",
+            "description": "3-month data requirement before value realization kills sales conversion",
+            "mitigation": "Use industry benchmarks and synthetic data to show immediate value; compress to 30-day minimum"
+          },
+          {
+            "category": "technical",
+            "severity": "medium",
+            "description": "POS integration complexity and maintenance overhead with 2-person team",
+            "mitigation": "Start with top 2-3 POS systems, use integration platform, hire contractor for specific integrations"
+          },
+          {
+            "category": "financial",
+            "severity": "medium",
+            "description": "$150K runway insufficient for 12-18 month payback period",
+            "mitigation": "Raise Series A within 9 months or achieve profitability with higher-priced annual plans"
+          }
+        ]
+      },
+      "actionPlan": {
+        "week1to4": [
+          "Decide POS integration vs standalone based on current customer feedback",
+          "Interview 15 target restaurants about pricing sensitivity and feature priorities",
+          "Build integration with Toast API (most common among current users)",
+          "Create waste reduction ROI calculator for sales demos"
+        ],
+        "week5to8": [
+          "Launch beta with 5 paying customers at $99/month introductory rate",
+          "Implement weather/events data integration",
+          "Build automated supplier ordering workflow",
+          "Develop case studies from current free users showing waste reduction"
+        ],
+        "week9to12": [
+          "Optimize ML models with real customer data",
+          "Launch referral program targeting restaurant networks",
+          "Build Square integration",
+          "Prepare Series A materials with unit economics and growth metrics"
+        ]
+      },
+      "decisionAgenda": [
+        {
+          "priority": "critical",
+          "question": "POS integration vs standalone tool architecture",
+          "options": [
+            {
+              "option": "POS integration first",
+              "tradeoff": "Easier sales and data access vs 4-6 month development timeline and technical complexity"
+            },
+            {
+              "option": "Standalone tool first",
+              "tradeoff": "Faster to market (2-3 months) vs harder sales process and manual data entry"
+            }
+          ],
+          "recommendation": "POS integration first with Toast and Square. The sales friction of manual data entry will kill you in this price-sensitive market. 2-3 extra months of development is worth it for distribution advantage.",
+          "deadline": "This week"
+        },
+        {
+          "priority": "critical",
+          "question": "Primary value messaging: waste reduction vs cost savings",
+          "options": [
+            {
+              "option": "Waste reduction focus",
+              "tradeoff": "Emotional appeal and sustainability angle vs harder to quantify ROI"
+            },
+            {
+              "option": "Cost savings focus",
+              "tradeoff": "Clear ROI calculation and CFO appeal vs commoditized positioning"
+            }
+          ],
+          "recommendation": "Lead with cost savings ($500-1,500 monthly savings) but use waste reduction for differentiation. Restaurant owners care about profit first, planet second.",
+          "deadline": "Week 2"
+        },
+        {
+          "priority": "important",
+          "question": "Pricing strategy for market penetration",
+          "options": [
+            {
+              "option": "Hold $199/month premium pricing",
+              "tradeoff": "Better unit economics vs slower adoption in price-sensitive market"
+            },
+            {
+              "option": "Launch at $99/month with annual increase",
+              "tradeoff": "Faster customer acquisition vs lower LTV and harder to raise prices later"
+            }
+          ],
+          "recommendation": "Launch at $99/month for first 6 months, then increase to $149 for new customers. Need market penetration more than premium pricing right now.",
+          "deadline": "Week 3"
+        },
+        {
+          "priority": "important",
+          "question": "Minimum viable data period before ML value",
+          "options": [
+            {
+              "option": "Maintain 3-month minimum for accuracy",
+              "tradeoff": "Better predictions vs sales conversion killer"
+            },
+            {
+              "option": "Compress to 30 days with industry benchmarks",
+              "tradeoff": "Faster value demonstration vs potentially less accurate initial predictions"
+            }
+          ],
+          "recommendation": "Compress to 30 days using industry benchmarks and synthetic data. Show directional value immediately, refine accuracy over time. Perfect predictions mean nothing if customers churn before seeing value.",
+          "deadline": "Week 4"
+        }
+      ],
+      "metadata": {
+        "pipelineMode": "single",
+        "agentsUsed": [
+          "strategist"
+        ],
+        "totalTokens": 0,
+        "totalCostUsd": 0,
+        "durationMs": 0,
+        "language": "en"
+      }
+    },
+    "rawText": "{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"You're tackling a real problem with a solid technical approach, but you're fighting uphill against low-tech adoption, price sensitivity, and well-funded incumbents adding competing features. The 3-month value delay is a sales killer in this market. Your best shot is aggressive niche positioning and rapid POS integration to reduce friction.\",\n    \"councilScore\": 55\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$12B global restaurant management software market\",\n      \"sam\": \"$2.8B US independent restaurant software market (650K independent restaurants × ~$4K annual software spend)\",\n      \"som\": \"$65M realistic addressable market (65K restaurants × $1K annual spend for inventory-focused tools)\",\n      \"methodology\": \"Based on National Restaurant Association data on independent restaurants, estimated software penetration rates, and category-specific spending\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"Toast\",\n        \"description\": \"POS system with native inventory management features\",\n        \"strength\": \"Already embedded in restaurant operations, massive distribution\",\n        \"weakness\": \"Inventory is secondary feature, not ML-powered\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Square for Restaurants\",\n        \"description\": \"POS with inventory tracking and low-stock alerts\",\n        \"strength\": \"Easy setup, integrated payments and inventory\",\n        \"weakness\": \"Basic inventory features, no predictive capabilities\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Upserve (now part of Lightspeed)\",\n        \"description\": \"Restaurant management platform with inventory tools\",\n        \"strength\": \"Comprehensive restaurant operations suite\",\n        \"weakness\": \"Enterprise-focused, expensive for independents\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"BevSpot\",\n        \"description\": \"Beverage inventory management for bars/restaurants\",\n        \"strength\": \"Category expertise, proven ROI metrics\",\n        \"weakness\": \"Beverage-only, not food inventory\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"MarketMan\",\n        \"description\": \"Food cost management and inventory for restaurants\",\n        \"strength\": \"Established in the space, supplier integrations\",\n        \"weakness\": \"Manual data entry, not predictive\",\n        \"isDirectCompetitor\": true\n      }\n    ],\n    \"positioning\": \"The only predictive food inventory system that prevents waste before it happens, specifically built for independent restaurants under 10 locations\",\n    \"timing\": \"Post-COVID supply chain disruptions made inventory planning critical; rising food costs (up 25% since 2020) create urgency for waste reduction\",\n    \"gaps\": [\"True ML-powered demand forecasting\", \"Weather/events integration\", \"Focus on sub-10 location independents\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Independent restaurants waste 4-10% of food purchases ($4,000-15,000 annually per location) due to poor demand forecasting and manual inventory planning\",\n    \"targetCustomer\": \"Independent restaurant owners with 1-3 locations, $500K-2M annual revenue, currently using spreadsheets or basic POS inventory\",\n    \"uniqueAngle\": \"Only solution that predicts demand using external factors (weather, events) + ML, not just historical sales\",\n    \"whyNow\": \"Food costs hit 28-35% of revenue post-COVID vs. 25-30% pre-pandemic, making waste reduction mission-critical for survival\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Monthly SaaS subscription at $199/location with annual discounts, potential add-on revenue from supplier marketplace commissions\",\n    \"pricingFramework\": \"$199/month justified by preventing $500-1,500 monthly waste per location (3-8x ROI), positioned between basic POS inventory (free-$50) and enterprise solutions ($500+)\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$2,400-3,600 (6-9 months sales cycle, high-touch onboarding, demo requirements)\",\n      \"estimatedLTV\": \"$7,164 (30 months average retention × $199/month × 1.2 locations per customer)\",\n      \"paybackPeriod\": \"12-18 months\",\n      \"confidence\": \"low\"\n    },\n    \"scalabilityAssessment\": \"At 10x scale, need dedicated sales team, customer success, and multi-tenant ML infrastructure. Margins improve with scale due to ML model efficiency gains.\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"POS data ingestion\", \"Basic demand forecasting\", \"Automated ordering suggestions\", \"Waste tracking dashboard\"],\n    \"recommendedStack\": \"Python/Django backend, React frontend, PostgreSQL + time-series DB, AWS/GCP ML services, POS API integrations\",\n    \"buildVsBuy\": [\n      {\n        \"component\": \"POS integrations\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"Use Revel, Tray.io, or similar integration platforms to accelerate time-to-market\"\n      },\n      {\n        \"component\": \"ML forecasting engine\",\n        \"recommendation\": \"build\",\n        \"rationale\": \"Core differentiator, need custom models for restaurant-specific factors\"\n      },\n      {\n        \"component\": \"Weather/events data\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"OpenWeatherMap, Eventbrite APIs are cheap and reliable\"\n      }\n    ],\n    \"technicalRisks\": [\"POS API rate limits and reliability\", \"ML model accuracy with limited initial data\", \"Real-time inventory sync challenges\"],\n    \"estimatedMvpTimeline\": \"4-6 months for POS-integrated version, 2-3 months for standalone\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"critical\",\n        \"description\": \"Toast/Square add ML-powered inventory features with their distribution advantage\",\n        \"mitigation\": \"Focus on restaurant-specific ML models they can't replicate quickly; build deep supplier integrations\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"Restaurant owners resist paying $199/month for inventory software during economic uncertainty\",\n        \"mitigation\": \"Offer 90-day money-back guarantee tied to measurable waste reduction; freemium tier\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"high\",\n        \"description\": \"3-month data requirement before value realization kills sales conversion\",\n        \"mitigation\": \"Use industry benchmarks and synthetic data to show immediate value; compress to 30-day minimum\"\n      },\n      {\n        \"category\": \"technical\",\n        \"severity\": \"medium\",\n        \"description\": \"POS integration complexity and maintenance overhead with 2-person team\",\n        \"mitigation\": \"Start with top 2-3 POS systems, use integration platform, hire contractor for specific integrations\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"medium\",\n        \"description\": \"$150K runway insufficient for 12-18 month payback period\",\n        \"mitigation\": \"Raise Series A within 9 months or achieve profitability with higher-priced annual plans\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Decide POS integration vs standalone based on current customer feedback\", \"Interview 15 target restaurants about pricing sensitivity and feature priorities\", \"Build integration with Toast API (most common among current users)\", \"Create waste reduction ROI calculator for sales demos\"],\n    \"week5to8\": [\"Launch beta with 5 paying customers at $99/month introductory rate\", \"Implement weather/events data integration\", \"Build automated supplier ordering workflow\", \"Develop case studies from current free users showing waste reduction\"],\n    \"week9to12\": [\"Optimize ML models with real customer data\", \"Launch referral program targeting restaurant networks\", \"Build Square integration\", \"Prepare Series A materials with unit economics and growth metrics\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"POS integration vs standalone tool architecture\",\n      \"options\": [\n        { \"option\": \"POS integration first\", \"tradeoff\": \"Easier sales and data access vs 4-6 month development timeline and technical complexity\" },\n        { \"option\": \"Standalone tool first\", \"tradeoff\": \"Faster to market (2-3 months) vs harder sales process and manual data entry\" }\n      ],\n      \"recommendation\": \"POS integration first with Toast and Square. The sales friction of manual data entry will kill you in this price-sensitive market. 2-3 extra months of development is worth it for distribution advantage.\",\n      \"deadline\": \"This week\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Primary value messaging: waste reduction vs cost savings\",\n      \"options\": [\n        { \"option\": \"Waste reduction focus\", \"tradeoff\": \"Emotional appeal and sustainability angle vs harder to quantify ROI\" },\n        { \"option\": \"Cost savings focus\", \"tradeoff\": \"Clear ROI calculation and CFO appeal vs commoditized positioning\" }\n      ],\n      \"recommendation\": \"Lead with cost savings ($500-1,500 monthly savings) but use waste reduction for differentiation. Restaurant owners care about profit first, planet second.\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Pricing strategy for market penetration\",\n      \"options\": [\n        { \"option\": \"Hold $199/month premium pricing\", \"tradeoff\": \"Better unit economics vs slower adoption in price-sensitive market\" },\n        { \"option\": \"Launch at $99/month with annual increase\", \"tradeoff\": \"Faster customer acquisition vs lower LTV and harder to raise prices later\" }\n      ],\n      \"recommendation\": \"Launch at $99/month for first 6 months, then increase to $149 for new customers. Need market penetration more than premium pricing right now.\",\n      \"deadline\": \"Week 3\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Minimum viable data period before ML value\",\n      \"options\": [\n        { \"option\": \"Maintain 3-month minimum for accuracy\", \"tradeoff\": \"Better predictions vs sales conversion killer\" },\n        { \"option\": \"Compress to 30 days with industry benchmarks\", \"tradeoff\": \"Faster value demonstration vs potentially less accurate initial predictions\" }\n      ],\n      \"recommendation\": \"Compress to 30 days using industry benchmarks and synthetic data. Show directional value immediately, refine accuracy over time. Perfect predictions mean nothing if customers churn before seeing value.\",\n      \"deadline\": \"Week 4\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"strategist\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}",
+    "model": "claude-sonnet-4-20250514",
+    "inputTokens": 796,
+    "outputTokens": 2714,
+    "cacheReadTokens": 1409,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.041132699999999994,
+    "durationMs": 55631
+  },
+  "totalCostUsd": 0.0442951,
+  "totalDurationMs": 62330,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "You're tackling a real problem with a solid technical approach, but you're fighting uphill against low-tech adoption, price sensitivity, and well-funded incumbents adding competing features. The 3-month value delay is a sales killer in this market. Your best shot is aggressive niche positioning and rapid POS integration to reduce friction.",
+      "councilScore": 55
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$12B global restaurant management software market",
+        "sam": "$2.8B US independent restaurant software market (650K independent restaurants × ~$4K annual software spend)",
+        "som": "$65M realistic addressable market (65K restaurants × $1K annual spend for inventory-focused tools)",
+        "methodology": "Based on National Restaurant Association data on independent restaurants, estimated software penetration rates, and category-specific spending",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "Toast",
+          "description": "POS system with native inventory management features",
+          "strength": "Already embedded in restaurant operations, massive distribution",
+          "weakness": "Inventory is secondary feature, not ML-powered",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Square for Restaurants",
+          "description": "POS with inventory tracking and low-stock alerts",
+          "strength": "Easy setup, integrated payments and inventory",
+          "weakness": "Basic inventory features, no predictive capabilities",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Upserve (now part of Lightspeed)",
+          "description": "Restaurant management platform with inventory tools",
+          "strength": "Comprehensive restaurant operations suite",
+          "weakness": "Enterprise-focused, expensive for independents",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "BevSpot",
+          "description": "Beverage inventory management for bars/restaurants",
+          "strength": "Category expertise, proven ROI metrics",
+          "weakness": "Beverage-only, not food inventory",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "MarketMan",
+          "description": "Food cost management and inventory for restaurants",
+          "strength": "Established in the space, supplier integrations",
+          "weakness": "Manual data entry, not predictive",
+          "isDirectCompetitor": true
+        }
+      ],
+      "positioning": "The only predictive food inventory system that prevents waste before it happens, specifically built for independent restaurants under 10 locations",
+      "timing": "Post-COVID supply chain disruptions made inventory planning critical; rising food costs (up 25% since 2020) create urgency for waste reduction",
+      "gaps": [
+        "True ML-powered demand forecasting",
+        "Weather/events integration",
+        "Focus on sub-10 location independents"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Independent restaurants waste 4-10% of food purchases ($4,000-15,000 annually per location) due to poor demand forecasting and manual inventory planning",
+      "targetCustomer": "Independent restaurant owners with 1-3 locations, $500K-2M annual revenue, currently using spreadsheets or basic POS inventory",
+      "uniqueAngle": "Only solution that predicts demand using external factors (weather, events) + ML, not just historical sales",
+      "whyNow": "Food costs hit 28-35% of revenue post-COVID vs. 25-30% pre-pandemic, making waste reduction mission-critical for survival"
+    },
+    "businessModel": {
+      "revenueStrategy": "Monthly SaaS subscription at $199/location with annual discounts, potential add-on revenue from supplier marketplace commissions",
+      "pricingFramework": "$199/month justified by preventing $500-1,500 monthly waste per location (3-8x ROI), positioned between basic POS inventory (free-$50) and enterprise solutions ($500+)",
+      "unitEconomics": {
+        "estimatedCAC": "$2,400-3,600 (6-9 months sales cycle, high-touch onboarding, demo requirements)",
+        "estimatedLTV": "$7,164 (30 months average retention × $199/month × 1.2 locations per customer)",
+        "paybackPeriod": "12-18 months",
+        "confidence": "low"
+      },
+      "scalabilityAssessment": "At 10x scale, need dedicated sales team, customer success, and multi-tenant ML infrastructure. Margins improve with scale due to ML model efficiency gains."
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "POS data ingestion",
+        "Basic demand forecasting",
+        "Automated ordering suggestions",
+        "Waste tracking dashboard"
+      ],
+      "recommendedStack": "Python/Django backend, React frontend, PostgreSQL + time-series DB, AWS/GCP ML services, POS API integrations",
+      "buildVsBuy": [
+        {
+          "component": "POS integrations",
+          "recommendation": "buy",
+          "rationale": "Use Revel, Tray.io, or similar integration platforms to accelerate time-to-market"
+        },
+        {
+          "component": "ML forecasting engine",
+          "recommendation": "build",
+          "rationale": "Core differentiator, need custom models for restaurant-specific factors"
+        },
+        {
+          "component": "Weather/events data",
+          "recommendation": "buy",
+          "rationale": "OpenWeatherMap, Eventbrite APIs are cheap and reliable"
+        }
+      ],
+      "technicalRisks": [
+        "POS API rate limits and reliability",
+        "ML model accuracy with limited initial data",
+        "Real-time inventory sync challenges"
+      ],
+      "estimatedMvpTimeline": "4-6 months for POS-integrated version, 2-3 months for standalone"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "competitive",
+          "severity": "critical",
+          "description": "Toast/Square add ML-powered inventory features with their distribution advantage",
+          "mitigation": "Focus on restaurant-specific ML models they can't replicate quickly; build deep supplier integrations"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Restaurant owners resist paying $199/month for inventory software during economic uncertainty",
+          "mitigation": "Offer 90-day money-back guarantee tied to measurable waste reduction; freemium tier"
+        },
+        {
+          "category": "execution",
+          "severity": "high",
+          "description": "3-month data requirement before value realization kills sales conversion",
+          "mitigation": "Use industry benchmarks and synthetic data to show immediate value; compress to 30-day minimum"
+        },
+        {
+          "category": "technical",
+          "severity": "medium",
+          "description": "POS integration complexity and maintenance overhead with 2-person team",
+          "mitigation": "Start with top 2-3 POS systems, use integration platform, hire contractor for specific integrations"
+        },
+        {
+          "category": "financial",
+          "severity": "medium",
+          "description": "$150K runway insufficient for 12-18 month payback period",
+          "mitigation": "Raise Series A within 9 months or achieve profitability with higher-priced annual plans"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Decide POS integration vs standalone based on current customer feedback",
+        "Interview 15 target restaurants about pricing sensitivity and feature priorities",
+        "Build integration with Toast API (most common among current users)",
+        "Create waste reduction ROI calculator for sales demos"
+      ],
+      "week5to8": [
+        "Launch beta with 5 paying customers at $99/month introductory rate",
+        "Implement weather/events data integration",
+        "Build automated supplier ordering workflow",
+        "Develop case studies from current free users showing waste reduction"
+      ],
+      "week9to12": [
+        "Optimize ML models with real customer data",
+        "Launch referral program targeting restaurant networks",
+        "Build Square integration",
+        "Prepare Series A materials with unit economics and growth metrics"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "POS integration vs standalone tool architecture",
+        "options": [
+          {
+            "option": "POS integration first",
+            "tradeoff": "Easier sales and data access vs 4-6 month development timeline and technical complexity"
+          },
+          {
+            "option": "Standalone tool first",
+            "tradeoff": "Faster to market (2-3 months) vs harder sales process and manual data entry"
+          }
+        ],
+        "recommendation": "POS integration first with Toast and Square. The sales friction of manual data entry will kill you in this price-sensitive market. 2-3 extra months of development is worth it for distribution advantage.",
+        "deadline": "This week"
+      },
+      {
+        "priority": "critical",
+        "question": "Primary value messaging: waste reduction vs cost savings",
+        "options": [
+          {
+            "option": "Waste reduction focus",
+            "tradeoff": "Emotional appeal and sustainability angle vs harder to quantify ROI"
+          },
+          {
+            "option": "Cost savings focus",
+            "tradeoff": "Clear ROI calculation and CFO appeal vs commoditized positioning"
+          }
+        ],
+        "recommendation": "Lead with cost savings ($500-1,500 monthly savings) but use waste reduction for differentiation. Restaurant owners care about profit first, planet second.",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "important",
+        "question": "Pricing strategy for market penetration",
+        "options": [
+          {
+            "option": "Hold $199/month premium pricing",
+            "tradeoff": "Better unit economics vs slower adoption in price-sensitive market"
+          },
+          {
+            "option": "Launch at $99/month with annual increase",
+            "tradeoff": "Faster customer acquisition vs lower LTV and harder to raise prices later"
+          }
+        ],
+        "recommendation": "Launch at $99/month for first 6 months, then increase to $149 for new customers. Need market penetration more than premium pricing right now.",
+        "deadline": "Week 3"
+      },
+      {
+        "priority": "important",
+        "question": "Minimum viable data period before ML value",
+        "options": [
+          {
+            "option": "Maintain 3-month minimum for accuracy",
+            "tradeoff": "Better predictions vs sales conversion killer"
+          },
+          {
+            "option": "Compress to 30 days with industry benchmarks",
+            "tradeoff": "Faster value demonstration vs potentially less accurate initial predictions"
+          }
+        ],
+        "recommendation": "Compress to 30 days using industry benchmarks and synthetic data. Show directional value immediately, refine accuracy over time. Perfect predictions mean nothing if customers churn before seeing value.",
+        "deadline": "Week 4"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "strategist"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "error": null,
+  "timestamp": "2026-03-08T01:26:39.311Z"
+}

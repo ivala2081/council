@@ -1,0 +1,53 @@
+{
+  "promptId": "g09-cybersecurity-compliance",
+  "outputA": {
+    "mode": "council",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific with named competitors, real valuations, and concrete numbers",
+      "Excellent decision agenda with clear options, tradeoffs, and deadlines",
+      "Realistic unit economics and market sizing methodology",
+      "Actionable weekly plans with specific deliverables"
+    ],
+    "weaknesses": [
+      "Some market size discrepancies with Output B",
+      "Could provide more detail on technical implementation specifics"
+    ]
+  },
+  "outputB": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Strong vertical specialization focus with healthtech emphasis",
+      "Good competitive analysis with clear positioning",
+      "Realistic assessment of AI risks and mitigation strategies",
+      "Clear pricing strategy with implementation fees"
+    ],
+    "weaknesses": [
+      "Less detailed decision framework compared to Output A",
+      "Some generic advice mixed with specific recommendations",
+      "Market sizing methodology less detailed"
+    ]
+  },
+  "preference": "A",
+  "preferenceReason": "Output A provides a more comprehensive and structured decision framework with clearer priority levels, deadlines, and specific recommendations. The decision agenda section is particularly strong with well-reasoned tradeoffs. Both outputs are quite good, but A's superior decision clarity and slightly more detailed analysis make it more actionable for a founder.",
+  "keyDifferences": [
+    "Output A has a more structured decision agenda with priority levels and specific deadlines",
+    "Output B focuses more heavily on vertical specialization from the start",
+    "Output A provides more detailed unit economics breakdown",
+    "Output B emphasizes healthtech specialization more consistently throughout"
+  ],
+  "timestamp": "2026-03-08T01:17:21.565Z"
+}

@@ -1,0 +1,569 @@
+{
+  "promptId": "g06-rural-telehealth",
+  "mode": "dual",
+  "triage": {
+    "output": {
+      "ideaType": "B2B2C Healthcare SaaS - Telehealth Platform",
+      "queryType": "Go-to-market strategy with focus on geographic and clinical scope decisions; regulatory/operational feasibility assessment",
+      "founderProfile": {
+        "teamSize": 3,
+        "technicalAbility": "high",
+        "healthcareExpertise": "high",
+        "budget": "$200K (NIH SBIR Phase I)",
+        "experience": "6 years healthcare PM at Epic Systems; founder appears first-time but domain-expert"
+      },
+      "extractedContext": {
+        "coreProblem": "60M rural Americans lack specialist access; existing telehealth platforms ignore rural-specific constraints (bandwidth, demographics, clinic integration, insurance complexity)",
+        "targetMarket": "Rural health networks and small clinics serving underserved populations; secondary: rural patients 55+, Medicaid/Medicare dependent",
+        "solution": "Low-bandwidth telehealth platform with simplified UX, clinic EHR integration, and native Medicaid/Medicare billing",
+        "revenueModel": "Hybrid: $2K/mo per clinic subscription + $15/visit specialist consultation fee",
+        "statedConcerns": [
+          "Regulatory complexity (HIPAA, state licensing, telemedicine laws vary by state)",
+          "Clinic adoption friction (slow tech adoption in rural settings)",
+          "Reimbursement uncertainty (rural telehealth rates unstable)",
+          "Specialist recruitment (convincing MDs to serve rural markets)"
+        ],
+        "openDecisions": [
+          "First state to launch (regulatory, reimbursement, clinic density trade-offs)",
+          "Clinical scope: primary care vs. specialty focus (mental health, dermatology, cardiology)"
+        ],
+        "constraints": [
+          "Limited team (3 people, 1 part-time compliance)",
+          "$200K runway (sufficient for MVP but not sustained go-to-market)",
+          "Regulatory burden requires ongoing legal/compliance investment"
+        ]
+      },
+      "sectionPriorities": {
+        "decisionAgenda": "detailed",
+        "marketAnalysis": "detailed",
+        "businessModel": "detailed",
+        "regulatoryAndCompliance": "detailed",
+        "technicalFeasibility": "standard",
+        "competitivePositioning": "detailed",
+        "operationalRoadmap": "detailed"
+      },
+      "keyQuestions": [
+        "Which state offers the optimal combination of: (a) favorable telemedicine reimbursement policy, (b) high clinic density in rural areas, (c) manageable regulatory burden, and (d) existing relationships/pilot opportunities?",
+        "Should the first launch focus on primary care (broader addressable market, slower specialist recruitment) or a high-margin specialty (mental health, dermatology) to validate unit economics and clinic adoption before scaling?",
+        "What is the realistic specialist recruitment strategy and unit economics per visit? At $15/visit, what % goes to specialists, platform, and clinic—and is this sustainable vs. competitor pricing?",
+        "How will you navigate state-by-state telemedicine licensing variation and Medicaid reimbursement differences without a large compliance team, and what is the true cost of regulatory compliance per state?",
+        "What is your clinic acquisition strategy given slow rural tech adoption? (e.g., partnerships with rural health networks, grant-funded pilots, existing Epic relationships)"
+      ],
+      "language": "en"
+    },
+    "rawText": "```json\n{\n  \"ideaType\": \"B2B2C Healthcare SaaS - Telehealth Platform\",\n  \"queryType\": \"Go-to-market strategy with focus on geographic and clinical scope decisions; regulatory/operational feasibility assessment\",\n  \"founderProfile\": {\n    \"teamSize\": 3,\n    \"technicalAbility\": \"high\",\n    \"healthcareExpertise\": \"high\",\n    \"budget\": \"$200K (NIH SBIR Phase I)\",\n    \"experience\": \"6 years healthcare PM at Epic Systems; founder appears first-time but domain-expert\"\n  },\n  \"extractedContext\": {\n    \"coreProblem\": \"60M rural Americans lack specialist access; existing telehealth platforms ignore rural-specific constraints (bandwidth, demographics, clinic integration, insurance complexity)\",\n    \"targetMarket\": \"Rural health networks and small clinics serving underserved populations; secondary: rural patients 55+, Medicaid/Medicare dependent\",\n    \"solution\": \"Low-bandwidth telehealth platform with simplified UX, clinic EHR integration, and native Medicaid/Medicare billing\",\n    \"revenueModel\": \"Hybrid: $2K/mo per clinic subscription + $15/visit specialist consultation fee\",\n    \"statedConcerns\": [\n      \"Regulatory complexity (HIPAA, state licensing, telemedicine laws vary by state)\",\n      \"Clinic adoption friction (slow tech adoption in rural settings)\",\n      \"Reimbursement uncertainty (rural telehealth rates unstable)\",\n      \"Specialist recruitment (convincing MDs to serve rural markets)\"\n    ],\n    \"openDecisions\": [\n      \"First state to launch (regulatory, reimbursement, clinic density trade-offs)\",\n      \"Clinical scope: primary care vs. specialty focus (mental health, dermatology, cardiology)\"\n    ],\n    \"constraints\": [\n      \"Limited team (3 people, 1 part-time compliance)\",\n      \"$200K runway (sufficient for MVP but not sustained go-to-market)\",\n      \"Regulatory burden requires ongoing legal/compliance investment\"\n    ]\n  },\n  \"sectionPriorities\": {\n    \"decisionAgenda\": \"detailed\",\n    \"marketAnalysis\": \"detailed\",\n    \"businessModel\": \"detailed\",\n    \"regulatoryAndCompliance\": \"detailed\",\n    \"technicalFeasibility\": \"standard\",\n    \"competitivePositioning\": \"detailed\",\n    \"operationalRoadmap\": \"detailed\"\n  },\n  \"keyQuestions\": [\n    \"Which state offers the optimal combination of: (a) favorable telemedicine reimbursement policy, (b) high clinic density in rural areas, (c) manageable regulatory burden, and (d) existing relationships/pilot opportunities?\",\n    \"Should the first launch focus on primary care (broader addressable market, slower specialist recruitment) or a high-margin specialty (mental health, dermatology) to validate unit economics and clinic adoption before scaling?\",\n    \"What is the realistic specialist recruitment strategy and unit economics per visit? At $15/visit, what % goes to specialists, platform, and clinic—and is this sustainable vs. competitor pricing?\",\n    \"How will you navigate state-by-state telemedicine licensing variation and Medicaid reimbursement differences without a large compliance team, and what is the true cost of regulatory compliance per state?\",\n    \"What is your clinic acquisition strategy given slow rural tech adoption? (e.g., partnerships with rural health networks, grant-funded pilots, existing Epic relationships)\"\n  ],\n  \"language\": \"en\"\n}\n```",
+    "model": "claude-haiku-4-5-20251001",
+    "inputTokens": 641,
+    "outputTokens": 828,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0038247999999999997,
+    "durationMs": 7829
+  },
+  "strategist": {
+    "brief": {
+      "executiveSummary": {
+        "verdict": "promising",
+        "summary": "Strong domain expertise and real problem, but execution will be brutal. Rural telehealth is a graveyard of well-intentioned startups that underestimated regulatory complexity and clinic sales cycles. Your Epic background is your biggest asset - use those relationships ruthlessly. Focus on one specialty in one state to prove unit economics before expanding.",
+        "councilScore": 68
+      },
+      "marketAnalysis": {
+        "marketSize": {
+          "tam": "$4.2B rural telehealth market (60M rural Americans × $70 average annual telehealth spend)",
+          "sam": "$840M addressable via rural clinics (12,000 rural clinics × $70K annual telehealth revenue potential)",
+          "som": "$2.1M realistic year 1-2 (35 clinics × $60K annual revenue per clinic)",
+          "methodology": "Based on rural population data, existing telehealth penetration rates, and clinic density. Revenue per clinic estimated from subscription + visit fees.",
+          "confidence": "medium"
+        },
+        "competitors": [
+          {
+            "name": "Teladoc",
+            "description": "Dominant telehealth platform with enterprise focus",
+            "strength": "Scale, provider network, insurance relationships",
+            "weakness": "Urban-centric, poor rural connectivity optimization",
+            "isDirectCompetitor": false
+          },
+          {
+            "name": "Doxy.me",
+            "description": "Simple telehealth platform popular with small practices",
+            "strength": "Easy setup, affordable pricing",
+            "weakness": "Limited rural-specific features, basic EHR integration",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "TytoCare",
+            "description": "Remote examination devices + telehealth platform",
+            "strength": "Physical examination capabilities",
+            "weakness": "Expensive hardware, complex setup for rural clinics",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "MDLive",
+            "description": "Direct-to-consumer telehealth",
+            "strength": "Consumer brand, insurance coverage",
+            "weakness": "No clinic integration, limited specialist network",
+            "isDirectCompetitor": false
+          }
+        ],
+        "positioning": "The only telehealth platform built specifically for rural constraints - low bandwidth, older patients, small clinic operations, and complex rural insurance billing.",
+        "timing": "Perfect timing: COVID normalized telehealth, CMS expanded rural reimbursement, and rural physician shortage is accelerating.",
+        "gaps": [
+          "Rural-optimized technology",
+          "Small clinic workflow integration",
+          "Rural specialist recruitment",
+          "Medicaid billing complexity handling"
+        ]
+      },
+      "valueProposition": {
+        "coreProblem": "Rural patients can't access specialists due to distance, and existing telehealth platforms fail in rural environments due to bandwidth, UI complexity, and poor clinic integration",
+        "targetCustomer": "Rural health networks (5-20 clinics) and independent rural clinics serving 2,000-10,000 patients, primarily Medicare/Medicaid populations",
+        "uniqueAngle": "Only platform designed for rural constraints: bandwidth optimization, senior-friendly UI, rural clinic EHR integration, complex rural insurance handling",
+        "whyNow": "CMS rural telehealth reimbursement expansion + COVID adoption + worsening rural physician shortage created the perfect storm"
+      },
+      "businessModel": {
+        "revenueStrategy": "Hybrid B2B2C: $2K/month clinic subscriptions + $15/visit specialist fees, targeting 80% subscription revenue for predictability",
+        "pricingFramework": "$2K/month justified by replacing $8K+ monthly locum specialist costs; $15/visit competitive with $25-40 typical telehealth visit fees",
+        "unitEconomics": {
+          "estimatedCAC": "$8,000 per clinic (12-18 month sales cycle, high-touch enterprise sales)",
+          "estimatedLTV": "$72,000 over 3 years ($24K annual revenue × 3 year average retention)",
+          "paybackPeriod": "10 months",
+          "confidence": "medium"
+        },
+        "scalabilityAssessment": "At 10x scale (350 clinics), you'll need state-by-state compliance team, dedicated specialist recruitment, and enterprise sales force. Platform scales well, operations don't."
+      },
+      "technicalFeasibility": {
+        "mvpScope": [
+          "Low-bandwidth video optimization",
+          "Basic EHR integration (Epic first)",
+          "Simple patient portal",
+          "Specialist scheduling system",
+          "Insurance billing module"
+        ],
+        "recommendedStack": "React/Node.js web app, WebRTC for video (Agora.io for reliability), AWS/HIPAA-compliant hosting, Epic FHIR APIs for EHR integration",
+        "buildVsBuy": [
+          {
+            "component": "Video infrastructure",
+            "recommendation": "buy",
+            "rationale": "Agora.io or Twilio Video - building reliable low-bandwidth video is complex"
+          },
+          {
+            "component": "EHR integration",
+            "recommendation": "build",
+            "rationale": "Your Epic expertise is core differentiator - build custom integrations"
+          },
+          {
+            "component": "HIPAA compliance",
+            "recommendation": "buy",
+            "rationale": "Use AWS HIPAA-eligible services, don't build security from scratch"
+          }
+        ],
+        "technicalRisks": [
+          "EHR integration complexity varies by vendor",
+          "Low-bandwidth video quality issues",
+          "Mobile app performance on older devices"
+        ],
+        "estimatedMvpTimeline": "6-8 months for core platform, additional 3-4 months per state for compliance/licensing"
+      },
+      "riskAssessment": {
+        "risks": [
+          {
+            "category": "regulatory",
+            "severity": "critical",
+            "description": "State-by-state telemedicine licensing and Medicaid reimbursement variation could make expansion prohibitively expensive",
+            "mitigation": "Start with one state with favorable regulations (Texas or Georgia), build compliance playbook before expanding"
+          },
+          {
+            "category": "market",
+            "severity": "high",
+            "description": "Rural clinics have 12-18 month technology adoption cycles and are extremely price-sensitive",
+            "mitigation": "Leverage Epic relationships for warm introductions, offer pilot programs with success-based pricing"
+          },
+          {
+            "category": "competitive",
+            "severity": "high",
+            "description": "Teladoc or Amwell could easily add rural-specific features once you prove the market",
+            "mitigation": "Build deep EHR integrations and specialist relationships as moats, focus on clinic workflow embedding"
+          },
+          {
+            "category": "financial",
+            "severity": "high",
+            "description": "Specialist recruitment and retention costs could exceed $15/visit fee economics",
+            "mitigation": "Start with high-margin specialties (dermatology, psychiatry), negotiate revenue-sharing with specialists"
+          },
+          {
+            "category": "execution",
+            "severity": "medium",
+            "description": "Team of 3 cannot handle sales, product, compliance, and specialist recruitment simultaneously",
+            "mitigation": "Focus on single specialty in single state, hire sales rep after first 10 clinic wins"
+          }
+        ]
+      },
+      "actionPlan": {
+        "week1to4": [
+          "Choose launch state (recommend Texas - favorable reimbursement, Epic presence)",
+          "Define specialty focus (recommend dermatology - high-margin, visual, less urgent)",
+          "Map 50 target rural clinics in chosen state",
+          "Begin Texas medical licensing process"
+        ],
+        "week5to8": [
+          "Build MVP core: video + scheduling + basic EHR integration",
+          "Recruit 5 dermatologists for pilot network",
+          "Develop clinic pilot program structure",
+          "File HIPAA compliance documentation"
+        ],
+        "week9to12": [
+          "Launch pilot with 3 rural Texas clinics",
+          "Complete Epic integration testing",
+          "Establish specialist payment/scheduling workflows",
+          "Begin formal sales outreach to next 10 clinics"
+        ]
+      },
+      "decisionAgenda": [
+        {
+          "priority": "critical",
+          "question": "Which state to launch in first?",
+          "options": [
+            {
+              "option": "Texas",
+              "tradeoff": "Large market, Epic presence, good reimbursement vs higher competition"
+            },
+            {
+              "option": "Georgia",
+              "tradeoff": "Favorable regulations, rural density vs smaller market"
+            },
+            {
+              "option": "Iowa",
+              "tradeoff": "Very rural, less competition vs limited market size, harsh regulations"
+            }
+          ],
+          "recommendation": "Texas. Your Epic relationships provide unfair advantage, reimbursement rates are stable, and market size justifies regulatory investment.",
+          "deadline": "Week 2"
+        },
+        {
+          "priority": "critical",
+          "question": "Primary care or specialty focus for launch?",
+          "options": [
+            {
+              "option": "Dermatology",
+              "tradeoff": "High margins ($50+ per visit), visual diagnosis works well remotely vs smaller addressable market"
+            },
+            {
+              "option": "Mental health",
+              "tradeoff": "Huge rural need, good reimbursement vs regulatory complexity, specialist shortage"
+            },
+            {
+              "option": "Primary care",
+              "tradeoff": "Largest market, every clinic needs vs low margins, complex medical decisions"
+            }
+          ],
+          "recommendation": "Dermatology. Highest margin, easiest to deliver remotely, clear value prop for rural patients who currently drive 2+ hours for skin issues.",
+          "deadline": "Week 2"
+        },
+        {
+          "priority": "important",
+          "question": "How to structure specialist compensation?",
+          "options": [
+            {
+              "option": "Fixed $40/consultation",
+              "tradeoff": "Predictable costs, easy recruiting vs low platform margin"
+            },
+            {
+              "option": "$10 platform fee, $40 to specialist",
+              "tradeoff": "Better margins vs need higher visit volume"
+            },
+            {
+              "option": "Revenue share 70/30",
+              "tradeoff": "Scales with pricing vs complex accounting"
+            }
+          ],
+          "recommendation": "Start with $40 to specialist, $10 platform fee. Simple, attractive to specialists, proves market before optimizing margins.",
+          "deadline": "Week 4"
+        },
+        {
+          "priority": "consider",
+          "question": "Epic integration depth for MVP?",
+          "options": [
+            {
+              "option": "Basic FHIR patient lookup",
+              "tradeoff": "Fast to build, works vs limited workflow integration"
+            },
+            {
+              "option": "Full visit documentation sync",
+              "tradeoff": "True workflow integration vs 3+ month development"
+            }
+          ],
+          "recommendation": "Basic FHIR first - prove clinic demand before investing in deep integration complexity.",
+          "deadline": "Week 6"
+        }
+      ],
+      "metadata": {
+        "pipelineMode": "single",
+        "agentsUsed": [
+          "strategist"
+        ],
+        "totalTokens": 0,
+        "totalCostUsd": 0,
+        "durationMs": 0,
+        "language": "en"
+      }
+    },
+    "rawText": "```json\n{\n  \"executiveSummary\": {\n    \"verdict\": \"promising\",\n    \"summary\": \"Strong domain expertise and real problem, but execution will be brutal. Rural telehealth is a graveyard of well-intentioned startups that underestimated regulatory complexity and clinic sales cycles. Your Epic background is your biggest asset - use those relationships ruthlessly. Focus on one specialty in one state to prove unit economics before expanding.\",\n    \"councilScore\": 68\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$4.2B rural telehealth market (60M rural Americans × $70 average annual telehealth spend)\",\n      \"sam\": \"$840M addressable via rural clinics (12,000 rural clinics × $70K annual telehealth revenue potential)\",\n      \"som\": \"$2.1M realistic year 1-2 (35 clinics × $60K annual revenue per clinic)\",\n      \"methodology\": \"Based on rural population data, existing telehealth penetration rates, and clinic density. Revenue per clinic estimated from subscription + visit fees.\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"Teladoc\",\n        \"description\": \"Dominant telehealth platform with enterprise focus\",\n        \"strength\": \"Scale, provider network, insurance relationships\",\n        \"weakness\": \"Urban-centric, poor rural connectivity optimization\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Doxy.me\",\n        \"description\": \"Simple telehealth platform popular with small practices\",\n        \"strength\": \"Easy setup, affordable pricing\",\n        \"weakness\": \"Limited rural-specific features, basic EHR integration\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"TytoCare\",\n        \"description\": \"Remote examination devices + telehealth platform\",\n        \"strength\": \"Physical examination capabilities\",\n        \"weakness\": \"Expensive hardware, complex setup for rural clinics\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"MDLive\",\n        \"description\": \"Direct-to-consumer telehealth\",\n        \"strength\": \"Consumer brand, insurance coverage\",\n        \"weakness\": \"No clinic integration, limited specialist network\",\n        \"isDirectCompetitor\": false\n      }\n    ],\n    \"positioning\": \"The only telehealth platform built specifically for rural constraints - low bandwidth, older patients, small clinic operations, and complex rural insurance billing.\",\n    \"timing\": \"Perfect timing: COVID normalized telehealth, CMS expanded rural reimbursement, and rural physician shortage is accelerating.\",\n    \"gaps\": [\"Rural-optimized technology\", \"Small clinic workflow integration\", \"Rural specialist recruitment\", \"Medicaid billing complexity handling\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Rural patients can't access specialists due to distance, and existing telehealth platforms fail in rural environments due to bandwidth, UI complexity, and poor clinic integration\",\n    \"targetCustomer\": \"Rural health networks (5-20 clinics) and independent rural clinics serving 2,000-10,000 patients, primarily Medicare/Medicaid populations\",\n    \"uniqueAngle\": \"Only platform designed for rural constraints: bandwidth optimization, senior-friendly UI, rural clinic EHR integration, complex rural insurance handling\",\n    \"whyNow\": \"CMS rural telehealth reimbursement expansion + COVID adoption + worsening rural physician shortage created the perfect storm\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Hybrid B2B2C: $2K/month clinic subscriptions + $15/visit specialist fees, targeting 80% subscription revenue for predictability\",\n    \"pricingFramework\": \"$2K/month justified by replacing $8K+ monthly locum specialist costs; $15/visit competitive with $25-40 typical telehealth visit fees\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$8,000 per clinic (12-18 month sales cycle, high-touch enterprise sales)\",\n      \"estimatedLTV\": \"$72,000 over 3 years ($24K annual revenue × 3 year average retention)\",\n      \"paybackPeriod\": \"10 months\",\n      \"confidence\": \"medium\"\n    },\n    \"scalabilityAssessment\": \"At 10x scale (350 clinics), you'll need state-by-state compliance team, dedicated specialist recruitment, and enterprise sales force. Platform scales well, operations don't.\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Low-bandwidth video optimization\", \"Basic EHR integration (Epic first)\", \"Simple patient portal\", \"Specialist scheduling system\", \"Insurance billing module\"],\n    \"recommendedStack\": \"React/Node.js web app, WebRTC for video (Agora.io for reliability), AWS/HIPAA-compliant hosting, Epic FHIR APIs for EHR integration\",\n    \"buildVsBuy\": [\n      {\n        \"component\": \"Video infrastructure\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"Agora.io or Twilio Video - building reliable low-bandwidth video is complex\"\n      },\n      {\n        \"component\": \"EHR integration\",\n        \"recommendation\": \"build\",\n        \"rationale\": \"Your Epic expertise is core differentiator - build custom integrations\"\n      },\n      {\n        \"component\": \"HIPAA compliance\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"Use AWS HIPAA-eligible services, don't build security from scratch\"\n      }\n    ],\n    \"technicalRisks\": [\"EHR integration complexity varies by vendor\", \"Low-bandwidth video quality issues\", \"Mobile app performance on older devices\"],\n    \"estimatedMvpTimeline\": \"6-8 months for core platform, additional 3-4 months per state for compliance/licensing\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"regulatory\",\n        \"severity\": \"critical\",\n        \"description\": \"State-by-state telemedicine licensing and Medicaid reimbursement variation could make expansion prohibitively expensive\",\n        \"mitigation\": \"Start with one state with favorable regulations (Texas or Georgia), build compliance playbook before expanding\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"Rural clinics have 12-18 month technology adoption cycles and are extremely price-sensitive\",\n        \"mitigation\": \"Leverage Epic relationships for warm introductions, offer pilot programs with success-based pricing\"\n      },\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"high\",\n        \"description\": \"Teladoc or Amwell could easily add rural-specific features once you prove the market\",\n        \"mitigation\": \"Build deep EHR integrations and specialist relationships as moats, focus on clinic workflow embedding\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"high\",\n        \"description\": \"Specialist recruitment and retention costs could exceed $15/visit fee economics\",\n        \"mitigation\": \"Start with high-margin specialties (dermatology, psychiatry), negotiate revenue-sharing with specialists\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"medium\",\n        \"description\": \"Team of 3 cannot handle sales, product, compliance, and specialist recruitment simultaneously\",\n        \"mitigation\": \"Focus on single specialty in single state, hire sales rep after first 10 clinic wins\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Choose launch state (recommend Texas - favorable reimbursement, Epic presence)\", \"Define specialty focus (recommend dermatology - high-margin, visual, less urgent)\", \"Map 50 target rural clinics in chosen state\", \"Begin Texas medical licensing process\"],\n    \"week5to8\": [\"Build MVP core: video + scheduling + basic EHR integration\", \"Recruit 5 dermatologists for pilot network\", \"Develop clinic pilot program structure\", \"File HIPAA compliance documentation\"],\n    \"week9to12\": [\"Launch pilot with 3 rural Texas clinics\", \"Complete Epic integration testing\", \"Establish specialist payment/scheduling workflows\", \"Begin formal sales outreach to next 10 clinics\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Which state to launch in first?\",\n      \"options\": [\n        { \"option\": \"Texas\", \"tradeoff\": \"Large market, Epic presence, good reimbursement vs higher competition\" },\n        { \"option\": \"Georgia\", \"tradeoff\": \"Favorable regulations, rural density vs smaller market\" },\n        { \"option\": \"Iowa\", \"tradeoff\": \"Very rural, less competition vs limited market size, harsh regulations\" }\n      ],\n      \"recommendation\": \"Texas. Your Epic relationships provide unfair advantage, reimbursement rates are stable, and market size justifies regulatory investment.\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Primary care or specialty focus for launch?\",\n      \"options\": [\n        { \"option\": \"Dermatology\", \"tradeoff\": \"High margins ($50+ per visit), visual diagnosis works well remotely vs smaller addressable market\" },\n        { \"option\": \"Mental health\", \"tradeoff\": \"Huge rural need, good reimbursement vs regulatory complexity, specialist shortage\" },\n        { \"option\": \"Primary care\", \"tradeoff\": \"Largest market, every clinic needs vs low margins, complex medical decisions\" }\n      ],\n      \"recommendation\": \"Dermatology. Highest margin, easiest to deliver remotely, clear value prop for rural patients who currently drive 2+ hours for skin issues.\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"How to structure specialist compensation?\",\n      \"options\": [\n        { \"option\": \"Fixed $40/consultation\", \"tradeoff\": \"Predictable costs, easy recruiting vs low platform margin\" },\n        { \"option\": \"$10 platform fee, $40 to specialist\", \"tradeoff\": \"Better margins vs need higher visit volume\" },\n        { \"option\": \"Revenue share 70/30\", \"tradeoff\": \"Scales with pricing vs complex accounting\" }\n      ],\n      \"recommendation\": \"Start with $40 to specialist, $10 platform fee. Simple, attractive to specialists, proves market before optimizing margins.\",\n      \"deadline\": \"Week 4\"\n    },\n    {\n      \"priority\": \"consider\",\n      \"question\": \"Epic integration depth for MVP?\",\n      \"options\": [\n        { \"option\": \"Basic FHIR patient lookup\", \"tradeoff\": \"Fast to build, works vs limited workflow integration\" },\n        { \"option\": \"Full visit documentation sync\", \"tradeoff\": \"True workflow integration vs 3+ month development\" }\n      ],\n      \"recommendation\": \"Basic FHIR first - prove clinic demand before investing in deep integration complexity.\",\n      \"deadline\": \"Week 6\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"strategist\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}\n```",
+    "model": "claude-sonnet-4-20250514",
+    "inputTokens": 1048,
+    "outputTokens": 2719,
+    "cacheReadTokens": 1409,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0412077,
+    "durationMs": 53956
+  },
+  "totalCostUsd": 0.0450325,
+  "totalDurationMs": 61785,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "promising",
+      "summary": "Strong domain expertise and real problem, but execution will be brutal. Rural telehealth is a graveyard of well-intentioned startups that underestimated regulatory complexity and clinic sales cycles. Your Epic background is your biggest asset - use those relationships ruthlessly. Focus on one specialty in one state to prove unit economics before expanding.",
+      "councilScore": 68
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$4.2B rural telehealth market (60M rural Americans × $70 average annual telehealth spend)",
+        "sam": "$840M addressable via rural clinics (12,000 rural clinics × $70K annual telehealth revenue potential)",
+        "som": "$2.1M realistic year 1-2 (35 clinics × $60K annual revenue per clinic)",
+        "methodology": "Based on rural population data, existing telehealth penetration rates, and clinic density. Revenue per clinic estimated from subscription + visit fees.",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "Teladoc",
+          "description": "Dominant telehealth platform with enterprise focus",
+          "strength": "Scale, provider network, insurance relationships",
+          "weakness": "Urban-centric, poor rural connectivity optimization",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Doxy.me",
+          "description": "Simple telehealth platform popular with small practices",
+          "strength": "Easy setup, affordable pricing",
+          "weakness": "Limited rural-specific features, basic EHR integration",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "TytoCare",
+          "description": "Remote examination devices + telehealth platform",
+          "strength": "Physical examination capabilities",
+          "weakness": "Expensive hardware, complex setup for rural clinics",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "MDLive",
+          "description": "Direct-to-consumer telehealth",
+          "strength": "Consumer brand, insurance coverage",
+          "weakness": "No clinic integration, limited specialist network",
+          "isDirectCompetitor": false
+        }
+      ],
+      "positioning": "The only telehealth platform built specifically for rural constraints - low bandwidth, older patients, small clinic operations, and complex rural insurance billing.",
+      "timing": "Perfect timing: COVID normalized telehealth, CMS expanded rural reimbursement, and rural physician shortage is accelerating.",
+      "gaps": [
+        "Rural-optimized technology",
+        "Small clinic workflow integration",
+        "Rural specialist recruitment",
+        "Medicaid billing complexity handling"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Rural patients can't access specialists due to distance, and existing telehealth platforms fail in rural environments due to bandwidth, UI complexity, and poor clinic integration",
+      "targetCustomer": "Rural health networks (5-20 clinics) and independent rural clinics serving 2,000-10,000 patients, primarily Medicare/Medicaid populations",
+      "uniqueAngle": "Only platform designed for rural constraints: bandwidth optimization, senior-friendly UI, rural clinic EHR integration, complex rural insurance handling",
+      "whyNow": "CMS rural telehealth reimbursement expansion + COVID adoption + worsening rural physician shortage created the perfect storm"
+    },
+    "businessModel": {
+      "revenueStrategy": "Hybrid B2B2C: $2K/month clinic subscriptions + $15/visit specialist fees, targeting 80% subscription revenue for predictability",
+      "pricingFramework": "$2K/month justified by replacing $8K+ monthly locum specialist costs; $15/visit competitive with $25-40 typical telehealth visit fees",
+      "unitEconomics": {
+        "estimatedCAC": "$8,000 per clinic (12-18 month sales cycle, high-touch enterprise sales)",
+        "estimatedLTV": "$72,000 over 3 years ($24K annual revenue × 3 year average retention)",
+        "paybackPeriod": "10 months",
+        "confidence": "medium"
+      },
+      "scalabilityAssessment": "At 10x scale (350 clinics), you'll need state-by-state compliance team, dedicated specialist recruitment, and enterprise sales force. Platform scales well, operations don't."
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Low-bandwidth video optimization",
+        "Basic EHR integration (Epic first)",
+        "Simple patient portal",
+        "Specialist scheduling system",
+        "Insurance billing module"
+      ],
+      "recommendedStack": "React/Node.js web app, WebRTC for video (Agora.io for reliability), AWS/HIPAA-compliant hosting, Epic FHIR APIs for EHR integration",
+      "buildVsBuy": [
+        {
+          "component": "Video infrastructure",
+          "recommendation": "buy",
+          "rationale": "Agora.io or Twilio Video - building reliable low-bandwidth video is complex"
+        },
+        {
+          "component": "EHR integration",
+          "recommendation": "build",
+          "rationale": "Your Epic expertise is core differentiator - build custom integrations"
+        },
+        {
+          "component": "HIPAA compliance",
+          "recommendation": "buy",
+          "rationale": "Use AWS HIPAA-eligible services, don't build security from scratch"
+        }
+      ],
+      "technicalRisks": [
+        "EHR integration complexity varies by vendor",
+        "Low-bandwidth video quality issues",
+        "Mobile app performance on older devices"
+      ],
+      "estimatedMvpTimeline": "6-8 months for core platform, additional 3-4 months per state for compliance/licensing"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "regulatory",
+          "severity": "critical",
+          "description": "State-by-state telemedicine licensing and Medicaid reimbursement variation could make expansion prohibitively expensive",
+          "mitigation": "Start with one state with favorable regulations (Texas or Georgia), build compliance playbook before expanding"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Rural clinics have 12-18 month technology adoption cycles and are extremely price-sensitive",
+          "mitigation": "Leverage Epic relationships for warm introductions, offer pilot programs with success-based pricing"
+        },
+        {
+          "category": "competitive",
+          "severity": "high",
+          "description": "Teladoc or Amwell could easily add rural-specific features once you prove the market",
+          "mitigation": "Build deep EHR integrations and specialist relationships as moats, focus on clinic workflow embedding"
+        },
+        {
+          "category": "financial",
+          "severity": "high",
+          "description": "Specialist recruitment and retention costs could exceed $15/visit fee economics",
+          "mitigation": "Start with high-margin specialties (dermatology, psychiatry), negotiate revenue-sharing with specialists"
+        },
+        {
+          "category": "execution",
+          "severity": "medium",
+          "description": "Team of 3 cannot handle sales, product, compliance, and specialist recruitment simultaneously",
+          "mitigation": "Focus on single specialty in single state, hire sales rep after first 10 clinic wins"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Choose launch state (recommend Texas - favorable reimbursement, Epic presence)",
+        "Define specialty focus (recommend dermatology - high-margin, visual, less urgent)",
+        "Map 50 target rural clinics in chosen state",
+        "Begin Texas medical licensing process"
+      ],
+      "week5to8": [
+        "Build MVP core: video + scheduling + basic EHR integration",
+        "Recruit 5 dermatologists for pilot network",
+        "Develop clinic pilot program structure",
+        "File HIPAA compliance documentation"
+      ],
+      "week9to12": [
+        "Launch pilot with 3 rural Texas clinics",
+        "Complete Epic integration testing",
+        "Establish specialist payment/scheduling workflows",
+        "Begin formal sales outreach to next 10 clinics"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Which state to launch in first?",
+        "options": [
+          {
+            "option": "Texas",
+            "tradeoff": "Large market, Epic presence, good reimbursement vs higher competition"
+          },
+          {
+            "option": "Georgia",
+            "tradeoff": "Favorable regulations, rural density vs smaller market"
+          },
+          {
+            "option": "Iowa",
+            "tradeoff": "Very rural, less competition vs limited market size, harsh regulations"
+          }
+        ],
+        "recommendation": "Texas. Your Epic relationships provide unfair advantage, reimbursement rates are stable, and market size justifies regulatory investment.",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "critical",
+        "question": "Primary care or specialty focus for launch?",
+        "options": [
+          {
+            "option": "Dermatology",
+            "tradeoff": "High margins ($50+ per visit), visual diagnosis works well remotely vs smaller addressable market"
+          },
+          {
+            "option": "Mental health",
+            "tradeoff": "Huge rural need, good reimbursement vs regulatory complexity, specialist shortage"
+          },
+          {
+            "option": "Primary care",
+            "tradeoff": "Largest market, every clinic needs vs low margins, complex medical decisions"
+          }
+        ],
+        "recommendation": "Dermatology. Highest margin, easiest to deliver remotely, clear value prop for rural patients who currently drive 2+ hours for skin issues.",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "important",
+        "question": "How to structure specialist compensation?",
+        "options": [
+          {
+            "option": "Fixed $40/consultation",
+            "tradeoff": "Predictable costs, easy recruiting vs low platform margin"
+          },
+          {
+            "option": "$10 platform fee, $40 to specialist",
+            "tradeoff": "Better margins vs need higher visit volume"
+          },
+          {
+            "option": "Revenue share 70/30",
+            "tradeoff": "Scales with pricing vs complex accounting"
+          }
+        ],
+        "recommendation": "Start with $40 to specialist, $10 platform fee. Simple, attractive to specialists, proves market before optimizing margins.",
+        "deadline": "Week 4"
+      },
+      {
+        "priority": "consider",
+        "question": "Epic integration depth for MVP?",
+        "options": [
+          {
+            "option": "Basic FHIR patient lookup",
+            "tradeoff": "Fast to build, works vs limited workflow integration"
+          },
+          {
+            "option": "Full visit documentation sync",
+            "tradeoff": "True workflow integration vs 3+ month development"
+          }
+        ],
+        "recommendation": "Basic FHIR first - prove clinic demand before investing in deep integration complexity.",
+        "deadline": "Week 6"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "strategist"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "error": null,
+  "timestamp": "2026-03-08T01:29:41.888Z"
+}

@@ -1,0 +1,228 @@
+{
+  "promptId": "g09-cybersecurity-compliance",
+  "mode": "baseline",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 429,
+  "outputTokens": 2202,
+  "cacheReadTokens": 1227,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.0333981,
+  "durationMs": 44364,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "Strong team and real problem, but entering a crowded, well-funded market with established players. The AI angle is both your biggest differentiator and highest risk. Vertical specialization is likely your only path to compete, but even then, you're fighting uphill against companies with 10x your resources and years of head start.",
+      "councilScore": 45
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$12B cybersecurity compliance market (Gartner 2024)",
+        "sam": "$2.8B GRC automation for mid-market (100-1000 employees globally)",
+        "som": "$50M realistic addressable market in first 2 years focusing on specific verticals",
+        "methodology": "Based on 280K mid-market companies globally, 15% needing compliance annually, average $3K annual spend",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "Vanta",
+          "description": "Leading automated compliance platform with $150M+ funding",
+          "strength": "Brand recognition, extensive integrations, enterprise sales team",
+          "weakness": "Generic approach, weak in specialized verticals like healthcare",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Drata",
+          "description": "Compliance automation focused on continuous monitoring",
+          "strength": "Strong continuous monitoring, good SOC 2 coverage",
+          "weakness": "Limited multi-framework support, less AI sophistication",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Secureframe",
+          "description": "Y Combinator compliance platform targeting startups",
+          "strength": "Simple onboarding, startup-friendly pricing",
+          "weakness": "Limited enterprise features, shallow compliance depth",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Tugboat Logic",
+          "description": "Enterprise GRC platform acquired by OneTrust",
+          "strength": "Enterprise features, deep compliance expertise",
+          "weakness": "Complex, expensive, poor mid-market fit",
+          "isDirectCompetitor": false
+        }
+      ],
+      "positioning": "AI-powered compliance specialist for regulated verticals",
+      "timing": "Good - new AI capabilities enable better automation, but market is already mature",
+      "gaps": [
+        "Vertical-specific compliance templates",
+        "AI-generated policy accuracy",
+        "Real-time compliance drift detection"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Mid-market companies in regulated industries need compliance certifications to win enterprise deals but current solutions are either too expensive (consultants) or too generic (existing platforms)",
+      "targetCustomer": "VP of Security or Compliance Officer at 100-500 employee companies in healthcare, fintech, or SaaS selling to enterprise",
+      "uniqueAngle": "AI-generated, industry-specific compliance documentation that understands actual infrastructure context",
+      "whyNow": "LLMs can now generate contextually accurate compliance documentation, and cloud infrastructure APIs provide real-time security posture visibility"
+    },
+    "businessModel": {
+      "revenueStrategy": "SaaS subscription with framework-based pricing tiers",
+      "pricingFramework": "$1,500/mo single framework, $2,500/mo multi-framework - priced at 20% of consultant cost but 80% gross margin",
+      "unitEconomics": {
+        "estimatedCAC": "$8,000 based on 4-month sales cycle, $2K/month sales cost per deal",
+        "estimatedLTV": "$54,000 assuming 18-month average retention, $2,500 average monthly revenue",
+        "paybackPeriod": "10.8 months",
+        "confidence": "medium"
+      },
+      "scalabilityAssessment": "Scales well once integrations are built, but customer success becomes critical at scale due to compliance accuracy requirements"
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "AWS/Azure integration",
+        "SOC 2 Type II mapping",
+        "Gap analysis dashboard",
+        "Basic policy generation",
+        "Evidence collection"
+      ],
+      "recommendedStack": "Python/FastAPI backend, React frontend, PostgreSQL, LangChain for AI, Terraform for infrastructure scanning",
+      "buildVsBuy": [
+        {
+          "component": "Cloud integrations",
+          "recommendation": "build",
+          "rationale": "Core differentiator, need custom mapping logic"
+        },
+        {
+          "component": "Document generation",
+          "recommendation": "build",
+          "rationale": "AI customization is key value prop"
+        },
+        {
+          "component": "Authentication/SSO",
+          "recommendation": "buy",
+          "rationale": "Auth0 or similar, not core competency"
+        }
+      ],
+      "technicalRisks": [
+        "AI hallucination in compliance docs",
+        "API rate limits from cloud providers",
+        "Complex enterprise integrations"
+      ],
+      "estimatedMvpTimeline": "4-6 months for single framework, single cloud provider"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "competitive",
+          "severity": "critical",
+          "description": "Vanta and Drata have massive funding advantage and can copy your AI features within 6-12 months",
+          "mitigation": "Focus on vertical specialization they can't easily replicate"
+        },
+        {
+          "category": "technical",
+          "severity": "critical",
+          "description": "AI-generated compliance documents contain errors that cause audit failures",
+          "mitigation": "Human review layer, liability insurance, conservative AI application"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Security buyers are skeptical of AI and prefer proven solutions",
+          "mitigation": "Lead with automation benefits, position AI as enhancement not replacement"
+        },
+        {
+          "category": "financial",
+          "severity": "high",
+          "description": "Long sales cycles burn cash faster than expected with current runway",
+          "mitigation": "Focus on faster-closing SMB deals initially"
+        },
+        {
+          "category": "regulatory",
+          "severity": "medium",
+          "description": "Compliance frameworks change, requiring constant platform updates",
+          "mitigation": "Build modular framework engine, hire compliance experts"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Pick one vertical (recommend healthcare)",
+        "Interview 50 healthcare CISOs about specific compliance pain points",
+        "Validate AI policy generation accuracy with 3 compliance experts"
+      ],
+      "week5to8": [
+        "Build healthcare-specific SOC 2 MVP",
+        "Recruit 5 design partners",
+        "Develop AI safety protocols and human review process"
+      ],
+      "week9to12": [
+        "Launch private beta with design partners",
+        "Measure policy accuracy rates",
+        "Begin building sales pipeline in target vertical"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Horizontal vs vertical market entry strategy",
+        "options": [
+          {
+            "option": "Compete head-on with Vanta horizontally",
+            "tradeoff": "Larger market but impossible to win against funded competitors"
+          },
+          {
+            "option": "Focus on healthcare vertical",
+            "tradeoff": "Smaller market but defensible specialization and compliance expertise"
+          }
+        ],
+        "recommendation": "Go vertical with healthcare - you can't out-execute Vanta with generic compliance, but you can become the healthcare compliance expert",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "critical",
+        "question": "AI positioning and safety approach",
+        "options": [
+          {
+            "option": "Lead with AI as main differentiator",
+            "tradeoff": "Higher perceived value but higher risk and buyer skepticism"
+          },
+          {
+            "option": "Downplay AI, emphasize automation",
+            "tradeoff": "Safer positioning but less differentiated from competitors"
+          }
+        ],
+        "recommendation": "Downplay AI publicly, emphasize 'intelligent automation' - let the results speak rather than the technology",
+        "deadline": "Week 1"
+      },
+      {
+        "priority": "important",
+        "question": "Pricing strategy for market entry",
+        "options": [
+          {
+            "option": "Match current pricing ($1,500-$2,500)",
+            "tradeoff": "Sustainable margins but harder to displace incumbents"
+          },
+          {
+            "option": "Undercut by 40% for first year",
+            "tradeoff": "Easier customer acquisition but unsustainable unit economics"
+          }
+        ],
+        "recommendation": "Start 30% below incumbents ($1,000/$1,750) with vertical specialization premium - you need price advantage to overcome switching costs",
+        "deadline": "Week 4"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "baseline"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"Strong team and real problem, but entering a crowded, well-funded market with established players. The AI angle is both your biggest differentiator and highest risk. Vertical specialization is likely your only path to compete, but even then, you're fighting uphill against companies with 10x your resources and years of head start.\",\n    \"councilScore\": 45\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$12B cybersecurity compliance market (Gartner 2024)\",\n      \"sam\": \"$2.8B GRC automation for mid-market (100-1000 employees globally)\",\n      \"som\": \"$50M realistic addressable market in first 2 years focusing on specific verticals\",\n      \"methodology\": \"Based on 280K mid-market companies globally, 15% needing compliance annually, average $3K annual spend\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"Vanta\",\n        \"description\": \"Leading automated compliance platform with $150M+ funding\",\n        \"strength\": \"Brand recognition, extensive integrations, enterprise sales team\",\n        \"weakness\": \"Generic approach, weak in specialized verticals like healthcare\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Drata\",\n        \"description\": \"Compliance automation focused on continuous monitoring\",\n        \"strength\": \"Strong continuous monitoring, good SOC 2 coverage\",\n        \"weakness\": \"Limited multi-framework support, less AI sophistication\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Secureframe\",\n        \"description\": \"Y Combinator compliance platform targeting startups\",\n        \"strength\": \"Simple onboarding, startup-friendly pricing\",\n        \"weakness\": \"Limited enterprise features, shallow compliance depth\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Tugboat Logic\",\n        \"description\": \"Enterprise GRC platform acquired by OneTrust\",\n        \"strength\": \"Enterprise features, deep compliance expertise\",\n        \"weakness\": \"Complex, expensive, poor mid-market fit\",\n        \"isDirectCompetitor\": false\n      }\n    ],\n    \"positioning\": \"AI-powered compliance specialist for regulated verticals\",\n    \"timing\": \"Good - new AI capabilities enable better automation, but market is already mature\",\n    \"gaps\": [\"Vertical-specific compliance templates\", \"AI-generated policy accuracy\", \"Real-time compliance drift detection\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Mid-market companies in regulated industries need compliance certifications to win enterprise deals but current solutions are either too expensive (consultants) or too generic (existing platforms)\",\n    \"targetCustomer\": \"VP of Security or Compliance Officer at 100-500 employee companies in healthcare, fintech, or SaaS selling to enterprise\",\n    \"uniqueAngle\": \"AI-generated, industry-specific compliance documentation that understands actual infrastructure context\",\n    \"whyNow\": \"LLMs can now generate contextually accurate compliance documentation, and cloud infrastructure APIs provide real-time security posture visibility\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"SaaS subscription with framework-based pricing tiers\",\n    \"pricingFramework\": \"$1,500/mo single framework, $2,500/mo multi-framework - priced at 20% of consultant cost but 80% gross margin\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$8,000 based on 4-month sales cycle, $2K/month sales cost per deal\",\n      \"estimatedLTV\": \"$54,000 assuming 18-month average retention, $2,500 average monthly revenue\",\n      \"paybackPeriod\": \"10.8 months\",\n      \"confidence\": \"medium\"\n    },\n    \"scalabilityAssessment\": \"Scales well once integrations are built, but customer success becomes critical at scale due to compliance accuracy requirements\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"AWS/Azure integration\", \"SOC 2 Type II mapping\", \"Gap analysis dashboard\", \"Basic policy generation\", \"Evidence collection\"],\n    \"recommendedStack\": \"Python/FastAPI backend, React frontend, PostgreSQL, LangChain for AI, Terraform for infrastructure scanning\",\n    \"buildVsBuy\": [\n      { \"component\": \"Cloud integrations\", \"recommendation\": \"build\", \"rationale\": \"Core differentiator, need custom mapping logic\" },\n      { \"component\": \"Document generation\", \"recommendation\": \"build\", \"rationale\": \"AI customization is key value prop\" },\n      { \"component\": \"Authentication/SSO\", \"recommendation\": \"buy\", \"rationale\": \"Auth0 or similar, not core competency\" }\n    ],\n    \"technicalRisks\": [\"AI hallucination in compliance docs\", \"API rate limits from cloud providers\", \"Complex enterprise integrations\"],\n    \"estimatedMvpTimeline\": \"4-6 months for single framework, single cloud provider\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"critical\",\n        \"description\": \"Vanta and Drata have massive funding advantage and can copy your AI features within 6-12 months\",\n        \"mitigation\": \"Focus on vertical specialization they can't easily replicate\"\n      },\n      {\n        \"category\": \"technical\",\n        \"severity\": \"critical\",\n        \"description\": \"AI-generated compliance documents contain errors that cause audit failures\",\n        \"mitigation\": \"Human review layer, liability insurance, conservative AI application\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"Security buyers are skeptical of AI and prefer proven solutions\",\n        \"mitigation\": \"Lead with automation benefits, position AI as enhancement not replacement\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"high\",\n        \"description\": \"Long sales cycles burn cash faster than expected with current runway\",\n        \"mitigation\": \"Focus on faster-closing SMB deals initially\"\n      },\n      {\n        \"category\": \"regulatory\",\n        \"severity\": \"medium\",\n        \"description\": \"Compliance frameworks change, requiring constant platform updates\",\n        \"mitigation\": \"Build modular framework engine, hire compliance experts\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Pick one vertical (recommend healthcare)\", \"Interview 50 healthcare CISOs about specific compliance pain points\", \"Validate AI policy generation accuracy with 3 compliance experts\"],\n    \"week5to8\": [\"Build healthcare-specific SOC 2 MVP\", \"Recruit 5 design partners\", \"Develop AI safety protocols and human review process\"],\n    \"week9to12\": [\"Launch private beta with design partners\", \"Measure policy accuracy rates\", \"Begin building sales pipeline in target vertical\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Horizontal vs vertical market entry strategy\",\n      \"options\": [\n        { \"option\": \"Compete head-on with Vanta horizontally\", \"tradeoff\": \"Larger market but impossible to win against funded competitors\" },\n        { \"option\": \"Focus on healthcare vertical\", \"tradeoff\": \"Smaller market but defensible specialization and compliance expertise\" }\n      ],\n      \"recommendation\": \"Go vertical with healthcare - you can't out-execute Vanta with generic compliance, but you can become the healthcare compliance expert\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"AI positioning and safety approach\",\n      \"options\": [\n        { \"option\": \"Lead with AI as main differentiator\", \"tradeoff\": \"Higher perceived value but higher risk and buyer skepticism\" },\n        { \"option\": \"Downplay AI, emphasize automation\", \"tradeoff\": \"Safer positioning but less differentiated from competitors\" }\n      ],\n      \"recommendation\": \"Downplay AI publicly, emphasize 'intelligent automation' - let the results speak rather than the technology\",\n      \"deadline\": \"Week 1\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Pricing strategy for market entry\",\n      \"options\": [\n        { \"option\": \"Match current pricing ($1,500-$2,500)\", \"tradeoff\": \"Sustainable margins but harder to displace incumbents\" },\n        { \"option\": \"Undercut by 40% for first year\", \"tradeoff\": \"Easier customer acquisition but unsustainable unit economics\" }\n      ],\n      \"recommendation\": \"Start 30% below incumbents ($1,000/$1,750) with vertical specialization premium - you need price advantage to overcome switching costs\",\n      \"deadline\": \"Week 4\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"baseline\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}",
+  "error": null,
+  "timestamp": "2026-03-08T02:01:53.836Z"
+}

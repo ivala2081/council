@@ -4,7 +4,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   AiCompanyOS Unified Design System
+   Inspired by: Anthropic Console, OpenAI Dashboard
+   Philosophy: Monochrome base + semantic color only where it
+   carries meaning. Restraint is the aesthetic.
+   ============================================================ */
+
 @theme inline {
+  /* --- Core palette (shadcn) --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
@@ -38,6 +46,30 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* --- Verdict semantic colors --- */
+  --color-verdict-strong: var(--verdict-strong);
+  --color-verdict-promising: var(--verdict-promising);
+  --color-verdict-risky: var(--verdict-risky);
+  --color-verdict-weak: var(--verdict-weak);
+
+  /* --- Status semantic colors --- */
+  --color-status-success: var(--status-success);
+  --color-status-warning: var(--status-warning);
+  --color-status-error: var(--status-error);
+  --color-status-info: var(--status-info);
+
+  /* --- Priority semantic colors --- */
+  --color-priority-critical: var(--priority-critical);
+  --color-priority-important: var(--priority-important);
+  --color-priority-consider: var(--priority-consider);
+
+  /* --- Confidence semantic colors --- */
+  --color-confidence-verified: var(--confidence-verified);
+  --color-confidence-estimated: var(--confidence-estimated);
+  --color-confidence-speculative: var(--confidence-speculative);
+
+  /* --- Radius scale --- */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -47,7 +79,11 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ============================================================
+   Light Mode — Clean, airy, paper-white
+   ============================================================ */
 :root {
+  /* Core */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -66,12 +102,40 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+
+  /* Verdict — the 4 states that define Council */
+  --verdict-strong: oklch(0.55 0.17 145);
+  --verdict-promising: oklch(0.55 0.17 250);
+  --verdict-risky: oklch(0.70 0.17 85);
+  --verdict-weak: oklch(0.55 0.20 27);
+
+  /* Status — universal UI states */
+  --status-success: oklch(0.55 0.17 145);
+  --status-warning: oklch(0.70 0.17 85);
+  --status-error: oklch(0.55 0.20 27);
+  --status-info: oklch(0.55 0.17 250);
+
+  /* Priority — decision urgency */
+  --priority-critical: oklch(0.55 0.20 27);
+  --priority-important: oklch(0.62 0.18 55);
+  --priority-consider: oklch(0.55 0.02 0);
+
+  /* Confidence — data reliability */
+  --confidence-verified: oklch(0.55 0.17 145);
+  --confidence-estimated: oklch(0.70 0.17 85);
+  --confidence-speculative: oklch(0.55 0.20 27);
+
+  /* Charts */
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
   --chart-3: oklch(0.546 0.245 262.881);
   --chart-4: oklch(0.488 0.243 264.376);
   --chart-5: oklch(0.424 0.199 265.638);
+
+  /* Radius */
   --radius: 0.625rem;
+
+  /* Sidebar */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -82,30 +146,60 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* ============================================================
+   Dark Mode — Deep, focused, console-grade
+   ============================================================ */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0.00 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Core — deeper blacks, Anthropic-console grade */
+  --background: oklch(0.12 0 0);
+  --foreground: oklch(0.93 0 0);
+  --card: oklch(0.16 0 0);
+  --card-foreground: oklch(0.93 0 0);
+  --popover: oklch(0.16 0 0);
+  --popover-foreground: oklch(0.93 0 0);
+  --primary: oklch(0.93 0.00 0);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.20 0 0);
+  --secondary-foreground: oklch(0.93 0 0);
+  --muted: oklch(0.20 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.24 0 0);
+  --accent-foreground: oklch(0.93 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.45 0 0);
+
+  /* Verdict — brighter for dark backgrounds */
+  --verdict-strong: oklch(0.72 0.19 145);
+  --verdict-promising: oklch(0.72 0.19 250);
+  --verdict-risky: oklch(0.80 0.16 85);
+  --verdict-weak: oklch(0.70 0.19 27);
+
+  /* Status */
+  --status-success: oklch(0.72 0.19 145);
+  --status-warning: oklch(0.80 0.16 85);
+  --status-error: oklch(0.70 0.19 27);
+  --status-info: oklch(0.72 0.19 250);
+
+  /* Priority */
+  --priority-critical: oklch(0.70 0.19 27);
+  --priority-important: oklch(0.75 0.16 55);
+  --priority-consider: oklch(0.70 0.02 0);
+
+  /* Confidence */
+  --confidence-verified: oklch(0.72 0.19 145);
+  --confidence-estimated: oklch(0.80 0.16 85);
+  --confidence-speculative: oklch(0.70 0.19 27);
+
+  /* Charts */
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
   --chart-3: oklch(0.546 0.245 262.881);
   --chart-4: oklch(0.488 0.243 264.376);
   --chart-5: oklch(0.424 0.199 265.638);
+
+  /* Sidebar */
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -116,14 +210,108 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* ============================================================
+   Base Layer
+   ============================================================ */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   html {
     @apply font-sans;
   }
+}
+
+/* ============================================================
+   Visual Effects — polished interactions
+   ============================================================ */
+
+/* Input container glow on focus */
+.input-glow {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.input-glow:focus-within {
+  box-shadow: 0 0 0 3px oklch(0.55 0 0 / 8%);
+  border-color: oklch(0.55 0 0 / 25%);
+}
+.dark .input-glow:focus-within {
+  box-shadow: 0 0 0 3px oklch(0.85 0 0 / 6%);
+  border-color: oklch(0.85 0 0 / 20%);
+}
+
+/* Subtle card hover lift */
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px oklch(0 0 0 / 6%);
+}
+.dark .card-hover:hover {
+  box-shadow: 0 2px 8px oklch(0 0 0 / 30%);
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: linear-gradient(135deg, oklch(0.75 0 0), oklch(0.50 0 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.dark .text-gradient {
+  background: linear-gradient(135deg, oklch(0.95 0 0), oklch(0.65 0 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+/* Typewriter — rotating hints */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: currentColor; }
+}
+.typewriter-text {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid currentColor;
+  animation:
+    typewriter 1.2s steps(30, end) forwards,
+    blink-caret 0.8s step-end infinite;
+}
+.typewriter-exit {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid transparent;
+  animation: typewriter 0.4s steps(20, end) reverse forwards;
+}
+
+/* Subtle fade-in for sections */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.3s ease-out forwards;
+}
+
+/* Pulse dot — for live status indicators */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
 }

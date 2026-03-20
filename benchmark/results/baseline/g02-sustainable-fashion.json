@@ -1,0 +1,231 @@
+{
+  "promptId": "g02-sustainable-fashion",
+  "mode": "baseline",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 261,
+  "outputTokens": 2247,
+  "cacheReadTokens": 1227,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.0340731,
+  "durationMs": 42795,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "Strong founder-market fit and growing category, but significant structural challenges. The 15% commission on already thin-margin sustainable brands creates a fundamental tension. Customer acquisition costs in fashion e-commerce typically run $50-150, making unit economics difficult without high AOV or repeat rates. Your fashion industry experience is valuable, but you're entering a crowded space where differentiation beyond 'curation' will be critical.",
+      "councilScore": 52
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$15B global sustainable fashion market (McKinsey 2023)",
+        "sam": "$2.5B US online sustainable fashion market",
+        "som": "$1-3M realistic year 1-2 obtainable market (0.1-0.3% of SAM)",
+        "methodology": "Based on 200-500 brands at $5K average annual GMV per brand",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "The RealReal",
+          "description": "Luxury consignment marketplace with sustainability angle",
+          "strength": "Established brand, luxury positioning, authentication",
+          "weakness": "Focus on secondhand, not new sustainable brands",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Reformation",
+          "description": "Direct-to-consumer sustainable fashion brand",
+          "strength": "Strong brand identity, vertical integration",
+          "weakness": "Single brand, not marketplace model",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Faire",
+          "description": "B2B marketplace for independent brands",
+          "strength": "Established wholesale relationships, financing options",
+          "weakness": "B2B focus, not sustainability-specific",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Garmentory",
+          "description": "Curated marketplace for independent fashion brands",
+          "strength": "Similar curation model, established brand relationships",
+          "weakness": "Limited sustainability focus, small scale",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Etsy",
+          "description": "Handmade and vintage marketplace with growing sustainability section",
+          "strength": "Massive scale, established customer base, low barriers",
+          "weakness": "Not fashion-focused, quality inconsistency",
+          "isDirectCompetitor": true
+        }
+      ],
+      "positioning": "The vetted sustainable fashion marketplace for conscious consumers who want discovery without compromise",
+      "timing": "Good - Gen Z/Millennial sustainability consciousness at peak, but marketplace fatigue also growing",
+      "gaps": [
+        "True sustainability verification system",
+        "Fashion-specific discovery tools",
+        "Brand success metrics beyond just sales"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Conscious consumers struggle to discover legitimate sustainable fashion brands among greenwashing and low-quality options",
+      "targetCustomer": "Urban millennials/Gen Z, household income $75K+, already shopping sustainable brands, willing to pay premium for convenience and curation",
+      "uniqueAngle": "Rigorous sustainability vetting process combined with fashion industry expertise and brand development support",
+      "whyNow": "Post-pandemic shift toward conscious consumption + supply chain transparency demands + influencer-driven discovery fatigue"
+    },
+    "businessModel": {
+      "revenueStrategy": "Dual revenue: 15% commission on sales + $99/month brand listing fee creates predictable base with upside participation",
+      "pricingFramework": "$99/month justified by marketing support and curation value; 15% commission competitive with Etsy (6.5%) but high for fashion margins",
+      "unitEconomics": {
+        "estimatedCAC": "$75-120 based on fashion e-commerce benchmarks",
+        "estimatedLTV": "$180-300 assuming 3-4 purchases over 18 months at $60 AOV",
+        "paybackPeriod": "8-12 months",
+        "confidence": "low"
+      },
+      "scalabilityAssessment": "Revenue scales with GMV, but curation quality may degrade. Need to build systematic vetting processes and brand success programs to maintain differentiation."
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Brand application system",
+        "Basic storefront builder",
+        "Payment processing",
+        "Order management",
+        "Sustainability criteria verification"
+      ],
+      "recommendedStack": "Shopify Plus marketplace solution + custom vetting portal",
+      "buildVsBuy": [
+        {
+          "component": "E-commerce platform",
+          "recommendation": "buy",
+          "rationale": "Shopify marketplace tools save 6+ months development time"
+        },
+        {
+          "component": "Sustainability vetting system",
+          "recommendation": "build",
+          "rationale": "Core differentiator, no existing solution meets needs"
+        },
+        {
+          "component": "Payment processing",
+          "recommendation": "buy",
+          "rationale": "Stripe Connect handles marketplace payments well"
+        }
+      ],
+      "technicalRisks": [
+        "Shopify marketplace limitations",
+        "Custom vetting system integration complexity"
+      ],
+      "estimatedMvpTimeline": "12-16 weeks with Shopify foundation"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "financial",
+          "severity": "critical",
+          "description": "Unit economics don't work - high CAC + low margins + 15% commission creates unsustainable business",
+          "mitigation": "Start with higher AOV brands, negotiate performance-based commission tiers, focus on repeat purchase drivers"
+        },
+        {
+          "category": "competitive",
+          "severity": "high",
+          "description": "Etsy or Amazon adds sustainability filters and verification, commoditizing your differentiator",
+          "mitigation": "Build deep brand relationships and success programs that create switching costs"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Sustainable fashion brands reject 15% commission due to already thin margins",
+          "mitigation": "Provide clear ROI through marketing support, customer data, and brand development services"
+        },
+        {
+          "category": "execution",
+          "severity": "medium",
+          "description": "Scaling curation while maintaining quality standards",
+          "mitigation": "Develop systematic vetting criteria and processes early, hire domain experts"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Interview 20 sustainable fashion brand founders about marketplace pain points",
+        "Analyze competitor commission structures and brand success rates",
+        "Define sustainability criteria framework",
+        "Build financial model with realistic CAC/LTV assumptions"
+      ],
+      "week5to8": [
+        "Recruit 5-10 pilot brands willing to test platform",
+        "Set up Shopify Plus marketplace foundation",
+        "Build sustainability vetting portal MVP",
+        "Create brand onboarding process"
+      ],
+      "week9to12": [
+        "Launch private beta with pilot brands",
+        "Test customer acquisition channels with $2K budget",
+        "Measure early unit economics and brand satisfaction",
+        "Iterate based on initial data"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Platform: Build custom vs Shopify marketplace tools?",
+        "options": [
+          {
+            "option": "Shopify Plus marketplace",
+            "tradeoff": "Faster launch, proven payments vs limited customization"
+          },
+          {
+            "option": "Custom platform",
+            "tradeoff": "Full control, unique features vs 6+ month delay, higher cost"
+          }
+        ],
+        "recommendation": "Start with Shopify Plus - speed to market is critical for testing demand and unit economics",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "critical",
+        "question": "Launch scale: 10 brands or 100 brands?",
+        "options": [
+          {
+            "option": "10 carefully selected brands",
+            "tradeoff": "Deep relationships, better curation vs limited selection"
+          },
+          {
+            "option": "100+ brands for variety",
+            "tradeoff": "More choice, faster GMV growth vs diluted curation, harder to support"
+          }
+        ],
+        "recommendation": "Start with 10-15 brands in 2-3 categories. Quality over quantity is your only defensible moat.",
+        "deadline": "Week 3"
+      },
+      {
+        "priority": "important",
+        "question": "Commission structure: Flat 15% or tiered?",
+        "options": [
+          {
+            "option": "Flat 15% commission",
+            "tradeoff": "Simple, predictable vs may price out smaller brands"
+          },
+          {
+            "option": "Tiered 10-20% based on volume",
+            "tradeoff": "More brand-friendly vs complex, lower initial revenue"
+          }
+        ],
+        "recommendation": "Start tiered: 10% first $10K monthly, 15% above. Shows you're invested in brand success.",
+        "deadline": "Week 4"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "baseline"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"Strong founder-market fit and growing category, but significant structural challenges. The 15% commission on already thin-margin sustainable brands creates a fundamental tension. Customer acquisition costs in fashion e-commerce typically run $50-150, making unit economics difficult without high AOV or repeat rates. Your fashion industry experience is valuable, but you're entering a crowded space where differentiation beyond 'curation' will be critical.\",\n    \"councilScore\": 52\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$15B global sustainable fashion market (McKinsey 2023)\",\n      \"sam\": \"$2.5B US online sustainable fashion market\",\n      \"som\": \"$1-3M realistic year 1-2 obtainable market (0.1-0.3% of SAM)\",\n      \"methodology\": \"Based on 200-500 brands at $5K average annual GMV per brand\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"The RealReal\",\n        \"description\": \"Luxury consignment marketplace with sustainability angle\",\n        \"strength\": \"Established brand, luxury positioning, authentication\",\n        \"weakness\": \"Focus on secondhand, not new sustainable brands\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Reformation\",\n        \"description\": \"Direct-to-consumer sustainable fashion brand\",\n        \"strength\": \"Strong brand identity, vertical integration\",\n        \"weakness\": \"Single brand, not marketplace model\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Faire\",\n        \"description\": \"B2B marketplace for independent brands\",\n        \"strength\": \"Established wholesale relationships, financing options\",\n        \"weakness\": \"B2B focus, not sustainability-specific\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Garmentory\",\n        \"description\": \"Curated marketplace for independent fashion brands\",\n        \"strength\": \"Similar curation model, established brand relationships\",\n        \"weakness\": \"Limited sustainability focus, small scale\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Etsy\",\n        \"description\": \"Handmade and vintage marketplace with growing sustainability section\",\n        \"strength\": \"Massive scale, established customer base, low barriers\",\n        \"weakness\": \"Not fashion-focused, quality inconsistency\",\n        \"isDirectCompetitor\": true\n      }\n    ],\n    \"positioning\": \"The vetted sustainable fashion marketplace for conscious consumers who want discovery without compromise\",\n    \"timing\": \"Good - Gen Z/Millennial sustainability consciousness at peak, but marketplace fatigue also growing\",\n    \"gaps\": [\"True sustainability verification system\", \"Fashion-specific discovery tools\", \"Brand success metrics beyond just sales\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Conscious consumers struggle to discover legitimate sustainable fashion brands among greenwashing and low-quality options\",\n    \"targetCustomer\": \"Urban millennials/Gen Z, household income $75K+, already shopping sustainable brands, willing to pay premium for convenience and curation\",\n    \"uniqueAngle\": \"Rigorous sustainability vetting process combined with fashion industry expertise and brand development support\",\n    \"whyNow\": \"Post-pandemic shift toward conscious consumption + supply chain transparency demands + influencer-driven discovery fatigue\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Dual revenue: 15% commission on sales + $99/month brand listing fee creates predictable base with upside participation\",\n    \"pricingFramework\": \"$99/month justified by marketing support and curation value; 15% commission competitive with Etsy (6.5%) but high for fashion margins\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$75-120 based on fashion e-commerce benchmarks\",\n      \"estimatedLTV\": \"$180-300 assuming 3-4 purchases over 18 months at $60 AOV\",\n      \"paybackPeriod\": \"8-12 months\",\n      \"confidence\": \"low\"\n    },\n    \"scalabilityAssessment\": \"Revenue scales with GMV, but curation quality may degrade. Need to build systematic vetting processes and brand success programs to maintain differentiation.\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Brand application system\", \"Basic storefront builder\", \"Payment processing\", \"Order management\", \"Sustainability criteria verification\"],\n    \"recommendedStack\": \"Shopify Plus marketplace solution + custom vetting portal\",\n    \"buildVsBuy\": [\n      { \"component\": \"E-commerce platform\", \"recommendation\": \"buy\", \"rationale\": \"Shopify marketplace tools save 6+ months development time\" },\n      { \"component\": \"Sustainability vetting system\", \"recommendation\": \"build\", \"rationale\": \"Core differentiator, no existing solution meets needs\" },\n      { \"component\": \"Payment processing\", \"recommendation\": \"buy\", \"rationale\": \"Stripe Connect handles marketplace payments well\" }\n    ],\n    \"technicalRisks\": [\"Shopify marketplace limitations\", \"Custom vetting system integration complexity\"],\n    \"estimatedMvpTimeline\": \"12-16 weeks with Shopify foundation\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"financial\",\n        \"severity\": \"critical\",\n        \"description\": \"Unit economics don't work - high CAC + low margins + 15% commission creates unsustainable business\",\n        \"mitigation\": \"Start with higher AOV brands, negotiate performance-based commission tiers, focus on repeat purchase drivers\"\n      },\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"high\",\n        \"description\": \"Etsy or Amazon adds sustainability filters and verification, commoditizing your differentiator\",\n        \"mitigation\": \"Build deep brand relationships and success programs that create switching costs\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"Sustainable fashion brands reject 15% commission due to already thin margins\",\n        \"mitigation\": \"Provide clear ROI through marketing support, customer data, and brand development services\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"medium\",\n        \"description\": \"Scaling curation while maintaining quality standards\",\n        \"mitigation\": \"Develop systematic vetting criteria and processes early, hire domain experts\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Interview 20 sustainable fashion brand founders about marketplace pain points\", \"Analyze competitor commission structures and brand success rates\", \"Define sustainability criteria framework\", \"Build financial model with realistic CAC/LTV assumptions\"],\n    \"week5to8\": [\"Recruit 5-10 pilot brands willing to test platform\", \"Set up Shopify Plus marketplace foundation\", \"Build sustainability vetting portal MVP\", \"Create brand onboarding process\"],\n    \"week9to12\": [\"Launch private beta with pilot brands\", \"Test customer acquisition channels with $2K budget\", \"Measure early unit economics and brand satisfaction\", \"Iterate based on initial data\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Platform: Build custom vs Shopify marketplace tools?\",\n      \"options\": [\n        { \"option\": \"Shopify Plus marketplace\", \"tradeoff\": \"Faster launch, proven payments vs limited customization\" },\n        { \"option\": \"Custom platform\", \"tradeoff\": \"Full control, unique features vs 6+ month delay, higher cost\" }\n      ],\n      \"recommendation\": \"Start with Shopify Plus - speed to market is critical for testing demand and unit economics\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Launch scale: 10 brands or 100 brands?\",\n      \"options\": [\n        { \"option\": \"10 carefully selected brands\", \"tradeoff\": \"Deep relationships, better curation vs limited selection\" },\n        { \"option\": \"100+ brands for variety\", \"tradeoff\": \"More choice, faster GMV growth vs diluted curation, harder to support\" }\n      ],\n      \"recommendation\": \"Start with 10-15 brands in 2-3 categories. Quality over quantity is your only defensible moat.\",\n      \"deadline\": \"Week 3\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Commission structure: Flat 15% or tiered?\",\n      \"options\": [\n        { \"option\": \"Flat 15% commission\", \"tradeoff\": \"Simple, predictable vs may price out smaller brands\" },\n        { \"option\": \"Tiered 10-20% based on volume\", \"tradeoff\": \"More brand-friendly vs complex, lower initial revenue\" }\n      ],\n      \"recommendation\": \"Start tiered: 10% first $10K monthly, 15% above. Shows you're invested in brand success.\",\n      \"deadline\": \"Week 4\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"baseline\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}",
+  "error": null,
+  "timestamp": "2026-03-08T01:51:02.506Z"
+}

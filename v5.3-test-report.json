@@ -1,0 +1,101 @@
+{
+  "reportTitle": "Council Brief v5.3 — Upper-Band Calibration Test Report",
+  "reportDate": "2026-03-09",
+  "promptVersion": "v5.3",
+  "previousVersion": "v5.2",
+  "testMethod": "Test 6 × 3 runs + regression tests (1, 5, 7) on production API.",
+
+  "summary": {
+    "test6Result": "0/3 strong — still promising (scores: 73, 72, 65)",
+    "regressions": "None — all regression tests pass",
+    "verdictAccuracy": "9/10 (Test 6 still not strong)",
+    "improvement": "Scores improved (v5.2: 67 → v5.3 avg: 70) but still below 75 threshold"
+  },
+
+  "test6Runs": [
+    {
+      "run": 1,
+      "verdict": "promising",
+      "councilScore": 73,
+      "baseScore": 73,
+      "scoreBreakdown": { "team": 17, "market": 16, "traction": 14, "defensibility": 12, "timing": 14 },
+      "verdictReasoning": "Promising not strong because while traction is solid (14/20), the company needs to prove it can scale beyond current organic growth and navigate complex multi-market expansion",
+      "note": "2 pts short of strong. Defensibility 12 ≥ 11 gate — passed. But total 73 < 75."
+    },
+    {
+      "run": 2,
+      "verdict": "promising",
+      "councilScore": 72,
+      "baseScore": 72,
+      "scoreBreakdown": { "team": 18, "market": 16, "traction": 15, "defensibility": 11, "timing": 12 },
+      "verdictReasoning": "Promising not strong because while traction and team are excellent, defensibility remains unproven against well-funded global competitors",
+      "note": "3 pts short. Defensibility 11 = exact gate minimum. Timing 12 still conservative."
+    },
+    {
+      "run": 3,
+      "verdict": "promising",
+      "councilScore": 65,
+      "baseScore": 65,
+      "scoreBreakdown": { "team": 16, "market": 15, "traction": 12, "defensibility": 10, "timing": 12 },
+      "verdictReasoning": "Promising not strong because $50K MRR with 200 merchants suggests $250 ARPU which may not be sustainable",
+      "note": "Worst run. Traction 12 < 14 gate — blocked even if score were 75+. Defensibility 10 < 11 gate — also blocked."
+    }
+  ],
+
+  "test6Analysis": {
+    "scoreRange": "65-73 (avg 70)",
+    "v5.2Score": 67,
+    "improvement": "+3 avg (67→70)",
+    "defensibilityRange": "10-12 (avg 11)",
+    "timingRange": "12-14 (avg 12.7)",
+    "problem": "Rubric changes helped (+3 avg) but not enough. Model still conservative on defensibility/timing. Score 73 was closest — 2 pts short.",
+    "rootCause": "Model treats $50K MRR in competitive market as 'promising but unproven' rather than 'strong signal'. The anti-competition instruction helped (defensibility 9→11 avg) but timing improvement was minimal (10→12.7 avg).",
+    "options": [
+      "Option A: Lower strong threshold from 75 to 72. Risk: may let marginal cases through.",
+      "Option B: Add explicit scoring instruction: '$50K+ MRR with 15%+ MoM growth = traction 16+'. Forces higher traction score which pushes total over 75.",
+      "Option C: Accept that this case is legitimately 'high promising' and adjust expected verdict to promising. Strong should require clearer defensibility proof.",
+      "Option D: Add a 'momentum bonus' — if traction >= 14 AND team >= 16 AND no penalties, add +3 bonus. Creates explicit upward pull."
+    ]
+  },
+
+  "regressionTests": [
+    {
+      "test": 1,
+      "idea": "Uber for laundry, solo, no funding",
+      "expected": "weak",
+      "actual": "weak",
+      "councilScore": 10,
+      "scoreBreakdown": { "team": 6, "market": 12, "traction": 0, "defensibility": 4, "timing": 18 },
+      "regression": false,
+      "note": "Still weak. Score dropped 20→10 (timing 4→18 variance but 3 penalties still force weak)."
+    },
+    {
+      "test": 5,
+      "idea": "CLI API tool, 3 ex-Stripe, $500K, 400 DAU",
+      "expected": "promising",
+      "actual": "promising",
+      "councilScore": 68,
+      "scoreBreakdown": { "team": 16, "market": 14, "traction": 12, "defensibility": 11, "timing": 15 },
+      "regression": false,
+      "note": "Still promising. Traction 12 < 14 blocks strong. No inflation."
+    },
+    {
+      "test": 7,
+      "idea": "Blockchain social, solo student",
+      "expected": "weak",
+      "actual": "weak",
+      "councilScore": 0,
+      "scoreBreakdown": { "team": 3, "market": 8, "traction": 0, "defensibility": 5, "timing": 8 },
+      "regression": false,
+      "note": "Still weak. 3 penalties applied. baseScore 24, councilScore 0."
+    }
+  ],
+
+  "v5.3Impact": {
+    "defensibilityChange": "v5.2: 9 → v5.3 avg: 11 (+2). Rubric change helped.",
+    "timingChange": "v5.2: 10 → v5.3 avg: 12.7 (+2.7). Moderate improvement.",
+    "totalScoreChange": "v5.2: 67 → v5.3 avg: 70 (+3). Not enough for 75.",
+    "gatesPassed": "Run 1: all gates passed except score < 75. Run 2: all gates passed except score < 75. Run 3: traction AND defensibility gates failed.",
+    "conclusion": "v5.3 moved scores in right direction but strong remains 2-5 pts out of reach. The model is inherently conservative about 'strong' labels for competitive markets."
+  }
+}

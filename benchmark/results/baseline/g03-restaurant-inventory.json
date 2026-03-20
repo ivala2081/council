@@ -1,0 +1,220 @@
+{
+  "promptId": "g03-restaurant-inventory",
+  "mode": "baseline",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 268,
+  "outputTokens": 2065,
+  "cacheReadTokens": 1227,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.0313431,
+  "durationMs": 40110,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "Solid technical foundation but facing three major headwinds: POS incumbents expanding into your space, a 3-month value gap that kills adoption, and selling to the most software-resistant market segment. The business is viable if you solve the cold-start problem and choose integration over competition.",
+      "councilScore": 52
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$4.2B global restaurant inventory management software market (Grand View Research 2023)",
+        "sam": "$800M US independent restaurant inventory software market (650K independent restaurants × $1,200 annual spend)",
+        "som": "$2.4M realistic year 1-2 market (1,000 restaurants × $2,400 annual)",
+        "methodology": "TAM from industry reports, SAM estimated from restaurant count × pricing, SOM assumes 0.15% market penetration",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "Toast",
+          "description": "POS system adding inventory management features",
+          "strength": "Already embedded in restaurant operations, massive distribution",
+          "weakness": "Inventory is secondary feature, not core competency",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Square for Restaurants",
+          "description": "POS with basic inventory tracking",
+          "strength": "Integrated ecosystem, familiar brand",
+          "weakness": "Limited ML capabilities, basic forecasting",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "MarketMan",
+          "description": "Restaurant inventory and procurement platform",
+          "strength": "Mature product, supplier network",
+          "weakness": "$300+/month pricing, targets larger operations",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "BlueCart",
+          "description": "B2B marketplace with inventory features",
+          "strength": "Supplier relationships, procurement focus",
+          "weakness": "Marketplace model, less ML sophistication",
+          "isDirectCompetitor": false
+        }
+      ],
+      "positioning": "The only AI-first inventory system built specifically for independent restaurants, not chains",
+      "timing": "Post-COVID focus on margins + labor shortage driving automation needs",
+      "gaps": [
+        "Cold-start ML problem unsolved by competitors",
+        "Independent restaurant-specific features missing from POS solutions"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Independent restaurants waste 15-20% of food inventory due to poor demand forecasting and manual ordering processes",
+      "targetCustomer": "Independent restaurant owners with $500K-$2M annual revenue, 2-5 locations max, currently using spreadsheets or basic POS inventory",
+      "uniqueAngle": "ML predictions that factor weather, local events, and seasonal patterns - not just historical sales",
+      "whyNow": "Rising food costs (up 25% since 2020) + labor shortage making manual inventory management unsustainable"
+    },
+    "businessModel": {
+      "revenueStrategy": "SaaS subscription with potential transaction fees on automated supplier orders",
+      "pricingFramework": "$199/month justified by saving 10% on $15K monthly food costs = $1,500 monthly savings",
+      "unitEconomics": {
+        "estimatedCAC": "$800 (assuming 4-month sales cycle, $200/month blended acquisition cost)",
+        "estimatedLTV": "$4,776 (24-month average tenure × $199/month)",
+        "paybackPeriod": "4 months",
+        "confidence": "low"
+      },
+      "scalabilityAssessment": "Good margins once built, but high touch sales model limits scaling without enterprise pricing"
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "POS integration",
+        "Basic demand forecasting",
+        "Automated order suggestions",
+        "Waste tracking dashboard"
+      ],
+      "recommendedStack": "Python/Django backend, React frontend, PostgreSQL, AWS hosting, ML pipeline with scikit-learn/TensorFlow",
+      "buildVsBuy": [
+        {
+          "component": "POS integrations",
+          "recommendation": "buy",
+          "rationale": "Use existing APIs rather than building connectors from scratch"
+        },
+        {
+          "component": "ML forecasting engine",
+          "recommendation": "build",
+          "rationale": "Core differentiation, need custom algorithms for restaurant-specific factors"
+        },
+        {
+          "component": "Supplier ordering",
+          "recommendation": "buy",
+          "rationale": "Partner with existing procurement platforms like Sysco or US Foods"
+        }
+      ],
+      "technicalRisks": [
+        "POS API rate limits and reliability",
+        "ML model accuracy with limited data",
+        "Real-time inventory sync challenges"
+      ],
+      "estimatedMvpTimeline": "4-5 months for production-ready version with 2-person team"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "competitive",
+          "severity": "critical",
+          "description": "Toast and Square bundling inventory features makes standalone solution less attractive",
+          "mitigation": "Focus on advanced ML capabilities they can't match, or become their AI layer via partnership"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "3-month cold start period before ML shows value kills adoption in price-sensitive market",
+          "mitigation": "Develop non-ML value props for first 90 days: waste tracking, supplier price comparison, basic reorder alerts"
+        },
+        {
+          "category": "execution",
+          "severity": "high",
+          "description": "Restaurants are notoriously difficult to sell to and retain",
+          "mitigation": "Partner with restaurant consultants, equipment vendors, or accounting firms for distribution"
+        },
+        {
+          "category": "technical",
+          "severity": "medium",
+          "description": "POS integration complexity and maintenance burden",
+          "mitigation": "Start with 1-2 POS systems, use standardized APIs where possible"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Interview all 3 pilot customers about POS integration preferences",
+        "Research Toast/Square partnership programs",
+        "Build basic waste tracking features for immediate value"
+      ],
+      "week5to8": [
+        "Develop non-ML onboarding value props",
+        "Begin Toast API integration",
+        "Create restaurant consultant partnership program"
+      ],
+      "week9to12": [
+        "Launch paid pilot with 5 restaurants",
+        "Test pricing sensitivity",
+        "Build supplier integration prototype"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Integration strategy with POS incumbents",
+        "options": [
+          {
+            "option": "Integrate as partner",
+            "tradeoff": "Faster adoption vs. margin compression and platform risk"
+          },
+          {
+            "option": "Build standalone",
+            "tradeoff": "Higher margins vs. much harder customer acquisition"
+          }
+        ],
+        "recommendation": "Integrate first - the distribution advantage outweighs margin concerns at this stage",
+        "deadline": "Week 4"
+      },
+      {
+        "priority": "critical",
+        "question": "Hero metric: waste reduction vs. cost savings",
+        "options": [
+          {
+            "option": "Focus on waste reduction",
+            "tradeoff": "Easier to measure and prove vs. lower dollar impact"
+          },
+          {
+            "option": "Focus on cost savings",
+            "tradeoff": "Higher ROI story vs. harder to attribute and prove"
+          }
+        ],
+        "recommendation": "Lead with waste reduction (measurable, immediate) but convert to cost savings story for retention",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "important",
+        "question": "Cold-start problem solution",
+        "options": [
+          {
+            "option": "Build non-ML features for first 90 days",
+            "tradeoff": "Immediate value vs. development resource allocation"
+          },
+          {
+            "option": "Seed with industry benchmarks",
+            "tradeoff": "Faster ML value vs. less accurate predictions"
+          }
+        ],
+        "recommendation": "Hybrid approach: basic benchmarks + immediate waste tracking features",
+        "deadline": "Week 6"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "baseline"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"Solid technical foundation but facing three major headwinds: POS incumbents expanding into your space, a 3-month value gap that kills adoption, and selling to the most software-resistant market segment. The business is viable if you solve the cold-start problem and choose integration over competition.\",\n    \"councilScore\": 52\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$4.2B global restaurant inventory management software market (Grand View Research 2023)\",\n      \"sam\": \"$800M US independent restaurant inventory software market (650K independent restaurants × $1,200 annual spend)\",\n      \"som\": \"$2.4M realistic year 1-2 market (1,000 restaurants × $2,400 annual)\",\n      \"methodology\": \"TAM from industry reports, SAM estimated from restaurant count × pricing, SOM assumes 0.15% market penetration\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"Toast\",\n        \"description\": \"POS system adding inventory management features\",\n        \"strength\": \"Already embedded in restaurant operations, massive distribution\",\n        \"weakness\": \"Inventory is secondary feature, not core competency\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Square for Restaurants\",\n        \"description\": \"POS with basic inventory tracking\",\n        \"strength\": \"Integrated ecosystem, familiar brand\",\n        \"weakness\": \"Limited ML capabilities, basic forecasting\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"MarketMan\",\n        \"description\": \"Restaurant inventory and procurement platform\",\n        \"strength\": \"Mature product, supplier network\",\n        \"weakness\": \"$300+/month pricing, targets larger operations\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"BlueCart\",\n        \"description\": \"B2B marketplace with inventory features\",\n        \"strength\": \"Supplier relationships, procurement focus\",\n        \"weakness\": \"Marketplace model, less ML sophistication\",\n        \"isDirectCompetitor\": false\n      }\n    ],\n    \"positioning\": \"The only AI-first inventory system built specifically for independent restaurants, not chains\",\n    \"timing\": \"Post-COVID focus on margins + labor shortage driving automation needs\",\n    \"gaps\": [\"Cold-start ML problem unsolved by competitors\", \"Independent restaurant-specific features missing from POS solutions\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Independent restaurants waste 15-20% of food inventory due to poor demand forecasting and manual ordering processes\",\n    \"targetCustomer\": \"Independent restaurant owners with $500K-$2M annual revenue, 2-5 locations max, currently using spreadsheets or basic POS inventory\",\n    \"uniqueAngle\": \"ML predictions that factor weather, local events, and seasonal patterns - not just historical sales\",\n    \"whyNow\": \"Rising food costs (up 25% since 2020) + labor shortage making manual inventory management unsustainable\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"SaaS subscription with potential transaction fees on automated supplier orders\",\n    \"pricingFramework\": \"$199/month justified by saving 10% on $15K monthly food costs = $1,500 monthly savings\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$800 (assuming 4-month sales cycle, $200/month blended acquisition cost)\",\n      \"estimatedLTV\": \"$4,776 (24-month average tenure × $199/month)\",\n      \"paybackPeriod\": \"4 months\",\n      \"confidence\": \"low\"\n    },\n    \"scalabilityAssessment\": \"Good margins once built, but high touch sales model limits scaling without enterprise pricing\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"POS integration\", \"Basic demand forecasting\", \"Automated order suggestions\", \"Waste tracking dashboard\"],\n    \"recommendedStack\": \"Python/Django backend, React frontend, PostgreSQL, AWS hosting, ML pipeline with scikit-learn/TensorFlow\",\n    \"buildVsBuy\": [\n      { \"component\": \"POS integrations\", \"recommendation\": \"buy\", \"rationale\": \"Use existing APIs rather than building connectors from scratch\" },\n      { \"component\": \"ML forecasting engine\", \"recommendation\": \"build\", \"rationale\": \"Core differentiation, need custom algorithms for restaurant-specific factors\" },\n      { \"component\": \"Supplier ordering\", \"recommendation\": \"buy\", \"rationale\": \"Partner with existing procurement platforms like Sysco or US Foods\" }\n    ],\n    \"technicalRisks\": [\"POS API rate limits and reliability\", \"ML model accuracy with limited data\", \"Real-time inventory sync challenges\"],\n    \"estimatedMvpTimeline\": \"4-5 months for production-ready version with 2-person team\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"critical\",\n        \"description\": \"Toast and Square bundling inventory features makes standalone solution less attractive\",\n        \"mitigation\": \"Focus on advanced ML capabilities they can't match, or become their AI layer via partnership\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"3-month cold start period before ML shows value kills adoption in price-sensitive market\",\n        \"mitigation\": \"Develop non-ML value props for first 90 days: waste tracking, supplier price comparison, basic reorder alerts\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"high\",\n        \"description\": \"Restaurants are notoriously difficult to sell to and retain\",\n        \"mitigation\": \"Partner with restaurant consultants, equipment vendors, or accounting firms for distribution\"\n      },\n      {\n        \"category\": \"technical\",\n        \"severity\": \"medium\",\n        \"description\": \"POS integration complexity and maintenance burden\",\n        \"mitigation\": \"Start with 1-2 POS systems, use standardized APIs where possible\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Interview all 3 pilot customers about POS integration preferences\", \"Research Toast/Square partnership programs\", \"Build basic waste tracking features for immediate value\"],\n    \"week5to8\": [\"Develop non-ML onboarding value props\", \"Begin Toast API integration\", \"Create restaurant consultant partnership program\"],\n    \"week9to12\": [\"Launch paid pilot with 5 restaurants\", \"Test pricing sensitivity\", \"Build supplier integration prototype\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Integration strategy with POS incumbents\",\n      \"options\": [\n        { \"option\": \"Integrate as partner\", \"tradeoff\": \"Faster adoption vs. margin compression and platform risk\" },\n        { \"option\": \"Build standalone\", \"tradeoff\": \"Higher margins vs. much harder customer acquisition\" }\n      ],\n      \"recommendation\": \"Integrate first - the distribution advantage outweighs margin concerns at this stage\",\n      \"deadline\": \"Week 4\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Hero metric: waste reduction vs. cost savings\",\n      \"options\": [\n        { \"option\": \"Focus on waste reduction\", \"tradeoff\": \"Easier to measure and prove vs. lower dollar impact\" },\n        { \"option\": \"Focus on cost savings\", \"tradeoff\": \"Higher ROI story vs. harder to attribute and prove\" }\n      ],\n      \"recommendation\": \"Lead with waste reduction (measurable, immediate) but convert to cost savings story for retention\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Cold-start problem solution\",\n      \"options\": [\n        { \"option\": \"Build non-ML features for first 90 days\", \"tradeoff\": \"Immediate value vs. development resource allocation\" },\n        { \"option\": \"Seed with industry benchmarks\", \"tradeoff\": \"Faster ML value vs. less accurate predictions\" }\n      ],\n      \"recommendation\": \"Hybrid approach: basic benchmarks + immediate waste tracking features\",\n      \"deadline\": \"Week 6\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"baseline\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}",
+  "error": null,
+  "timestamp": "2026-03-08T01:52:33.801Z"
+}

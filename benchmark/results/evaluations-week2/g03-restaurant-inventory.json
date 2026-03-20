@@ -1,0 +1,94 @@
+{
+  "promptId": "g03-restaurant-inventory",
+  "mapping": {
+    "A": "baseline",
+    "B": "council",
+    "C": "dual"
+  },
+  "timestamp": "2026-03-08T01:34:18.025Z",
+  "council": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good balance of optimism and realism",
+      "Clear identification of key risks",
+      "Practical mitigation strategies",
+      "Solid competitive landscape analysis",
+      "Reasonable unit economics estimates"
+    ],
+    "weaknesses": [
+      "Less specific on market sizing methodology",
+      "Action items are somewhat generic",
+      "Decision framework lacks urgency and deadlines",
+      "Limited technical depth on implementation",
+      "Some recommendations lack concrete next steps"
+    ],
+    "total": 18
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 3,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Comprehensive competitive analysis",
+      "Detailed technical feasibility assessment",
+      "Strong risk identification across multiple categories",
+      "Good integration of external factors (weather, events)",
+      "Thorough market context with post-COVID impacts"
+    ],
+    "weaknesses": [
+      "Unit economics seem pessimistic (12-18 month payback)",
+      "Some market size estimates appear inflated",
+      "Action plan timeline may be too aggressive",
+      "Pricing recommendations conflict with stated unit economics",
+      "Less decisive on key strategic choices"
+    ],
+    "total": 19
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 5,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific market sizing with clear methodology",
+      "Extremely actionable weekly plans",
+      "Strong decision framework with clear recommendations and deadlines",
+      "Realistic assessment of technical challenges",
+      "Concrete competitor analysis with specific strengths/weaknesses"
+    ],
+    "weaknesses": [
+      "Some market size estimates seem optimistic",
+      "Could provide more depth on ML technical implementation",
+      "Limited discussion of regulatory or compliance issues"
+    ],
+    "total": 22
+  },
+  "ranking": [
+    "baseline",
+    "dual",
+    "council"
+  ],
+  "rankingReason": "Output A provides the most actionable and decisive strategic guidance. It has the clearest decision framework with specific deadlines, most realistic unit economics, and most concrete action items. While Output C has good depth, its pessimistic unit economics and conflicting recommendations reduce trust. Output B is solid but less specific and actionable than A.",
+  "keyDifferences": [
+    "Output A is most decisive with clear recommendations and deadlines",
+    "Output C has most comprehensive risk analysis but conflicting financial projections",
+    "Output B takes middle ground but lacks specificity",
+    "Market sizing varies significantly across outputs ($2.4M vs $8M vs $65M SOM)",
+    "Unit economics range from optimistic (A: 4mo payback) to pessimistic (C: 12-18mo payback)",
+    "Technical implementation timelines differ (A: 4-5mo, B: 4-6mo, C: 4-6mo integrated)"
+  ],
+  "winner": "baseline"
+}

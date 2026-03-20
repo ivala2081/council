@@ -1,0 +1,53 @@
+{
+  "promptId": "g03-restaurant-inventory",
+  "outputA": {
+    "mode": "council",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific market sizing with clear methodology",
+      "Excellent decision agenda with concrete options and deadlines",
+      "Realistic assessment of competitive threats from Toast/Square",
+      "Actionable weekly plans with specific deliverables"
+    ],
+    "weaknesses": [
+      "Some market size numbers seem inconsistent (660K vs 400K restaurants)",
+      "Could provide more specific competitor pricing details"
+    ]
+  },
+  "outputB": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Clear focus on solving the ML cold-start problem",
+      "Good emphasis on cost savings over waste reduction messaging",
+      "Realistic timeline and technical approach",
+      "Strong competitive positioning against POS systems"
+    ],
+    "weaknesses": [
+      "Less specific market sizing methodology",
+      "Generic competitor analysis without deep insights",
+      "Decision agenda less comprehensive than Output A"
+    ]
+  },
+  "preference": "A",
+  "preferenceReason": "Output A provides more rigorous market analysis with specific methodologies, deeper competitive insights, and a more comprehensive decision framework. The decision agenda in Output A is particularly strong with clear deadlines and well-reasoned recommendations. While both outputs address the core challenges, Output A demonstrates deeper strategic thinking.",
+  "keyDifferences": [
+    "Output A provides more detailed market sizing with specific restaurant counts and methodologies",
+    "Output A has a more comprehensive decision agenda with three critical decisions vs two",
+    "Output B focuses more heavily on the ML cold-start problem as the primary risk",
+    "Output A provides more specific competitor weaknesses and positioning insights"
+  ],
+  "timestamp": "2026-03-08T01:16:10.629Z"
+}

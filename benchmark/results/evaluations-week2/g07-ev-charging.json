@@ -1,0 +1,88 @@
+{
+  "promptId": "g07-ev-charging",
+  "mapping": {
+    "A": "council",
+    "B": "dual",
+    "C": "baseline"
+  },
+  "timestamp": "2026-03-08T01:35:14.104Z",
+  "council": {
+    "scores": {
+      "specificity": 5,
+      "actionability": 5,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Extremely specific with real companies and concrete numbers",
+      "Highly actionable weekly tasks",
+      "Clear decision framework with specific recommendations",
+      "Realistic assessment of brutal rural unit economics",
+      "Strong competitive analysis with specific weaknesses"
+    ],
+    "weaknesses": [
+      "Some estimates may be overly optimistic",
+      "Could benefit from more technical risk detail"
+    ],
+    "total": 23
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 3,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good competitive landscape coverage",
+      "Realistic timeline estimates",
+      "Balanced risk assessment",
+      "Clear positioning strategy"
+    ],
+    "weaknesses": [
+      "Less specific on actionable next steps",
+      "Unit economics confidence marked as 'low' without clear path forward",
+      "Some generic advice mixed with specifics",
+      "Less decisive recommendations"
+    ],
+    "total": 18
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 3,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 3
+    },
+    "strengths": [
+      "Realistic market sizing methodology",
+      "Good technical feasibility breakdown",
+      "Honest about execution risks",
+      "Includes Shell Recharge as emerging competitor"
+    ],
+    "weaknesses": [
+      "Less specific actionable guidance",
+      "More conservative market estimates may be too pessimistic",
+      "Decision recommendations lack conviction",
+      "Generic strategic advice in places"
+    ],
+    "total": 16
+  },
+  "ranking": [
+    "council",
+    "dual",
+    "baseline"
+  ],
+  "rankingReason": "Output A provides the most actionable and specific guidance a founder could actually execute. It gives concrete numbers, specific highway corridors to target (I-80, I-40, I-10), exact utilization thresholds (15-20%), and decisive recommendations with clear deadlines. The competitive analysis is most detailed and the decision framework is most actionable. Output B is solid but less decisive, while Output C is more conservative and generic.",
+  "keyDifferences": [
+    "Output A is most decisive with specific highway recommendations and utilization targets",
+    "Output A provides most specific competitive intelligence and positioning",
+    "Output B focuses more on partnership dynamics but with less conviction",
+    "Output C is most conservative on market sizing and growth projections",
+    "Output A has clearest action items with specific deadlines and metrics"
+  ],
+  "winner": "council"
+}

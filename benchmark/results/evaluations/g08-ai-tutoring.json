@@ -1,0 +1,54 @@
+{
+  "promptId": "g08-ai-tutoring",
+  "outputA": {
+    "mode": "council",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific competitor analysis with real numbers (120M Khan Academy users, 200M+ Photomath downloads)",
+      "Clear decision framework with well-reasoned recommendations and deadlines",
+      "Realistic unit economics with honest confidence levels",
+      "Actionable weekly breakdown with concrete tasks"
+    ],
+    "weaknesses": [
+      "Some market sizing methodology could be more detailed",
+      "Technical risk assessment could be deeper on AI safety concerns"
+    ]
+  },
+  "outputB": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good competitor analysis with specific user numbers",
+      "Realistic assessment of budget constraints",
+      "Clear focus on Algebra 1 specialization",
+      "Honest about low confidence in unit economics"
+    ],
+    "weaknesses": [
+      "Less detailed decision framework compared to Output A",
+      "Shallower analysis of technical implementation details",
+      "Market sizing methodology less rigorous",
+      "Action plan items less specific than Output A"
+    ]
+  },
+  "preference": "A",
+  "preferenceReason": "Output A provides superior decision clarity with more detailed tradeoff analysis and specific deadlines. The decision agenda section is exceptionally well-structured with clear options, tradeoffs, and reasoned recommendations. While both outputs are quite similar in quality, Output A's decision framework would be more actionable for a real founder making critical early-stage choices.",
+  "keyDifferences": [
+    "Output A has more detailed decision agenda with specific deadlines and clearer tradeoff analysis",
+    "Output A provides more granular action plan items (e.g., 'Interview 20 parents' vs 'Validate demand with 50 parent interviews')",
+    "Output A includes more technical implementation details in the build vs buy analysis",
+    "Output B emphasizes family plans and has slightly different LTV calculations"
+  ],
+  "timestamp": "2026-03-08T01:17:10.972Z"
+}

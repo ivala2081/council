@@ -1,0 +1,224 @@
+{
+  "promptId": "g05-developer-docs",
+  "mode": "baseline",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 314,
+  "outputTokens": 2173,
+  "cacheReadTokens": 1227,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.0329631,
+  "durationMs": 44826,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "promising",
+      "summary": "Strong technical founder attacking a real pain point with differentiated AI approach. The code-sync angle is genuinely novel versus existing players. However, faces significant technical complexity and a historically difficult market where docs tooling competes with urgent priorities. Success hinges on nailing the AI accuracy and choosing the right initial wedge.",
+      "councilScore": 72
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$4.2B developer tools market (Evans Data Corp, 2023)",
+        "sam": "$800M documentation and collaboration tools for developers",
+        "som": "$15M realistic 2-year market (750 teams × $20K annual contracts)",
+        "methodology": "Bottom-up from target segment: 50K+ Series A-C startups with 10-100 dev teams, ~15% adoption ceiling for specialized tooling",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "GitBook",
+          "description": "Modern documentation platform with Git sync",
+          "strength": "Strong brand, good UX, Git integration",
+          "weakness": "No AI code understanding, manual sync process",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Mintlify",
+          "description": "AI-powered documentation generation",
+          "strength": "AI-first approach, growing fast",
+          "weakness": "Focused on static generation, not continuous sync",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "ReadMe",
+          "description": "API documentation platform",
+          "strength": "Strong in external API docs, enterprise sales",
+          "weakness": "Weak internal docs story, limited AI features",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Confluence",
+          "description": "Enterprise wiki and documentation",
+          "strength": "Massive install base, Atlassian ecosystem",
+          "weakness": "No code integration, painful UX for developers",
+          "isDirectCompetitor": false
+        }
+      ],
+      "positioning": "The only documentation platform that understands your codebase and keeps docs automatically in sync",
+      "timing": "AI code understanding just became feasible with LLMs; remote work increased documentation importance; developer productivity tools seeing increased investment",
+      "gaps": [
+        "True bidirectional code-docs sync",
+        "AI that understands architectural changes",
+        "Developer-first UX for internal documentation"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Documentation becomes stale within weeks of writing because manual updates don't scale with fast-moving codebases",
+      "targetCustomer": "Engineering managers at 50-500 person startups who are tired of onboarding taking 2+ weeks due to outdated internal docs",
+      "uniqueAngle": "AI agent that reads code diffs and proactively maintains documentation accuracy",
+      "whyNow": "LLMs can finally understand code semantics well enough to detect doc-breaking changes; GitHub Actions/webhooks make real-time monitoring feasible"
+    },
+    "businessModel": {
+      "revenueStrategy": "SaaS subscription with usage-based pricing tiers: Free (open source), Pro ($20/user/mo), Enterprise ($50/user/mo with advanced integrations)",
+      "pricingFramework": "$20/user/mo positions below Confluence ($6-12) but above pure doc tools - justified by AI value and developer time savings",
+      "unitEconomics": {
+        "estimatedCAC": "$400 (primarily product-led growth with some sales assist for 50+ user accounts)",
+        "estimatedLTV": "$4,800 (24-month retention, $20/user/mo average, 10 users per team)",
+        "paybackPeriod": "2 months",
+        "confidence": "medium"
+      },
+      "scalabilityAssessment": "High gross margins (85%+) but AI inference costs grow with usage. Need to optimize model efficiency and potentially build specialized code understanding models"
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "GitHub webhook integration",
+        "Diff analysis for breaking changes",
+        "Automated doc update suggestions",
+        "Basic markdown doc editing"
+      ],
+      "recommendedStack": "Next.js frontend, Python backend (FastAPI), PostgreSQL, Redis, OpenAI/Anthropic APIs, GitHub API",
+      "buildVsBuy": [
+        {
+          "component": "Code parsing",
+          "recommendation": "build",
+          "rationale": "Core differentiator, need custom logic for semantic change detection"
+        },
+        {
+          "component": "Document editor",
+          "recommendation": "buy",
+          "rationale": "Use TipTap or similar, focus on AI features"
+        },
+        {
+          "component": "User authentication",
+          "recommendation": "buy",
+          "rationale": "Auth0 or similar, not core value"
+        }
+      ],
+      "technicalRisks": [
+        "AI accuracy for complex architectural changes",
+        "GitHub API rate limiting at scale",
+        "Parsing accuracy across different programming languages"
+      ],
+      "estimatedMvpTimeline": "3-4 months for basic GitHub integration and change detection"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "technical",
+          "severity": "critical",
+          "description": "AI fails to accurately detect when code changes break documentation, leading to false positives/negatives",
+          "mitigation": "Start with narrow use cases (API endpoints, function signatures), build extensive test suite, implement confidence scoring"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Developers reject AI-generated documentation as untrustworthy or low-quality",
+          "mitigation": "Focus on flagging outdated docs rather than auto-rewriting, provide clear confidence indicators, allow easy human override"
+        },
+        {
+          "category": "competitive",
+          "severity": "high",
+          "description": "Mintlify or GitBook adds similar AI code-sync features",
+          "mitigation": "Move fast on technical moat, focus on superior accuracy, build switching costs through integrations"
+        },
+        {
+          "category": "financial",
+          "severity": "medium",
+          "description": "AI inference costs eat into margins as usage scales",
+          "mitigation": "Optimize prompts, cache results, consider training smaller specialized models, implement usage limits"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Build GitHub webhook MVP",
+        "Create basic diff analysis",
+        "Interview 20 potential customers",
+        "Apply to YC"
+      ],
+      "week5to8": [
+        "Implement change detection for API endpoints",
+        "Build simple doc update UI",
+        "Get first 5 beta users",
+        "Refine AI accuracy"
+      ],
+      "week9to12": [
+        "Add support for multiple doc formats",
+        "Implement team collaboration features",
+        "Launch public beta",
+        "Gather usage metrics and feedback"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Internal vs external documentation focus?",
+        "options": [
+          {
+            "option": "Internal docs",
+            "tradeoff": "Larger market, easier sales vs harder to measure ROI"
+          },
+          {
+            "option": "External API docs",
+            "tradeoff": "Clear value prop, easier to measure vs smaller market, more competition"
+          }
+        ],
+        "recommendation": "Start with internal docs - larger market, less competition, and your Stripe background gives credibility with engineering teams",
+        "deadline": "Week 1"
+      },
+      {
+        "priority": "critical",
+        "question": "VS Code extension vs web platform first?",
+        "options": [
+          {
+            "option": "VS Code extension",
+            "tradeoff": "Developer adoption, viral growth vs limited functionality, harder monetization"
+          },
+          {
+            "option": "Web platform",
+            "tradeoff": "Full feature set, team collaboration vs higher adoption friction"
+          }
+        ],
+        "recommendation": "Web platform first - you need team-level features for your pricing model, and docs are inherently collaborative",
+        "deadline": "Week 1"
+      },
+      {
+        "priority": "important",
+        "question": "YC application timing?",
+        "options": [
+          {
+            "option": "Apply this batch",
+            "tradeoff": "Accelerate fundraising, network vs pressure to move faster than optimal"
+          },
+          {
+            "option": "Wait for next batch",
+            "tradeoff": "More traction, better application vs delayed funding, competitive timing"
+          }
+        ],
+        "recommendation": "Apply this batch - your background is strong, and the AI docs space is moving fast. YC can help with customer introductions",
+        "deadline": "Week 2"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "baseline"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "```json\n{\n  \"executiveSummary\": {\n    \"verdict\": \"promising\",\n    \"summary\": \"Strong technical founder attacking a real pain point with differentiated AI approach. The code-sync angle is genuinely novel versus existing players. However, faces significant technical complexity and a historically difficult market where docs tooling competes with urgent priorities. Success hinges on nailing the AI accuracy and choosing the right initial wedge.\",\n    \"councilScore\": 72\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$4.2B developer tools market (Evans Data Corp, 2023)\",\n      \"sam\": \"$800M documentation and collaboration tools for developers\",\n      \"som\": \"$15M realistic 2-year market (750 teams × $20K annual contracts)\",\n      \"methodology\": \"Bottom-up from target segment: 50K+ Series A-C startups with 10-100 dev teams, ~15% adoption ceiling for specialized tooling\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"GitBook\",\n        \"description\": \"Modern documentation platform with Git sync\",\n        \"strength\": \"Strong brand, good UX, Git integration\",\n        \"weakness\": \"No AI code understanding, manual sync process\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Mintlify\",\n        \"description\": \"AI-powered documentation generation\",\n        \"strength\": \"AI-first approach, growing fast\",\n        \"weakness\": \"Focused on static generation, not continuous sync\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"ReadMe\",\n        \"description\": \"API documentation platform\",\n        \"strength\": \"Strong in external API docs, enterprise sales\",\n        \"weakness\": \"Weak internal docs story, limited AI features\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Confluence\",\n        \"description\": \"Enterprise wiki and documentation\",\n        \"strength\": \"Massive install base, Atlassian ecosystem\",\n        \"weakness\": \"No code integration, painful UX for developers\",\n        \"isDirectCompetitor\": false\n      }\n    ],\n    \"positioning\": \"The only documentation platform that understands your codebase and keeps docs automatically in sync\",\n    \"timing\": \"AI code understanding just became feasible with LLMs; remote work increased documentation importance; developer productivity tools seeing increased investment\",\n    \"gaps\": [\"True bidirectional code-docs sync\", \"AI that understands architectural changes\", \"Developer-first UX for internal documentation\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Documentation becomes stale within weeks of writing because manual updates don't scale with fast-moving codebases\",\n    \"targetCustomer\": \"Engineering managers at 50-500 person startups who are tired of onboarding taking 2+ weeks due to outdated internal docs\",\n    \"uniqueAngle\": \"AI agent that reads code diffs and proactively maintains documentation accuracy\",\n    \"whyNow\": \"LLMs can finally understand code semantics well enough to detect doc-breaking changes; GitHub Actions/webhooks make real-time monitoring feasible\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"SaaS subscription with usage-based pricing tiers: Free (open source), Pro ($20/user/mo), Enterprise ($50/user/mo with advanced integrations)\",\n    \"pricingFramework\": \"$20/user/mo positions below Confluence ($6-12) but above pure doc tools - justified by AI value and developer time savings\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$400 (primarily product-led growth with some sales assist for 50+ user accounts)\",\n      \"estimatedLTV\": \"$4,800 (24-month retention, $20/user/mo average, 10 users per team)\",\n      \"paybackPeriod\": \"2 months\",\n      \"confidence\": \"medium\"\n    },\n    \"scalabilityAssessment\": \"High gross margins (85%+) but AI inference costs grow with usage. Need to optimize model efficiency and potentially build specialized code understanding models\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"GitHub webhook integration\", \"Diff analysis for breaking changes\", \"Automated doc update suggestions\", \"Basic markdown doc editing\"],\n    \"recommendedStack\": \"Next.js frontend, Python backend (FastAPI), PostgreSQL, Redis, OpenAI/Anthropic APIs, GitHub API\",\n    \"buildVsBuy\": [\n      { \"component\": \"Code parsing\", \"recommendation\": \"build\", \"rationale\": \"Core differentiator, need custom logic for semantic change detection\" },\n      { \"component\": \"Document editor\", \"recommendation\": \"buy\", \"rationale\": \"Use TipTap or similar, focus on AI features\" },\n      { \"component\": \"User authentication\", \"recommendation\": \"buy\", \"rationale\": \"Auth0 or similar, not core value\" }\n    ],\n    \"technicalRisks\": [\"AI accuracy for complex architectural changes\", \"GitHub API rate limiting at scale\", \"Parsing accuracy across different programming languages\"],\n    \"estimatedMvpTimeline\": \"3-4 months for basic GitHub integration and change detection\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"technical\",\n        \"severity\": \"critical\",\n        \"description\": \"AI fails to accurately detect when code changes break documentation, leading to false positives/negatives\",\n        \"mitigation\": \"Start with narrow use cases (API endpoints, function signatures), build extensive test suite, implement confidence scoring\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\", \n        \"description\": \"Developers reject AI-generated documentation as untrustworthy or low-quality\",\n        \"mitigation\": \"Focus on flagging outdated docs rather than auto-rewriting, provide clear confidence indicators, allow easy human override\"\n      },\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"high\",\n        \"description\": \"Mintlify or GitBook adds similar AI code-sync features\",\n        \"mitigation\": \"Move fast on technical moat, focus on superior accuracy, build switching costs through integrations\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"medium\",\n        \"description\": \"AI inference costs eat into margins as usage scales\",\n        \"mitigation\": \"Optimize prompts, cache results, consider training smaller specialized models, implement usage limits\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Build GitHub webhook MVP\", \"Create basic diff analysis\", \"Interview 20 potential customers\", \"Apply to YC\"],\n    \"week5to8\": [\"Implement change detection for API endpoints\", \"Build simple doc update UI\", \"Get first 5 beta users\", \"Refine AI accuracy\"],\n    \"week9to12\": [\"Add support for multiple doc formats\", \"Implement team collaboration features\", \"Launch public beta\", \"Gather usage metrics and feedback\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Internal vs external documentation focus?\",\n      \"options\": [\n        { \"option\": \"Internal docs\", \"tradeoff\": \"Larger market, easier sales vs harder to measure ROI\" },\n        { \"option\": \"External API docs\", \"tradeoff\": \"Clear value prop, easier to measure vs smaller market, more competition\" }\n      ],\n      \"recommendation\": \"Start with internal docs - larger market, less competition, and your Stripe background gives credibility with engineering teams\",\n      \"deadline\": \"Week 1\"\n    },\n    {\n      \"priority\": \"critical\", \n      \"question\": \"VS Code extension vs web platform first?\",\n      \"options\": [\n        { \"option\": \"VS Code extension\", \"tradeoff\": \"Developer adoption, viral growth vs limited functionality, harder monetization\" },\n        { \"option\": \"Web platform\", \"tradeoff\": \"Full feature set, team collaboration vs higher adoption friction\" }\n      ],\n      \"recommendation\": \"Web platform first - you need team-level features for your pricing model, and docs are inherently collaborative\",\n      \"deadline\": \"Week 1\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"YC application timing?\",\n      \"options\": [\n        { \"option\": \"Apply this batch\", \"tradeoff\": \"Accelerate fundraising, network vs pressure to move faster than optimal\" },\n        { \"option\": \"Wait for next batch\", \"tradeoff\": \"More traction, better application vs delayed funding, competitive timing\" }\n      ],\n      \"recommendation\": \"Apply this batch - your background is strong, and the AI docs space is moving fast. YC can help with customer introductions\",\n      \"deadline\": \"Week 2\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"baseline\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}\n```",
+  "error": null,
+  "timestamp": "2026-03-08T01:55:37.222Z"
+}

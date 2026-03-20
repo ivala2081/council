@@ -1,0 +1,535 @@
+{
+  "promptId": "g02-sustainable-fashion",
+  "mode": "dual",
+  "triage": {
+    "output": {
+      "ideaType": "B2B2C Marketplace / Curated E-commerce Platform",
+      "queryType": "Strategic validation + go-to-market planning + build vs. buy decision",
+      "founderProfile": {
+        "teamSize": 2,
+        "technicalAbility": "High (co-founder is full-stack developer)",
+        "founderExperience": "Domain expert (8 years fashion retail marketing)",
+        "budget": "$40K",
+        "fundingStage": "Pre-seed, no external capital"
+      },
+      "extractedContext": {
+        "coreProblem": "Sustainable fashion brands lack a curated, trustworthy sales channel; conscious consumers struggle to find verified ethical options",
+        "targetMarket": "Conscious consumers + ethical fashion brands (SMEs)",
+        "solution": "Curated marketplace with strict sustainability vetting; positioning as premium alternative to open marketplaces",
+        "revenueModel": "15% commission + $99/month brand listing fee",
+        "statedConcerns": [
+          "Competitive threat from existing marketplaces adding sustainability filters",
+          "Thin margins in sustainable fashion reducing brand willingness to pay 15% commission",
+          "High customer acquisition costs in e-commerce"
+        ],
+        "openDecisions": [
+          "Build custom platform vs. use Shopify marketplace tools",
+          "Launch with 10 brands (quality-focused) vs. 100 brands (scale-focused)"
+        ],
+        "constraints": [
+          "Limited budget ($40K)",
+          "No external funding",
+          "Founder is non-technical (though co-founder can build)"
+        ]
+      },
+      "sectionPriorities": {
+        "businessModel": "detailed",
+        "marketAnalysis": "detailed",
+        "competitiveStrategy": "detailed",
+        "technicalFeasibility": "standard",
+        "decisionAgenda": "detailed",
+        "goToMarket": "detailed"
+      },
+      "keyQuestions": [
+        "What is the actual willingness-to-pay for sustainable fashion brands? Does 15% commission + $99/mo align with their unit economics, or will you face adoption resistance?",
+        "How defensible is curation as a moat? If Amazon/Etsy add sustainability filters, what prevents commoditization of your value proposition?",
+        "What is the unit economics of customer acquisition for conscious consumers? Can you achieve profitability at scale given e-commerce CAC benchmarks?",
+        "Should you launch with 10 hand-curated brands (build trust, prove model) or 100 brands (demonstrate scale, improve unit economics)? What's the minimum viable supply-side to attract demand?",
+        "Is a custom build justified at $40K budget, or does Shopify marketplace reduce time-to-market and allow capital reallocation to customer acquisition?"
+      ],
+      "language": "en"
+    },
+    "rawText": "```json\n{\n  \"ideaType\": \"B2B2C Marketplace / Curated E-commerce Platform\",\n  \"queryType\": \"Strategic validation + go-to-market planning + build vs. buy decision\",\n  \"founderProfile\": {\n    \"teamSize\": 2,\n    \"technicalAbility\": \"High (co-founder is full-stack developer)\",\n    \"founderExperience\": \"Domain expert (8 years fashion retail marketing)\",\n    \"budget\": \"$40K\",\n    \"fundingStage\": \"Pre-seed, no external capital\"\n  },\n  \"extractedContext\": {\n    \"coreProblem\": \"Sustainable fashion brands lack a curated, trustworthy sales channel; conscious consumers struggle to find verified ethical options\",\n    \"targetMarket\": \"Conscious consumers + ethical fashion brands (SMEs)\",\n    \"solution\": \"Curated marketplace with strict sustainability vetting; positioning as premium alternative to open marketplaces\",\n    \"revenueModel\": \"15% commission + $99/month brand listing fee\",\n    \"statedConcerns\": [\n      \"Competitive threat from existing marketplaces adding sustainability filters\",\n      \"Thin margins in sustainable fashion reducing brand willingness to pay 15% commission\",\n      \"High customer acquisition costs in e-commerce\"\n    ],\n    \"openDecisions\": [\n      \"Build custom platform vs. use Shopify marketplace tools\",\n      \"Launch with 10 brands (quality-focused) vs. 100 brands (scale-focused)\"\n    ],\n    \"constraints\": [\n      \"Limited budget ($40K)\",\n      \"No external funding\",\n      \"Founder is non-technical (though co-founder can build)\"\n    ]\n  },\n  \"sectionPriorities\": {\n    \"businessModel\": \"detailed\",\n    \"marketAnalysis\": \"detailed\",\n    \"competitiveStrategy\": \"detailed\",\n    \"technicalFeasibility\": \"standard\",\n    \"decisionAgenda\": \"detailed\",\n    \"goToMarket\": \"detailed\"\n  },\n  \"keyQuestions\": [\n    \"What is the actual willingness-to-pay for sustainable fashion brands? Does 15% commission + $99/mo align with their unit economics, or will you face adoption resistance?\",\n    \"How defensible is curation as a moat? If Amazon/Etsy add sustainability filters, what prevents commoditization of your value proposition?\",\n    \"What is the unit economics of customer acquisition for conscious consumers? Can you achieve profitability at scale given e-commerce CAC benchmarks?\",\n    \"Should you launch with 10 hand-curated brands (build trust, prove model) or 100 brands (demonstrate scale, improve unit economics)? What's the minimum viable supply-side to attract demand?\",\n    \"Is a custom build justified at $40K budget, or does Shopify marketplace reduce time-to-market and allow capital reallocation to customer acquisition?\"\n  ],\n  \"language\": \"en\"\n}\n```",
+    "model": "claude-haiku-4-5-20251001",
+    "inputTokens": 516,
+    "outputTokens": 698,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0032048000000000003,
+    "durationMs": 6461
+  },
+  "strategist": {
+    "brief": {
+      "executiveSummary": {
+        "verdict": "risky",
+        "summary": "Your sustainable fashion marketplace faces significant structural challenges: thin margins in sustainable fashion make your 15% commission + $99/mo fee potentially prohibitive, established players like Etsy and Amazon are already adding sustainability filters, and customer acquisition costs in fashion e-commerce average $50-150. However, your fashion industry experience and the growing conscious consumer segment (25% CAGR) create a narrow window if you can solve the unit economics puzzle.",
+        "councilScore": 52
+      },
+      "marketAnalysis": {
+        "marketSize": {
+          "tam": "$15B global sustainable fashion market (McKinsey, 2023)",
+          "sam": "$3B US conscious consumers willing to pay premium for sustainable fashion",
+          "som": "$50M realistic addressable market for curated marketplace (assuming 3-5% market penetration)",
+          "methodology": "Based on 15% of US fashion market ($200B) being sustainability-conscious, with 10-15% willing to use specialized platforms",
+          "confidence": "medium"
+        },
+        "competitors": [
+          {
+            "name": "The Yes",
+            "description": "Curated sustainable fashion marketplace backed by major VCs",
+            "strength": "Strong curation, established brand relationships",
+            "weakness": "High-end focus, limited mid-market penetration",
+            "isDirectCompetitor": true
+          },
+          {
+            "name": "Etsy",
+            "description": "Handmade/vintage marketplace with growing sustainability category",
+            "strength": "Massive user base, low customer acquisition cost",
+            "weakness": "Quality inconsistency, not fashion-focused",
+            "isDirectCompetitor": false
+          },
+          {
+            "name": "Reformation",
+            "description": "Direct-to-consumer sustainable fashion brand",
+            "strength": "Strong brand, proven sustainable fashion business model",
+            "weakness": "Single brand, not a marketplace",
+            "isDirectCompetitor": false
+          },
+          {
+            "name": "Farfetch",
+            "description": "Luxury fashion marketplace adding sustainability filters",
+            "strength": "Established luxury relationships, proven marketplace model",
+            "weakness": "Luxury focus, not sustainability-first",
+            "isDirectCompetitor": false
+          }
+        ],
+        "positioning": "The trusted curator for mid-market sustainable fashion brands seeking conscious consumers who value authenticity over luxury",
+        "timing": "Gen Z and millennial spending power is peaking, sustainability regulations are increasing brand compliance costs, making third-party verification valuable",
+        "gaps": [
+          "Mid-market sustainable brands lack dedicated sales channels",
+          "Consumers struggle with greenwashing verification"
+        ]
+      },
+      "valueProposition": {
+        "coreProblem": "Sustainable fashion brands struggle with customer acquisition while conscious consumers can't trust sustainability claims without verification",
+        "targetCustomer": "Women 25-45, household income $75K+, shop sustainable brands 3+ times per year, frustrated by greenwashing",
+        "uniqueAngle": "Strict sustainability verification process combined with fashion industry insider curation",
+        "whyNow": "ESG reporting requirements make sustainability verification more valuable to brands, consumer skepticism of greenwashing is at all-time high"
+      },
+      "businessModel": {
+        "revenueStrategy": "Commission-based marketplace with subscription component for predictable revenue",
+        "pricingFramework": "Start with 10% commission + $49/mo to improve adoption, increase to 15% + $99/mo after proving value",
+        "unitEconomics": {
+          "estimatedCAC": "$75-120 for conscious consumers (fashion e-commerce average), $500-1000 for brand acquisition",
+          "estimatedLTV": "$180-250 customer LTV based on 3-4 purchases/year at $60 average order value",
+          "paybackPeriod": "12-18 months for consumers, 6-12 months for brands",
+          "confidence": "low"
+        },
+        "scalabilityAssessment": "At 10x scale, curation becomes bottleneck unless systematized. Network effects weak until 50+ brands and 10K+ active customers."
+      },
+      "technicalFeasibility": {
+        "mvpScope": [
+          "Basic marketplace with brand profiles",
+          "Simple checkout and payment processing",
+          "Brand application and approval workflow",
+          "Basic search and filtering"
+        ],
+        "recommendedStack": "Shopify Plus marketplace solution for MVP, migrate to custom Rails/React if proven",
+        "buildVsBuy": [
+          {
+            "component": "Core marketplace functionality",
+            "recommendation": "buy",
+            "rationale": "Shopify Plus costs $2K/mo but saves 4-6 months development time, critical given budget constraints"
+          },
+          {
+            "component": "Brand verification system",
+            "recommendation": "build",
+            "rationale": "Core differentiator that requires custom logic for sustainability criteria"
+          },
+          {
+            "component": "Payment processing",
+            "recommendation": "buy",
+            "rationale": "Stripe Connect handles marketplace payments, regulatory compliance included"
+          }
+        ],
+        "technicalRisks": [
+          "Custom verification system complexity",
+          "Shopify marketplace limitations as you scale",
+          "Payment processing compliance for marketplace"
+        ],
+        "estimatedMvpTimeline": "3-4 months with Shopify Plus, 8-12 months custom build"
+      },
+      "riskAssessment": {
+        "risks": [
+          {
+            "category": "market",
+            "severity": "critical",
+            "description": "Established marketplaces like Etsy and Amazon adding sustainability filters eliminates your differentiation",
+            "mitigation": "Build deep brand relationships and exclusive partnerships that can't be replicated by algorithms"
+          },
+          {
+            "category": "financial",
+            "severity": "high",
+            "description": "15% commission + $99/mo may be too expensive for sustainable fashion brands with 40-50% gross margins",
+            "mitigation": "Survey 20 target brands about pricing sensitivity before launch, consider tiered pricing"
+          },
+          {
+            "category": "execution",
+            "severity": "high",
+            "description": "Customer acquisition costs in fashion e-commerce ($75-150) may exceed customer lifetime value",
+            "mitigation": "Focus on organic growth through brand partnerships and influencer marketing rather than paid acquisition"
+          },
+          {
+            "category": "competitive",
+            "severity": "medium",
+            "description": "Venture-backed competitors like The Yes have deeper pockets for brand acquisition and marketing",
+            "mitigation": "Focus on underserved mid-market segment where you can compete on personal relationships"
+          }
+        ]
+      },
+      "actionPlan": {
+        "week1to4": [
+          "Survey 20 sustainable fashion brands about commission sensitivity and marketplace needs",
+          "Interview 50 conscious consumers about shopping behavior and platform preferences",
+          "Set up basic Shopify Plus marketplace instance"
+        ],
+        "week5to8": [
+          "Recruit first 5 brands with personal relationships from fashion industry",
+          "Build brand application and verification workflow",
+          "Create content marketing strategy targeting conscious consumers"
+        ],
+        "week9to12": [
+          "Launch with 5-10 carefully curated brands",
+          "Implement basic analytics tracking for conversion rates",
+          "Test customer acquisition channels: Instagram, Pinterest, sustainable fashion blogs"
+        ]
+      },
+      "decisionAgenda": [
+        {
+          "priority": "critical",
+          "question": "What commission rate and monthly fee can sustainable fashion brands actually afford?",
+          "options": [
+            {
+              "option": "15% + $99/mo (original plan)",
+              "tradeoff": "Higher revenue per brand vs. potential adoption resistance"
+            },
+            {
+              "option": "10% + $49/mo (market entry)",
+              "tradeoff": "Better adoption vs. lower unit economics"
+            },
+            {
+              "option": "Tiered pricing based on brand size",
+              "tradeoff": "Complexity vs. broader market appeal"
+            }
+          ],
+          "recommendation": "Start with 10% + $49/mo to prove value, then increase pricing for new brands after demonstrating ROI",
+          "deadline": "Week 2"
+        },
+        {
+          "priority": "critical",
+          "question": "Should you build custom platform or use Shopify Plus marketplace?",
+          "options": [
+            {
+              "option": "Custom build",
+              "tradeoff": "Full control and differentiation vs. 8-12 month timeline and higher costs"
+            },
+            {
+              "option": "Shopify Plus",
+              "tradeoff": "Faster launch and lower costs vs. platform limitations and ongoing fees"
+            }
+          ],
+          "recommendation": "Use Shopify Plus for MVP to preserve capital for customer acquisition, migrate later if proven",
+          "deadline": "Week 1"
+        },
+        {
+          "priority": "important",
+          "question": "Launch with 10 brands (quality) or 100 brands (scale)?",
+          "options": [
+            {
+              "option": "10 hand-curated brands",
+              "tradeoff": "Higher quality and trust vs. limited selection and inventory risk"
+            },
+            {
+              "option": "100 brands for scale",
+              "tradeoff": "Better selection and inventory vs. curation quality concerns"
+            }
+          ],
+          "recommendation": "Start with 10 exceptional brands to establish trust and prove curation value, expand to 50 within 6 months",
+          "deadline": "Week 3"
+        },
+        {
+          "priority": "important",
+          "question": "What customer acquisition strategy can work within your budget constraints?",
+          "options": [
+            {
+              "option": "Paid social media advertising",
+              "tradeoff": "Scalable reach vs. high CAC ($75-150)"
+            },
+            {
+              "option": "Influencer partnerships and content marketing",
+              "tradeoff": "Lower costs and higher trust vs. slower scaling"
+            },
+            {
+              "option": "Brand partnership co-marketing",
+              "tradeoff": "Leveraged reach vs. dependency on brand relationships"
+            }
+          ],
+          "recommendation": "Focus on influencer partnerships and brand co-marketing to minimize cash burn while building authentic audience",
+          "deadline": "Week 4"
+        }
+      ],
+      "metadata": {
+        "pipelineMode": "single",
+        "agentsUsed": [
+          "strategist"
+        ],
+        "totalTokens": 0,
+        "totalCostUsd": 0,
+        "durationMs": 0,
+        "language": "en"
+      }
+    },
+    "rawText": "{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"Your sustainable fashion marketplace faces significant structural challenges: thin margins in sustainable fashion make your 15% commission + $99/mo fee potentially prohibitive, established players like Etsy and Amazon are already adding sustainability filters, and customer acquisition costs in fashion e-commerce average $50-150. However, your fashion industry experience and the growing conscious consumer segment (25% CAGR) create a narrow window if you can solve the unit economics puzzle.\",\n    \"councilScore\": 52\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$15B global sustainable fashion market (McKinsey, 2023)\",\n      \"sam\": \"$3B US conscious consumers willing to pay premium for sustainable fashion\",\n      \"som\": \"$50M realistic addressable market for curated marketplace (assuming 3-5% market penetration)\",\n      \"methodology\": \"Based on 15% of US fashion market ($200B) being sustainability-conscious, with 10-15% willing to use specialized platforms\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"The Yes\",\n        \"description\": \"Curated sustainable fashion marketplace backed by major VCs\",\n        \"strength\": \"Strong curation, established brand relationships\",\n        \"weakness\": \"High-end focus, limited mid-market penetration\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Etsy\",\n        \"description\": \"Handmade/vintage marketplace with growing sustainability category\",\n        \"strength\": \"Massive user base, low customer acquisition cost\",\n        \"weakness\": \"Quality inconsistency, not fashion-focused\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Reformation\",\n        \"description\": \"Direct-to-consumer sustainable fashion brand\",\n        \"strength\": \"Strong brand, proven sustainable fashion business model\",\n        \"weakness\": \"Single brand, not a marketplace\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Farfetch\",\n        \"description\": \"Luxury fashion marketplace adding sustainability filters\",\n        \"strength\": \"Established luxury relationships, proven marketplace model\",\n        \"weakness\": \"Luxury focus, not sustainability-first\",\n        \"isDirectCompetitor\": false\n      }\n    ],\n    \"positioning\": \"The trusted curator for mid-market sustainable fashion brands seeking conscious consumers who value authenticity over luxury\",\n    \"timing\": \"Gen Z and millennial spending power is peaking, sustainability regulations are increasing brand compliance costs, making third-party verification valuable\",\n    \"gaps\": [\"Mid-market sustainable brands lack dedicated sales channels\", \"Consumers struggle with greenwashing verification\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Sustainable fashion brands struggle with customer acquisition while conscious consumers can't trust sustainability claims without verification\",\n    \"targetCustomer\": \"Women 25-45, household income $75K+, shop sustainable brands 3+ times per year, frustrated by greenwashing\",\n    \"uniqueAngle\": \"Strict sustainability verification process combined with fashion industry insider curation\",\n    \"whyNow\": \"ESG reporting requirements make sustainability verification more valuable to brands, consumer skepticism of greenwashing is at all-time high\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Commission-based marketplace with subscription component for predictable revenue\",\n    \"pricingFramework\": \"Start with 10% commission + $49/mo to improve adoption, increase to 15% + $99/mo after proving value\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$75-120 for conscious consumers (fashion e-commerce average), $500-1000 for brand acquisition\",\n      \"estimatedLTV\": \"$180-250 customer LTV based on 3-4 purchases/year at $60 average order value\",\n      \"paybackPeriod\": \"12-18 months for consumers, 6-12 months for brands\",\n      \"confidence\": \"low\"\n    },\n    \"scalabilityAssessment\": \"At 10x scale, curation becomes bottleneck unless systematized. Network effects weak until 50+ brands and 10K+ active customers.\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Basic marketplace with brand profiles\", \"Simple checkout and payment processing\", \"Brand application and approval workflow\", \"Basic search and filtering\"],\n    \"recommendedStack\": \"Shopify Plus marketplace solution for MVP, migrate to custom Rails/React if proven\",\n    \"buildVsBuy\": [\n      {\n        \"component\": \"Core marketplace functionality\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"Shopify Plus costs $2K/mo but saves 4-6 months development time, critical given budget constraints\"\n      },\n      {\n        \"component\": \"Brand verification system\",\n        \"recommendation\": \"build\",\n        \"rationale\": \"Core differentiator that requires custom logic for sustainability criteria\"\n      },\n      {\n        \"component\": \"Payment processing\",\n        \"recommendation\": \"buy\",\n        \"rationale\": \"Stripe Connect handles marketplace payments, regulatory compliance included\"\n      }\n    ],\n    \"technicalRisks\": [\"Custom verification system complexity\", \"Shopify marketplace limitations as you scale\", \"Payment processing compliance for marketplace\"],\n    \"estimatedMvpTimeline\": \"3-4 months with Shopify Plus, 8-12 months custom build\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"market\",\n        \"severity\": \"critical\",\n        \"description\": \"Established marketplaces like Etsy and Amazon adding sustainability filters eliminates your differentiation\",\n        \"mitigation\": \"Build deep brand relationships and exclusive partnerships that can't be replicated by algorithms\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"high\",\n        \"description\": \"15% commission + $99/mo may be too expensive for sustainable fashion brands with 40-50% gross margins\",\n        \"mitigation\": \"Survey 20 target brands about pricing sensitivity before launch, consider tiered pricing\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"high\",\n        \"description\": \"Customer acquisition costs in fashion e-commerce ($75-150) may exceed customer lifetime value\",\n        \"mitigation\": \"Focus on organic growth through brand partnerships and influencer marketing rather than paid acquisition\"\n      },\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"medium\",\n        \"description\": \"Venture-backed competitors like The Yes have deeper pockets for brand acquisition and marketing\",\n        \"mitigation\": \"Focus on underserved mid-market segment where you can compete on personal relationships\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Survey 20 sustainable fashion brands about commission sensitivity and marketplace needs\", \"Interview 50 conscious consumers about shopping behavior and platform preferences\", \"Set up basic Shopify Plus marketplace instance\"],\n    \"week5to8\": [\"Recruit first 5 brands with personal relationships from fashion industry\", \"Build brand application and verification workflow\", \"Create content marketing strategy targeting conscious consumers\"],\n    \"week9to12\": [\"Launch with 5-10 carefully curated brands\", \"Implement basic analytics tracking for conversion rates\", \"Test customer acquisition channels: Instagram, Pinterest, sustainable fashion blogs\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"What commission rate and monthly fee can sustainable fashion brands actually afford?\",\n      \"options\": [\n        { \"option\": \"15% + $99/mo (original plan)\", \"tradeoff\": \"Higher revenue per brand vs. potential adoption resistance\" },\n        { \"option\": \"10% + $49/mo (market entry)\", \"tradeoff\": \"Better adoption vs. lower unit economics\" },\n        { \"option\": \"Tiered pricing based on brand size\", \"tradeoff\": \"Complexity vs. broader market appeal\" }\n      ],\n      \"recommendation\": \"Start with 10% + $49/mo to prove value, then increase pricing for new brands after demonstrating ROI\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Should you build custom platform or use Shopify Plus marketplace?\",\n      \"options\": [\n        { \"option\": \"Custom build\", \"tradeoff\": \"Full control and differentiation vs. 8-12 month timeline and higher costs\" },\n        { \"option\": \"Shopify Plus\", \"tradeoff\": \"Faster launch and lower costs vs. platform limitations and ongoing fees\" }\n      ],\n      \"recommendation\": \"Use Shopify Plus for MVP to preserve capital for customer acquisition, migrate later if proven\",\n      \"deadline\": \"Week 1\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Launch with 10 brands (quality) or 100 brands (scale)?\",\n      \"options\": [\n        { \"option\": \"10 hand-curated brands\", \"tradeoff\": \"Higher quality and trust vs. limited selection and inventory risk\" },\n        { \"option\": \"100 brands for scale\", \"tradeoff\": \"Better selection and inventory vs. curation quality concerns\" }\n      ],\n      \"recommendation\": \"Start with 10 exceptional brands to establish trust and prove curation value, expand to 50 within 6 months\",\n      \"deadline\": \"Week 3\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"What customer acquisition strategy can work within your budget constraints?\",\n      \"options\": [\n        { \"option\": \"Paid social media advertising\", \"tradeoff\": \"Scalable reach vs. high CAC ($75-150)\" },\n        { \"option\": \"Influencer partnerships and content marketing\", \"tradeoff\": \"Lower costs and higher trust vs. slower scaling\" },\n        { \"option\": \"Brand partnership co-marketing\", \"tradeoff\": \"Leveraged reach vs. dependency on brand relationships\" }\n      ],\n      \"recommendation\": \"Focus on influencer partnerships and brand co-marketing to minimize cash burn while building authentic audience\",\n      \"deadline\": \"Week 4\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"strategist\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}",
+    "model": "claude-sonnet-4-20250514",
+    "inputTokens": 785,
+    "outputTokens": 2496,
+    "cacheReadTokens": 1409,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0378627,
+    "durationMs": 48105
+  },
+  "totalCostUsd": 0.0410675,
+  "totalDurationMs": 54566,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "Your sustainable fashion marketplace faces significant structural challenges: thin margins in sustainable fashion make your 15% commission + $99/mo fee potentially prohibitive, established players like Etsy and Amazon are already adding sustainability filters, and customer acquisition costs in fashion e-commerce average $50-150. However, your fashion industry experience and the growing conscious consumer segment (25% CAGR) create a narrow window if you can solve the unit economics puzzle.",
+      "councilScore": 52
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$15B global sustainable fashion market (McKinsey, 2023)",
+        "sam": "$3B US conscious consumers willing to pay premium for sustainable fashion",
+        "som": "$50M realistic addressable market for curated marketplace (assuming 3-5% market penetration)",
+        "methodology": "Based on 15% of US fashion market ($200B) being sustainability-conscious, with 10-15% willing to use specialized platforms",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "The Yes",
+          "description": "Curated sustainable fashion marketplace backed by major VCs",
+          "strength": "Strong curation, established brand relationships",
+          "weakness": "High-end focus, limited mid-market penetration",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Etsy",
+          "description": "Handmade/vintage marketplace with growing sustainability category",
+          "strength": "Massive user base, low customer acquisition cost",
+          "weakness": "Quality inconsistency, not fashion-focused",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Reformation",
+          "description": "Direct-to-consumer sustainable fashion brand",
+          "strength": "Strong brand, proven sustainable fashion business model",
+          "weakness": "Single brand, not a marketplace",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Farfetch",
+          "description": "Luxury fashion marketplace adding sustainability filters",
+          "strength": "Established luxury relationships, proven marketplace model",
+          "weakness": "Luxury focus, not sustainability-first",
+          "isDirectCompetitor": false
+        }
+      ],
+      "positioning": "The trusted curator for mid-market sustainable fashion brands seeking conscious consumers who value authenticity over luxury",
+      "timing": "Gen Z and millennial spending power is peaking, sustainability regulations are increasing brand compliance costs, making third-party verification valuable",
+      "gaps": [
+        "Mid-market sustainable brands lack dedicated sales channels",
+        "Consumers struggle with greenwashing verification"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Sustainable fashion brands struggle with customer acquisition while conscious consumers can't trust sustainability claims without verification",
+      "targetCustomer": "Women 25-45, household income $75K+, shop sustainable brands 3+ times per year, frustrated by greenwashing",
+      "uniqueAngle": "Strict sustainability verification process combined with fashion industry insider curation",
+      "whyNow": "ESG reporting requirements make sustainability verification more valuable to brands, consumer skepticism of greenwashing is at all-time high"
+    },
+    "businessModel": {
+      "revenueStrategy": "Commission-based marketplace with subscription component for predictable revenue",
+      "pricingFramework": "Start with 10% commission + $49/mo to improve adoption, increase to 15% + $99/mo after proving value",
+      "unitEconomics": {
+        "estimatedCAC": "$75-120 for conscious consumers (fashion e-commerce average), $500-1000 for brand acquisition",
+        "estimatedLTV": "$180-250 customer LTV based on 3-4 purchases/year at $60 average order value",
+        "paybackPeriod": "12-18 months for consumers, 6-12 months for brands",
+        "confidence": "low"
+      },
+      "scalabilityAssessment": "At 10x scale, curation becomes bottleneck unless systematized. Network effects weak until 50+ brands and 10K+ active customers."
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Basic marketplace with brand profiles",
+        "Simple checkout and payment processing",
+        "Brand application and approval workflow",
+        "Basic search and filtering"
+      ],
+      "recommendedStack": "Shopify Plus marketplace solution for MVP, migrate to custom Rails/React if proven",
+      "buildVsBuy": [
+        {
+          "component": "Core marketplace functionality",
+          "recommendation": "buy",
+          "rationale": "Shopify Plus costs $2K/mo but saves 4-6 months development time, critical given budget constraints"
+        },
+        {
+          "component": "Brand verification system",
+          "recommendation": "build",
+          "rationale": "Core differentiator that requires custom logic for sustainability criteria"
+        },
+        {
+          "component": "Payment processing",
+          "recommendation": "buy",
+          "rationale": "Stripe Connect handles marketplace payments, regulatory compliance included"
+        }
+      ],
+      "technicalRisks": [
+        "Custom verification system complexity",
+        "Shopify marketplace limitations as you scale",
+        "Payment processing compliance for marketplace"
+      ],
+      "estimatedMvpTimeline": "3-4 months with Shopify Plus, 8-12 months custom build"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "market",
+          "severity": "critical",
+          "description": "Established marketplaces like Etsy and Amazon adding sustainability filters eliminates your differentiation",
+          "mitigation": "Build deep brand relationships and exclusive partnerships that can't be replicated by algorithms"
+        },
+        {
+          "category": "financial",
+          "severity": "high",
+          "description": "15% commission + $99/mo may be too expensive for sustainable fashion brands with 40-50% gross margins",
+          "mitigation": "Survey 20 target brands about pricing sensitivity before launch, consider tiered pricing"
+        },
+        {
+          "category": "execution",
+          "severity": "high",
+          "description": "Customer acquisition costs in fashion e-commerce ($75-150) may exceed customer lifetime value",
+          "mitigation": "Focus on organic growth through brand partnerships and influencer marketing rather than paid acquisition"
+        },
+        {
+          "category": "competitive",
+          "severity": "medium",
+          "description": "Venture-backed competitors like The Yes have deeper pockets for brand acquisition and marketing",
+          "mitigation": "Focus on underserved mid-market segment where you can compete on personal relationships"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Survey 20 sustainable fashion brands about commission sensitivity and marketplace needs",
+        "Interview 50 conscious consumers about shopping behavior and platform preferences",
+        "Set up basic Shopify Plus marketplace instance"
+      ],
+      "week5to8": [
+        "Recruit first 5 brands with personal relationships from fashion industry",
+        "Build brand application and verification workflow",
+        "Create content marketing strategy targeting conscious consumers"
+      ],
+      "week9to12": [
+        "Launch with 5-10 carefully curated brands",
+        "Implement basic analytics tracking for conversion rates",
+        "Test customer acquisition channels: Instagram, Pinterest, sustainable fashion blogs"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "What commission rate and monthly fee can sustainable fashion brands actually afford?",
+        "options": [
+          {
+            "option": "15% + $99/mo (original plan)",
+            "tradeoff": "Higher revenue per brand vs. potential adoption resistance"
+          },
+          {
+            "option": "10% + $49/mo (market entry)",
+            "tradeoff": "Better adoption vs. lower unit economics"
+          },
+          {
+            "option": "Tiered pricing based on brand size",
+            "tradeoff": "Complexity vs. broader market appeal"
+          }
+        ],
+        "recommendation": "Start with 10% + $49/mo to prove value, then increase pricing for new brands after demonstrating ROI",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "critical",
+        "question": "Should you build custom platform or use Shopify Plus marketplace?",
+        "options": [
+          {
+            "option": "Custom build",
+            "tradeoff": "Full control and differentiation vs. 8-12 month timeline and higher costs"
+          },
+          {
+            "option": "Shopify Plus",
+            "tradeoff": "Faster launch and lower costs vs. platform limitations and ongoing fees"
+          }
+        ],
+        "recommendation": "Use Shopify Plus for MVP to preserve capital for customer acquisition, migrate later if proven",
+        "deadline": "Week 1"
+      },
+      {
+        "priority": "important",
+        "question": "Launch with 10 brands (quality) or 100 brands (scale)?",
+        "options": [
+          {
+            "option": "10 hand-curated brands",
+            "tradeoff": "Higher quality and trust vs. limited selection and inventory risk"
+          },
+          {
+            "option": "100 brands for scale",
+            "tradeoff": "Better selection and inventory vs. curation quality concerns"
+          }
+        ],
+        "recommendation": "Start with 10 exceptional brands to establish trust and prove curation value, expand to 50 within 6 months",
+        "deadline": "Week 3"
+      },
+      {
+        "priority": "important",
+        "question": "What customer acquisition strategy can work within your budget constraints?",
+        "options": [
+          {
+            "option": "Paid social media advertising",
+            "tradeoff": "Scalable reach vs. high CAC ($75-150)"
+          },
+          {
+            "option": "Influencer partnerships and content marketing",
+            "tradeoff": "Lower costs and higher trust vs. slower scaling"
+          },
+          {
+            "option": "Brand partnership co-marketing",
+            "tradeoff": "Leveraged reach vs. dependency on brand relationships"
+          }
+        ],
+        "recommendation": "Focus on influencer partnerships and brand co-marketing to minimize cash burn while building authentic audience",
+        "deadline": "Week 4"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "strategist"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "error": null,
+  "timestamp": "2026-03-08T01:25:36.980Z"
+}

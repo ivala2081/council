@@ -1,0 +1,86 @@
+{
+  "promptId": "g10-social-commerce",
+  "mapping": {
+    "A": "council",
+    "B": "dual",
+    "C": "baseline"
+  },
+  "timestamp": "2026-03-08T01:35:58.068Z",
+  "council": {
+    "scores": {
+      "specificity": 5,
+      "actionability": 5,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Extremely specific with real company names, exact pricing (3.5% + $0.30), and concrete market sizing",
+      "Highly actionable with detailed week-by-week plans and specific tools (Bubble, Stripe Connect)",
+      "Deep competitive analysis with specific strengths/weaknesses for each competitor",
+      "Clear decision framework with explicit tradeoffs and deadlines"
+    ],
+    "weaknesses": [
+      "Some market sizing confidence labeled as 'medium' but estimates seem optimistic",
+      "Technical timeline estimates may be aggressive for solo founder"
+    ],
+    "total": 23
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 3,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good specificity with real competitors and market data",
+      "Actionable recommendations with clear timelines",
+      "Identifies key risks like API dependencies",
+      "Addresses technical co-founder challenge directly"
+    ],
+    "weaknesses": [
+      "Unit economics seem overly optimistic (3.2 month payback)",
+      "Some claims about GMV increases (25%+) lack supporting evidence",
+      "Less detailed on specific implementation steps"
+    ],
+    "total": 19
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 3
+    },
+    "strengths": [
+      "Realistic assessment of challenges and risks",
+      "Good focus on no-code MVP approach",
+      "Honest about low confidence in unit economics",
+      "Practical advice about starting with specific niche"
+    ],
+    "weaknesses": [
+      "Less specific on exact pricing and competitive positioning",
+      "Shorter action plan with less detail",
+      "Decision agenda less comprehensive than other outputs",
+      "Market analysis less detailed"
+    ],
+    "total": 17
+  },
+  "ranking": [
+    "council",
+    "dual",
+    "baseline"
+  ],
+  "rankingReason": "Output A provides the most comprehensive and actionable strategic brief. It offers specific pricing recommendations (3.5% + $0.30), detailed competitive analysis with exact fee structures, and a thorough decision framework with clear tradeoffs and deadlines. The week-by-week action plan is highly specific and immediately actionable. While Output B has good insights, its unit economics seem less realistic. Output C is solid but less detailed and specific overall.",
+  "keyDifferences": [
+    "Output A provides most specific pricing strategy and competitive positioning",
+    "Output A has most detailed decision framework with explicit tradeoffs",
+    "Output B focuses heavily on creator collaboration as differentiator",
+    "Output C is most conservative in projections but less comprehensive",
+    "All three recommend no-code MVP but A provides most specific implementation guidance"
+  ],
+  "winner": "council"
+}

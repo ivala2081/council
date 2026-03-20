@@ -1,0 +1,54 @@
+{
+  "promptId": "g01-resume-screening",
+  "outputA": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 5,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Extremely specific with named competitors, real pricing data, and concrete market sizing",
+      "Decision agenda is exceptionally well-structured with clear options, tradeoffs, and deadlines",
+      "Deep analysis of regulatory risks with specific laws mentioned (NYC bias audit law, EU AI Act)",
+      "Realistic unit economics with detailed assumptions and confidence levels"
+    ],
+    "weaknesses": [
+      "Some market sizing assumptions may be optimistic (10% adoption rate)",
+      "Technical timeline might be slightly aggressive for compliance features"
+    ]
+  },
+  "outputB": {
+    "mode": "council",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good specific competitor analysis with clear strengths/weaknesses",
+      "Realistic pricing strategy with lower barrier to entry",
+      "Strong focus on integration approach as competitive advantage",
+      "Practical compliance strategy recommendations"
+    ],
+    "weaknesses": [
+      "Less detailed market sizing methodology",
+      "Decision agenda has fewer critical decisions identified",
+      "Some analysis is more surface-level compared to Output A",
+      "Less comprehensive risk assessment"
+    ]
+  },
+  "preference": "B",
+  "preferenceReason": "Output A provides significantly more depth and specificity across all dimensions. The market analysis includes more detailed methodology, the decision agenda is more comprehensive with clearer tradeoffs, and the risk assessment covers more scenarios with specific mitigation strategies. The level of detail in competitor analysis and regulatory considerations makes it more actionable for real decision-making.",
+  "keyDifferences": [
+    "Output A has much more detailed market sizing with specific methodology vs Output B's higher-level estimates",
+    "Output A identifies more critical decisions (3 vs 2) with clearer deadline urgency",
+    "Output A provides deeper regulatory analysis with specific laws vs Output B's more general compliance discussion",
+    "Output A has more comprehensive risk assessment (5 detailed risks vs 5 less detailed risks)"
+  ],
+  "timestamp": "2026-03-08T01:15:47.807Z"
+}

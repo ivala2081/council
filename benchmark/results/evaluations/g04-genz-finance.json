@@ -1,0 +1,53 @@
+{
+  "promptId": "g04-genz-finance",
+  "outputA": {
+    "mode": "council",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific with named competitors and real data points",
+      "Clear decision framework with well-reasoned tradeoffs and deadlines",
+      "Deep analysis of unit economics with realistic CAC/LTV estimates",
+      "Actionable weekly timeline with concrete deliverables"
+    ],
+    "weaknesses": [
+      "Some optimistic assumptions about conversion rates",
+      "Limited discussion of alternative positioning strategies"
+    ]
+  },
+  "outputB": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 3,
+      "actionability": 3,
+      "depth": 3,
+      "realism": 3,
+      "decisionClarity": 3
+    },
+    "strengths": [
+      "Good competitive analysis including lesser-known players",
+      "Realistic assessment of Gen Z willingness to pay challenges",
+      "Acknowledges Mint shutdown as market opportunity"
+    ],
+    "weaknesses": [
+      "Less specific on actionable next steps",
+      "Vague unit economics with low confidence ratings",
+      "Decision options lack clear reasoning for recommendations",
+      "More generic advice that could apply to many fintech startups"
+    ]
+  },
+  "preference": "A",
+  "preferenceReason": "Output A provides significantly more actionable guidance with specific timelines, clearer decision frameworks, and more confident unit economics. The decision agenda in A is particularly strong with clear options, tradeoffs, and reasoned recommendations with deadlines. While both outputs cover similar ground, A gives the founder much more concrete direction for immediate action.",
+  "keyDifferences": [
+    "Output A has much stronger decision clarity with specific deadlines and reasoning",
+    "Output A provides more confident unit economics estimates vs Output B's 'low confidence' ratings",
+    "Output A gives specific weekly action items vs Output B's more general timeline",
+    "Output A has a more optimistic verdict (68 vs 45 council score) while maintaining realism about risks"
+  ],
+  "timestamp": "2026-03-08T01:16:22.568Z"
+}

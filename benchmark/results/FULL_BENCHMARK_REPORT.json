@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "project": "Council / AiCompanyOS",
+    "generatedAt": "2026-03-08",
+    "model": "claude-sonnet-4-20250514",
+    "triageModel": "claude-haiku-4-5-20251001",
+    "judgeModel": "claude-sonnet-4-20250514",
+    "goldTestCount": 10,
+    "phases": ["week1_baseline_proof", "week2_decomposition_proof"]
+  },
+
+  "week1": {
+    "objective": "Prove Council output matters before expanding architecture",
+    "flows": ["council", "baseline"],
+    "comparison": "pairwise (council vs baseline)",
+
+    "costSummary": {
+      "council": { "totalCost": 0.3593, "avgCostPerMission": 0.0359, "avgDuration_s": 45.5, "avgOutputTokens": 2367 },
+      "baseline": { "totalCost": 0.3428, "avgCostPerMission": 0.0343, "avgDuration_s": 44.0, "avgOutputTokens": 2261 }
+    },
+
+    "selfAssignedScores": {
+      "council": {
+        "g01": { "verdict": "risky", "score": 45 },
+        "g02": { "verdict": "promising", "score": 72 },
+        "g03": { "verdict": "risky", "score": 52 },
+        "g04": { "verdict": "promising", "score": 68 },
+        "g05": { "verdict": "promising", "score": 72 },
+        "g06": { "verdict": "promising", "score": 72 },
+        "g07": { "verdict": "promising", "score": 72 },
+        "g08": { "verdict": "risky", "score": 45 },
+        "g09": { "verdict": "risky", "score": 45 },
+        "g10": { "verdict": "promising", "score": 68 },
+        "average": 61.1
+      },
+      "baseline": {
+        "g01": { "verdict": "risky", "score": 45 },
+        "g02": { "verdict": "risky", "score": 52 },
+        "g03": { "verdict": "promising", "score": 68 },
+        "g04": { "verdict": "risky", "score": 45 },
+        "g05": { "verdict": "risky", "score": 58 },
+        "g06": { "verdict": "promising", "score": 72 },
+        "g07": { "verdict": "risky", "score": 52 },
+        "g08": { "verdict": "risky", "score": 45 },
+        "g09": { "verdict": "risky", "score": 52 },
+        "g10": { "verdict": "risky", "score": 58 },
+        "average": 54.7
+      }
+    },
+
+    "rubricEvaluation": {
+      "method": "blind pairwise, randomized A/B, LLM judge",
+      "dimensionAverages": {
+        "council":  { "specificity": 4.10, "actionability": 4.10, "depth": 3.70, "realism": 4.00, "decisionClarity": 4.60, "total": 20.50 },
+        "baseline": { "specificity": 3.90, "actionability": 3.90, "depth": 3.40, "realism": 3.90, "decisionClarity": 4.20, "total": 19.30 }
+      },
+      "winRate": { "council": 10, "baseline": 0, "ties": 0 },
+      "perPrompt": [
+        { "promptId": "g01", "councilTotal": 19, "baselineTotal": 22, "winner": "council", "reason": "More depth in market analysis and decision agenda despite lower numerical score" },
+        { "promptId": "g02", "councilTotal": 19, "baselineTotal": 21, "winner": "council", "reason": "Better decision framing with clearer tradeoffs and deadlines" },
+        { "promptId": "g03", "councilTotal": 21, "baselineTotal": 18, "winner": "council", "reason": "More rigorous market analysis and comprehensive decision framework" },
+        { "promptId": "g04", "councilTotal": 21, "baselineTotal": 15, "winner": "council", "reason": "Significantly more actionable with specific timelines and decision frameworks" },
+        { "promptId": "g05", "councilTotal": 17, "baselineTotal": 21, "winner": "council", "reason": "More specific competitor data and superior decision framework" },
+        { "promptId": "g06", "councilTotal": 21, "baselineTotal": 23, "winner": "council", "reason": "More actionable specificity with concrete numbers and decision framework" },
+        { "promptId": "g07", "councilTotal": 22, "baselineTotal": 16, "winner": "council", "reason": "Concrete utilization thresholds, specific corridors, decisive recommendations" },
+        { "promptId": "g08", "councilTotal": 21, "baselineTotal": 19, "winner": "council", "reason": "Superior decision clarity with detailed tradeoff analysis" },
+        { "promptId": "g09", "councilTotal": 21, "baselineTotal": 19, "winner": "council", "reason": "More comprehensive decision framework with clearer priorities" },
+        { "promptId": "g10", "councilTotal": 23, "baselineTotal": 19, "winner": "council", "reason": "Precise pricing, detailed competitive analysis, comprehensive decision framework" }
+      ],
+      "caveats": [
+        "10-0 win rate is suspicious — LLM judges have known biases in pairwise comparison",
+        "In 4/10 cases judge gave higher numerical scores to baseline but still preferred council",
+        "Scores and preference measure different things — need human validation"
+      ]
+    },
+
+    "decisionGate": {
+      "status": "PASS_WITH_CAVEATS",
+      "outputQuality": "consistently good across all 10 prompts",
+      "heroSection": "Decision Agenda — consistently strongest dimension",
+      "caveat": "LLM-judged only, need 5 real founder reviews"
+    }
+  },
+
+  "week2": {
+    "objective": "Test whether 2-step decomposition flow is justified",
+    "flows": ["council", "dual", "baseline"],
+    "dualPipeline": {
+      "step1": "Triage (Haiku) — extracts structured context, founder profile, section priorities",
+      "step2": "Strategist (Sonnet) — generates brief with enriched prompt",
+      "avgTriageCost": 0.0035,
+      "avgTriageDuration_s": 7.4
+    },
+    "comparison": "3-way blind, randomized A/B/C, LLM judge",
+
+    "costSummary": {
+      "council":  { "totalCost": 0.3593, "avgCostPerMission": 0.0359, "avgDuration_s": 45.5 },
+      "dual":     { "totalCost": 0.4197, "avgCostPerMission": 0.0420, "avgDuration_s": 56.9 },
+      "baseline": { "totalCost": 0.3428, "avgCostPerMission": 0.0343, "avgDuration_s": 44.0 }
+    },
+
+    "dualScores": {
+      "g01": { "verdict": "risky", "score": 45 },
+      "g02": { "verdict": "risky", "score": 52 },
+      "g03": { "verdict": "risky", "score": 55 },
+      "g04": { "verdict": "risky", "score": 42 },
+      "g05": { "verdict": "promising", "score": 72 },
+      "g06": { "verdict": "promising", "score": 68 },
+      "g07": { "verdict": "risky", "score": 52 },
+      "g08": { "verdict": "risky", "score": 45 },
+      "g09": { "verdict": "promising", "score": 72 },
+      "g10": { "verdict": "risky", "score": 45 },
+      "average": 54.8
+    },
+
+    "rubricEvaluation": {
+      "method": "blind 3-way, randomized A/B/C, LLM judge",
+      "dimensionAverages": {
+        "council":  { "specificity": 3.50, "actionability": 4.00, "depth": 3.30, "realism": 3.80, "decisionClarity": 4.00, "total": 18.60 },
+        "dual":     { "specificity": 4.20, "actionability": 4.20, "depth": 3.90, "realism": 3.90, "decisionClarity": 4.20, "total": 20.40 },
+        "baseline": { "specificity": 3.80, "actionability": 4.10, "depth": 3.80, "realism": 4.00, "decisionClarity": 4.40, "total": 20.10 }
+      },
+      "winRate": { "council": 2, "dual": 2, "baseline": 6 },
+      "perPrompt": [
+        { "promptId": "g01", "council": 20, "dual": 22, "baseline": 19, "winner": "dual", "ranking": ["dual", "council", "baseline"] },
+        { "promptId": "g02", "council": 18, "dual": 19, "baseline": 21, "winner": "baseline", "ranking": ["baseline", "dual", "council"] },
+        { "promptId": "g03", "council": 18, "dual": 19, "baseline": 22, "winner": "baseline", "ranking": ["baseline", "dual", "council"] },
+        { "promptId": "g04", "council": 15, "dual": 20, "baseline": 21, "winner": "baseline", "ranking": ["baseline", "dual", "council"] },
+        { "promptId": "g05", "council": 17, "dual": 22, "baseline": 21, "winner": "baseline", "ranking": ["baseline", "dual", "council"] },
+        { "promptId": "g06", "council": 16, "dual": 22, "baseline": 23, "winner": "baseline", "ranking": ["baseline", "dual", "council"] },
+        { "promptId": "g07", "council": 23, "dual": 18, "baseline": 16, "winner": "council", "ranking": ["council", "dual", "baseline"] },
+        { "promptId": "g08", "council": 18, "dual": 19, "baseline": 21, "winner": "baseline", "ranking": ["baseline", "dual", "council"] },
+        { "promptId": "g09", "council": 18, "dual": 24, "baseline": 20, "winner": "dual", "ranking": ["dual", "baseline", "council"] },
+        { "promptId": "g10", "council": 23, "dual": 19, "baseline": 17, "winner": "council", "ranking": ["council", "dual", "baseline"] }
+      ]
+    },
+
+    "decisionGate": {
+      "status": "FAIL",
+      "reason": "Dual wins only 2/10 (20%) — not enough to justify +17% cost and +25% latency",
+      "recommendation": "Do not expand agent count. Baseline is cheapest, fastest, and wins most often.",
+      "dualStrength": "Specificity (+0.70 over council) — triage context helps strategist be more specific",
+      "dualWeakness": "Decision Clarity (-0.20 vs baseline) — enriched prompt may dilute focus",
+      "baselineStrength": "Decision Clarity (4.40) — simpler prompt produces more focused output"
+    }
+  },
+
+  "crossWeekAnalysis": {
+    "week1vs2_councilDrift": {
+      "observation": "Council scored 20.50/25 avg in Week 1 (pairwise) but 18.60/25 in Week 2 (3-way)",
+      "explanation": "Pairwise comparison inflates scores due to LLM judge preference bias. 3-way reduces this effect.",
+      "implication": "Week 2 scores are more reliable. Week 1's 10-0 win rate was likely inflated."
+    },
+    "consistentFindings": [
+      "Decision Agenda is consistently the most valued section across all evaluations",
+      "Specificity and actionability are the key differentiators between outputs",
+      "All three flows produce usable output — the quality gap is smaller than expected",
+      "Cost differences are minimal (~$0.006/mission between cheapest and most expensive)"
+    ],
+    "surprises": [
+      "Baseline (simpler prompt) wins more often than Council (richer prompt) in 3-way eval",
+      "Dual's triage step helps specificity significantly (+0.70) but hurts decision clarity",
+      "Self-assigned council scores don't correlate well with rubric evaluation quality"
+    ]
+  },
+
+  "strategicRecommendations": {
+    "immediate": [
+      "Simplify Council system prompt — reduce over-prescriptive personality instructions",
+      "Make triage conditional — only for complex/ambiguous prompts",
+      "Run 5 real founder reviews before further architecture changes"
+    ],
+    "week3_plan": "Ugly MVP — put the best-performing prompt in front of real users",
+    "moatStrategy": "Memory (accumulated context) is the real moat, not prompt engineering or agent count",
+    "killSignals": [
+      "If simplified council prompt still loses to baseline, adopt baseline as production prompt",
+      "If founders say 'I can get this from ChatGPT', reconsider the entire wedge"
+    ]
+  },
+
+  "totalBenchmarkCost": {
+    "week1_runs": 0.70,
+    "week1_evals": 0.15,
+    "week2_runs": 0.42,
+    "week2_evals": 0.25,
+    "total": 1.52
+  }
+}

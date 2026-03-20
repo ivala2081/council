@@ -1,0 +1,229 @@
+{
+  "promptId": "g08-ai-tutoring",
+  "mode": "baseline",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 372,
+  "outputTokens": 2272,
+  "cacheReadTokens": 1227,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.0344481,
+  "durationMs": 42782,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "The core concept is sound and addresses a real pain point, but you're entering a market dominated by well-funded players with massive head starts. Your education background is valuable, but $10K and solo execution against Khan Academy's Khanmigo creates significant execution risk. The B2C path offers more control but harder customer acquisition.",
+      "councilScore": 45
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$7.8B US K-12 tutoring market (IBISWorld 2023)",
+        "sam": "$2.1B online tutoring segment for grades 6-12 math",
+        "som": "$500K-1M realistic year 1-2 obtainable market (0.02-0.05% of SAM)",
+        "methodology": "Based on 50M US students grades 6-12, 15% needing math help, 5% willing to pay for AI tutoring at $29/mo",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "Khan Academy (Khanmigo)",
+          "description": "Free platform with AI tutoring feature, 120M users",
+          "strength": "Massive brand trust, free core content, GPT-4 powered",
+          "weakness": "Generic approach, limited personalization depth",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Photomath",
+          "description": "Camera-based math problem solver, 300M+ downloads",
+          "strength": "Instant gratification, visual problem solving",
+          "weakness": "Doesn't teach underlying concepts or methodology",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "IXL Learning",
+          "description": "Adaptive practice platform, $100M+ revenue",
+          "strength": "Comprehensive curriculum, school partnerships",
+          "weakness": "Drill-focused, not conversational",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Varsity Tutors",
+          "description": "On-demand human and AI tutoring",
+          "strength": "Human tutor option, established marketplace",
+          "weakness": "Higher price point, less personalized AI",
+          "isDirectCompetitor": false
+        }
+      ],
+      "positioning": "The conversational math tutor that thinks like a great teacher",
+      "timing": "Good - AI tutoring acceptance growing, but Khan Academy already captured early market",
+      "gaps": [
+        "Truly Socratic dialogue",
+        "Deep learning style adaptation",
+        "Granular progress tracking for parents"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Middle-class families can't afford $50-100/hr human tutors but need more than generic video content",
+      "targetCustomer": "Parents of grades 6-12 students struggling with math, household income $50K-$150K, value education highly",
+      "uniqueAngle": "Socratic dialogue approach that mirrors how great teachers actually teach - through questions, not answers",
+      "whyNow": "LLMs finally enable natural conversation, parents more comfortable with AI post-ChatGPT adoption"
+    },
+    "businessModel": {
+      "revenueStrategy": "Subscription SaaS - $29/mo individual, $49/mo family (up to 3 kids)",
+      "pricingFramework": "$29/mo = cost of 20 minutes with human tutor, positioned as premium vs free alternatives",
+      "unitEconomics": {
+        "estimatedCAC": "$45-80 via digital marketing, $25-40 via referrals",
+        "estimatedLTV": "$174-348 (6-12 month retention estimate)",
+        "paybackPeriod": "2-4 months depending on acquisition channel",
+        "confidence": "low"
+      },
+      "scalabilityAssessment": "High marginal scalability once core AI is built, but customer acquisition cost likely increases with competition"
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Basic algebra Socratic dialogue",
+        "Progress tracking dashboard",
+        "Parent reporting",
+        "Simple adaptive questioning"
+      ],
+      "recommendedStack": "Next.js frontend, Node.js backend, OpenAI API, PostgreSQL, Stripe payments",
+      "buildVsBuy": [
+        {
+          "component": "AI/LLM",
+          "recommendation": "buy",
+          "rationale": "OpenAI API much cheaper than training custom model"
+        },
+        {
+          "component": "Payment processing",
+          "recommendation": "buy",
+          "rationale": "Stripe handles complexity and compliance"
+        },
+        {
+          "component": "Tutoring logic",
+          "recommendation": "build",
+          "rationale": "Core differentiator must be proprietary"
+        }
+      ],
+      "technicalRisks": [
+        "OpenAI API costs scaling with usage",
+        "Prompt engineering for consistent Socratic method",
+        "Ensuring mathematical accuracy"
+      ],
+      "estimatedMvpTimeline": "4-6 months for algebra-only MVP"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "competitive",
+          "severity": "critical",
+          "description": "Khan Academy could improve Khanmigo's Socratic capabilities and maintain free pricing",
+          "mitigation": "Focus on superior pedagogy and parent reporting that Khan Academy neglects"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Parents may resist AI tutoring due to screen time concerns or preference for human interaction",
+          "mitigation": "Position as supplement to human teaching, emphasize learning outcomes over screen time"
+        },
+        {
+          "category": "financial",
+          "severity": "high",
+          "description": "$10K insufficient for 6+ months of development plus customer acquisition",
+          "mitigation": "Seek pre-orders, consider part-time development, or find technical co-founder"
+        },
+        {
+          "category": "regulatory",
+          "severity": "medium",
+          "description": "Schools may ban AI tutoring tools or require specific compliance",
+          "mitigation": "Start B2C to avoid school procurement complexity"
+        },
+        {
+          "category": "technical",
+          "severity": "medium",
+          "description": "AI may give incorrect mathematical guidance or fail to maintain Socratic approach",
+          "mitigation": "Extensive testing, human review of AI responses, clear disclaimers"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Validate demand: survey 100 parents about AI tutoring willingness",
+        "Analyze Khanmigo's current capabilities and gaps",
+        "Build basic Socratic dialogue prototype for linear equations"
+      ],
+      "week5to8": [
+        "Test prototype with 10 students/parents",
+        "Refine Socratic prompting based on feedback",
+        "Design parent dashboard mockups",
+        "Research customer acquisition channels"
+      ],
+      "week9to12": [
+        "Build MVP for Algebra I topics",
+        "Set up basic payment and user management",
+        "Create landing page and start email list",
+        "Interview potential early customers"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Should you focus on algebra-only or attempt grades 6-12 math?",
+        "options": [
+          {
+            "option": "Algebra-only",
+            "tradeoff": "Deeper quality and faster launch vs smaller addressable market"
+          },
+          {
+            "option": "Grades 6-12",
+            "tradeoff": "Larger market vs diluted focus and longer development"
+          }
+        ],
+        "recommendation": "Start with Algebra I only. Your $10K budget and solo status require extreme focus. You can expand after proving the concept works.",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "critical",
+        "question": "B2C (parents) or B2B (schools) go-to-market?",
+        "options": [
+          {
+            "option": "B2C direct to parents",
+            "tradeoff": "Faster iteration and feedback vs higher customer acquisition cost"
+          },
+          {
+            "option": "B2B to schools",
+            "tradeoff": "Larger deal sizes vs long sales cycles and compliance requirements"
+          }
+        ],
+        "recommendation": "Start B2C. Schools have 12-18 month procurement cycles you can't afford to wait for. Parents can give immediate feedback on your Socratic approach.",
+        "deadline": "Week 1"
+      },
+      {
+        "priority": "important",
+        "question": "Should you seek a technical co-founder or stay solo?",
+        "options": [
+          {
+            "option": "Find technical co-founder",
+            "tradeoff": "Faster development and shared equity vs finding right person and equity dilution"
+          },
+          {
+            "option": "Stay solo",
+            "tradeoff": "Full control and ownership vs slower development and higher risk"
+          }
+        ],
+        "recommendation": "Stay solo for now but actively network for potential co-founder. Your teaching background is the key asset - don't dilute it too early.",
+        "deadline": "Week 8"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "baseline"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"The core concept is sound and addresses a real pain point, but you're entering a market dominated by well-funded players with massive head starts. Your education background is valuable, but $10K and solo execution against Khan Academy's Khanmigo creates significant execution risk. The B2C path offers more control but harder customer acquisition.\",\n    \"councilScore\": 45\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$7.8B US K-12 tutoring market (IBISWorld 2023)\",\n      \"sam\": \"$2.1B online tutoring segment for grades 6-12 math\",\n      \"som\": \"$500K-1M realistic year 1-2 obtainable market (0.02-0.05% of SAM)\",\n      \"methodology\": \"Based on 50M US students grades 6-12, 15% needing math help, 5% willing to pay for AI tutoring at $29/mo\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"Khan Academy (Khanmigo)\",\n        \"description\": \"Free platform with AI tutoring feature, 120M users\",\n        \"strength\": \"Massive brand trust, free core content, GPT-4 powered\",\n        \"weakness\": \"Generic approach, limited personalization depth\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Photomath\",\n        \"description\": \"Camera-based math problem solver, 300M+ downloads\",\n        \"strength\": \"Instant gratification, visual problem solving\",\n        \"weakness\": \"Doesn't teach underlying concepts or methodology\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"IXL Learning\",\n        \"description\": \"Adaptive practice platform, $100M+ revenue\",\n        \"strength\": \"Comprehensive curriculum, school partnerships\",\n        \"weakness\": \"Drill-focused, not conversational\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Varsity Tutors\",\n        \"description\": \"On-demand human and AI tutoring\",\n        \"strength\": \"Human tutor option, established marketplace\",\n        \"weakness\": \"Higher price point, less personalized AI\",\n        \"isDirectCompetitor\": false\n      }\n    ],\n    \"positioning\": \"The conversational math tutor that thinks like a great teacher\",\n    \"timing\": \"Good - AI tutoring acceptance growing, but Khan Academy already captured early market\",\n    \"gaps\": [\"Truly Socratic dialogue\", \"Deep learning style adaptation\", \"Granular progress tracking for parents\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Middle-class families can't afford $50-100/hr human tutors but need more than generic video content\",\n    \"targetCustomer\": \"Parents of grades 6-12 students struggling with math, household income $50K-$150K, value education highly\",\n    \"uniqueAngle\": \"Socratic dialogue approach that mirrors how great teachers actually teach - through questions, not answers\",\n    \"whyNow\": \"LLMs finally enable natural conversation, parents more comfortable with AI post-ChatGPT adoption\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Subscription SaaS - $29/mo individual, $49/mo family (up to 3 kids)\",\n    \"pricingFramework\": \"$29/mo = cost of 20 minutes with human tutor, positioned as premium vs free alternatives\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$45-80 via digital marketing, $25-40 via referrals\",\n      \"estimatedLTV\": \"$174-348 (6-12 month retention estimate)\",\n      \"paybackPeriod\": \"2-4 months depending on acquisition channel\",\n      \"confidence\": \"low\"\n    },\n    \"scalabilityAssessment\": \"High marginal scalability once core AI is built, but customer acquisition cost likely increases with competition\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Basic algebra Socratic dialogue\", \"Progress tracking dashboard\", \"Parent reporting\", \"Simple adaptive questioning\"],\n    \"recommendedStack\": \"Next.js frontend, Node.js backend, OpenAI API, PostgreSQL, Stripe payments\",\n    \"buildVsBuy\": [\n      { \"component\": \"AI/LLM\", \"recommendation\": \"buy\", \"rationale\": \"OpenAI API much cheaper than training custom model\" },\n      { \"component\": \"Payment processing\", \"recommendation\": \"buy\", \"rationale\": \"Stripe handles complexity and compliance\" },\n      { \"component\": \"Tutoring logic\", \"recommendation\": \"build\", \"rationale\": \"Core differentiator must be proprietary\" }\n    ],\n    \"technicalRisks\": [\"OpenAI API costs scaling with usage\", \"Prompt engineering for consistent Socratic method\", \"Ensuring mathematical accuracy\"],\n    \"estimatedMvpTimeline\": \"4-6 months for algebra-only MVP\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"critical\",\n        \"description\": \"Khan Academy could improve Khanmigo's Socratic capabilities and maintain free pricing\",\n        \"mitigation\": \"Focus on superior pedagogy and parent reporting that Khan Academy neglects\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"Parents may resist AI tutoring due to screen time concerns or preference for human interaction\",\n        \"mitigation\": \"Position as supplement to human teaching, emphasize learning outcomes over screen time\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"high\",\n        \"description\": \"$10K insufficient for 6+ months of development plus customer acquisition\",\n        \"mitigation\": \"Seek pre-orders, consider part-time development, or find technical co-founder\"\n      },\n      {\n        \"category\": \"regulatory\",\n        \"severity\": \"medium\",\n        \"description\": \"Schools may ban AI tutoring tools or require specific compliance\",\n        \"mitigation\": \"Start B2C to avoid school procurement complexity\"\n      },\n      {\n        \"category\": \"technical\",\n        \"severity\": \"medium\",\n        \"description\": \"AI may give incorrect mathematical guidance or fail to maintain Socratic approach\",\n        \"mitigation\": \"Extensive testing, human review of AI responses, clear disclaimers\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Validate demand: survey 100 parents about AI tutoring willingness\", \"Analyze Khanmigo's current capabilities and gaps\", \"Build basic Socratic dialogue prototype for linear equations\"],\n    \"week5to8\": [\"Test prototype with 10 students/parents\", \"Refine Socratic prompting based on feedback\", \"Design parent dashboard mockups\", \"Research customer acquisition channels\"],\n    \"week9to12\": [\"Build MVP for Algebra I topics\", \"Set up basic payment and user management\", \"Create landing page and start email list\", \"Interview potential early customers\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Should you focus on algebra-only or attempt grades 6-12 math?\",\n      \"options\": [\n        { \"option\": \"Algebra-only\", \"tradeoff\": \"Deeper quality and faster launch vs smaller addressable market\" },\n        { \"option\": \"Grades 6-12\", \"tradeoff\": \"Larger market vs diluted focus and longer development\" }\n      ],\n      \"recommendation\": \"Start with Algebra I only. Your $10K budget and solo status require extreme focus. You can expand after proving the concept works.\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"B2C (parents) or B2B (schools) go-to-market?\",\n      \"options\": [\n        { \"option\": \"B2C direct to parents\", \"tradeoff\": \"Faster iteration and feedback vs higher customer acquisition cost\" },\n        { \"option\": \"B2B to schools\", \"tradeoff\": \"Larger deal sizes vs long sales cycles and compliance requirements\" }\n      ],\n      \"recommendation\": \"Start B2C. Schools have 12-18 month procurement cycles you can't afford to wait for. Parents can give immediate feedback on your Socratic approach.\",\n      \"deadline\": \"Week 1\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Should you seek a technical co-founder or stay solo?\",\n      \"options\": [\n        { \"option\": \"Find technical co-founder\", \"tradeoff\": \"Faster development and shared equity vs finding right person and equity dilution\" },\n        { \"option\": \"Stay solo\", \"tradeoff\": \"Full control and ownership vs slower development and higher risk\" }\n      ],\n      \"recommendation\": \"Stay solo for now but actively network for potential co-founder. Your teaching background is the key asset - don't dilute it too early.\",\n      \"deadline\": \"Week 8\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"baseline\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}",
+  "error": null,
+  "timestamp": "2026-03-08T02:00:19.761Z"
+}

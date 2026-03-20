@@ -1,0 +1,246 @@
+{
+  "promptId": "g06-rural-telehealth",
+  "mode": "baseline",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 386,
+  "outputTokens": 2493,
+  "cacheReadTokens": 1227,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.0377631,
+  "durationMs": 47783,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "promising",
+      "summary": "Strong market need with differentiated approach to rural telehealth challenges. Your Epic background and NIH funding provide credibility. However, regulatory complexity, slow adoption cycles, and specialist recruitment present significant execution risks that require careful sequencing.",
+      "councilScore": 72
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$45B US telehealth market, with rural representing ~20% or $9B",
+        "sam": "$2.8B rural telehealth market (60M rural Americans × $47 avg annual telehealth spend)",
+        "som": "$15-30M realistic 3-year market (500-1000 rural clinics × $24K annual revenue per clinic)",
+        "methodology": "Based on rural population census data, current telehealth penetration rates, and clinic density in rural areas",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "Teladoc Health",
+          "description": "Largest telehealth platform with B2B2C model",
+          "strength": "Scale, established payer relationships, broad specialist network",
+          "weakness": "Urban-focused, poor rural connectivity optimization",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Amwell",
+          "description": "Telehealth platform with EHR integrations",
+          "strength": "Strong EHR partnerships, enterprise sales experience",
+          "weakness": "Not optimized for low-bandwidth or rural workflows",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "MDLive",
+          "description": "On-demand telehealth services",
+          "strength": "24/7 availability, mobile-first approach",
+          "weakness": "Limited rural focus, no clinic integration strategy",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Doxy.me",
+          "description": "Simple, HIPAA-compliant video platform",
+          "strength": "Easy to use, no downloads required, popular with small practices",
+          "weakness": "Limited EHR integration, no rural-specific features",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Project ECHO",
+          "description": "Hub-and-spoke model for specialist knowledge sharing",
+          "strength": "Proven rural model, academic partnerships",
+          "weakness": "Educational focus, not direct patient care platform",
+          "isDirectCompetitor": false
+        }
+      ],
+      "positioning": "The only telehealth platform purpose-built for rural healthcare delivery challenges",
+      "timing": "Perfect timing with permanent telehealth reimbursement expansions post-COVID and $2B in rural health funding from Infrastructure Act",
+      "gaps": [
+        "Low-bandwidth optimization",
+        "Rural clinic workflow integration",
+        "Medicare/Medicaid billing complexity handling"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Rural patients can't access specialists due to distance and rural clinics can't retain specialists due to economics",
+      "targetCustomer": "Rural health networks and FQHCs serving 2,000-15,000 patients with 1-5 clinic locations",
+      "uniqueAngle": "Only platform that works reliably on rural internet while integrating seamlessly with small clinic workflows",
+      "whyNow": "COVID proved telehealth viability, permanent reimbursement changes make it economically viable, and federal rural health funding creates budget availability"
+    },
+    "businessModel": {
+      "revenueStrategy": "Dual revenue: $2K/month SaaS per clinic + $15 per specialist consultation",
+      "pricingFramework": "$2K/month justified by replacing $8K/month locum specialist costs; $15/visit competitive with 20-30% platform fees charged by others",
+      "unitEconomics": {
+        "estimatedCAC": "$8,000 per clinic (12-18 month sales cycle, field sales required)",
+        "estimatedLTV": "$84,000 per clinic (assuming 3.5 year retention, $2K monthly + $500 monthly visit fees)",
+        "paybackPeriod": "10.5 months",
+        "confidence": "medium"
+      },
+      "scalabilityAssessment": "Strong network effects as more specialists join platform. Technical infrastructure scales efficiently. Main constraint is field sales team growth and regulatory compliance across states."
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Low-bandwidth video optimization",
+        "Basic EHR integration (Epic, Cerner)",
+        "HIPAA-compliant messaging",
+        "Simple patient portal",
+        "Insurance billing module"
+      ],
+      "recommendedStack": "React/Node.js frontend, Python/Django backend, WebRTC for video, AWS for HIPAA compliance",
+      "buildVsBuy": [
+        {
+          "component": "Video infrastructure",
+          "recommendation": "buy",
+          "rationale": "Use Twilio Video or Agora for HIPAA-compliant foundation, customize for bandwidth optimization"
+        },
+        {
+          "component": "EHR integrations",
+          "recommendation": "build",
+          "rationale": "Your Epic background is competitive advantage, rural clinics need custom workflows"
+        },
+        {
+          "component": "Billing/Claims",
+          "recommendation": "buy",
+          "rationale": "Use existing clearinghouse like Change Healthcare, too complex and regulated to build"
+        }
+      ],
+      "technicalRisks": [
+        "EHR integration complexity",
+        "Video quality on 5Mbps connections",
+        "HIPAA compliance audit readiness"
+      ],
+      "estimatedMvpTimeline": "6-8 months for basic platform, additional 3-4 months per major EHR integration"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "regulatory",
+          "severity": "high",
+          "description": "Multi-state medical licensing, HIPAA compliance, and varying telehealth regulations create complex legal requirements",
+          "mitigation": "Start in single state, hire healthcare attorney, get HIPAA audit before launch"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "Rural clinic adoption cycles are 12-24 months, delaying revenue and increasing cash burn",
+          "mitigation": "Focus on health networks vs individual clinics, leverage existing relationships from Epic background"
+        },
+        {
+          "category": "competitive",
+          "severity": "medium",
+          "description": "Teladoc or Amwell could add rural-specific features and leverage existing scale",
+          "mitigation": "Build deep rural clinic relationships and workflows that are hard to replicate"
+        },
+        {
+          "category": "financial",
+          "severity": "medium",
+          "description": "Reimbursement rates for rural telehealth may decrease as COVID emergency measures end",
+          "mitigation": "Focus on high-value specialties, build direct-pay options, track policy changes closely"
+        },
+        {
+          "category": "execution",
+          "severity": "high",
+          "description": "Recruiting specialists willing to do rural telehealth at competitive rates",
+          "mitigation": "Partner with academic medical centers, offer flexible scheduling, focus on high-demand specialties"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Choose launch state (recommend Texas - large rural population, favorable telehealth laws)",
+        "Map target health networks in chosen state",
+        "Begin HIPAA compliance audit preparation",
+        "Interview 10 rural clinic administrators about workflows"
+      ],
+      "week5to8": [
+        "Hire healthcare attorney for regulatory guidance",
+        "Build low-bandwidth video MVP",
+        "Identify 3 target health networks for pilot partnerships",
+        "Research specialist recruitment strategies"
+      ],
+      "week9to12": [
+        "Complete basic EHR integration with Epic",
+        "Launch pilot with 1-2 friendly clinics",
+        "Recruit 5 specialists in mental health",
+        "Apply for additional SBIR Phase II funding"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Which state to launch in first?",
+        "options": [
+          {
+            "option": "Texas",
+            "tradeoff": "Large market, favorable laws vs high competition"
+          },
+          {
+            "option": "Montana",
+            "tradeoff": "Less competition, clear need vs smaller market size"
+          },
+          {
+            "option": "North Carolina",
+            "tradeoff": "Good health networks, moderate size vs more complex regulations"
+          }
+        ],
+        "recommendation": "Texas - largest rural population (3.6M), favorable telehealth laws, strong health network infrastructure, and your Epic background likely has connections there",
+        "deadline": "Week 2"
+      },
+      {
+        "priority": "critical",
+        "question": "Primary care or specialty focus for launch?",
+        "options": [
+          {
+            "option": "Mental health specialty",
+            "tradeoff": "High demand, easier licensing vs limited market size"
+          },
+          {
+            "option": "Primary care",
+            "tradeoff": "Larger market, easier clinic buy-in vs lower reimbursement rates"
+          },
+          {
+            "option": "Dermatology",
+            "tradeoff": "Visual specialty fits telehealth, good reimbursement vs smaller provider pool"
+          }
+        ],
+        "recommendation": "Mental health - highest unmet need in rural areas, best reimbursement rates, and specialists more willing to do telehealth. Expand to primary care in year 2",
+        "deadline": "Week 3"
+      },
+      {
+        "priority": "important",
+        "question": "Direct clinic sales vs health network partnerships?",
+        "options": [
+          {
+            "option": "Individual clinic sales",
+            "tradeoff": "Higher margins, direct relationships vs longer sales cycles"
+          },
+          {
+            "option": "Health network partnerships",
+            "tradeoff": "Faster scaling, shared risk vs lower margins, less control"
+          }
+        ],
+        "recommendation": "Start with 2-3 health network partnerships to prove model, then add direct clinic sales channel in year 2",
+        "deadline": "Week 4"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "baseline"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "```json\n{\n  \"executiveSummary\": {\n    \"verdict\": \"promising\",\n    \"summary\": \"Strong market need with differentiated approach to rural telehealth challenges. Your Epic background and NIH funding provide credibility. However, regulatory complexity, slow adoption cycles, and specialist recruitment present significant execution risks that require careful sequencing.\",\n    \"councilScore\": 72\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$45B US telehealth market, with rural representing ~20% or $9B\",\n      \"sam\": \"$2.8B rural telehealth market (60M rural Americans × $47 avg annual telehealth spend)\",\n      \"som\": \"$15-30M realistic 3-year market (500-1000 rural clinics × $24K annual revenue per clinic)\",\n      \"methodology\": \"Based on rural population census data, current telehealth penetration rates, and clinic density in rural areas\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"Teladoc Health\",\n        \"description\": \"Largest telehealth platform with B2B2C model\",\n        \"strength\": \"Scale, established payer relationships, broad specialist network\",\n        \"weakness\": \"Urban-focused, poor rural connectivity optimization\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Amwell\",\n        \"description\": \"Telehealth platform with EHR integrations\",\n        \"strength\": \"Strong EHR partnerships, enterprise sales experience\",\n        \"weakness\": \"Not optimized for low-bandwidth or rural workflows\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"MDLive\",\n        \"description\": \"On-demand telehealth services\",\n        \"strength\": \"24/7 availability, mobile-first approach\",\n        \"weakness\": \"Limited rural focus, no clinic integration strategy\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Doxy.me\",\n        \"description\": \"Simple, HIPAA-compliant video platform\",\n        \"strength\": \"Easy to use, no downloads required, popular with small practices\",\n        \"weakness\": \"Limited EHR integration, no rural-specific features\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Project ECHO\",\n        \"description\": \"Hub-and-spoke model for specialist knowledge sharing\",\n        \"strength\": \"Proven rural model, academic partnerships\",\n        \"weakness\": \"Educational focus, not direct patient care platform\",\n        \"isDirectCompetitor\": false\n      }\n    ],\n    \"positioning\": \"The only telehealth platform purpose-built for rural healthcare delivery challenges\",\n    \"timing\": \"Perfect timing with permanent telehealth reimbursement expansions post-COVID and $2B in rural health funding from Infrastructure Act\",\n    \"gaps\": [\"Low-bandwidth optimization\", \"Rural clinic workflow integration\", \"Medicare/Medicaid billing complexity handling\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Rural patients can't access specialists due to distance and rural clinics can't retain specialists due to economics\",\n    \"targetCustomer\": \"Rural health networks and FQHCs serving 2,000-15,000 patients with 1-5 clinic locations\",\n    \"uniqueAngle\": \"Only platform that works reliably on rural internet while integrating seamlessly with small clinic workflows\",\n    \"whyNow\": \"COVID proved telehealth viability, permanent reimbursement changes make it economically viable, and federal rural health funding creates budget availability\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"Dual revenue: $2K/month SaaS per clinic + $15 per specialist consultation\",\n    \"pricingFramework\": \"$2K/month justified by replacing $8K/month locum specialist costs; $15/visit competitive with 20-30% platform fees charged by others\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$8,000 per clinic (12-18 month sales cycle, field sales required)\",\n      \"estimatedLTV\": \"$84,000 per clinic (assuming 3.5 year retention, $2K monthly + $500 monthly visit fees)\",\n      \"paybackPeriod\": \"10.5 months\",\n      \"confidence\": \"medium\"\n    },\n    \"scalabilityAssessment\": \"Strong network effects as more specialists join platform. Technical infrastructure scales efficiently. Main constraint is field sales team growth and regulatory compliance across states.\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Low-bandwidth video optimization\", \"Basic EHR integration (Epic, Cerner)\", \"HIPAA-compliant messaging\", \"Simple patient portal\", \"Insurance billing module\"],\n    \"recommendedStack\": \"React/Node.js frontend, Python/Django backend, WebRTC for video, AWS for HIPAA compliance\",\n    \"buildVsBuy\": [\n      { \"component\": \"Video infrastructure\", \"recommendation\": \"buy\", \"rationale\": \"Use Twilio Video or Agora for HIPAA-compliant foundation, customize for bandwidth optimization\" },\n      { \"component\": \"EHR integrations\", \"recommendation\": \"build\", \"rationale\": \"Your Epic background is competitive advantage, rural clinics need custom workflows\" },\n      { \"component\": \"Billing/Claims\", \"recommendation\": \"buy\", \"rationale\": \"Use existing clearinghouse like Change Healthcare, too complex and regulated to build\" }\n    ],\n    \"technicalRisks\": [\"EHR integration complexity\", \"Video quality on 5Mbps connections\", \"HIPAA compliance audit readiness\"],\n    \"estimatedMvpTimeline\": \"6-8 months for basic platform, additional 3-4 months per major EHR integration\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"regulatory\",\n        \"severity\": \"high\",\n        \"description\": \"Multi-state medical licensing, HIPAA compliance, and varying telehealth regulations create complex legal requirements\",\n        \"mitigation\": \"Start in single state, hire healthcare attorney, get HIPAA audit before launch\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"Rural clinic adoption cycles are 12-24 months, delaying revenue and increasing cash burn\",\n        \"mitigation\": \"Focus on health networks vs individual clinics, leverage existing relationships from Epic background\"\n      },\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"medium\",\n        \"description\": \"Teladoc or Amwell could add rural-specific features and leverage existing scale\",\n        \"mitigation\": \"Build deep rural clinic relationships and workflows that are hard to replicate\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"medium\",\n        \"description\": \"Reimbursement rates for rural telehealth may decrease as COVID emergency measures end\",\n        \"mitigation\": \"Focus on high-value specialties, build direct-pay options, track policy changes closely\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"high\",\n        \"description\": \"Recruiting specialists willing to do rural telehealth at competitive rates\",\n        \"mitigation\": \"Partner with academic medical centers, offer flexible scheduling, focus on high-demand specialties\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Choose launch state (recommend Texas - large rural population, favorable telehealth laws)\", \"Map target health networks in chosen state\", \"Begin HIPAA compliance audit preparation\", \"Interview 10 rural clinic administrators about workflows\"],\n    \"week5to8\": [\"Hire healthcare attorney for regulatory guidance\", \"Build low-bandwidth video MVP\", \"Identify 3 target health networks for pilot partnerships\", \"Research specialist recruitment strategies\"],\n    \"week9to12\": [\"Complete basic EHR integration with Epic\", \"Launch pilot with 1-2 friendly clinics\", \"Recruit 5 specialists in mental health\", \"Apply for additional SBIR Phase II funding\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Which state to launch in first?\",\n      \"options\": [\n        { \"option\": \"Texas\", \"tradeoff\": \"Large market, favorable laws vs high competition\" },\n        { \"option\": \"Montana\", \"tradeoff\": \"Less competition, clear need vs smaller market size\" },\n        { \"option\": \"North Carolina\", \"tradeoff\": \"Good health networks, moderate size vs more complex regulations\" }\n      ],\n      \"recommendation\": \"Texas - largest rural population (3.6M), favorable telehealth laws, strong health network infrastructure, and your Epic background likely has connections there\",\n      \"deadline\": \"Week 2\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Primary care or specialty focus for launch?\",\n      \"options\": [\n        { \"option\": \"Mental health specialty\", \"tradeoff\": \"High demand, easier licensing vs limited market size\" },\n        { \"option\": \"Primary care\", \"tradeoff\": \"Larger market, easier clinic buy-in vs lower reimbursement rates\" },\n        { \"option\": \"Dermatology\", \"tradeoff\": \"Visual specialty fits telehealth, good reimbursement vs smaller provider pool\" }\n      ],\n      \"recommendation\": \"Mental health - highest unmet need in rural areas, best reimbursement rates, and specialists more willing to do telehealth. Expand to primary care in year 2\",\n      \"deadline\": \"Week 3\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Direct clinic sales vs health network partnerships?\",\n      \"options\": [\n        { \"option\": \"Individual clinic sales\", \"tradeoff\": \"Higher margins, direct relationships vs longer sales cycles\" },\n        { \"option\": \"Health network partnerships\", \"tradeoff\": \"Faster scaling, shared risk vs lower margins, less control\" }\n      ],\n      \"recommendation\": \"Start with 2-3 health network partnerships to prove model, then add direct clinic sales channel in year 2\",\n      \"deadline\": \"Week 4\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"baseline\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}\n```",
+  "error": null,
+  "timestamp": "2026-03-08T01:57:16.561Z"
+}

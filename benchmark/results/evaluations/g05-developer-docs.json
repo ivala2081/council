@@ -1,0 +1,53 @@
+{
+  "promptId": "g05-developer-docs",
+  "outputA": {
+    "mode": "baseline",
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific with real competitor data (GitBook $7B valuation, Mintlify YC-backed)",
+      "Very actionable timeline with concrete weekly tasks",
+      "Deep technical analysis including build vs buy recommendations",
+      "Excellent decision framework with clear tradeoffs and deadlines"
+    ],
+    "weaknesses": [
+      "Some inconsistency in market sizing methodology",
+      "LTV/CAC calculations seem optimistic for early stage"
+    ]
+  },
+  "outputB": {
+    "mode": "council",
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 3,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good balance of specific and strategic advice",
+      "Realistic assessment of competitive threats",
+      "Clear positioning against competitors",
+      "Practical technical recommendations"
+    ],
+    "weaknesses": [
+      "Less specific market data and competitor intelligence",
+      "Unit economics calculations appear overly optimistic (2-month payback)",
+      "Some generic advice that could apply to many startups"
+    ]
+  },
+  "preference": "B",
+  "preferenceReason": "Output A provides significantly more specific and actionable intelligence. It includes precise competitor valuations, detailed technical stack recommendations, and a superior decision framework with clear deadlines. The market analysis is more thorough with specific methodologies, and the weekly action plan is more concrete and executable.",
+  "keyDifferences": [
+    "Output A has much more specific competitor data (GitBook $7B valuation vs generic descriptions)",
+    "Output A provides more detailed technical feasibility analysis with specific stack recommendations",
+    "Output A has a more structured decision agenda with clear deadlines and tradeoffs",
+    "Output B has more optimistic but less realistic unit economics (2-month vs 6-12 month payback)"
+  ],
+  "timestamp": "2026-03-08T01:16:33.748Z"
+}

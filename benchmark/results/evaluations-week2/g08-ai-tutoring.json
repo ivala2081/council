@@ -1,0 +1,92 @@
+{
+  "promptId": "g08-ai-tutoring",
+  "mapping": {
+    "A": "baseline",
+    "B": "dual",
+    "C": "council"
+  },
+  "timestamp": "2026-03-08T01:35:28.285Z",
+  "council": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Clear value proposition articulation",
+      "Realistic timeline estimates",
+      "Good balance of technical and business considerations",
+      "Practical approach to bootstrapping",
+      "Strong focus on COPPA compliance"
+    ],
+    "weaknesses": [
+      "Less detailed market analysis methodology",
+      "Fewer specific competitor insights",
+      "Decision agenda less comprehensive",
+      "Unit economics estimates seem less grounded",
+      "Less detailed risk mitigation strategies"
+    ],
+    "total": 18
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Strong competitive analysis with specific user numbers",
+      "Realistic assessment of funding constraints",
+      "Good focus on learning outcomes vs engagement metrics",
+      "Clear positioning against established players",
+      "Practical technical stack recommendations"
+    ],
+    "weaknesses": [
+      "Less detailed decision framework compared to other outputs",
+      "Market sizing methodology less clear",
+      "Action plan could be more specific about validation methods",
+      "Some redundancy in risk assessment"
+    ],
+    "total": 19
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific market sizing with clear methodology",
+      "Detailed competitor analysis with concrete strengths/weaknesses",
+      "Well-structured decision agenda with clear recommendations and deadlines",
+      "Realistic assessment of $10K budget constraints",
+      "Actionable weekly timeline with specific tasks"
+    ],
+    "weaknesses": [
+      "Some market size estimates may be optimistic",
+      "Limited discussion of technical implementation details",
+      "Could provide more specific customer acquisition strategies"
+    ],
+    "total": 21
+  },
+  "ranking": [
+    "baseline",
+    "dual",
+    "council"
+  ],
+  "rankingReason": "Output A provides the most comprehensive and actionable strategic brief. It offers the most detailed decision framework with clear recommendations and deadlines, specific market sizing methodology, and thorough competitor analysis. The structured approach to critical decisions (narrow focus, B2C vs B2B, funding timing) with clear tradeoffs makes it most valuable for actual decision-making. Output B is strong but less structured in decision-making, while Output C is solid but less detailed overall.",
+  "keyDifferences": [
+    "Output A has the most structured decision agenda with specific deadlines and clear recommendations",
+    "Output B emphasizes learning outcomes measurement as a key differentiator more than others",
+    "Output C focuses more on technical implementation details and COPPA compliance",
+    "All three agree on the competitive threat from Khan Academy but differ in their strategic responses",
+    "Market sizing approaches vary significantly between outputs, with A being most methodical"
+  ],
+  "winner": "baseline"
+}

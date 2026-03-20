@@ -1,0 +1,86 @@
+{
+  "promptId": "g09-cybersecurity-compliance",
+  "mapping": {
+    "A": "dual",
+    "B": "council",
+    "C": "baseline"
+  },
+  "timestamp": "2026-03-08T01:35:42.367Z",
+  "council": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good focus on AI liability risks",
+      "Realistic assessment of competitive threats",
+      "Clear vertical vs horizontal decision framework",
+      "Appropriate caution about market maturity"
+    ],
+    "weaknesses": [
+      "Less specific market data and competitor intelligence",
+      "Generic action items without enough detail",
+      "Shorter timeline estimates may be unrealistic",
+      "Less comprehensive decision analysis"
+    ],
+    "total": 18
+  },
+  "dual": {
+    "scores": {
+      "specificity": 5,
+      "actionability": 5,
+      "depth": 5,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Extremely specific with real company data (Vanta 7,000+ customers, $100M ARR)",
+      "Highly actionable weekly plans with concrete tasks",
+      "Deep insights on vertical positioning and AI risk management",
+      "Comprehensive decision framework with clear recommendations and deadlines"
+    ],
+    "weaknesses": [
+      "Some unit economics assumptions may be optimistic",
+      "Could benefit from more conservative market sizing"
+    ],
+    "total": 24
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good balance of optimism and realism",
+      "Strong focus on vertical specialization benefits",
+      "Comprehensive risk assessment",
+      "Clear positioning recommendations"
+    ],
+    "weaknesses": [
+      "Less detailed competitor analysis",
+      "Higher pricing assumptions may not be market-tested",
+      "Action plan could be more specific",
+      "Missing some technical implementation details"
+    ],
+    "total": 20
+  },
+  "ranking": [
+    "dual",
+    "baseline",
+    "council"
+  ],
+  "rankingReason": "Output A provides the most actionable and specific strategic guidance with real market data, detailed competitor intelligence, and a comprehensive decision framework. It offers the deepest insights while maintaining realism about challenges. Output C is solid but less detailed, while Output B is too cautious and generic for effective decision-making.",
+  "keyDifferences": [
+    "Output A provides specific competitor metrics and market data vs generic assessments in B and C",
+    "Output A has more detailed weekly action plans vs high-level recommendations in others",
+    "Output A offers more comprehensive decision frameworks with clear tradeoffs and deadlines",
+    "Output B is most conservative about AI risks while A provides balanced risk mitigation strategies"
+  ],
+  "winner": "dual"
+}

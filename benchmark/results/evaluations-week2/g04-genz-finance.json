@@ -1,0 +1,91 @@
+{
+  "promptId": "g04-genz-finance",
+  "mapping": {
+    "A": "baseline",
+    "B": "dual",
+    "C": "council"
+  },
+  "timestamp": "2026-03-08T01:34:32.177Z",
+  "council": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 3,
+      "depth": 3,
+      "realism": 3,
+      "decisionClarity": 3
+    },
+    "strengths": [
+      "Good positioning statement",
+      "Reasonable timeline estimates",
+      "Balanced view of opportunities and risks",
+      "Clear value proposition articulation"
+    ],
+    "weaknesses": [
+      "Less specific on regulatory requirements",
+      "Vague on customer acquisition costs and strategies",
+      "Limited depth in competitive analysis",
+      "Unit economics seem overly optimistic",
+      "Less actionable weekly tasks compared to others"
+    ],
+    "total": 15
+  },
+  "dual": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 5,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Very realistic about budget constraints and unit economics challenges",
+      "Strong emphasis on regulatory compliance costs",
+      "Good analysis of why $25K budget is insufficient",
+      "Practical recommendation to apply for accelerators",
+      "Honest assessment of competitive threats"
+    ],
+    "weaknesses": [
+      "Less detailed technical implementation guidance",
+      "Market size estimates vary significantly from other outputs",
+      "Some repetition in risk assessment",
+      "Less comprehensive competitor analysis"
+    ],
+    "total": 20
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Highly specific competitor analysis with real companies and pricing",
+      "Concrete 12-week action plan with weekly tasks",
+      "Excellent decision framework with clear options and tradeoffs",
+      "Realistic assessment of regulatory complexity and costs",
+      "Strong technical feasibility section with specific stack recommendations"
+    ],
+    "weaknesses": [
+      "Market size calculations seem inconsistent across outputs",
+      "Some unit economics assumptions may be optimistic",
+      "Could provide more specific customer acquisition strategies"
+    ],
+    "total": 21
+  },
+  "ranking": [
+    "baseline",
+    "dual",
+    "council"
+  ],
+  "rankingReason": "Output A provides the most comprehensive and actionable strategic brief. It offers the most detailed competitor analysis, clearest decision framework with specific recommendations and deadlines, and most thorough technical implementation guidance. Output B is strong on realism about financial constraints but less comprehensive overall. Output C lacks the depth and specificity needed for real decision-making.",
+  "keyDifferences": [
+    "Market size estimates vary dramatically ($24M to $200M SAM)",
+    "Regulatory risk assessment depth varies significantly",
+    "Level of technical implementation detail differs substantially",
+    "Decision framework clarity and actionability varies",
+    "Realism about budget constraints and unit economics challenges"
+  ],
+  "winner": "baseline"
+}

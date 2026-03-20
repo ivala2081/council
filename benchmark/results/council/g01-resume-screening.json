@@ -1,0 +1,253 @@
+{
+  "promptId": "g01-resume-screening",
+  "mode": "council",
+  "model": "claude-sonnet-4-20250514",
+  "inputTokens": 193,
+  "outputTokens": 2569,
+  "cacheReadTokens": 1338,
+  "cacheWriteTokens": 0,
+  "costUsd": 0.0389364,
+  "durationMs": 49896,
+  "brief": {
+    "executiveSummary": {
+      "verdict": "risky",
+      "summary": "Strong technical execution capability but entering a commoditizing market with powerful incumbents. The AI screening space is rapidly becoming table stakes for existing ATS platforms. Trust barriers are real but surmountable. Success depends on finding a defensible niche beyond basic AI screening.",
+      "councilScore": 45
+    },
+    "marketAnalysis": {
+      "marketSize": {
+        "tam": "$3.2B global recruitment software market (Grand View Research 2023)",
+        "sam": "$800M mid-market ATS/recruiting software segment in US",
+        "som": "$2-5M realistic 3-year capture (400-1000 customers at $500/mo)",
+        "methodology": "Based on ~50K mid-size companies in US, 10-20% adoption rate for standalone AI screening",
+        "confidence": "medium"
+      },
+      "competitors": [
+        {
+          "name": "HireVue",
+          "description": "AI-powered video interviewing and assessment platform",
+          "strength": "Established enterprise relationships, proven ROI metrics",
+          "weakness": "Expensive, complex implementation for mid-market",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Greenhouse",
+          "description": "Leading ATS with AI-powered candidate scoring",
+          "strength": "Full recruiting workflow, strong integrations, trusted brand",
+          "weakness": "Higher price point, may over-engineer for simple screening needs",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Workday HCM",
+          "description": "Enterprise HR suite with AI recruiting features",
+          "strength": "Complete HR ecosystem, enterprise sales force",
+          "weakness": "Overkill for mid-market, slow to innovate",
+          "isDirectCompetitor": false
+        },
+        {
+          "name": "Lever",
+          "description": "Modern ATS with built-in candidate intelligence",
+          "strength": "User-friendly interface, growing AI capabilities",
+          "weakness": "Still building AI features, limited customization",
+          "isDirectCompetitor": true
+        },
+        {
+          "name": "Pymetrics",
+          "description": "AI-based talent matching and bias reduction",
+          "strength": "Scientific approach, bias mitigation focus",
+          "weakness": "Complex setup, requires candidate buy-in for assessments",
+          "isDirectCompetitor": true
+        }
+      ],
+      "positioning": "Simple, transparent AI screening for mid-market companies who want AI benefits without ATS complexity",
+      "timing": "AI screening is becoming commoditized - window for standalone tools is narrowing rapidly",
+      "gaps": [
+        "Transparent AI decision-making",
+        "Industry-specific screening models",
+        "Bias auditing and compliance"
+      ]
+    },
+    "valueProposition": {
+      "coreProblem": "Mid-size companies waste 40+ hours per hire manually screening resumes, but full ATS platforms are overkill",
+      "targetCustomer": "HR managers at 100-300 employee companies in high-volume hiring industries (tech, healthcare, retail)",
+      "uniqueAngle": "Plug-and-play AI screening that integrates with existing workflows, not a full ATS replacement",
+      "whyNow": "Remote work increased application volumes 3x while AI screening accuracy crossed viability threshold in 2023"
+    },
+    "businessModel": {
+      "revenueStrategy": "SaaS subscription with usage-based tiers: $500/mo base (500 screenings), $0.50 per additional screening",
+      "pricingFramework": "$500/mo justified by saving 30 hours/month of manual screening (worth $900+ in HR time)",
+      "unitEconomics": {
+        "estimatedCAC": "$800-1200 (digital marketing + sales demos for mid-market)",
+        "estimatedLTV": "$18,000 (36 months average retention at $500/mo)",
+        "paybackPeriod": "2-3 months",
+        "confidence": "medium"
+      },
+      "scalabilityAssessment": "At 10x scale (1000 customers), need dedicated customer success team and enterprise sales motion. Margins improve with scale due to fixed AI infrastructure costs."
+    },
+    "technicalFeasibility": {
+      "mvpScope": [
+        "Resume parsing and scoring",
+        "Job description matching",
+        "Basic dashboard with rankings",
+        "CSV export functionality"
+      ],
+      "recommendedStack": "FastAPI backend, React frontend, OpenAI/Claude API for NLP, PostgreSQL, deployed on Railway/Vercel",
+      "buildVsBuy": [
+        {
+          "component": "Resume parsing",
+          "recommendation": "buy",
+          "rationale": "Textract or similar saves 4-6 weeks of development"
+        },
+        {
+          "component": "AI scoring engine",
+          "recommendation": "build",
+          "rationale": "Core differentiator, need control over prompts and logic"
+        },
+        {
+          "component": "User interface",
+          "recommendation": "build",
+          "rationale": "Simple CRUD app, faster to build than integrate"
+        }
+      ],
+      "technicalRisks": [
+        "AI API costs scaling faster than revenue",
+        "Resume format edge cases",
+        "Latency issues with large batches"
+      ],
+      "estimatedMvpTimeline": "10-12 weeks for solo developer with your experience"
+    },
+    "riskAssessment": {
+      "risks": [
+        {
+          "category": "competitive",
+          "severity": "critical",
+          "description": "Established ATS players adding AI screening as a feature, making standalone tool obsolete",
+          "mitigation": "Focus on integration-first approach, partner with smaller ATS providers, or pivot to specialized verticals"
+        },
+        {
+          "category": "market",
+          "severity": "high",
+          "description": "HR teams may not trust AI-only screening for legal/bias concerns",
+          "mitigation": "Build transparency features, partner with employment lawyers, get bias auditing certifications"
+        },
+        {
+          "category": "financial",
+          "severity": "high",
+          "description": "AI API costs could eat 40-60% of revenue at scale",
+          "mitigation": "Negotiate volume discounts early, consider fine-tuning smaller models, implement smart caching"
+        },
+        {
+          "category": "regulatory",
+          "severity": "medium",
+          "description": "Increasing AI hiring regulations (NYC Local Law 144, EU AI Act)",
+          "mitigation": "Build audit trails, bias testing features, stay ahead of compliance requirements"
+        },
+        {
+          "category": "execution",
+          "severity": "medium",
+          "description": "Solo founder burnout managing product, sales, and customer success",
+          "mitigation": "Hire part-time sales/marketing help by month 6, focus on product-led growth initially"
+        }
+      ]
+    },
+    "actionPlan": {
+      "week1to4": [
+        "Interview 15 HR managers at target companies about current screening process",
+        "Build basic resume parsing prototype",
+        "Research AI bias regulations in key markets",
+        "Set up basic landing page with email capture"
+      ],
+      "week5to8": [
+        "Complete MVP core features",
+        "Test with 3-5 beta customers",
+        "Implement basic bias detection/reporting",
+        "Create pricing and positioning based on customer feedback"
+      ],
+      "week9to12": [
+        "Launch paid beta with 10-20 customers",
+        "Build integrations with 2-3 popular HRIS systems",
+        "Develop customer success playbooks",
+        "Prepare for broader launch"
+      ]
+    },
+    "decisionAgenda": [
+      {
+        "priority": "critical",
+        "question": "Should you build a standalone tool or pivot to an integration-first approach?",
+        "options": [
+          {
+            "option": "Standalone SaaS",
+            "tradeoff": "Gain: Full control, higher margins. Lose: Harder customer acquisition, competitive risk"
+          },
+          {
+            "option": "Integration/API first",
+            "tradeoff": "Gain: Faster adoption, partner channels. Lose: Lower margins, dependency on partners"
+          }
+        ],
+        "recommendation": "Start standalone but design API-first architecture. This lets you pivot to integrations if customer acquisition proves too expensive.",
+        "deadline": "End of week 2"
+      },
+      {
+        "priority": "critical",
+        "question": "Which customer segment should you target first?",
+        "options": [
+          {
+            "option": "General mid-market HR",
+            "tradeoff": "Gain: Large market. Lose: Generic positioning, harder to stand out"
+          },
+          {
+            "option": "Specific vertical (healthcare/tech)",
+            "tradeoff": "Gain: Easier to build reputation, specialized features. Lose: Smaller initial market"
+          }
+        ],
+        "recommendation": "Target tech companies 100-300 employees first. You understand their needs, they're comfortable with AI tools, and high hiring volumes justify the cost.",
+        "deadline": "End of week 1"
+      },
+      {
+        "priority": "important",
+        "question": "How much should you invest in bias detection and transparency features?",
+        "options": [
+          {
+            "option": "Basic compliance only",
+            "tradeoff": "Gain: Faster MVP, lower costs. Lose: Harder enterprise sales, regulatory risk"
+          },
+          {
+            "option": "Advanced bias auditing",
+            "tradeoff": "Gain: Competitive differentiator, enterprise appeal. Lose: 4-6 weeks additional development"
+          }
+        ],
+        "recommendation": "Start with basic audit trails and explainable scoring. Add advanced bias detection in v2 based on customer demand.",
+        "deadline": "Week 4"
+      },
+      {
+        "priority": "important",
+        "question": "Should you bootstrap or raise funding?",
+        "options": [
+          {
+            "option": "Bootstrap with $15K",
+            "tradeoff": "Gain: Full control, validation of business model. Lose: Slower growth, limited marketing budget"
+          },
+          {
+            "option": "Raise pre-seed round",
+            "tradeoff": "Gain: Faster growth, team building, marketing budget. Lose: Dilution, pressure, time spent fundraising"
+          }
+        ],
+        "recommendation": "Bootstrap to 20-30 paying customers first. This proves product-market fit and gives you leverage for better fundraising terms.",
+        "deadline": "Month 6"
+      }
+    ],
+    "metadata": {
+      "pipelineMode": "single",
+      "agentsUsed": [
+        "strategist"
+      ],
+      "totalTokens": 0,
+      "totalCostUsd": 0,
+      "durationMs": 0,
+      "language": "en"
+    }
+  },
+  "rawText": "```json\n{\n  \"executiveSummary\": {\n    \"verdict\": \"risky\",\n    \"summary\": \"Strong technical execution capability but entering a commoditizing market with powerful incumbents. The AI screening space is rapidly becoming table stakes for existing ATS platforms. Trust barriers are real but surmountable. Success depends on finding a defensible niche beyond basic AI screening.\",\n    \"councilScore\": 45\n  },\n  \"marketAnalysis\": {\n    \"marketSize\": {\n      \"tam\": \"$3.2B global recruitment software market (Grand View Research 2023)\",\n      \"sam\": \"$800M mid-market ATS/recruiting software segment in US\",\n      \"som\": \"$2-5M realistic 3-year capture (400-1000 customers at $500/mo)\",\n      \"methodology\": \"Based on ~50K mid-size companies in US, 10-20% adoption rate for standalone AI screening\",\n      \"confidence\": \"medium\"\n    },\n    \"competitors\": [\n      {\n        \"name\": \"HireVue\",\n        \"description\": \"AI-powered video interviewing and assessment platform\",\n        \"strength\": \"Established enterprise relationships, proven ROI metrics\",\n        \"weakness\": \"Expensive, complex implementation for mid-market\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Greenhouse\",\n        \"description\": \"Leading ATS with AI-powered candidate scoring\",\n        \"strength\": \"Full recruiting workflow, strong integrations, trusted brand\",\n        \"weakness\": \"Higher price point, may over-engineer for simple screening needs\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Workday HCM\",\n        \"description\": \"Enterprise HR suite with AI recruiting features\",\n        \"strength\": \"Complete HR ecosystem, enterprise sales force\",\n        \"weakness\": \"Overkill for mid-market, slow to innovate\",\n        \"isDirectCompetitor\": false\n      },\n      {\n        \"name\": \"Lever\",\n        \"description\": \"Modern ATS with built-in candidate intelligence\",\n        \"strength\": \"User-friendly interface, growing AI capabilities\",\n        \"weakness\": \"Still building AI features, limited customization\",\n        \"isDirectCompetitor\": true\n      },\n      {\n        \"name\": \"Pymetrics\",\n        \"description\": \"AI-based talent matching and bias reduction\",\n        \"strength\": \"Scientific approach, bias mitigation focus\",\n        \"weakness\": \"Complex setup, requires candidate buy-in for assessments\",\n        \"isDirectCompetitor\": true\n      }\n    ],\n    \"positioning\": \"Simple, transparent AI screening for mid-market companies who want AI benefits without ATS complexity\",\n    \"timing\": \"AI screening is becoming commoditized - window for standalone tools is narrowing rapidly\",\n    \"gaps\": [\"Transparent AI decision-making\", \"Industry-specific screening models\", \"Bias auditing and compliance\"]\n  },\n  \"valueProposition\": {\n    \"coreProblem\": \"Mid-size companies waste 40+ hours per hire manually screening resumes, but full ATS platforms are overkill\",\n    \"targetCustomer\": \"HR managers at 100-300 employee companies in high-volume hiring industries (tech, healthcare, retail)\",\n    \"uniqueAngle\": \"Plug-and-play AI screening that integrates with existing workflows, not a full ATS replacement\",\n    \"whyNow\": \"Remote work increased application volumes 3x while AI screening accuracy crossed viability threshold in 2023\"\n  },\n  \"businessModel\": {\n    \"revenueStrategy\": \"SaaS subscription with usage-based tiers: $500/mo base (500 screenings), $0.50 per additional screening\",\n    \"pricingFramework\": \"$500/mo justified by saving 30 hours/month of manual screening (worth $900+ in HR time)\",\n    \"unitEconomics\": {\n      \"estimatedCAC\": \"$800-1200 (digital marketing + sales demos for mid-market)\",\n      \"estimatedLTV\": \"$18,000 (36 months average retention at $500/mo)\",\n      \"paybackPeriod\": \"2-3 months\",\n      \"confidence\": \"medium\"\n    },\n    \"scalabilityAssessment\": \"At 10x scale (1000 customers), need dedicated customer success team and enterprise sales motion. Margins improve with scale due to fixed AI infrastructure costs.\"\n  },\n  \"technicalFeasibility\": {\n    \"mvpScope\": [\"Resume parsing and scoring\", \"Job description matching\", \"Basic dashboard with rankings\", \"CSV export functionality\"],\n    \"recommendedStack\": \"FastAPI backend, React frontend, OpenAI/Claude API for NLP, PostgreSQL, deployed on Railway/Vercel\",\n    \"buildVsBuy\": [\n      { \"component\": \"Resume parsing\", \"recommendation\": \"buy\", \"rationale\": \"Textract or similar saves 4-6 weeks of development\" },\n      { \"component\": \"AI scoring engine\", \"recommendation\": \"build\", \"rationale\": \"Core differentiator, need control over prompts and logic\" },\n      { \"component\": \"User interface\", \"recommendation\": \"build\", \"rationale\": \"Simple CRUD app, faster to build than integrate\" }\n    ],\n    \"technicalRisks\": [\"AI API costs scaling faster than revenue\", \"Resume format edge cases\", \"Latency issues with large batches\"],\n    \"estimatedMvpTimeline\": \"10-12 weeks for solo developer with your experience\"\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"category\": \"competitive\",\n        \"severity\": \"critical\",\n        \"description\": \"Established ATS players adding AI screening as a feature, making standalone tool obsolete\",\n        \"mitigation\": \"Focus on integration-first approach, partner with smaller ATS providers, or pivot to specialized verticals\"\n      },\n      {\n        \"category\": \"market\",\n        \"severity\": \"high\",\n        \"description\": \"HR teams may not trust AI-only screening for legal/bias concerns\",\n        \"mitigation\": \"Build transparency features, partner with employment lawyers, get bias auditing certifications\"\n      },\n      {\n        \"category\": \"financial\",\n        \"severity\": \"high\",\n        \"description\": \"AI API costs could eat 40-60% of revenue at scale\",\n        \"mitigation\": \"Negotiate volume discounts early, consider fine-tuning smaller models, implement smart caching\"\n      },\n      {\n        \"category\": \"regulatory\",\n        \"severity\": \"medium\",\n        \"description\": \"Increasing AI hiring regulations (NYC Local Law 144, EU AI Act)\",\n        \"mitigation\": \"Build audit trails, bias testing features, stay ahead of compliance requirements\"\n      },\n      {\n        \"category\": \"execution\",\n        \"severity\": \"medium\",\n        \"description\": \"Solo founder burnout managing product, sales, and customer success\",\n        \"mitigation\": \"Hire part-time sales/marketing help by month 6, focus on product-led growth initially\"\n      }\n    ]\n  },\n  \"actionPlan\": {\n    \"week1to4\": [\"Interview 15 HR managers at target companies about current screening process\", \"Build basic resume parsing prototype\", \"Research AI bias regulations in key markets\", \"Set up basic landing page with email capture\"],\n    \"week5to8\": [\"Complete MVP core features\", \"Test with 3-5 beta customers\", \"Implement basic bias detection/reporting\", \"Create pricing and positioning based on customer feedback\"],\n    \"week9to12\": [\"Launch paid beta with 10-20 customers\", \"Build integrations with 2-3 popular HRIS systems\", \"Develop customer success playbooks\", \"Prepare for broader launch\"]\n  },\n  \"decisionAgenda\": [\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Should you build a standalone tool or pivot to an integration-first approach?\",\n      \"options\": [\n        { \"option\": \"Standalone SaaS\", \"tradeoff\": \"Gain: Full control, higher margins. Lose: Harder customer acquisition, competitive risk\" },\n        { \"option\": \"Integration/API first\", \"tradeoff\": \"Gain: Faster adoption, partner channels. Lose: Lower margins, dependency on partners\" }\n      ],\n      \"recommendation\": \"Start standalone but design API-first architecture. This lets you pivot to integrations if customer acquisition proves too expensive.\",\n      \"deadline\": \"End of week 2\"\n    },\n    {\n      \"priority\": \"critical\",\n      \"question\": \"Which customer segment should you target first?\",\n      \"options\": [\n        { \"option\": \"General mid-market HR\", \"tradeoff\": \"Gain: Large market. Lose: Generic positioning, harder to stand out\" },\n        { \"option\": \"Specific vertical (healthcare/tech)\", \"tradeoff\": \"Gain: Easier to build reputation, specialized features. Lose: Smaller initial market\" }\n      ],\n      \"recommendation\": \"Target tech companies 100-300 employees first. You understand their needs, they're comfortable with AI tools, and high hiring volumes justify the cost.\",\n      \"deadline\": \"End of week 1\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"How much should you invest in bias detection and transparency features?\",\n      \"options\": [\n        { \"option\": \"Basic compliance only\", \"tradeoff\": \"Gain: Faster MVP, lower costs. Lose: Harder enterprise sales, regulatory risk\" },\n        { \"option\": \"Advanced bias auditing\", \"tradeoff\": \"Gain: Competitive differentiator, enterprise appeal. Lose: 4-6 weeks additional development\" }\n      ],\n      \"recommendation\": \"Start with basic audit trails and explainable scoring. Add advanced bias detection in v2 based on customer demand.\",\n      \"deadline\": \"Week 4\"\n    },\n    {\n      \"priority\": \"important\",\n      \"question\": \"Should you bootstrap or raise funding?\",\n      \"options\": [\n        { \"option\": \"Bootstrap with $15K\", \"tradeoff\": \"Gain: Full control, validation of business model. Lose: Slower growth, limited marketing budget\" },\n        { \"option\": \"Raise pre-seed round\", \"tradeoff\": \"Gain: Faster growth, team building, marketing budget. Lose: Dilution, pressure, time spent fundraising\" }\n      ],\n      \"recommendation\": \"Bootstrap to 20-30 paying customers first. This proves product-market fit and gives you leverage for better fundraising terms.\",\n      \"deadline\": \"Month 6\"\n    }\n  ],\n  \"metadata\": {\n    \"pipelineMode\": \"single\",\n    \"agentsUsed\": [\"strategist\"],\n    \"totalTokens\": 0,\n    \"totalCostUsd\": 0,\n    \"durationMs\": 0,\n    \"language\": \"en\"\n  }\n}\n```",
+  "error": null,
+  "timestamp": "2026-03-08T01:48:49.342Z"
+}

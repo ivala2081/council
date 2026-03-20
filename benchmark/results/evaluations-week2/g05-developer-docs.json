@@ -1,0 +1,83 @@
+{
+  "promptId": "g05-developer-docs",
+  "mapping": {
+    "A": "baseline",
+    "B": "council",
+    "C": "dual"
+  },
+  "timestamp": "2026-03-08T01:34:43.945Z",
+  "council": {
+    "scores": {
+      "specificity": 3,
+      "actionability": 4,
+      "depth": 3,
+      "realism": 3,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Good balance of optimism and realism",
+      "Clear positioning statement",
+      "Practical MVP scope",
+      "Strong actionable timeline"
+    ],
+    "weaknesses": [
+      "Less specific on competitor weaknesses",
+      "Unit economics seem overly optimistic (2-month payback)",
+      "Shallow technical risk analysis"
+    ],
+    "total": 17
+  },
+  "dual": {
+    "scores": {
+      "specificity": 5,
+      "actionability": 4,
+      "depth": 5,
+      "realism": 4,
+      "decisionClarity": 4
+    },
+    "strengths": [
+      "Most specific competitor details with funding amounts",
+      "Deep insight about positioning as workflow automation vs docs tool",
+      "Excellent technical feasibility analysis",
+      "Strong market timing rationale"
+    ],
+    "weaknesses": [
+      "Decision agenda could be clearer on recommendations",
+      "Some decisions marked as 'consider' rather than actionable"
+    ],
+    "total": 22
+  },
+  "baseline": {
+    "scores": {
+      "specificity": 4,
+      "actionability": 4,
+      "depth": 4,
+      "realism": 4,
+      "decisionClarity": 5
+    },
+    "strengths": [
+      "Excellent decision framework with clear options and tradeoffs",
+      "Specific market sizing with methodology",
+      "Realistic unit economics with proper confidence labeling",
+      "Actionable weekly timeline"
+    ],
+    "weaknesses": [
+      "Some generic competitor analysis",
+      "Limited technical depth on AI implementation challenges"
+    ],
+    "total": 21
+  },
+  "ranking": [
+    "baseline",
+    "dual",
+    "council"
+  ],
+  "rankingReason": "Output A provides the clearest decision framework with specific recommendations and deadlines, making it most actionable for a founder. Output C has superior depth and specificity but slightly weaker decision clarity. Output B is solid but less distinctive and has some unrealistic assumptions.",
+  "keyDifferences": [
+    "Output A excels at decision clarity with explicit recommendations and deadlines",
+    "Output C provides the most market intelligence and technical depth",
+    "Output B is most optimistic but least specific about competitive landscape",
+    "All three agree on core strategy but differ in execution priorities"
+  ],
+  "winner": "baseline"
+}
