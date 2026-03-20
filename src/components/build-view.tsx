@@ -7,7 +7,7 @@ import { status as statusTokens } from "@/lib/design-tokens";
 interface PhaseInfo {
   phase: number;
   name: string;
-  status: "pending" | "running" | "awaiting_approval" | "completed" | "failed";
+  status: "pending" | "running" | "awaiting_approval" | "completed" | "failed" | "skipped";
 }
 
 const PHASE_NAMES: Record<number, string> = {
@@ -25,6 +25,7 @@ function statusIcon(status: PhaseInfo["status"]): string {
     case "running": return "◎";
     case "awaiting_approval": return "◉";
     case "failed": return "✕";
+    case "skipped": return "—";
     default: return "○";
   }
 }
@@ -35,6 +36,7 @@ function statusColor(s: PhaseInfo["status"]): string {
     case "running": return "text-status-info animate-pulse";
     case "awaiting_approval": return "text-status-warning";
     case "failed": return "text-status-error";
+    case "skipped": return "text-muted-foreground/50";
     default: return "text-muted-foreground";
   }
 }

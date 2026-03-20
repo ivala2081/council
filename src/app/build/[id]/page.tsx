@@ -13,7 +13,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { ProjectPreview } from "@/components/sandpack-preview";
 
-type PhaseStatus = "pending" | "running" | "awaiting_approval" | "completed" | "failed";
+type PhaseStatus = "pending" | "running" | "awaiting_approval" | "completed" | "failed" | "skipped";
 
 interface PhaseOutput {
   id: string;
@@ -88,9 +88,8 @@ function getPhaseStatuses(
     let status: PhaseStatus = "pending";
     if (phasesWithOutputs.has(num) && num < currentPhase) {
       status = "completed";
-    } else if (num < currentPhase) {
-      // Skipped phase (e.g. Phase 5)
-      status = "completed";
+    } else if (num < currentPhase && !phasesWithOutputs.has(num)) {
+      status = "skipped";
     } else if (num === currentPhase) {
       if (awaitingApproval) status = "awaiting_approval";
       else if (data?.project.status === "failed") status = "failed";
@@ -355,14 +354,35 @@ export default function BuildPage({ params }: { params: Promise<{ id: string }> 
         )}
 
         {canRetry && (
-          <Card className="p-6 text-center space-y-3 border-red-200 bg-red-50 dark:bg-red-950/20">
-            <h3 className="font-semibold text-red-700 dark:text-red-400">Build failed</h3>
-            <p className="text-sm text-muted-foreground">
-              Some agents failed. You can retry — completed phases will be skipped.
-            </p>
-            <Button onClick={startBuild} variant="outline" className="w-full max-w-sm">
-              Retry Build →
-            </Button>
+          <Card className="p-6 space-y-4 border-red-200 bg-red-50 dark:bg-red-950/20">
+            <div className="text-center space-y-1">
+              <h3 className="font-semibold text-red-700 dark:text-red-400">Build failed at Phase {project.current_phase}</h3>
+              <p className="text-sm text-muted-foreground">
+                Completed phases will be skipped on retry.
+              </p>
+            </div>
+            {auditLog.filter((a) => a.error_message).length > 0 && (
+              <div className="space-y-1.5 text-left">
+                {auditLog
+                  .filter((a) => a.error_message)
+                  .slice(0, 5)
+                  .map((a, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs">
+                      <Badge variant="destructive" className="text-[10px] px-1.5 shrink-0 mt-0.5">
+                        {a.agent_name?.replace(/_/g, " ")}
+                      </Badge>
+                      <span className="text-red-600 dark:text-red-400 line-clamp-2">
+                        {a.error_message?.replace(/^Agent failed on model [\w-]+: /, "")}
+                      </span>
+                    </div>
+                  ))}
+              </div>
+            )}
+            <div className="text-center">
+              <Button onClick={startBuild} variant="outline" className="w-full max-w-sm">
+                Retry Build →
+              </Button>
+            </div>
           </Card>
         )}
 
