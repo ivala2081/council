@@ -16,17 +16,22 @@ interface Project {
   created_at: string;
 }
 
-const STATUS_COLORS: Record<string, string> = {
-  intake: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
-  product: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
-  design: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
-  building: "bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300",
-  verifying: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300",
-  releasing: "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300",
-  live: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
-  paused: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
-  failed: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
-};
+function statusBadgeClass(status: string): string {
+  switch (status) {
+    case "live":
+      return "bg-status-success/15 text-status-success";
+    case "failed":
+      return "bg-status-error/15 text-status-error";
+    case "paused":
+      return "bg-status-warning/15 text-status-warning";
+    case "building":
+    case "verifying":
+    case "releasing":
+      return "bg-status-info/15 text-status-info";
+    default:
+      return "bg-muted text-muted-foreground";
+  }
+}
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
@@ -93,7 +98,7 @@ export default function ProjectsPage() {
                         <h2 className="font-semibold truncate group-hover:text-foreground transition-colors">
                           {project.name}
                         </h2>
-                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[project.status] ?? STATUS_COLORS.intake}`}>
+                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusBadgeClass(project.status)}`}>
                           {project.status}
                         </span>
                       </div>
