@@ -201,7 +201,7 @@ export function CouncilConversation({
       <div ref={bottomRef} />
 
       {/* Input */}
-      <div className="sticky bottom-4 bg-background/80 backdrop-blur-sm rounded-xl border p-1">
+      <div className="sticky bottom-4 bg-background/80 backdrop-blur-sm rounded-xl border p-1 flex items-center gap-1">
         <textarea
           ref={inputRef}
           value={input}
@@ -212,8 +212,18 @@ export function CouncilConversation({
           }
           disabled={loading}
           rows={1}
-          className="w-full resize-none bg-transparent px-3 py-2.5 text-[15px] text-foreground placeholder:text-muted-foreground/50 focus:outline-none disabled:opacity-50"
+          className="flex-1 resize-none bg-transparent px-3 py-2.5 text-[15px] text-foreground placeholder:text-muted-foreground/50 focus:outline-none disabled:opacity-50"
         />
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={loading || !input.trim()}
+          className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center shrink-0 disabled:opacity-15 hover:opacity-80 transition-all mr-1"
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+          </svg>
+        </button>
       </div>
 
       {/* Skip link — only on first question */}
