@@ -43,6 +43,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-foreground/10`}
+        suppressHydrationWarning
       >
         <script
           dangerouslySetInnerHTML={{
