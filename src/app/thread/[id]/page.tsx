@@ -10,6 +10,12 @@ import { DeltaBanner } from "@/components/delta-banner";
 import { FeedbackForm } from "@/components/feedback-form";
 import { LoadingDots } from "@/components/loading-dots";
 import { PdfExportButton } from "@/components/pdf-export-button";
+import { ThreadSectionNav } from "@/components/thread-section-nav";
+import { GenesisView } from "@/components/genesis/genesis-view";
+import { VerdictActionBar } from "@/components/verdict-action-bar";
+import { ScoreSparkline } from "@/components/score-sparkline";
+import { ShareModal } from "@/components/share-modal";
+import { EmailCapture } from "@/components/email-capture";
 import {
   strategicBriefSchema,
   conciseBriefSchema,
@@ -19,6 +25,7 @@ import {
 import { getVerdict, getDelta } from "@/lib/design-tokens";
 import type { BriefDelta } from "@/lib/threads/delta";
 import { trackEvent } from "@/lib/track-event";
+import { canStartGenesis } from "@/lib/entitlements";
 
 type BriefMode = "full" | "concise";
 
@@ -53,11 +60,19 @@ interface Thread {
   created_at: string;
 }
 
+// Genesis project state
+interface Project {
+  id: string;
+  status: string;
+  current_phase: number;
+}
+
 export default function ThreadPage() {
   const { id } = useParams<{ id: string }>();
   const [thread, setThread] = useState<Thread | null>(null);
   const [runs, setRuns] = useState<Run[]>([]);
   const [loading, setLoading] = useState(true);
+  const [project, setProject] = useState<Project | null>(null);
 
   // New run state
   const [prompt, setPrompt] = useState("");
@@ -67,10 +82,15 @@ export default function ThreadPage() {
   const [newMissionId, setNewMissionId] = useState<string | null>(null);
   const [mode, setMode] = useState<BriefMode>("full");
   const [copiedShare, setCopiedShare] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const [selectedChips, setSelectedChips] = useState<Set<string>>(new Set());
   const [building, setBuilding] = useState(false);
   const briefRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const ownerToken = typeof window !== "undefined"
+    ? localStorage.getItem("council_owner_token") ?? ""
+    : "";
 
   // Fetch thread data
   useEffect(() => {
@@ -90,6 +110,22 @@ export default function ThreadPage() {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
+  }, [id]);
+
+  // Check for existing project (genesis)
+  useEffect(() => {
+    if (!id) return;
+    const token = localStorage.getItem("council_owner_token") ?? "";
+    fetch(`/api/projects?owner_token=${token}`)
+      .then((r) => r.json())
+      .then((data) => {
+        const projects = data.projects ?? [];
+        const existing = projects.find(
+          (p: { thread_id: string }) => p.thread_id === id
+        );
+        if (existing) setProject(existing);
+      })
+      .catch(() => {});
   }, [id]);
 
   // Parse new brief from streaming completion
@@ -128,7 +164,6 @@ export default function ThreadPage() {
       briefRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     if (newBrief && newMissionId) {
-      // Re-fetch thread data to get the computed delta
       const token = localStorage.getItem("council_owner_token") ?? "";
       fetch(`/api/threads/${id}?token=${token}`)
         .then((r) => r.json())
@@ -136,7 +171,6 @@ export default function ThreadPage() {
           setThread(data.thread);
           const allRuns = (data.runs ?? []) as Run[];
           setRuns(allRuns);
-          // Find the new run's delta
           const newRun = allRuns.find((r: Run) => r.id === newMissionId);
           if (newRun?.delta) {
             setNewRunDelta(newRun.delta);
@@ -165,11 +199,11 @@ export default function ThreadPage() {
       setIsStreaming(true);
 
       try {
-        const ownerToken = localStorage.getItem("council_owner_token") ?? undefined;
+        const token = localStorage.getItem("council_owner_token") ?? undefined;
         const res = await fetch("/api/mission", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt, mode, threadId: id, ownerToken }),
+          body: JSON.stringify({ prompt, mode, threadId: id, ownerToken: token }),
         });
 
         if (!res.ok) {
@@ -207,31 +241,36 @@ export default function ThreadPage() {
         setIsStreaming(false);
       }
     },
-    [prompt, isStreaming, mode, id]
+    [prompt, isStreaming, mode, id, runs.length]
   );
 
-  const handleBuild = useCallback(async () => {
+  const handleStartGenesis = useCallback(async () => {
     if (!thread || building) return;
+    if (!canStartGenesis(ownerToken)) return;
+
     setBuilding(true);
     try {
-      const ownerToken = localStorage.getItem("council_owner_token") ?? localStorage.getItem("owner_token") ?? "";
+      const token = localStorage.getItem("council_owner_token") ?? "";
       const res = await fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ threadId: thread.id, ownerToken, name: thread.name }),
+        body: JSON.stringify({ threadId: thread.id, ownerToken: token, name: thread.name }),
       });
       const json = await res.json();
       if (json.projectId) {
-        window.location.href = `/build/${json.projectId}`;
+        setProject({ id: json.projectId, status: "pending", current_phase: 0 });
+        // Start build
+        await fetch(`/api/projects/${json.projectId}/build`, { method: "POST" });
+        setProject((p) => p ? { ...p, status: "building" } : p);
       } else {
         setError(json.error ?? "Failed to create project");
       }
     } catch {
-      setError("Failed to create project");
+      setError("Failed to start Genesis");
     } finally {
       setBuilding(false);
     }
-  }, [thread, building]);
+  }, [thread, building, ownerToken]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -242,9 +281,19 @@ export default function ThreadPage() {
     }
   };
 
-  // Get last completed run for context display
   const lastRun = runs.filter((r) => r.status === "completed").at(-1) ?? null;
   const lastVerdict = lastRun?.result?.verdict as Record<string, unknown> | undefined;
+  const hasGenesis = project !== null;
+  const hasCompletedRun = runs.some((r) => r.status === "completed");
+
+  // Section nav
+  const sections = [
+    { id: "header", label: "Overview", visible: true },
+    { id: "runs", label: "Runs", visible: runs.length > 0 },
+    { id: "brief", label: "Brief", visible: !!newBrief || !!lastRun },
+    { id: "update-input", label: "Update", visible: !newBrief && !isStreaming },
+    { id: "genesis", label: "Genesis", visible: hasGenesis },
+  ];
 
   if (loading) {
     return (
@@ -264,36 +313,20 @@ export default function ThreadPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
       <AppHeader />
+      <ThreadSectionNav sections={sections} />
 
       <main className="flex-1 max-w-3xl w-full mx-auto px-6 py-6">
-        {/* Thread header */}
-        <div className="mb-6">
+        {/* ─── SECTION: Header ─── */}
+        <section id="header" className="mb-8">
           <div className="flex items-start justify-between gap-3">
             <h1 className="text-lg font-semibold line-clamp-2">{thread.name}</h1>
             <div className="flex items-center gap-2 shrink-0 mt-0.5">
-              {thread.run_count > 0 && (
-                <button
-                  onClick={handleBuild}
-                  disabled={building}
-                  className="text-xs px-2.5 py-1 rounded-lg bg-foreground text-background font-medium hover:opacity-80 transition-opacity disabled:opacity-40"
-                >
-                  {building ? "…" : "Build →"}
-                </button>
-              )}
               <button
-                onClick={() => {
-                  const url = `${window.location.origin}/thread/${thread.id}`;
-                  navigator.clipboard.writeText(url).then(() => {
-                    setCopiedShare(true);
-                    trackEvent({ event: "share_clicked", thread_id: thread.id });
-                    setTimeout(() => setCopiedShare(false), 2000);
-                  });
-                }}
+                onClick={() => setShareOpen(true)}
                 className="text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
-                {copiedShare ? "Copied!" : "Share"}
+                Share
               </button>
             </div>
           </div>
@@ -308,15 +341,28 @@ export default function ThreadPage() {
                 {thread.latest_score}
               </span>
             )}
+            <ScoreSparkline
+              scores={runs
+                .filter((r) => r.status === "completed")
+                .map((r) => {
+                  const v = r.result?.verdict as Record<string, unknown> | undefined;
+                  return (v?.councilScore as number) ?? 0;
+                })
+                .filter((s) => s > 0)}
+              latestVerdict={thread.latest_verdict ?? undefined}
+            />
             <span className="text-xs text-muted-foreground">
               · {thread.run_count} {thread.run_count === 1 ? "run" : "runs"}
             </span>
           </div>
-        </div>
+        </section>
 
-        {/* Previous runs summary */}
+        {/* ─── SECTION: Run History ─── */}
         {runs.length > 0 && (
-          <div className="mb-6 space-y-2">
+          <section id="runs" className="mb-8 space-y-2">
+            <h2 className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+              Run History
+            </h2>
             {runs.filter((r) => r.status === "completed").map((run) => {
               const v = run.result?.verdict as Record<string, unknown> | undefined;
               const verdict = v?.verdict as string | undefined;
@@ -362,13 +408,66 @@ export default function ThreadPage() {
                 </a>
               );
             })}
-          </div>
+          </section>
         )}
 
-        {/* "What changed?" input */}
+        {/* ─── SECTION: Brief (latest or new) ─── */}
+        <section id="brief" ref={briefRef}>
+          {/* Streaming state */}
+          {isStreaming && (
+            <div className="py-6 flex items-start gap-3.5 animate-fade-up">
+              <div className="w-8 h-8 rounded-full bg-muted/80 flex items-center justify-center shrink-0">
+                <CouncilMark className="w-4 h-4 text-foreground" />
+              </div>
+              <div className="pt-1.5">
+                <p className="text-[15px] text-muted-foreground">
+                  {lastRun ? "Reassessing with your updates" : "Analyzing your idea"}
+                  <LoadingDots />
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* New brief result */}
+          {newBrief && !isStreaming && (
+            <div className="py-4 animate-in fade-in duration-300 mb-8">
+              {newRunDelta && <DeltaBanner delta={newRunDelta} />}
+              {parsedBrief && <BriefView brief={parsedBrief} />}
+              {parsedConciseBrief && <ConciseBriefView brief={parsedConciseBrief} />}
+
+              <div className="mt-4 flex justify-end">
+                <PdfExportButton
+                  briefRef={briefRef}
+                  filename={`council-${thread.name.slice(0, 30).replace(/\s+/g, "-").toLowerCase()}.pdf`}
+                  title={thread.name}
+                  variant="button"
+                />
+              </div>
+
+              {/* Verdict Action Bar */}
+              {hasCompletedRun && !hasGenesis && thread.latest_verdict && (
+                <div className="mt-6">
+                  <VerdictActionBar
+                    verdict={thread.latest_verdict}
+                    onGenesis={handleStartGenesis}
+                    building={building}
+                  />
+                </div>
+              )}
+
+              {newMissionId && (
+                <div className="mt-6">
+                  <FeedbackForm missionId={newMissionId} />
+                </div>
+              )}
+            </div>
+          )}
+        </section>
+
+        {/* ─── SECTION: Update Input ─── */}
         {!newBrief && !isStreaming && (
-          <div className="mb-8">
-            {/* Sprint status message */}
+          <section id="update-input" className="mb-8">
+            {/* Sprint status */}
             {lastRun && (() => {
               const daysSince = Math.floor((Date.now() - new Date(lastRun.created_at).getTime()) / 86400000);
               const sprintMsg =
@@ -383,7 +482,7 @@ export default function ThreadPage() {
               );
             })()}
 
-            {/* Update chips (only for returning users) */}
+            {/* Update chips */}
             {lastRun && (
               <div className="flex flex-wrap gap-1.5 mb-3">
                 {UPDATE_CHIPS.map((chip) => {
@@ -396,7 +495,6 @@ export default function ThreadPage() {
                         const next = new Set(selectedChips);
                         if (active) {
                           next.delete(chip.id);
-                          // Remove the prefix from prompt
                           setPrompt((p) => p.replace(chip.prefix, "").trim());
                         } else {
                           next.add(chip.id);
@@ -437,9 +535,7 @@ export default function ThreadPage() {
                       type="button"
                       onClick={() => setMode("full")}
                       className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${
-                        mode === "full"
-                          ? "bg-background text-foreground shadow-sm"
-                          : "text-muted-foreground hover:text-foreground"
+                        mode === "full" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
                       Full Brief
@@ -448,9 +544,7 @@ export default function ThreadPage() {
                       type="button"
                       onClick={() => setMode("concise")}
                       className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${
-                        mode === "concise"
-                          ? "bg-background text-foreground shadow-sm"
-                          : "text-muted-foreground hover:text-foreground"
+                        mode === "concise" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
                       Decisions Only
@@ -462,71 +556,82 @@ export default function ThreadPage() {
                     className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center disabled:opacity-20 hover:opacity-80 transition-opacity"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
+                      <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
                     </svg>
                   </button>
                 </div>
               </div>
             </form>
+
             {lastVerdict && (
               <p className="text-[11px] text-muted-foreground/40 text-center mt-2 select-none">
                 Last verdict: {(lastVerdict.verdict as string)?.toUpperCase()} ({lastVerdict.councilScore as number}) · Tell Council what&apos;s different now
               </p>
             )}
-          </div>
+
+            {/* Verdict Action Bar */}
+            {hasCompletedRun && !hasGenesis && !newBrief && thread.latest_verdict && (
+              <div className="mt-6">
+                <VerdictActionBar
+                  verdict={thread.latest_verdict}
+                  onGenesis={handleStartGenesis}
+                  building={building}
+                />
+              </div>
+            )}
+          </section>
         )}
 
         {/* Error */}
         {error && (
-          <div className="mb-6 px-4 py-3 rounded-xl bg-status-error/10 text-sm text-status-error">
-            {error}
+          <div className="mb-6 flex items-center gap-3 px-4 py-3 rounded-xl border bg-card">
+            <CouncilMark className="w-5 h-5 shrink-0" />
+            <span className="text-sm">{error}</span>
+            <button
+              onClick={() => setError(null)}
+              className="ml-auto text-xs text-muted-foreground hover:text-foreground"
+            >
+              Dismiss
+            </button>
           </div>
         )}
 
-        {/* Loading */}
-        {isStreaming && (
-          <div className="py-6 flex items-start gap-3.5">
-            <div className="w-8 h-8 rounded-full bg-muted/80 flex items-center justify-center shrink-0">
-              <CouncilMark className="w-4 h-4 text-foreground" />
-            </div>
-            <div className="pt-1.5">
-              <p className="text-[15px] text-muted-foreground">
-                {lastRun ? "Reassessing with your updates" : "Analyzing your idea"}
-                <LoadingDots />
-              </p>
-            </div>
-          </div>
+        {/* ─── Email Capture ─── */}
+        {hasCompletedRun && (
+          <section className="mb-8">
+            <EmailCapture ownerToken={ownerToken} />
+          </section>
         )}
 
-        {/* New brief result */}
-        <div ref={briefRef}>
-          {newBrief && !isStreaming && (
-            <div className="py-4 animate-in fade-in duration-300">
-              {newRunDelta && <DeltaBanner delta={newRunDelta} />}
-
-              {parsedBrief && <BriefView brief={parsedBrief} />}
-              {parsedConciseBrief && <ConciseBriefView brief={parsedConciseBrief} />}
-
-              {/* PDF Export */}
-              <div className="mt-4 flex justify-end">
-                <PdfExportButton
-                  briefRef={briefRef}
-                  filename={`council-${thread.name.slice(0, 30).replace(/\s+/g, "-").toLowerCase()}.pdf`}
-                  title={thread.name}
-                  variant="button"
-                />
-              </div>
-
-              {newMissionId && (
-                <div className="mt-8">
-                  <FeedbackForm missionId={newMissionId} />
-                </div>
-              )}
+        {/* ─── GENESIS DIVIDER ─── */}
+        {hasGenesis && (
+          <>
+            <div className="my-12 flex items-center gap-4">
+              <div className="flex-1 h-px bg-border" />
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Genesis
+              </span>
+              <div className="flex-1 h-px bg-border" />
             </div>
-          )}
-        </div>
+
+            {/* ─── SECTION: Genesis ─── */}
+            <section id="genesis" className="mb-8">
+              {project && <GenesisView projectId={project.id} />}
+            </section>
+          </>
+        )}
       </main>
+
+      {/* Share Modal */}
+      <ShareModal
+        open={shareOpen}
+        onClose={() => setShareOpen(false)}
+        threadId={thread.id}
+        threadName={thread.name}
+        latestMissionId={lastRun?.id ?? null}
+        runCount={runs.filter((r) => r.status === "completed").length}
+        hasGenesis={hasGenesis}
+      />
     </div>
   );
 }

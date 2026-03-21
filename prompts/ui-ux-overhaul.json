@@ -1,0 +1,916 @@
+{
+  "meta": {
+    "prompt_id": "council-ui-ux-overhaul-v1",
+    "created": "2026-03-21",
+    "author": "prompt-engineer",
+    "project": "AiCompanyOS/Council",
+    "working_dir": "council/",
+    "description": "Council UI/UX tam yeniden tasarımı — 22 soruluk keşif sürecinden çıkan 16 karar. Psikoloji araştırmalarıyla desteklenmiş, emsalsiz kullanıcı deneyimi.",
+    "psychology_foundations": [
+      "Labor Illusion (Buell & Norton, Harvard) — İşi göstermek algılanan değeri artırır",
+      "IKEA Effect (Norton et al.) — Katılım sahiplenme yaratır",
+      "Narrative Transportation (Green & Brock) — Hikaye tutum değiştirir",
+      "Zeigarnik Effect — Tamamlanmamış görevler geri dönüş dürtüsü yaratır",
+      "Flow State (Csikszentmihalyi) — Zorluk-beceri dengesi optimal deneyim sağlar",
+      "Socratic Method — Sorular derinleştirme ve keşif tetikler",
+      "Progressive Disclosure — Bilişsel yükü azaltır, tamamlama oranı artırır",
+      "Sequential Thinking Prompts — Sıralı promptlar yaratıcı performansı artırır"
+    ],
+    "design_philosophy": "Council bir dashboard değil, bir co-founder. Sıcak ama ciddi. Monochrome base, Genesis'te hayat. Conversation-first, form-never."
+  },
+
+  "instructions": {
+    "general": [
+      "Tüm değişiklikler council/ dizini içinde yapılacak.",
+      "Mevcut design system korunacak — OKLch tokens, verdict/status/priority renkleri, cn() utility.",
+      "TypeScript strict mode aktif — tip hatası bırakma.",
+      "Her büyük değişiklikten sonra `npm run build` ile doğrula.",
+      "Kod convention'ları için CLAUDE.md'yi referans al.",
+      "Commit YAPMA — sadece kodu düzelt.",
+      "Mevcut bileşenleri (CouncilMark, LoadingDots, AppHeader, design-tokens) yeniden kullan.",
+      "Yeni bileşenler src/components/ altına, yeni lib dosyaları src/lib/ altına.",
+      "Her bileşende 'use client' direktifini unutma (interactive olanlar için).",
+      "data-slot='component-name' pattern'ını koru.",
+      "Bu prompt büyük bir refactor — INCREMENTAL ilerle. Her task'ı tamamla, build et, sonra sonrakine geç."
+    ]
+  },
+
+  "page_structure": {
+    "description": "8 sayfadan 6 sayfaya sadeleştirme. 'One Thread, One Story' prensibi.",
+    "pages": {
+      "/": {
+        "role": "Giriş noktası — bağlam-duyarlı karşılama",
+        "behavior": "Yeni kullanıcı → conversational intake. Geri dönen → hybrid greeting.",
+        "replaces": ["/ (mevcut)", "/history (kaldırılıyor)", "/projects (kaldırılıyor)"]
+      },
+      "/thread/[id]": {
+        "role": "Fikrin tam yaşam döngüsü — TEK merkez sayfa",
+        "sections": ["Thread header", "Run history", "Latest brief", "What changed? input", "Genesis (build)", "Artifact wall", "Live preview"],
+        "replaces": ["thread/[id] (mevcut)", "/build/[id] (genesis olarak buraya taşınıyor)"]
+      },
+      "/brief/[id]": {
+        "role": "Public paylaşım sayfası — read-only brief",
+        "behavior": "Auth gerektirmez. OG image dynamic. CTA: 'Get your own verdict'"
+      },
+      "/thread/[id]/share": {
+        "role": "Transformation Card paylaşım sayfası",
+        "behavior": "Delta görselleştirme, skor trendi, before/after. Public."
+      },
+      "/how-we-score": {
+        "role": "Statik bilgi sayfası — puanlama metodolojisi",
+        "behavior": "Mevcut haliyle kalır, değişiklik yok"
+      },
+      "/admin": {
+        "role": "Admin dashboard",
+        "behavior": "Mevcut haliyle kalır, değişiklik yok"
+      }
+    },
+    "removed_pages": {
+      "/history": "Ana sayfadaki thread listesine taşındı",
+      "/projects": "Thread'in Genesis bölümüne taşındı",
+      "/build/[id]": "Thread sayfasının Genesis bölümüne taşındı",
+      "/compare": "Ana sayfadaki thread listesinden erişilebilir (inline veya modal)"
+    }
+  },
+
+  "tasks": [
+    {
+      "id": 1,
+      "priority": "critical",
+      "title": "Conversational Intake — 5 Katmanlı Socratic Sistem",
+      "description": "Ana sayfadaki textarea'yı conversation-first intake sistemiyle değiştir. Council soru sorar, kullanıcı cevaplar. Power user tek paragrafta her şeyi yazarsa Council bunu algılar ve derinleştirici tek soru sorar.",
+      "files_to_create": [
+        "src/components/council-conversation.tsx",
+        "src/lib/intake/conversation-engine.ts",
+        "src/app/api/intake/route.ts"
+      ],
+      "files_to_modify": [
+        "src/app/page.tsx"
+      ],
+      "technical_spec": {
+        "llm": "claude-haiku-4-5",
+        "max_tokens": 150,
+        "max_turns": 6,
+        "estimated_cost_per_conversation": "$0.001",
+        "system_prompt_structure": {
+          "role": "You are Council, a strategic co-founder. You help founders think clearly about their ideas through conversation. You ask questions — you don't lecture.",
+          "behavior": [
+            "Ask ONE question at a time. Never ask two questions in one message.",
+            "Match the user's language (Turkish → Turkish, English → English).",
+            "If the user provides comprehensive input in their first message (team, problem, target, traction), acknowledge it and ask ONE deepening question, then proceed to reflection.",
+            "Never use emojis. Be warm but professional.",
+            "After gathering enough information, provide a structured reflection and ask for confirmation."
+          ],
+          "completion_criteria": "You have enough info when you know: (1) who the target user is, (2) what problem they face, (3) what the solution looks like, (4) who is building it. Traction and differentiation are bonuses."
+        },
+        "question_layers": [
+          {
+            "layer": 1,
+            "name": "EMPATHY",
+            "question_en": "Whose life do you want to change?",
+            "question_tr": "Kimin hayatında bir şeyi değiştirmek istiyorsun?",
+            "psychology": "Human-centered start. Triggers empathy, opens creative thinking. Low cognitive load — anyone can answer.",
+            "skip_if": "User already mentioned target user in first message"
+          },
+          {
+            "layer": 2,
+            "name": "FRICTION",
+            "question_en": "What's stopping them from solving this today?",
+            "question_tr": "Bu problemi çözmelerini şu an ne engelliyor?",
+            "psychology": "Root cause analysis. Shifts from surface problem to structural understanding. Concrete → abstract transition.",
+            "skip_if": "User already described the problem and existing solutions"
+          },
+          {
+            "layer": 3,
+            "name": "VISION",
+            "question_en": "If everything goes perfectly, how does their day look different in a year?",
+            "question_tr": "Her şey mükemmel giderse, 1 yıl sonra bu insanların günü nasıl farklı görünüyor?",
+            "psychology": "Future pacing. Removes constraints, invites creative leap. Peak creativity moment in the flow.",
+            "skip_if": "User already painted a clear vision of the end state"
+          },
+          {
+            "layer": 4,
+            "name": "REALITY",
+            "question_en": "Who's on the team, and what have you tried so far?",
+            "question_tr": "Bunu inşa edecek ekipte kimler var ve şu ana kadar ne denediniz?",
+            "psychology": "Grounding after vision. Motivation is high from the vision — answering feels easy. Provides concrete data for scoring.",
+            "skip_if": "User already mentioned team composition and traction"
+          },
+          {
+            "layer": 5,
+            "name": "REFLECTION",
+            "question_en": "Let me make sure I understand: [structured summary]. Is that right?",
+            "question_tr": "Doğru anladığımdan emin olmak istiyorum: [yapılandırılmış özet]. Doğru mu?",
+            "psychology": "Mirroring. User sees their idea organized — creates ownership (IKEA effect spark). Confirms before analysis.",
+            "actions": ["[Yes, analyze →]", "[I want to adjust]"]
+          }
+        ],
+        "power_user_detection": "If first message contains 3+ of these signals: team size, problem description, target user, traction metrics, competition mention — skip to deepening question + reflection.",
+        "output_format": {
+          "description": "Haiku compiles the conversation into structured context for the Strategist agent",
+          "schema": {
+            "target_user": "string — who benefits",
+            "problem": "string — core problem",
+            "vision": "string — ideal future state",
+            "team": "string — who is building",
+            "traction": "string — what has been done so far",
+            "differentiator": "string — why this team/approach (if mentioned)",
+            "raw_conversation": "array — full transcript for context"
+          }
+        }
+      },
+      "ui_spec": {
+        "layout": "Centered, max-w-2xl. Council messages left-aligned with CouncilMark avatar. User input at bottom.",
+        "council_message_style": "bg-transparent, text-foreground, text-[15px] leading-relaxed. No card/bubble — clean inline text.",
+        "user_input": "Same textarea style as current, but single-line auto-expanding. Submit on Enter.",
+        "skip_link": "Below first question: 'Fikrimi direkt anlatmak istiyorum ↗' — opens classic single textarea mode.",
+        "transitions": "Each new Council message: animate-fade-up (existing animation). 300ms delay between question appearing and input focusing.",
+        "typing_indicator": "Council 'typing' for 400-600ms before showing question (feels natural, not instant)."
+      },
+      "validation": "Build başarılı. Conversation akışı: 5 soru → reflection → submit. Power user: 1 input → 1 soru → reflection → submit. Her iki dilde test et."
+    },
+
+    {
+      "id": 2,
+      "priority": "critical",
+      "title": "Bağlam-Duyarlı Hybrid Greeting (Geri Dönen Kullanıcı)",
+      "description": "Ana sayfada geri dönen kullanıcıyı tanıyan karşılama sistemi. Thread listesi anında render (rule-based), kişisel greeting Haiku'dan gelir (~300ms).",
+      "files_to_create": [
+        "src/components/council-greeting.tsx",
+        "src/app/api/greeting/route.ts"
+      ],
+      "files_to_modify": [
+        "src/app/page.tsx"
+      ],
+      "technical_spec": {
+        "instant_render": {
+          "description": "Thread listesi localStorage + API'dan anında render edilir. Greeting alanında skeleton/loading dots.",
+          "rule_based_fallback": "Eğer Haiku 2 saniyeden uzun sürerse veya fail ederse, rule-based fallback mesaj göster.",
+          "fallback_rules": {
+            "zero_threads": "Show conversational intake (Task 1)",
+            "one_thread_sprint_active": "'[Thread name] — sprint aktif. Ne değişti?'",
+            "one_thread_sprint_expired": "'[Thread name] — sprint bitti. Güncelle veya yeni fikir.'",
+            "multiple_threads": "'[N] fikrin var. Hangisi üzerinde çalışalım?'",
+            "genesis_complete": "'[Thread name] hazır. [Artifact count] artifact seni bekliyor.'"
+          }
+        },
+        "haiku_greeting": {
+          "model": "claude-haiku-4-5",
+          "max_tokens": 80,
+          "context_provided": {
+            "threads": "Array of {name, score, verdict, sprint_day, last_visited, genesis_status}",
+            "user_history": "{total_runs, first_visit, genesis_builds, last_active}",
+            "current_time": "ISO timestamp for sprint calculations"
+          },
+          "system_prompt": "You are Council, a strategic co-founder. Generate a 1-2 sentence greeting for a returning user. Reference their most relevant thread based on recency and status. Ask one question that drives action. Match the user's language based on their thread names. Be warm but concise. Never use emojis.",
+          "cost": "$0.0002 per greeting"
+        }
+      },
+      "ui_spec": {
+        "greeting_area": "Same position as conversational intake question. Council avatar + greeting text. Below: thread cards.",
+        "thread_cards": "Each card shows: name, verdict badge, score, sprint status, genesis status. Tappable → navigates to /thread/[id].",
+        "actions": "Below thread list: [+ New idea] button. If 2+ threads: [Compare] link.",
+        "transition": "Greeting text fades in when Haiku responds. Thread cards are already visible (no layout shift)."
+      },
+      "validation": "Yeni kullanıcı → intake görür. 1 thread (sprint aktif) → update prompt. 3 thread → liste + greeting. Genesis complete → ürünü gör CTA."
+    },
+
+    {
+      "id": 3,
+      "priority": "critical",
+      "title": "Verdict-Driven Adaptive UX",
+      "description": "Brief sonrası deneyim verdict'e göre değişir. Strong/Promising → Genesis'i teşvik et. Risky → risklere odaklan. Weak → Build'i blokla.",
+      "files_to_modify": [
+        "src/app/thread/[id]/page.tsx",
+        "src/components/brief-view.tsx"
+      ],
+      "files_to_create": [
+        "src/components/verdict-action-bar.tsx"
+      ],
+      "technical_spec": {
+        "verdict_behaviors": {
+          "strong": {
+            "message_en": "Exceptional. Council is ready to build.",
+            "message_tr": "Olağanüstü. Council inşa etmeye hazır.",
+            "genesis_cta": "prominent — large button, pulsing subtle glow",
+            "genesis_auto_tease": true,
+            "brief_sections_default_open": ["verdict", "sprintPlan"],
+            "color_accent": "verdict-strong subtle bg glow on the action bar"
+          },
+          "promising": {
+            "message_en": "Solid foundation. Architecture is being prepared...",
+            "message_tr": "Sağlam temel. Mimari hazırlanıyor...",
+            "genesis_cta": "visible — standard button with encouraging text",
+            "genesis_auto_tease": true,
+            "brief_sections_default_open": ["verdict", "risks", "sprintPlan"],
+            "color_accent": "verdict-promising subtle bg"
+          },
+          "risky": {
+            "message_en": "3 risks need attention. Address them, then build.",
+            "message_tr": "3 risk dikkat gerektiriyor. Önce bunları çöz.",
+            "genesis_cta": "muted — visible but secondary, text: 'Build anyway'",
+            "genesis_auto_tease": false,
+            "brief_sections_default_open": ["verdict", "risks", "penalties"],
+            "focus_element": "risks section highlighted with border-status-warning/20"
+          },
+          "weak": {
+            "message_en": "Not ready to build yet. Here's what to fix first.",
+            "message_tr": "Henüz inşa etmeye hazır değil. Önce bunları düzelt.",
+            "genesis_cta": "disabled — greyed out, tooltip: 'Improve your score first'",
+            "genesis_auto_tease": false,
+            "brief_sections_default_open": ["verdict", "risks", "penalties"],
+            "focus_element": "penalties and risks prominently displayed"
+          }
+        }
+      },
+      "ui_spec": {
+        "action_bar": "Appears between brief and 'What changed?' input. Full-width card with verdict-colored left border. Message + CTA button.",
+        "genesis_tease": "For strong/promising: subtle animated text below action bar — 'Council is already thinking about your architecture...' with pulse-dot animation.",
+        "animation": "Action bar slides in with animate-fade-up after brief renders."
+      },
+      "validation": "Her 4 verdict'le test et. Strong → prominent build CTA. Weak → disabled build, risks ön planda."
+    },
+
+    {
+      "id": 4,
+      "priority": "critical",
+      "title": "One Thread One Story — Unified Thread Page",
+      "description": "Thread sayfasını fikrin tam yaşam döngüsü olarak yeniden yapılandır. Brief, Genesis, Artifacts, Preview hepsi tek sayfada, doğal scroll akışıyla.",
+      "files_to_modify": [
+        "src/app/thread/[id]/page.tsx"
+      ],
+      "files_to_create": [
+        "src/components/thread-section-nav.tsx"
+      ],
+      "technical_spec": {
+        "sections_order": [
+          {
+            "id": "header",
+            "description": "Thread name, verdict badge, score, run count, sprint status, [Share] [Compare]"
+          },
+          {
+            "id": "runs",
+            "description": "Collapsible run history. Each run: prompt, verdict, score, delta. Tappable → expands inline brief or navigates to /brief/[id]."
+          },
+          {
+            "id": "brief",
+            "description": "Latest brief, fully rendered (existing BriefView/ConciseBriefView). Collapsible sections based on verdict (Task 3)."
+          },
+          {
+            "id": "verdict-action-bar",
+            "description": "Verdict-driven action bar from Task 3."
+          },
+          {
+            "id": "update-input",
+            "description": "What changed? textarea + update chips. Same as current but styled to match conversational tone."
+          },
+          {
+            "id": "email-capture",
+            "description": "Sprint reminder email opt-in (Task 11). Only shows if user hasn't provided email yet."
+          },
+          {
+            "id": "genesis-divider",
+            "description": "Visual separator — '═══ GENESIS ═══' with subtle animation when Genesis is active."
+          },
+          {
+            "id": "genesis",
+            "description": "Genesis build section (Task 5). Only visible if Genesis has been started."
+          },
+          {
+            "id": "artifacts",
+            "description": "Artifact Wall (Task 6). Only visible if Genesis has produced artifacts."
+          },
+          {
+            "id": "preview",
+            "description": "Live preview (existing Sandpack). Only visible if Genesis Phase 4+ complete. [Open fullscreen ↗] link."
+          }
+        ],
+        "section_nav": {
+          "description": "Sticky mini navigation that appears on scroll. Shows which section is active. Clickable to jump.",
+          "style": "Fixed right side (desktop) or bottom bar (mobile). Small dots or text labels.",
+          "sections_shown": "Only sections that exist for this thread — e.g., no Genesis dot if Genesis hasn't started."
+        },
+        "deep_links": "Each section has an anchor: #runs, #brief, #genesis, #artifacts, #preview. URL updates on scroll."
+      },
+      "ui_spec": {
+        "max_width": "max-w-3xl (same as current)",
+        "section_spacing": "Each section separated by 2rem gap. Genesis divider has extra 3rem top/bottom margin.",
+        "lazy_loading": "Genesis, Artifacts, Preview sections lazy-loaded — not fetched until user scrolls near them or Genesis is active.",
+        "mobile": "Section nav becomes bottom dots bar. Preview section shows screenshot + 'Open in browser' button instead of inline Sandpack."
+      },
+      "validation": "Sayfa yüklenir, tüm section'lar sırasıyla render olur. Deep link'ler çalışır. Genesis olmayan thread'de Genesis bölümü görünmez."
+    },
+
+    {
+      "id": 5,
+      "priority": "critical",
+      "title": "Genesis — Chapter Narrative System",
+      "description": "Build pipeline'ını Chapter-based narrative olarak yeniden tasarla. Her phase bir 'Chapter'. Agent'ların düşünce süreçleri, çatışmaları ve kararları hikaye formatında gösterilir.",
+      "files_to_create": [
+        "src/components/genesis/genesis-view.tsx",
+        "src/components/genesis/chapter.tsx",
+        "src/components/genesis/agent-narrative.tsx",
+        "src/components/genesis/ceo-decision.tsx",
+        "src/components/genesis/conflict-resolution.tsx",
+        "src/lib/genesis/narrative-builder.ts"
+      ],
+      "files_to_modify": [
+        "src/app/api/projects/[id]/build/route.ts",
+        "src/lib/orchestrator/dispatcher.ts"
+      ],
+      "technical_spec": {
+        "chapters": [
+          { "number": 1, "name": "Strategy", "phase": 1, "agents": ["strategist"], "description": "Already completed — the brief IS chapter 1." },
+          { "number": 2, "name": "Product Definition", "phase": 2, "agents": ["product-manager", "legal"], "narrative_elements": ["PRD creation", "Legal risk assessment", "Feature prioritization"] },
+          { "number": 3, "name": "Architecture", "phase": 3, "agents": ["architect", "designer", "security"], "narrative_elements": ["Tech stack decision", "Schema design", "Component library", "Security audit", "Agent conflicts"] },
+          { "number": 4, "name": "Build", "phase": 4, "agents": ["backend-engineer", "frontend-engineer", "devops", "qa-writer"], "narrative_elements": ["Code generation", "Test writing", "Infrastructure setup"] },
+          { "number": 5, "name": "Verify", "phase": 5, "agents": ["automated"], "narrative_elements": ["Test results", "Security scan", "Performance audit"] },
+          { "number": 6, "name": "Launch", "phase": 6, "agents": ["devops-deploy", "marketing", "support-docs"], "narrative_elements": ["Deploy config", "Landing page copy", "Documentation"] }
+        ],
+        "narrative_builder": {
+          "description": "Transforms raw agent outputs into human-readable narrative entries.",
+          "input": "Agent name, agent output JSON, phase context",
+          "output": {
+            "headline": "What the agent did (1 sentence)",
+            "reasoning": "Why it made this choice (1-2 sentences, extracted from agent output)",
+            "artifacts_produced": "List of artifact names generated",
+            "conflicts": "If this agent's output contradicts another agent's — flag it"
+          },
+          "implementation": "Rule-based extraction from agent output JSON fields. NOT LLM-generated — zero extra cost. Parse agent output's 'reasoning' or 'rationale' fields."
+        },
+        "agent_conflicts": {
+          "description": "When two agents produce contradictory outputs, show as conflict → resolution narrative.",
+          "detection": "Compare key decisions between agents in same phase (e.g., architect's DB choice vs PM's preference).",
+          "display": {
+            "conflict": "⚡ icon + 'Security flagged an issue in Architect's design...'",
+            "resolution": "✓ icon + 'Resolved: switched to HTTP-only cookies'",
+            "animation": "Conflict fades in with amber glow, resolution replaces with green fade"
+          }
+        },
+        "ceo_decisions": {
+          "description": "At approval checkpoints, present key decisions from agents and let user choose.",
+          "trigger": "Phase completion — existing approval checkpoint system",
+          "display": {
+            "card_style": "Bordered card with ◉ icon, verdict-promising accent",
+            "options": "2-3 choices extracted from agent outputs + 'Let Council decide' always last",
+            "effect": "User's choice is stored in phase_outputs and injected into next phase's context"
+          },
+          "important": "CEO decisions are OPTIONAL. If user doesn't respond within 30 seconds of page focus, auto-approve with 'Let Council decide'. Genesis should not block."
+        },
+        "chapter_states": {
+          "completed": "✓ icon, collapsed by default, expandable to see narrative",
+          "running": "◎ icon with pulse animation, expanded, narrative streaming",
+          "pending": "○ icon, muted text, 'Waiting...'",
+          "failed": "✕ icon with status-error color, shows error narrative + retry",
+          "skipped": "— icon, muted, '(Skipped)' text"
+        },
+        "polling": {
+          "interval": "3 seconds (existing)",
+          "update_behavior": "New narrative entries append with animate-fade-up. No full re-render."
+        }
+      },
+      "ui_spec": {
+        "layout": "Vertical timeline. Left border connects chapters. Each chapter expandable.",
+        "chapter_header": "Chapter number + name + status icon. Clickable to expand/collapse.",
+        "narrative_entry": "Agent avatar (small colored dot) + headline + reasoning. Indented under chapter.",
+        "alive_animations": {
+          "running_chapter": "Left border pulses with subtle glow (status-info color)",
+          "new_narrative": "Fades in with animate-fade-up",
+          "conflict_detected": "Amber pulse glow on the conflict card, 2 cycles then static",
+          "conflict_resolved": "Green fade-in replaces amber",
+          "ceo_decision": "Subtle scale-up entrance (1.02 → 1.0), border-primary accent",
+          "chapter_complete": "Checkmark draws itself (SVG path animation, 400ms)"
+        },
+        "mobile": "Same layout, full-width cards. CEO decision buttons full-width, thumb-friendly (min-h-12)."
+      },
+      "validation": "Genesis başlar. Chapter'lar sırayla açılır. Agent narrative'leri streaming gelir. CEO Decision gösterilir, seçim yapılır veya auto-approve olur. Chapter tamamlanınca collapse olur."
+    },
+
+    {
+      "id": 6,
+      "priority": "critical",
+      "title": "Artifact Wall",
+      "description": "Genesis'in ürettiği tüm artifact'ları (PRD, schema, API spec, component, test, config) grid olarak görselleştir. Koleksiyon psikolojisi — dolma hissi Zeigarnik effect tetikler.",
+      "files_to_create": [
+        "src/components/genesis/artifact-wall.tsx",
+        "src/components/genesis/artifact-card.tsx"
+      ],
+      "technical_spec": {
+        "data_source": "generated_files table — already exists in DB. Fields: file_path, content, language, phase, agent_name.",
+        "artifact_categories": [
+          { "type": "document", "extensions": [".md", ".txt"], "icon": "📄", "label": "Doc" },
+          { "type": "schema", "extensions": [".sql", ".prisma"], "icon": "🗄", "label": "Schema" },
+          { "type": "api", "extensions": ["route.ts", "api.ts"], "icon": "🔌", "label": "API" },
+          { "type": "component", "extensions": [".tsx", ".jsx"], "icon": "🧩", "label": "Component" },
+          { "type": "test", "extensions": [".test.ts", ".spec.ts"], "icon": "🧪", "label": "Test" },
+          { "type": "config", "extensions": [".json", ".yaml", ".env"], "icon": "⚙", "label": "Config" },
+          { "type": "style", "extensions": [".css", ".scss"], "icon": "🎨", "label": "Style" }
+        ],
+        "counter": "Shows 'X/Y artifacts' where Y is estimated total based on phase count and complexity."
+      },
+      "ui_spec": {
+        "layout": "Horizontal scrolling grid on mobile, wrapping grid on desktop. Each card ~80x80px.",
+        "card_states": {
+          "completed": "Full opacity, category icon, file name truncated. Tappable → shows content in modal/drawer.",
+          "in_progress": "Pulsing opacity (animate-pulse-dot), '...' as name.",
+          "pending": "10% opacity, empty placeholder."
+        },
+        "counter_bar": "Above grid: 'Artifact Wall — 12/47' with thin progress bar.",
+        "animation": "New artifact appearing: scale from 0.8 → 1.0 + fade-in (300ms). Satisfying 'pop' feeling.",
+        "mobile": "Horizontal scroll with snap points. Counter bar sticky."
+      },
+      "important": "Emojileri icon olarak KULLANMA — sadece açıklama amaçlı yukarıda yazdım. Gerçek UI'da Lucide icon'ları kullan (FileText, Database, Plug, Component, TestTube, Settings, Palette).",
+      "validation": "Artifact'lar Genesis ilerledikçe birer birer belirir. Tappable. Counter güncellenir. Boş state: 'Artifacts will appear as Council builds your product.'"
+    },
+
+    {
+      "id": 7,
+      "priority": "high",
+      "title": "Alive & Warm Visual Enhancements",
+      "description": "Monochrome base korunur. Genesis ve aktif elementlerde hayat belirtileri: pulse, glow, micro-interactions. 'Bu araç canlı' hissi.",
+      "files_to_modify": [
+        "src/app/globals.css"
+      ],
+      "technical_spec": {
+        "new_animations": [
+          {
+            "name": "genesis-pulse",
+            "description": "Genesis aktifken chapter'ın sol border'ında yumuşak nabız",
+            "css": "@keyframes genesis-pulse { 0%,100% { border-color: var(--status-info); opacity: 0.5 } 50% { border-color: var(--status-info); opacity: 1 } }",
+            "duration": "2s ease-in-out infinite"
+          },
+          {
+            "name": "artifact-pop",
+            "description": "Yeni artifact belirdiğinde küçük scale + fade",
+            "css": "@keyframes artifact-pop { from { opacity: 0; transform: scale(0.85) } to { opacity: 1; transform: scale(1) } }",
+            "duration": "300ms ease-out"
+          },
+          {
+            "name": "check-draw",
+            "description": "Chapter tamamlanınca checkmark çizilme animasyonu",
+            "implementation": "SVG stroke-dashoffset animation on the checkmark path",
+            "duration": "400ms ease-out"
+          },
+          {
+            "name": "conflict-glow",
+            "description": "Agent conflict'te amber glow",
+            "css": "@keyframes conflict-glow { 0%,100% { box-shadow: 0 0 0 0 oklch(0.80 0.16 85 / 0%) } 50% { box-shadow: 0 0 12px 2px oklch(0.80 0.16 85 / 15%) } }",
+            "duration": "1.5s ease-in-out, 2 cycles then stops"
+          },
+          {
+            "name": "resolve-fade",
+            "description": "Conflict çözüldüğünde amber → green geçişi",
+            "css": "transition: box-shadow 600ms ease, border-color 600ms ease",
+            "implementation": "Remove conflict-glow class, add resolved class with status-success border"
+          }
+        ],
+        "existing_animations_kept": [
+          "typewriter-text / typewriter-exit (intake'te kullanılır)",
+          "animate-fade-up (yeni elementler için)",
+          "animate-pulse-dot (live status indicators)",
+          "input-glow (textarea focus)",
+          "card-hover (thread cards)"
+        ]
+      },
+      "important": "Animasyonlar SUBTLE olmalı. Göz yormayan, arka planda hissedilen. Asla yanıp sönen, dikkat dağıtan animasyon yok. prefers-reduced-motion media query ile disable edilebilir olmalı.",
+      "validation": "Genesis aktifken pulse görünür. Artifact belirdiğinde pop animasyonu. Conflict amber glow, resolution green fade. Reduced motion tercihinde animasyonlar devre dışı."
+    },
+
+    {
+      "id": 8,
+      "priority": "high",
+      "title": "Adaptive Mobile Experience",
+      "description": "Cihaza göre farklı deneyim seviyesi. Mobile: conversation + brief + genesis narrative. Desktop: hepsi + live preview + artifact detay.",
+      "files_to_modify": [
+        "src/app/thread/[id]/page.tsx",
+        "src/components/genesis/genesis-view.tsx",
+        "src/components/genesis/artifact-wall.tsx",
+        "src/components/sandpack-preview.tsx"
+      ],
+      "technical_spec": {
+        "breakpoints": {
+          "mobile": "< 768px",
+          "desktop": ">= 768px"
+        },
+        "mobile_adaptations": [
+          "Sandpack preview → static screenshot + 'Open in browser ↗' button",
+          "Artifact wall → horizontal scroll with snap",
+          "CEO Decision buttons → full-width, min-h-12 (thumb-friendly)",
+          "Section nav → bottom dot bar instead of right-side",
+          "Compare → simplified side-by-side or stacked view",
+          "Conversation intake → full-screen conversational mode",
+          "Thread cards → full-width, larger touch targets"
+        ],
+        "desktop_only_features": [
+          "Inline Sandpack live preview",
+          "Artifact content modal (click to see code)",
+          "Section nav on right side",
+          "Keyboard shortcuts"
+        ],
+        "shared_features": [
+          "Conversational intake",
+          "Brief rendering",
+          "Genesis narrative (chapters, conflicts, decisions)",
+          "Artifact wall (counter + grid/scroll)",
+          "Share functionality",
+          "Email capture"
+        ]
+      },
+      "validation": "Mobile viewport'ta preview screenshot görünür (Sandpack yok). Desktop'ta inline Sandpack çalışır. Touch target'lar 44px minimum."
+    },
+
+    {
+      "id": 9,
+      "priority": "high",
+      "title": "3 Kademeli Paylaşım Sistemi",
+      "description": "Her aşamada farklı paylaşım kartı ve OG image. Brief Card → Transformation Card → Genesis Card.",
+      "files_to_create": [
+        "src/app/thread/[id]/share/page.tsx",
+        "src/app/thread/[id]/share/opengraph-image.tsx",
+        "src/components/share-modal.tsx"
+      ],
+      "files_to_modify": [
+        "src/app/brief/[id]/opengraph-image.tsx",
+        "src/app/thread/[id]/page.tsx"
+      ],
+      "technical_spec": {
+        "share_tiers": [
+          {
+            "tier": 1,
+            "name": "Brief Card",
+            "url": "/brief/[mission_id]",
+            "available_when": "Brief completed",
+            "og_image_content": {
+              "layout": "Council logo + thread name + score gauge + verdict badge + 1-line summary",
+              "style": "Monochrome, minimal. 1200x630px.",
+              "cta_text": "Get your own verdict →"
+            },
+            "share_motivation": "Validation — 'Look, I got my idea evaluated'"
+          },
+          {
+            "tier": 2,
+            "name": "Transformation Card",
+            "url": "/thread/[thread_id]/share",
+            "available_when": "2+ runs with score delta",
+            "og_image_content": {
+              "layout": "Thread name + before/after score + verdict transition arrow + run count + duration",
+              "example": "'AI Resume Screener — 52 → 78 in 3 weeks. RISKY → PROMISING.'",
+              "style": "Score trend mini sparkline. Delta colors (green for improvement). 1200x630px.",
+              "cta_text": "What's your idea's score? →"
+            },
+            "share_motivation": "Growth/flex — before/after transformation story. MOST VIRAL FORMAT.",
+            "page_content": "Public page showing: thread name, score trend chart, verdict history, run count. No full brief — teaser only."
+          },
+          {
+            "tier": 3,
+            "name": "Genesis Card",
+            "url": "/thread/[thread_id]/share?view=genesis",
+            "available_when": "Genesis completed",
+            "og_image_content": {
+              "layout": "Thread name + 'Idea → Product in Xmin' + artifact count + preview screenshot thumbnail",
+              "style": "Preview screenshot prominent. Achievement feel. 1200x630px.",
+              "cta_text": "Build yours →"
+            },
+            "share_motivation": "Achievement/wow — 'AI built my product'"
+          }
+        ],
+        "share_modal": {
+          "trigger": "Share button on thread page",
+          "content": "Shows available share tiers based on thread state. Each tier: preview of OG image + copy URL button + native share (if available).",
+          "native_share": "Use navigator.share() API on mobile if available. Fallback to copy URL."
+        }
+      },
+      "validation": "Brief Card OG image doğru render olur. Transformation Card sadece 2+ run'da görünür. Genesis Card sadece genesis complete'te. Share modal tüm tier'ları doğru gösterir."
+    },
+
+    {
+      "id": 10,
+      "priority": "high",
+      "title": "Error States — Co-Founder Tonunda",
+      "description": "Tüm hata durumlarında Council'ın co-founder tonu korunur. 'Error 500' yerine 'Bir sorunla karşılaştı, tekrar deniyor'. Retry + resume mekanizması.",
+      "files_to_create": [
+        "src/components/council-error.tsx",
+        "src/app/not-found.tsx",
+        "src/app/global-error.tsx"
+      ],
+      "files_to_modify": [
+        "src/components/genesis/genesis-view.tsx",
+        "src/app/thread/[id]/page.tsx"
+      ],
+      "technical_spec": {
+        "error_types": [
+          {
+            "type": "api_failure",
+            "where": "Brief generation, API calls",
+            "message_en": "Council hit a snag. Let's try again.",
+            "message_tr": "Council bir sorunla karşılaştı. Tekrar deneyelim.",
+            "action": "[Try again] button",
+            "auto_retry": "1 automatic retry after 2 seconds before showing error to user"
+          },
+          {
+            "type": "genesis_chapter_failure",
+            "where": "Genesis — a chapter/agent fails",
+            "message_en": "[Agent name] ran into an issue. Council is retrying...",
+            "message_tr": "[Agent name] bir sorunla karşılaştı. Council tekrar deniyor...",
+            "action": "3 auto-retries. After 3: '[Retry this chapter] [Skip & continue] [Resume later]'",
+            "important": "Existing artifacts are SAFE. Make this clear: 'Your progress is saved. X artifacts are safe.'"
+          },
+          {
+            "type": "network_error",
+            "where": "Any page",
+            "message_en": "Connection lost. Council will reconnect when you're back online.",
+            "message_tr": "Bağlantı kesildi. Çevrimiçi olduğunda Council tekrar bağlanacak.",
+            "action": "Auto-reconnect with exponential backoff. Visual: subtle offline indicator in header."
+          },
+          {
+            "type": "rate_limit",
+            "where": "Brief generation",
+            "message_en": "Council is busy. Your spot is held — try again in [X] seconds.",
+            "message_tr": "Council meşgul. Yeriniz ayrıldı — [X] saniye sonra tekrar deneyin.",
+            "action": "Countdown timer + auto-retry when timer expires"
+          },
+          {
+            "type": "404",
+            "where": "/not-found.tsx",
+            "message_en": "This page doesn't exist. Let's get you back on track.",
+            "message_tr": "Bu sayfa mevcut değil. Seni doğru yere yönlendirelim.",
+            "action": "[Go to Council →] button",
+            "design": "CouncilMark + message + CTA. Minimal, branded."
+          },
+          {
+            "type": "global_error",
+            "where": "/global-error.tsx",
+            "message_en": "Something unexpected happened. Council is looking into it.",
+            "message_tr": "Beklenmeyen bir şey oldu. Council inceliyor.",
+            "action": "[Refresh] [Go home]"
+          }
+        ]
+      },
+      "ui_spec": {
+        "error_card": "Rounded-xl, border, bg-card. CouncilMark icon (small) + message + action buttons. No red backgrounds — subtle, calm.",
+        "genesis_error": "Inline within the chapter timeline. Doesn't break the narrative — shows as a story beat: 'Frontend Engineer hit an issue → retrying → resolved' or 'couldn't resolve → user choice'.",
+        "tone": "NEVER technical jargon. Never 'Error', 'Exception', 'Status 500'. Always human, always calm."
+      },
+      "validation": "404 sayfası branded görünür. Global error çalışır. Genesis'te chapter fail → retry → user choice akışı çalışır. Mevcut artifact'lar korunur."
+    },
+
+    {
+      "id": 11,
+      "priority": "high",
+      "title": "Email Capture — Sprint Hatırlatma Noktası",
+      "description": "Brief tamamlandıktan sonra, sprint hatırlatması için email toplama. Doğal, zorlamayan, değer odaklı.",
+      "files_to_create": [
+        "src/components/email-capture.tsx",
+        "src/app/api/email/route.ts"
+      ],
+      "files_to_modify": [
+        "src/app/thread/[id]/page.tsx"
+      ],
+      "technical_spec": {
+        "placement": "Thread page — between 'What changed?' input and Genesis divider. Only shows if user hasn't provided email yet.",
+        "trigger": "Shows after first brief is completed on a thread (not on page load — after value is delivered).",
+        "storage": "Email stored in users table (linked via owner_token). New column: email (nullable).",
+        "api_endpoint": {
+          "method": "POST /api/email",
+          "body": "{ ownerToken, email }",
+          "validation": "Zod — valid email format",
+          "response": "{ success: true }"
+        },
+        "email_sending": "NOT implemented now. Just store the email. Email infrastructure (Resend/SendGrid) is a future task.",
+        "dismiss": "User can dismiss. Store dismissal in localStorage. Don't show again for 7 days after dismissal."
+      },
+      "ui_spec": {
+        "design": {
+          "style": "Subtle card — bg-muted/30, rounded-xl, no heavy borders. Feels like a helpful suggestion, not a popup.",
+          "content_en": "Sprint plan is 7 days. Want a reminder when it ends?\n[email input] [Yes →]\nOnly sprint reminders. No spam. Unsubscribe anytime.",
+          "content_tr": "Sprint planın 7 gün. Bittiğinde hatırlatayım mı?\n[email input] [Evet →]\nSadece sprint hatırlatması. Spam yok. İstediğin zaman iptal.",
+          "after_submit": "Input transforms to '✓ You'll hear from Council in [X] days.' — stays visible as confirmation."
+        },
+        "animation": "Fades in with animate-fade-up, 500ms after brief renders. No jarring entrance.",
+        "mobile": "Full-width, input and button stacked vertically."
+      },
+      "validation": "Brief sonrası email capture görünür. Email gönderilir, DB'ye yazılır. Dismiss'ten sonra 7 gün gizlenir. Email zaten varsa hiç gösterilmez."
+    },
+
+    {
+      "id": 12,
+      "priority": "high",
+      "title": "Score Trend Sparkline",
+      "description": "Thread header'da ve Transformation Card'da run'lar arası skor trendi mini çizgi grafik olarak göster.",
+      "files_to_create": [
+        "src/components/score-sparkline.tsx"
+      ],
+      "files_to_modify": [
+        "src/app/thread/[id]/page.tsx"
+      ],
+      "technical_spec": {
+        "component": {
+          "props": "scores: number[] (run scores in order), width?: number, height?: number",
+          "render": "SVG polyline. Min score = bottom, max = top. Dots on each data point.",
+          "colors": "Line: text-muted-foreground. Last dot: verdict color of latest run.",
+          "min_data_points": "2 (don't render for single-run threads)"
+        }
+      },
+      "ui_spec": {
+        "thread_header": "Inline next to score, ~80x24px. Subtle, informational.",
+        "transformation_card": "Larger, ~200x60px. More prominent.",
+        "animation": "Line draws itself left-to-right on mount (SVG path animation, 800ms)."
+      },
+      "validation": "2+ run thread'de sparkline görünür. 1 run thread'de gizli. Renkler verdict'e uygun."
+    },
+
+    {
+      "id": 13,
+      "priority": "medium",
+      "title": "Compare — Inline/Modal (Ayrı Sayfa Kaldırılıyor)",
+      "description": "/compare sayfasını kaldır, karşılaştırmayı ana sayfadaki thread listesinden erişilebilir yap.",
+      "files_to_create": [
+        "src/components/compare-modal.tsx"
+      ],
+      "files_to_modify": [
+        "src/app/page.tsx"
+      ],
+      "files_to_delete": [
+        "src/app/compare/page.tsx"
+      ],
+      "technical_spec": {
+        "trigger": "Thread listesinde 2+ thread varken [Compare] butonu görünür. Tıklayınca modal/drawer açılır.",
+        "selection": "Modal'da thread'ler checkbox ile seçilir (max 2). Seçince yan yana karşılaştırma render edilir.",
+        "data": "Mevcut /api/compare endpoint'i kullanılır. Sayfa kaldırılır, API kalır.",
+        "mobile": "Full-screen drawer, stacked comparison (A üstte, B altta)."
+      },
+      "validation": "Compare modal açılır, 2 thread seçilir, karşılaştırma gösterilir. Mevcut /compare URL'si 404'e düşer (veya ana sayfaya redirect)."
+    },
+
+    {
+      "id": 14,
+      "priority": "medium",
+      "title": "Paywall-Ready Mimari",
+      "description": "Şimdi her şey ücretsiz. Ama Genesis butonunda paywall noktası hazır — tek satır değişiklikle aktif edilebilir.",
+      "files_to_create": [
+        "src/lib/entitlements.ts"
+      ],
+      "files_to_modify": [
+        "src/app/thread/[id]/page.tsx"
+      ],
+      "technical_spec": {
+        "entitlements_module": {
+          "description": "Central module that checks what a user can do. Currently returns true for everything.",
+          "functions": {
+            "canCreateBrief": "() => true  // always free",
+            "canStartGenesis": "(ownerToken: string) => true  // first free, then paid (future)",
+            "canCompare": "() => true  // always free",
+            "getGenesisBuildsRemaining": "(ownerToken: string) => Infinity  // unlimited for now"
+          },
+          "future_activation": "Change canStartGenesis to check build count from DB. Add Stripe checkout redirect when limit reached."
+        }
+      },
+      "ui_spec": {
+        "genesis_button": "Uses canStartGenesis() to determine state. If false → button shows 'Upgrade to build' instead of 'Let it build →'.",
+        "no_paywall_ui_now": "No pricing page, no upgrade modal — just the entitlement checks wired in, returning true."
+      },
+      "validation": "Tüm entitlement fonksiyonları true döner. Genesis herkes için çalışır. entitlements.ts'de tek satır değişiklik paywall'ı aktif edebilir."
+    },
+
+    {
+      "id": 15,
+      "priority": "medium",
+      "title": "Page Cleanup — Kaldırılan Sayfalar & Redirects",
+      "description": "Eski sayfaları kaldır, redirect'leri ayarla.",
+      "files_to_delete": [
+        "src/app/history/page.tsx",
+        "src/app/projects/page.tsx",
+        "src/app/build/[id]/page.tsx",
+        "src/app/build/[id]/error.tsx"
+      ],
+      "redirects": {
+        "/history": "/ (ana sayfada thread listesi var)",
+        "/projects": "/ (thread'lerin genesis durumu ana sayfada görünür)",
+        "/build/[id]": "/thread/[id]#genesis",
+        "/compare": "/ (compare modal olarak taşındı)"
+      },
+      "implementation": "next.config.ts'te redirects array'i ile. Veya middleware ile.",
+      "validation": "/history → / redirect. /build/abc → /thread/abc#genesis redirect. Eski URL'ler kırılmaz."
+    },
+
+    {
+      "id": 16,
+      "priority": "medium",
+      "title": "Keyboard Shortcuts (Desktop Only)",
+      "description": "Power user'lar için temel klavye kısayolları.",
+      "files_to_create": [
+        "src/lib/keyboard-shortcuts.ts",
+        "src/components/shortcut-hint.tsx"
+      ],
+      "files_to_modify": [
+        "src/app/layout.tsx"
+      ],
+      "technical_spec": {
+        "shortcuts": [
+          { "key": "Cmd+K / Ctrl+K", "action": "Quick actions menu (navigate, new idea, compare)" },
+          { "key": "Cmd+N / Ctrl+N", "action": "New idea — focus on intake input" },
+          { "key": "Cmd+Enter", "action": "Submit current form/input" },
+          { "key": "Escape", "action": "Close modal/drawer, dismiss" }
+        ],
+        "implementation": "Global keydown listener in layout. useEffect with cleanup. Disabled when any input is focused (except Cmd+Enter).",
+        "mobile": "Shortcuts disabled on mobile (no keyboard)."
+      },
+      "validation": "Cmd+K açar, Cmd+N yeni fikre odaklanır, Escape kapatır. Input focus'tayken Cmd+K çalışmaz (Cmd+Enter hariç)."
+    }
+  ],
+
+  "execution_order": {
+    "description": "Bağımlılıklara ve riske göre önerilen uygulama sırası.",
+    "phases": [
+      {
+        "phase": "A — Foundation",
+        "task_ids": [10, 15, 14],
+        "reason": "Error boundaries, redirects ve entitlement modülü — diğer her şeyin temeli. Küçük, bağımsız, hızlı.",
+        "estimated_scope": "Küçük — mevcut kodu taşıma + yeni küçük dosyalar"
+      },
+      {
+        "phase": "B — Core UX Shift",
+        "task_ids": [1, 2, 4],
+        "reason": "Ana sayfayı ve thread sayfasını yeniden yapılandır. Conversational intake + hybrid greeting + unified thread. En büyük değişiklik.",
+        "estimated_scope": "Büyük — page.tsx ve thread/[id]/page.tsx tam refactor"
+      },
+      {
+        "phase": "C — Genesis",
+        "task_ids": [5, 6, 7],
+        "reason": "Genesis narrative, artifact wall, animasyonlar. Thread sayfası hazır olduktan sonra burası eklenebilir.",
+        "estimated_scope": "Büyük — tamamen yeni component ailesi"
+      },
+      {
+        "phase": "D — Adaptive & Polish",
+        "task_ids": [3, 8, 12],
+        "reason": "Verdict-driven UX, mobile adaptasyonu, sparkline. Core hazır olduktan sonra polish.",
+        "estimated_scope": "Orta"
+      },
+      {
+        "phase": "E — Growth & Sharing",
+        "task_ids": [9, 11, 13, 16],
+        "reason": "Paylaşım kartları, email capture, compare modal, shortcuts. Ürün çalıştıktan sonra growth katmanı.",
+        "estimated_scope": "Orta"
+      }
+    ]
+  },
+
+  "post_completion": {
+    "checklist": [
+      "`cd council && npm run build` — sıfır hata",
+      "`cd council && npx tsc --noEmit` — sıfır tip hatası",
+      "Yeni kullanıcı akışı: intake → brief → thread tüm adımlar çalışıyor",
+      "Geri dönen kullanıcı: greeting + thread listesi doğru render",
+      "Genesis akışı: chapter'lar sırayla, narrative streaming, CEO decisions",
+      "4 verdict tipi test edildi (strong/promising/risky/weak) — her birinde farklı UX",
+      "Mobile viewport'ta tüm sayfalar kullanılabilir",
+      "Share: 3 tier'dan uygun olanlar doğru gösteriliyor",
+      "Error states: 404, global error, genesis failure — hepsi co-founder tonunda",
+      "Email capture: brief sonrası görünür, submit çalışır, dismiss persist eder",
+      "Eski URL'ler redirect çalışıyor (/history, /projects, /build/[id])",
+      "Keyboard shortcuts desktop'ta çalışıyor",
+      "prefers-reduced-motion: animasyonlar devre dışı",
+      "Kullanıcıya deploy öncesi reminder: Vercel'de yeni env var gerekebilir"
+    ]
+  }
+}

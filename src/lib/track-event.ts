@@ -4,6 +4,7 @@ type EventName =
   | "second_run_submitted"
   | "delta_banner_viewed"
   | "share_clicked"
+  | "share_copied"
   | "feedback_submitted";
 
 interface TrackEventPayload {

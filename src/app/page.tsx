@@ -14,61 +14,32 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { trackEvent } from "@/lib/track-event";
 import { CouncilMark } from "@/components/council-mark";
 import { LoadingDots } from "@/components/loading-dots";
-import { getVerdict } from "@/lib/design-tokens";
+import { CouncilConversation } from "@/components/council-conversation";
+import { CouncilGreeting } from "@/components/council-greeting";
+import type { IntakeContext } from "@/lib/intake/conversation-engine";
+import { CompareModal } from "@/components/compare-modal";
+import { ShortcutHint } from "@/components/shortcut-hint";
 
 type BriefMode = "full" | "concise" | "deep";
-type Lang = "en" | "tr";
 
-const HINTS: Record<Lang, string[]> = {
-  en: [
-    "Describe your idea and team",
-    "What problem are you solving?",
-    "Who are your first 100 customers?",
-    "We got 50 users, should we pivot to B2B?",
-  ],
-  tr: [
-    "Fikrinizi ve ekibinizi anlatın",
-    "Hangi problemi çözüyorsunuz?",
-    "İlk 100 müşteriniz kim olacak?",
-    "50 kullanıcı aldık, B2B'ye dönmeli miyiz?",
-  ],
-};
+interface ThreadSummary {
+  id: string;
+  name: string;
+  latest_verdict: string | null;
+  latest_score: number | null;
+  run_count: number;
+  created_at: string;
+  updated_at: string;
+}
 
-function TypewriterHint({ lang }: { lang: Lang }) {
-  const [index, setIndex] = useState(0);
-  const [phase, setPhase] = useState<"typing" | "waiting" | "erasing">("typing");
-  const hints = HINTS[lang];
-
-  useEffect(() => {
-    setIndex(0);
-    setPhase("typing");
-  }, [lang]);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-
-    if (phase === "typing") {
-      timer = setTimeout(() => setPhase("waiting"), 1400);
-    } else if (phase === "waiting") {
-      timer = setTimeout(() => setPhase("erasing"), 2200);
-    } else {
-      timer = setTimeout(() => {
-        setIndex((i) => (i + 1) % hints.length);
-        setPhase("typing");
-      }, 500);
-    }
-
-    return () => clearTimeout(timer);
-  }, [phase, hints.length]);
-
-  return (
-    <span
-      key={`${lang}-${index}`}
-      className={`text-muted-foreground/40 ${phase === "erasing" ? "typewriter-exit" : "typewriter-text"}`}
-    >
-      {hints[index]}
-    </span>
-  );
+function getOwnerToken(): string {
+  if (typeof window === "undefined") return "";
+  let token = localStorage.getItem("council_owner_token");
+  if (!token) {
+    token = crypto.randomUUID();
+    localStorage.setItem("council_owner_token", token);
+  }
+  return token;
 }
 
 function ShareBar({ missionId }: { missionId: string }) {
@@ -96,26 +67,10 @@ function ShareBar({ missionId }: { missionId: string }) {
   );
 }
 
-interface ThreadSummary {
-  id: string;
-  name: string;
-  latest_verdict: string | null;
-  latest_score: number | null;
-  run_count: number;
-  updated_at: string;
-}
-
-function getOwnerToken(): string {
-  if (typeof window === "undefined") return "";
-  let token = localStorage.getItem("council_owner_token");
-  if (!token) {
-    token = crypto.randomUUID();
-    localStorage.setItem("council_owner_token", token);
-  }
-  return token;
-}
+type ViewState = "loading" | "intake" | "greeting" | "classic" | "analyzing" | "brief";
 
 export default function Home() {
+  const [viewState, setViewState] = useState<ViewState>("loading");
   const [prompt, setPrompt] = useState("");
   const [completion, setCompletion] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -123,19 +78,22 @@ export default function Home() {
   const [missionId, setMissionId] = useState<string | null>(null);
   const [threadId, setThreadId] = useState<string | null>(null);
   const [mode, setMode] = useState<BriefMode>("full");
-  const [lang, setLang] = useState<Lang>("en");
   const [threads, setThreads] = useState<ThreadSummary[]>([]);
+  const [compareOpen, setCompareOpen] = useState(false);
   const briefRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Fetch threads on mount
+  // Determine initial view
   useEffect(() => {
     const token = getOwnerToken();
-    if (!token) return;
     fetch(`/api/threads?token=${token}`)
       .then((r) => r.json())
-      .then((data) => setThreads(data.threads ?? []))
-      .catch(() => {});
+      .then((data) => {
+        const t = data.threads ?? [];
+        setThreads(t);
+        setViewState(t.length > 0 ? "greeting" : "intake");
+      })
+      .catch(() => setViewState("intake"));
   }, []);
 
   const parsedBrief = useMemo<StrategicBrief | null>(() => {
@@ -167,12 +125,12 @@ export default function Home() {
   const hasBrief = parsedBrief || parsedConciseBrief;
 
   useEffect(() => {
-    if (hasBrief && briefRef.current) {
-      briefRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (hasBrief) {
+      setViewState("brief");
+      briefRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [hasBrief]);
 
-  // Track brief_generated event
   useEffect(() => {
     if (hasBrief && missionId) {
       const brief = parsedBrief || parsedConciseBrief;
@@ -186,31 +144,16 @@ export default function Home() {
         score: v?.councilScore,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasBrief, missionId]);
 
-  useEffect(() => {
-    if (hasBrief && missionId) {
-      try {
-        const stored = localStorage.getItem("council_missions");
-        const ids: string[] = stored ? JSON.parse(stored) : [];
-        if (!ids.includes(missionId)) {
-          ids.unshift(missionId);
-          localStorage.setItem("council_missions", JSON.stringify(ids.slice(0, 50)));
-        }
-      } catch {}
-    }
-  }, [hasBrief, missionId]);
-
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!prompt.trim() || isLoading) return;
-
+  const submitToMission = useCallback(
+    async (text: string) => {
       setCompletion("");
       setError(null);
       setMissionId(null);
       setIsLoading(true);
+      setViewState("analyzing");
 
       try {
         const ownerToken = getOwnerToken();
@@ -218,7 +161,7 @@ export default function Home() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            prompt,
+            prompt: text,
             mode: mode === "deep" ? "deep" : mode,
             ownerToken,
           }),
@@ -238,22 +181,49 @@ export default function Home() {
         if (!reader) throw new Error("No response stream");
 
         const decoder = new TextDecoder();
-        let text = "";
+        let fullText = "";
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          text += decoder.decode(value, { stream: true });
-          setCompletion(text);
+          fullText += decoder.decode(value, { stream: true });
+          setCompletion(fullText);
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error");
+        setViewState("classic");
       } finally {
         setIsLoading(false);
       }
     },
-    [prompt, isLoading, mode]
+    [mode]
   );
+
+  const handleIntakeComplete = useCallback(
+    (_ctx: IntakeContext, compiledPrompt: string) => {
+      setPrompt(compiledPrompt);
+      submitToMission(compiledPrompt);
+    },
+    [submitToMission]
+  );
+
+  const handleClassicSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!prompt.trim() || isLoading) return;
+      submitToMission(prompt);
+    },
+    [prompt, isLoading, submitToMission]
+  );
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (prompt.trim().length >= 10 && !isLoading) {
+        handleClassicSubmit(e as unknown as React.FormEvent);
+      }
+    }
+  };
 
   const handleNewMission = () => {
     setPrompt("");
@@ -261,19 +231,8 @@ export default function Home() {
     setError(null);
     setMissionId(null);
     setThreadId(null);
-    textareaRef.current?.focus();
+    setViewState("intake");
   };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      if (prompt.trim().length >= 10 && !isLoading) {
-        handleSubmit(e as unknown as React.FormEvent);
-      }
-    }
-  };
-
-  const showInput = !hasBrief && !isLoading;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -285,53 +244,12 @@ export default function Home() {
             <span className="text-[15px] font-semibold tracking-tight">Council</span>
           </a>
           <div className="flex items-center gap-1">
-            {/* Language toggle */}
-            <div className="flex items-center rounded-md bg-muted/60 p-0.5 mr-1">
-              <button
-                onClick={() => setLang("en")}
-                className={`px-2 py-0.5 text-[11px] font-medium rounded transition-all ${
-                  lang === "en"
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLang("tr")}
-                className={`px-2 py-0.5 text-[11px] font-medium rounded transition-all ${
-                  lang === "tr"
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                TR
-              </button>
-            </div>
             <ThemeToggle />
-            <a
-              href="/projects"
-              className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-muted transition-colors"
-              title="Projects"
-            >
-              <svg className="w-[18px] h-[18px] text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-              </svg>
-            </a>
-            <a
-              href="/history"
-              className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-muted transition-colors"
-              title="History"
-            >
-              <svg className="w-[18px] h-[18px] text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </a>
-            {hasBrief && !isLoading && (
+            {(viewState === "brief" || viewState === "analyzing") && (
               <button
                 onClick={handleNewMission}
                 className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-muted transition-colors"
-                title="New mission"
+                title="New idea"
               >
                 <svg className="w-[18px] h-[18px] text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -344,101 +262,112 @@ export default function Home() {
 
       {/* Main */}
       <main className="flex-1 flex flex-col max-w-3xl w-full mx-auto px-6">
-        {/* Input area */}
-        {showInput && (
+        {/* Loading initial state */}
+        {viewState === "loading" && (
+          <div className="flex-1 flex items-center justify-center">
+            <LoadingDots />
+          </div>
+        )}
+
+        {/* New user: Conversational intake */}
+        {viewState === "intake" && (
+          <div className="flex-1 flex flex-col items-center justify-center py-12">
+            <div className="mb-10 text-center">
+              <div className="w-14 h-14 rounded-2xl bg-card border border-border/50 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <CouncilMark className="w-7 h-7 text-foreground/80" />
+              </div>
+              <h1 className="text-3xl font-bold tracking-tight text-gradient">
+                What are you building?
+              </h1>
+              <p className="text-[15px] text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
+                Council is your strategic co-founder. Let&apos;s start with a conversation.
+              </p>
+            </div>
+
+            <CouncilConversation
+              onComplete={handleIntakeComplete}
+              onSkip={() => setViewState("classic")}
+            />
+          </div>
+        )}
+
+        {/* Returning user: Greeting + thread list */}
+        {viewState === "greeting" && (
+          <div className="flex-1 flex flex-col items-center justify-center py-12">
+            <div className="mb-10 text-center">
+              <div className="w-14 h-14 rounded-2xl bg-card border border-border/50 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <CouncilMark className="w-7 h-7 text-foreground/80" />
+              </div>
+            </div>
+
+            <CouncilGreeting
+              threads={threads}
+              onNewIdea={() => setViewState("intake")}
+            />
+            {threads.length >= 2 && (
+              <button
+                onClick={() => setCompareOpen(true)}
+                className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors mt-2"
+              >
+                Compare ideas
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Classic textarea (skip mode) */}
+        {viewState === "classic" && (
           <div className="flex-1 flex flex-col items-center justify-center -mt-14">
-            {/* Title */}
             <div className="mb-12 text-center">
               <div className="w-14 h-14 rounded-2xl bg-card border border-border/50 flex items-center justify-center mx-auto mb-6 shadow-sm">
                 <CouncilMark className="w-7 h-7 text-foreground/80" />
               </div>
               <h1 className="text-3xl font-bold tracking-tight text-gradient">
-                {lang === "tr" ? "Ne inşa ediyorsun?" : "What are you building?"}
+                Describe your idea
               </h1>
               <p className="text-[15px] text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
-                {lang === "tr"
-                  ? "Fikrinizi değerlendirin. Geri gelin, ne değiştiğini söyleyin — Council hatırlar."
-                  : "Get a strategic verdict. Come back with updates — Council remembers."}
+                Tell Council about your startup — team, problem, market, traction.
               </p>
             </div>
 
-            {/* Input box */}
             <div className="w-full max-w-[640px]">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleClassicSubmit}>
                 <div className="input-glow relative rounded-2xl border border-border/60 bg-card shadow-sm">
-                  {/* Textarea */}
                   <textarea
                     ref={textareaRef}
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    rows={3}
-                    className="w-full resize-none bg-transparent px-4 pt-4 pb-2 text-[15px] leading-relaxed placeholder:text-transparent focus:outline-none"
+                    rows={4}
+                    placeholder="Describe your idea, team, and what problem you're solving..."
+                    className="w-full resize-none bg-transparent px-4 pt-4 pb-2 text-[15px] leading-relaxed placeholder:text-muted-foreground/40 focus:outline-none"
                     disabled={isLoading}
                     autoFocus
                   />
-
-                  {/* Typewriter hint */}
-                  {!prompt && (
-                    <div className="absolute top-4 left-4 text-[15px] pointer-events-none">
-                      <TypewriterHint lang={lang} />
-                    </div>
-                  )}
-
-                  {/* Bottom toolbar */}
                   <div className="flex items-center justify-between px-3 pb-3 pt-1">
-                    <div className="flex items-center gap-2">
-                      {/* Mode toggle */}
-                      <div className="flex items-center rounded-lg bg-muted/60 p-0.5">
+                    <div className="flex items-center rounded-lg bg-muted/60 p-0.5">
+                      {(["full", "concise", "deep"] as BriefMode[]).map((m) => (
                         <button
+                          key={m}
                           type="button"
-                          onClick={() => setMode("full")}
+                          onClick={() => setMode(m)}
                           className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${
-                            mode === "full"
+                            mode === m
                               ? "bg-background text-foreground shadow-sm"
                               : "text-muted-foreground hover:text-foreground"
                           }`}
                         >
-                          {lang === "tr" ? "Tam Rapor" : "Full Brief"}
+                          {m === "full" ? "Full Brief" : m === "concise" ? "Decisions Only" : "Deep"}
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => setMode("concise")}
-                          className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${
-                            mode === "concise"
-                              ? "bg-background text-foreground shadow-sm"
-                              : "text-muted-foreground hover:text-foreground"
-                          }`}
-                        >
-                          {lang === "tr" ? "Kararlar" : "Decisions Only"}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setMode("deep")}
-                          className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all flex items-center gap-1 ${
-                            mode === "deep"
-                              ? "bg-background text-foreground shadow-sm"
-                              : "text-muted-foreground hover:text-foreground"
-                          }`}
-                          title={lang === "tr" ? "Extended Thinking — daha derin analiz, biraz daha yavaş" : "Extended Thinking — deeper analysis, slightly slower"}
-                        >
-                          <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
-                          </svg>
-                          {lang === "tr" ? "Derin" : "Deep"}
-                        </button>
-                      </div>
+                      ))}
                     </div>
-
-                    {/* Submit */}
                     <button
                       type="submit"
                       disabled={isLoading || prompt.length < 10}
-                      className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center disabled:opacity-15 hover:opacity-80 transition-all hover:scale-105 active:scale-95"
+                      className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center disabled:opacity-15 hover:opacity-80 transition-all"
                     >
                       <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
+                        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
                       </svg>
                     </button>
                   </div>
@@ -446,79 +375,28 @@ export default function Home() {
               </form>
 
               <p className="text-[11px] text-muted-foreground/50 text-center mt-4 select-none">
-                {lang === "tr"
-                  ? "Enter gönder · Skor, riskler, 7 günlük sprint alacaksınız"
-                  : "Enter to send · You'll get a score, risks, and a 7-day sprint"}
-              </p>
-              <p className="text-center mt-1">
-                <a href="/how-we-score" className="text-[11px] text-muted-foreground/40 hover:text-muted-foreground underline underline-offset-2 decoration-muted-foreground/20 hover:decoration-muted-foreground/50 transition-all">
-                  {lang === "tr" ? "Nasıl puanlıyoruz?" : "How we score"}
-                </a>
+                Enter to send
               </p>
 
-              {/* Recent threads */}
-              {threads.length > 0 && (
-                <div className="mt-10 pt-6 border-t border-border/30">
-                  <p className="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-wider">
-                    {lang === "tr" ? "Devam et" : "Continue where you left off"}
-                  </p>
-                  <div className="space-y-2">
-                    {threads.slice(0, 5).map((t) => {
-                      const vc = t.latest_verdict ? getVerdict(t.latest_verdict) : null;
-                      return (
-                        <a
-                          key={t.id}
-                          href={`/thread/${t.id}`}
-                          className="card-hover flex items-center gap-3 px-4 py-3 rounded-xl border border-border/50 bg-card hover:bg-muted/20 transition-colors group"
-                        >
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm line-clamp-1 group-hover:text-foreground transition-colors">{t.name}</p>
-                            <span className="text-[11px] text-muted-foreground">
-                              {t.run_count} {t.run_count === 1 ? "run" : "runs"}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2 shrink-0">
-                            {vc && t.latest_verdict && (
-                              <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full ${vc.bg} ${vc.text}`}>
-                                {t.latest_verdict.toUpperCase()}
-                              </span>
-                            )}
-                            {t.latest_score !== null && (
-                              <span className="text-xs font-semibold tabular-nums text-muted-foreground">{t.latest_score}</span>
-                            )}
-                          </div>
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
+              <button
+                onClick={() => setViewState(threads.length > 0 ? "greeting" : "intake")}
+                className="block mx-auto mt-2 text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+              >
+                Back to conversation
+              </button>
             </div>
           </div>
         )}
 
-        {/* Error */}
-        {error && (
-          <div className="my-6 px-4 py-3 rounded-xl bg-status-error/10 text-sm text-status-error">
-            {error}
-          </div>
-        )}
-
-        {/* Loading */}
-        {isLoading && (
+        {/* Analyzing state */}
+        {viewState === "analyzing" && isLoading && (
           <div className="py-12 flex items-start gap-4 max-w-2xl animate-fade-up">
             <div className="w-10 h-10 rounded-xl bg-card border border-border/50 flex items-center justify-center shrink-0 shadow-sm">
               <CouncilMark className="w-5 h-5 text-foreground/80" />
             </div>
             <div className="pt-1.5">
               <p className="text-[15px] text-muted-foreground">
-                {lang === "tr"
-                  ? mode === "concise"
-                    ? "Karar raporu hazırlanıyor"
-                    : mode === "deep"
-                    ? "Derin analiz yapılıyor — biraz daha sürebilir"
-                    : "Fikriniz analiz ediliyor"
-                  : mode === "concise"
+                {mode === "concise"
                   ? "Generating decision brief"
                   : mode === "deep"
                   ? "Deep analysis in progress — this may take a moment"
@@ -529,9 +407,28 @@ export default function Home() {
           </div>
         )}
 
-        {/* Results */}
+        {/* Error */}
+        {error && (
+          <div className="my-6 flex flex-col items-center gap-3">
+            <div className="px-4 py-3 rounded-xl border bg-card text-sm text-foreground flex items-center gap-3">
+              <CouncilMark className="w-5 h-5 shrink-0" />
+              <span>Council hit a snag. Let&apos;s try again.</span>
+            </div>
+            <button
+              onClick={() => {
+                setError(null);
+                if (prompt) submitToMission(prompt);
+              }}
+              className="text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
+            >
+              Try again
+            </button>
+          </div>
+        )}
+
+        {/* Brief results */}
         <div ref={briefRef}>
-          {parsedBrief && !isLoading && (
+          {parsedBrief && !isLoading && viewState === "brief" && (
             <div className="py-8 animate-in fade-in duration-300">
               <BriefView brief={parsedBrief} />
               {missionId && <ShareBar missionId={missionId} />}
@@ -541,14 +438,8 @@ export default function Home() {
                     href={`/thread/${threadId}`}
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border bg-card hover:bg-muted/30 transition-colors text-sm"
                   >
-                    <svg className="w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
-                    </svg>
-                    {lang === "tr" ? "Thread'e git — sprint planını gör" : "Go to thread — see your sprint plan"}
+                    Go to thread — see your sprint plan
                   </a>
-                  <p className="text-[11px] text-muted-foreground/40 text-center mt-1.5 select-none">
-                    {lang === "tr" ? "Hazır olduğunuzda thread üzerinden projeyi build edebilirsiniz." : "When ready, you can build the project from your thread."}
-                  </p>
                 </div>
               )}
               <div className="mt-6">
@@ -557,7 +448,7 @@ export default function Home() {
             </div>
           )}
 
-          {parsedConciseBrief && !isLoading && (
+          {parsedConciseBrief && !isLoading && viewState === "brief" && (
             <div className="py-8 animate-in fade-in duration-300">
               <ConciseBriefView brief={parsedConciseBrief} />
               {missionId && <ShareBar missionId={missionId} />}
@@ -567,14 +458,8 @@ export default function Home() {
                     href={`/thread/${threadId}`}
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border bg-card hover:bg-muted/30 transition-colors text-sm"
                   >
-                    <svg className="w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
-                    </svg>
-                    {lang === "tr" ? "Thread'e git — sprint planını gör" : "Go to thread — see your sprint plan"}
+                    Go to thread — see your sprint plan
                   </a>
-                  <p className="text-[11px] text-muted-foreground/40 text-center mt-1.5 select-none">
-                    {lang === "tr" ? "Hazır olduğunuzda thread üzerinden projeyi build edebilirsiniz." : "When ready, you can build the project from your thread."}
-                  </p>
                 </div>
               )}
               <div className="mt-6">
@@ -584,6 +469,13 @@ export default function Home() {
           )}
         </div>
       </main>
+
+      <CompareModal
+        open={compareOpen}
+        onClose={() => setCompareOpen(false)}
+        threads={threads}
+      />
+      <ShortcutHint />
     </div>
   );
 }

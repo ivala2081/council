@@ -315,3 +315,46 @@
 .animate-pulse-dot {
   animation: pulse-dot 2s ease-in-out infinite;
 }
+
+/* Genesis — chapter border pulse */
+@keyframes genesis-pulse {
+  0%, 100% { border-color: var(--status-info); opacity: 0.5; }
+  50% { border-color: var(--status-info); opacity: 1; }
+}
+.genesis-pulse {
+  animation: genesis-pulse 2s ease-in-out infinite;
+}
+
+/* Artifact pop — new artifact appearing */
+@keyframes artifact-pop {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+.artifact-pop {
+  animation: artifact-pop 0.3s ease-out;
+}
+
+/* Conflict glow — agent conflict amber pulse */
+@keyframes conflict-glow {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.80 0.16 85 / 0%); }
+  50% { box-shadow: 0 0 12px 2px oklch(0.80 0.16 85 / 15%); }
+}
+.conflict-glow {
+  animation: conflict-glow 1.5s ease-in-out 2;
+}
+
+/* Resolve fade — conflict to resolved transition */
+.resolve-fade {
+  transition: box-shadow 600ms ease, border-color 600ms ease;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .genesis-pulse,
+  .artifact-pop,
+  .conflict-glow,
+  .animate-fade-up,
+  .animate-pulse-dot {
+    animation: none !important;
+  }
+}
