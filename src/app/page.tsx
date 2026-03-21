@@ -271,41 +271,26 @@ export default function Home() {
 
         {/* New user: Conversational intake */}
         {viewState === "intake" && (
-          <div className="flex-1 flex flex-col items-center pt-[12vh] sm:pt-[14vh] pb-12">
-            <div className="mb-8 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-card border border-border/50 flex items-center justify-center mx-auto mb-5 shadow-sm">
-                <CouncilMark className="w-6 h-6 text-foreground/80" />
-              </div>
-            </div>
-
+          <div className="flex-1 flex flex-col items-center pt-[8vh] sm:pt-[10vh] pb-12">
             <CouncilConversation
               onComplete={handleIntakeComplete}
               onSkip={() => setViewState("classic")}
             />
 
             {/* Value proposition */}
-            <div className="mt-10 max-w-sm mx-auto">
-              <div className="flex flex-col gap-2 text-center">
-                <p className="text-[11px] text-muted-foreground/50 uppercase tracking-wider font-medium">You&apos;ll get</p>
-                <div className="flex flex-col gap-1">
-                  <p className="text-xs text-muted-foreground/60">A score across 5 dimensions</p>
-                  <p className="text-xs text-muted-foreground/60">Risk analysis &amp; strengths</p>
-                  <p className="text-xs text-muted-foreground/60">7-day sprint plan — in 30 seconds</p>
-                </div>
-              </div>
+            <div className="mt-8 flex items-center justify-center gap-6 text-[11px] text-muted-foreground/40 select-none">
+              <span>Score across 5 dimensions</span>
+              <span className="text-muted-foreground/20">·</span>
+              <span>Risk &amp; strength analysis</span>
+              <span className="text-muted-foreground/20">·</span>
+              <span>7-day sprint — 30 seconds</span>
             </div>
           </div>
         )}
 
         {/* Returning user: Greeting + thread list */}
         {viewState === "greeting" && (
-          <div className="flex-1 flex flex-col items-center justify-center py-12">
-            <div className="mb-10 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-card border border-border/50 flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <CouncilMark className="w-7 h-7 text-foreground/80" />
-              </div>
-            </div>
-
+          <div className="flex-1 flex flex-col items-center pt-[8vh] sm:pt-[10vh] pb-12">
             <CouncilGreeting
               threads={threads}
               onNewIdea={() => setViewState("intake")}
@@ -323,15 +308,9 @@ export default function Home() {
 
         {/* Classic textarea (skip mode) */}
         {viewState === "classic" && (
-          <div className="flex-1 flex flex-col items-center justify-center -mt-14">
-            <div className="mb-12 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-card border border-border/50 flex items-center justify-center mx-auto mb-6 shadow-sm">
-                <CouncilMark className="w-7 h-7 text-foreground/80" />
-              </div>
-              <h1 className="text-3xl font-bold tracking-tight text-gradient">
-                Describe your idea
-              </h1>
-              <p className="text-[15px] text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
+          <div className="flex-1 flex flex-col items-center pt-[8vh] sm:pt-[10vh]">
+            <div className="mb-6 text-center">
+              <p className="text-[15px] text-muted-foreground max-w-md mx-auto leading-relaxed">
                 Tell Council about your startup — team, problem, market, traction.
               </p>
             </div>
