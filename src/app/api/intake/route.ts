@@ -45,9 +45,10 @@ export async function POST(req: Request) {
 
     return Response.json({ response: result.text });
   } catch (error) {
-    console.error("[intake] Error:", error);
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error("[intake] Error:", errMsg);
     return Response.json(
-      { error: "Failed to generate response" },
+      { error: "Failed to generate response", detail: errMsg },
       { status: 500 }
     );
   }
