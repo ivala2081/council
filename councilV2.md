@@ -2,99 +2,704 @@
 
 > Bu doküman Council v1'den v2'ye geçiş için yapılan tüm beyin fırtınasının kaydıdır.
 > Amaç: Başka modeller ve kişilerle üzerinde düşünmek, planlamak, kararları olgunlaştırmak.
+>
+> **Son büyük revizyon:** Ürün psikolojisi perspektifiyle yeniden yazıldı.
+> Eski çerçeve ("sanal yazılım şirketi") teknik arka plan haline geldi.
+> Yeni çerçeve: **"AI investor, dürüst cevap verir."**
 
 ---
 
-## BÖLÜM 1: VİZYON
+## BÖLÜM 1: VİZYON VE POZİSYONLAMA
 
-### Ana Fikir
+### Tek Cümle Promise
 
-> **Council bir sanal yazılım şirketi.**
-> 
-> İçinde bir milyar dolarlık firmanın sahip olduğu tüm departmanlar var (Engineering, Product, Design, Marketing, Legal, Finance, HR...) ve her departmanın çalışanları (Agents) var.
->
-> Kullanıcı bir fikir söylediğinde, Council bu fikri gerçek bir şirketin yaptığı gibi değerlendiriyor, planlıyor, ve isteğe bağlı olarak üretiyor.
+> **Council, fikrin hakkında kimsenin söyleyemediği gerçeği söyleyen bir AI yatırımcıdır.**
+
+### Neden Bu Cümle?
+
+Her kelime bir işe yarıyor:
+
+| Kelime | İşlev |
+|--------|-------|
+| **"AI yatırımcı"** | Araç değil, **rol**. Güven yaratır. "Tool" hissi yerine "danışman" hissi. |
+| **"Kimsenin söyleyemediği"** | Eşler yalan söyler (destek olsun diye), aile yanlılık yapar, mentor zamansızdır. Boşluk bu. |
+| **"Gerçeği söyleyen"** | Brutal honesty = differentiator. Rakipler "analiz" verir, Council **karar** verir. |
+| **"Fikrin hakkında"** | Spesifik use case. "Her şey yapan AI" değil, **fikir değerlendirme**. |
+
+### Ana Problemin Yeniden Tanımı
+
+Eski tanım: *"İnsanların fikirlerini değerlendirecek bir AI şirket"*
+
+**Gerçek problem:**
+> İnsanlar fikirlerini **değerlendirmek** istemiyor.
+> İnsanlar **emin olmak** istiyor.
+
+Bu küçük bir nüans değil — ürünün tüm karakterini değiştirir:
+
+| Eski çerçeve (analysis) | Yeni çerçeve (certainty) |
+|------------------------|--------------------------|
+| Çıktı: Rapor | Çıktı: Karar |
+| Ton: Analyst | Ton: Investor/mentor |
+| Değer: Bilgi | Değer: Güven (emin olma) |
+| Süre: "Oku ve düşün" | Süre: "10 saniye, bitti" |
+| UX: Dashboard | UX: Verdict card |
+
+### Kullanıcının Gerçek Sorusu
+
+Kullanıcı Council'a gelirken şunu sormuyor:
+- ❌ *"Bu fikrin SWOT analizini yap"*
+- ❌ *"Bana market segmentation ver"*
+- ❌ *"Stratejik brief yaz"*
+
+Gerçekte şunu soruyor:
+- ✅ *"Bu fikre 6 ay harcasam değer mi?"*
+- ✅ *"Bu fikir saçma mı, dürüstçe söyle"*
+- ✅ *"İşimi bırakıp bu işe girsem param tükenir mi?"*
+
+**Council bu sorulara cevap vermek için var.**
 
 ### v1 ile Fark
 
-| | v1 (mevcut) | v2 (vizyon) |
+| | v1 (mevcut) | v2 (yeni vizyon) |
 |---|---|---|
-| Konsept | Startup değerlendirme aracı | Sanal yazılım şirketi |
-| Ajanlar | 13 ajan, conveyor belt | 12 departman, gerçek organizasyon |
-| İletişim | Sıralı (A→B→C) | Çok yönlü (iç iletişim + hiyerarşi) |
-| Dış dünya | Yok (sadece LLM hayal) | Agent-Reach ile 17+ platform gerçek veri |
-| Çıktı | Rapor/Brief | Değerlendirme + plan + opsiyonel yapım |
-| Hafıza | Yok | Şirket hafızası, önceki projelerden öğrenme |
-
-### Köşe Taşı Pozisyonlama
-
-> *"Cursor kod yazar, Devin iş yapar. Council önce gerçek piyasa verisiyle fikrini test eder, sonra yönetim kurulundan geçirir, sonra planı verir — istersen yapar da."*
-
-Council üç şeyi birleştiriyor, rakipler sadece birini yapıyor:
-1. **Evaluation** — Verdict + puan + risk analizi
-2. **Planning** — Departman bazlı iş planı, maliyet, timeline
-3. **Real Market Data** — Agent-Reach ile gerçek Twitter/Reddit/LinkedIn verisi
+| Ana mesaj | Startup değerlendirme aracı | **"Fikrine dürüst cevap veren AI yatırımcı"** |
+| Çıktı | Stratejik Brief (rapor) | **Verdict + 3 sebep + kanıt** |
+| Ton | Kurumsal analyst | **Brutal honest mentor** |
+| Değer | Analiz | **Certainty (emin olma)** |
+| Multi-agent yapı | Görünür (13 ajan) | **Görünmez (arka planda 12 departman)** |
+| Dış veri | Yok | **Agent-Reach ile gerçek veri (görünmez, insight olarak sunulur)** |
+| Kullanıcı deneyimi | Rapor okuma | **10 saniyede karar** |
 
 ---
 
-## BÖLÜM 2: v1'İN DURUMU
+## BÖLÜM 2: KILLER OUTPUT — "THE VERDICT"
+
+### Ana İçgörü
+
+İnsanlar rapor okumak istemiyor. **Karar** istiyorlar.
+
+```
+Killer output = karar
+Rapor = supporting material (opsiyonel)
+```
+
+### The Verdict Formatı
+
+```
+┌────────────────────────────────────────┐
+│                                        │
+│   "Online terapi platformu"            │
+│                                        │
+│   ❌  YAPMA                             │
+│                                        │
+│   1. BetterHelp zaten pazarı kapmış    │
+│      → Reddit'te "pahalı" şikayeti     │
+│        2.3K upvote                     │
+│                                        │
+│   2. HIPAA compliance tek başına       │
+│      6 aylık bürokrasi                 │
+│      → Legal checklist                 │
+│                                        │
+│   3. Müşteri edinim maliyeti >         │
+│      aylık abonelik                    │
+│      → Finance hesabı                  │
+│                                        │
+│   Güven: %87                           │
+│                                        │
+│   [Ikna etmeye çalış]                  │
+│   [Detaylı aç ▼]                       │
+│   [Paylaş]                             │
+│                                        │
+└────────────────────────────────────────┘
+```
+
+### 3 Verdict Tipi
+
+```
+✅ YAP        → Fikir sağlam, ileri git
+⚠️  PIVOT     → Fikir tam doğru değil, şöyle değiştir
+❌ YAPMA      → Vakit harcama, başka şey dene
+```
+
+Soft cevap yok. "Promising", "risky" gibi belirsizlikler yok. Kullanıcı **net karar** istiyor, Council net karar veriyor.
+
+### 3 Sebep Kuralı
+
+- Her sebep **tek cümle**
+- Her sebep bir **kaynağa** bağlı
+- Her sebep **aksiyonlanabilir** bilgi
+- 3'ten fazla sebep → zayıflık (1-2 güçlü sebep 5 zayıf sebepten daha ikna edici)
+
+### Drill-Down (Opsiyonel)
+
+Verdict ana ekran. Detay isteyen tıklar:
+- "Neden böyle düşünüyorsun?" → sources açılır
+- "Pazar analizini göster" → Marketing departmanı çıktısı
+- "Teknik planı göster" → Engineering departmanı çıktısı
+- "Maliyet hesabı" → Finance departmanı çıktısı
+
+**Departmanlar drill-down'da yaşar, ana ekranda değil.**
+
+---
+
+## BÖLÜM 3: TRUST LAYER
+
+### En Büyük Gizli Risk
+
+Kullanıcı ilk kullanımda mutlaka şunu düşünecek:
+> *"AI ne bilecek benim fikrimi? Hallüsinasyon yapıyor olabilir."*
+
+Eğer ilk cevap yanlış veya güvenilmez görünürse → **kullanıcı bir daha gelmez**. Bu tek başına ürünü öldürür.
+
+**Trust = Product-Market Fit'in ön koşulu.**
+
+### Trust Layer'ın 5 Bileşeni
+
+#### 1. Confidence Scoring
+```
+"Bu fikir başarısız olacak (güven: %87)"
+```
+Düşük güven varsa açıkça söyle:
+```
+"Burada yeterli veri yok.
+ Kararımı %60 güvenle söylüyorum,
+ daha çok araştırman gerekebilir."
+```
+
+#### 2. Source Attribution (Zorunlu)
+
+Her iddia bir kaynağa bağlı olmak zorunda:
+
+- ❌ *"Bu pazar küçük"*
+- ✅ *"Bu pazar küçük — [Reddit r/therapy, 340 thread, son 30 gün]"*
+
+Kullanıcı tıklayınca kanıt açılır. Black box değil.
+
+#### 3. Uncertainty Hedging
+
+AI kendi sınırlarını kabul etmeli:
+- *"Bu bir varsayım"*
+- *"Bu konuda emin değilim ama"*
+- *"Eğer X doğruysa, o zaman Y"*
+- *"Burası için daha çok veri lazım"*
+
+İronik şekilde, **"bilmiyorum"** demek güveni ARTIRIR.
+
+#### 4. Anti-Hallucination Guardrails
+
+| Iddia tipi | Kaynak zorunluluğu |
+|-----------|---------------------|
+| Marketing claim | Agent-Reach verisi zorunlu |
+| Finance rakamı | Formül + kaynak zorunlu |
+| Legal risk | Checklist + disclaimer zorunlu |
+| Verdict | En az 3 independent signal |
+| Technical feasibility | Known pattern match |
+
+Kural: **Kaynak yoksa iddia yok.**
+
+#### 5. "Ben yanılmış olabilirim" kültürü
+
+Ürün kendi sınırlarını kabul etmeli. Bu, rakiplerin **yapmadığı** şey.
+
+Tagline olabilir:
+> *"Dürüst olmak için bazen 'bilmiyorum' demek gerekir."*
+
+### Neden Trust Layer Kritik?
+
+- Council'ın tek cümlelik promise'ı: **"dürüst cevap"**
+- Dürüstlük, **bilmediğini kabul etmek** demek
+- Hallüsinasyon → dürüstlük değil → promise'ın kırılması → güven kaybı → kullanıcı kaybı
+
+**Trust layer, ürünün etik omurgası.**
+
+---
+
+## BÖLÜM 4: AGENT-REACH — "GÖRÜNMEZ VERİ"
+
+### Eski Yanlış Yaklaşım
+
+```
+"Twitter'da 15K tweet var, Reddit'te 2.3K upvote,
+ LinkedIn'de 340 iş ilanı, sentiment %68 pozitif..."
+```
+
+Bu **ham veri spam'i**. Kullanıcı okumaz, önemsemez, yorulur.
+
+### Doğru Yaklaşım: Insight, Veri Değil
+
+```
+"Bu fikir başarısız. Çünkü Reddit'teki terapi
+ topluluğu 'BetterHelp bile pahalı' diyor —
+ sen nasıl para kazanacaksın?"
+```
+
+Aynı veri, **yorumlanmış gerçeklik** olarak sunuluyor.
+
+### Görünmez Ama Ulaşılabilir
+
+```
+"Bu fikir başarısız olacak çünkü [Reddit thread] 
+ müşteriler mevcut alternatifleri bile pahalı buluyor."
+                    ↑
+            tıklanınca kanıt açılır
+```
+
+- **Varsayılan görünüm:** Sadece insight
+- **Tıklayınca:** Ham veri + kaynak linki
+- **Power user için:** "Raw research" sekmesi
+
+### Teknik Değişim
+
+```typescript
+// ESKİ: kullanıcıya ham veri göster
+interface OldMarketingOutput {
+  twitterVolume: number
+  redditUpvotes: number
+  linkedinJobs: number
+  sentiment: number
+}
+
+// YENİ: kullanıcıya insight göster, veri arkada
+interface NewMarketingOutput {
+  verdict: "positive" | "negative" | "mixed"
+  oneSentenceInsight: string  // "Kullanıcılar mevcut çözümleri pahalı buluyor"
+  evidence: {
+    sources: Source[]  // Tıklayınca açılan kanıtlar
+    rawData: any      // Drill-down için
+  }
+}
+```
+
+### Agent-Reach'in Yeri
+
+Agent-Reach **ürünün özelliği değil, fuel'ı**. Kullanıcı "Agent-Reach kullanılıyor" bile bilmez. Sadece "Council dürüst konuşuyor, kanıtı var" der.
+
+### Alternatif: Agent-Reach'i pas geç
+
+P12 (Agent-Reach Integration Risk) kritik bir endişe. Python-TypeScript bridge riskli.
+
+**Alternatif sağlayıcılar:**
+- **Exa API** — semantic web search, unified, ücretli ama stabil
+- **Tavily API** — AI-first search, LLM-friendly output
+- **Perplexity API** — arama + özet
+- **Serper** — Google search wrapper
+
+**Önerim:** v2.0'da Agent-Reach **olmasın**. Exa veya Tavily ile başla. Agent-Reach v2.2+'a bırak (veya tamamen pas geç).
+
+---
+
+## BÖLÜM 5: 2 FARKLI ÜRÜN → AYIRMA STRATEJİSİ
+
+### Kritik İçgörü
+
+Farkında olmadan 2 farklı ürün tasarlıyordum:
+
+**Ürün A — Idea Validator**
+- **Kullanıcı:** Girişimci, indie hacker, non-technical founder
+- **Amaç:** "Bu fikir para kazanır mı?"
+- **Değer:** Hızlı verdict + kanıt
+- **Süre:** 10 saniye
+- **Ton:** Brutal honest investor
+- **Fiyat:** Ucuz ($9-15/ay)
+
+**Ürün B — Company Simulator**
+- **Kullanıcı:** Teknik geliştirici, araştırmacı, eğitim
+- **Amaç:** "Multi-agent sistemi nasıl çalışır, izleyeyim"
+- **Değer:** Eğlence + öğrenme + deep dive
+- **Süre:** 5-10 dakika
+- **Ton:** Educational, immersive
+- **Fiyat:** Pro ($49/ay)
+
+**Bu ikisini aynı ürün yapmak, ikisini de başarısızlığa sürüklüyor.**
+
+### Çözüm: İsim ve Deneyim Ayrımı
+
+- **Council** — Ürün A (hızlı karar, ana ürün)
+- **Council Studio** — Ürün B (simulation, opsiyonel Pro)
+
+Studio, Council'ın bir "modu" değil, **ayrı bir deneyim**. Aynı backend, farklı UX, farklı hedef.
+
+### v2 için Stratejik Sonuç
+
+- **v2.0 → Sadece Ürün A (Idea Validator).** Focus burada.
+- **v2.3+ → Studio eklenir.**
+
+Bu ayrım, scope problemini (P3) çözüyor ve product-market fit'i (P20) hızlandırıyor.
+
+---
+
+## BÖLÜM 6: SIMULATION — GROWTH ENGINE, CORE DEĞİL
+
+### Yeniden Konumlandırma
+
+Eski düşünce: *"Simulation core feature"*
+
+Yeni düşünce: *"Simulation growth engine"*
+
+### Simulation'ın Gerçek Değeri
+
+- Kullanıcıyı eğlendirir → **paylaşılabilir content**
+- "Council'ın CEO'su benim fikrime 'red' dedi" → **Twitter şakası**
+- Video: "AI şirketi benim fikrimi yargılıyor" → **TikTok viral potansiyel**
+- "Toplantıyı izle" deneyimi → **demo için ideal**
+
+### Pratik Uygulama
+
+- **Ana ürün (v2.0):** Hızlı brutal verdict (core value)
+- **Studio mode (v2.3):** Simulation, Pro tier
+- **Her verdict'in altında:** "Toplantıyı izle" butonu → shareable video/image
+- **Landing page'de:** Demo simulation video (viral hook)
+
+Simulation, core değil ama **kullanıcı kazanma makinesi**.
+
+---
+
+## BÖLÜM 7: VIRAL MEKANİZMALAR
+
+### En Güçlü Büyüme Hack'i
+
+> *"AI bana fikrimin çöp olduğunu söyledi"*
+
+Bu cümle **doğal olarak paylaşılır**. İnsanlar kendileriyle ilgili acı gerçekleri paylaşmayı sever (ironi + dürüstlük).
+
+### 7 Viral Mekanizma
+
+#### 1. Shareable Verdict Card
+Her verdict bir görsel kart olarak paylaşılabilir:
+```
+┌───────────────────────────────┐
+│  COUNCIL VERDICT              │
+│                               │
+│  "Podcast uygulaması"         │
+│                               │
+│  ❌ YAPMA                      │
+│                               │
+│  Sebebi: Spotify zaten        │
+│  ücretsiz.                    │
+│                               │
+│  council.dev/v/abc123         │
+└───────────────────────────────┘
+```
+Twitter kartı, Instagram post, Reddit share — hepsi için hazır.
+
+#### 2. Roast Mode
+Toggle: *"Sert konuş"* → daha acımasız cevap
+- Normal: *"Bu fikir zorlu olabilir"*
+- Roast: *"Bunu yapma. Kimse umursamıyor."*
+
+Paylaşılabilirliği artırır.
+
+#### 3. Public Ideas Feed (Opsiyonel)
+*"Bugün en sert eleştirilen fikirler"*
+- Entertainment
+- Social proof
+- SEO trafik
+
+#### 4. "Council'ı ikna et" Modu
+Kullanıcı hayır cevabını kabul etmiyor mu? İkna etmeye çalışsın. Conversation loop → engagement + retention.
+
+#### 5. Challenges
+*"Fikrimi Council'a sor"* — social media challenge. Viral potansiyel + zero cost marketing.
+
+#### 6. Verdict URL'leri
+Her verdict kalıcı URL ile paylaşılır: `council.dev/v/abc123`. Backlink + SEO + viral loop.
+
+#### 7. Arkadaş Karşılaştırma
+*"Benim fikrim arkadaşımınkinden daha iyi/kötü"* — sosyal karşılaştırma mekanizması.
+
+### Neden Bu Mekanizmalar Önemli?
+
+Sıfır pazarlama bütçesiyle başlıyoruz. **Viral = organik büyüme = düşük CAC**. Ürünün kendisi marketing olmalı.
+
+---
+
+## BÖLÜM 8: RETENTION STRATEJİSİ
+
+### Yanlış Soru
+
+*"Kullanıcı neden geri gelsin?"* — zorlama retention düşüncesi.
+
+### Doğru Soru
+
+*"Kullanıcının doğal geliş sebebi ne?"* — ürün-kullanıcı uyumu.
+
+### Retention Mekanizmaları
+
+#### 1. Fikir Günlüğü
+Kullanıcının fikirleri saklanır. Zaman içinde ilerleme:
+```
+6 ay önce: Fikir #1 (YAPMA - pazar kötü)
+    ↓ pivot
+3 ay önce: Fikir #2 (PIVOT - müşteri yanlış)
+    ↓ pivot
+Bugün:     Fikir #3 (YAP - doğru yol)
+```
+
+#### 2. Pazar Güncellemeleri
+30 gün sonra otomatik:
+> *"Reddit'teki sentiment değişti. Fikrinin durumu farklılaşmış olabilir. Tekrar değerlendir?"*
+
+Pasif email, aktif dönüş nedeni.
+
+#### 3. Rakip Uyarısı
+> *"Benzer bir fikir Y Combinator'da çıktı. Rakip analizi gözden geçir."*
+
+Kullanıcı kendi pazarında ne olduğunu bilmek ister.
+
+#### 4. Fikir Karşılaştırma
+*"Bu fikrim önceki fikrimden daha iyi mi?"* → head-to-head comparison.
+
+#### 5. Pivot Önerileri
+Red verilen fikirler için: *"Şu şekilde değiştirirsen evet derim"* → pivot önerisi.
+
+### "AI Sana Fikir Önerir" Riski
+
+Kullanıcının önerdiği mekanizma ("AI fikir önerir") tehlikeli olabilir çünkü:
+- Council "fikir jeneratörü" olur, "değerlendirici" değil
+- "Brutal truth" pozisyonu sarsılır: dürüst adam fikir satmaz
+
+**Daha güvenli yaklaşım:** Pivot önerisi (kullanıcının fikri üzerinden) evet, **boşluktan fikir yaratmak** hayır.
+
+---
+
+## BÖLÜM 9: OUTPUT QUALITY — MVP'NİN ASIL MERKEZİ
+
+### Kabul
+
+Doküman şimdiye kadar %60 mimari, %20 maliyet, %10 UX, %10 çıktı kalitesi oran dağılımı ile yazılmıştı. **Bu yanlış.**
+
+### Gerçek MVP Sorusu
+
+> *"Council tek bir fikri alıp, dürüst, doğru, güvenilir bir verdict verebiliyor mu?"*
+
+Bu çalışmadan diğer her şey boş. Mimari, caching, multi-agent, prompt caching — hepsi **gereksiz** eğer çıktı kalitesi düşükse.
+
+### Düzeltilmiş MVP Önceliği
+
+| Alan | Efor | Neden |
+|------|------|-------|
+| **Output quality** | %50 | Her şeyin temeli |
+| **Trust layer** | %20 | Promise'ın teslimi |
+| **Core UX** | %15 | 10 saniyede sonuç |
+| **Architecture** | %10 | Yeterli, optimize etmeden başla |
+| **Her şey diğer** | %5 | Sonra |
+
+### Output Quality Nasıl Sağlanır?
+
+#### 1. Golden Examples Set
+- 50 örnek fikir
+- Her biri için ideal verdict + sebepler (elle yazılmış)
+- Her prompt değişikliğinde bu set'e karşı test
+
+#### 2. Prompt Engineering
+- CEO system prompt'u **vizyon cümlesiyle tutarlı** olmalı
+- "AI investor" tonu prompt'ta sabit
+- Verdict formatı sabit (always verdict + 3 reasons + confidence)
+
+#### 3. Test-First Yaklaşım
+- Her değişiklikten sonra golden set ile karşılaştır
+- Regression var mı?
+- Subjective quality score (1-10) takibi
+
+#### 4. Iterative Prompt Refinement
+- Haftalık prompt review
+- Kullanıcı feedback'i → prompt güncelleme
+- A/B test farklı system prompt versiyonları
+
+### Quality > Architecture
+
+> "Kötü output + iyi mimari = çöp
+>  İyi output + kötü mimari = ürün"
+
+v2.0'da bunu unutma. Önce çıktıyı doğrula, sonra optimize et.
+
+---
+
+## BÖLÜM 10: COMPETITIVE LANDSCAPE — YENİ GÖZDEN GEÇİRME
+
+### Gerçek Rakip Kim?
+
+Eski liste: Cursor, Bolt, Lovable, Devin, MetaGPT, ChatDev...
+
+**Ama bunlar Council'ın rakibi değil.** Hepsi "kod yaz" kategorisinde. Council kod yazmıyor, **karar veriyor**.
+
+### Council'ın Gerçek Rakipleri
+
+| Rakip | Nasıl çözüyor? | Council nasıl farklı? |
+|-------|-----------------|-----------------------|
+| **Eş/Aile tavsiyesi** | Destekleyici, yanlı | Dürüst, objektif |
+| **Mentor** | Zamanı yok, pahalı, yavaş | Her zaman uygun, ucuz, hızlı |
+| **Co-founder konuşması** | Sadece co-founder varsa | Solo founders için de |
+| **Reddit/Indie Hackers** | Dağınık, trol'lü | Yoğun, yapılandırılmış |
+| **Düşünerek beklemek** | Paralysis by analysis | 10 saniyede karar |
+| **Tavsiye kitapları** | Generic, spesifik değil | Senin fikrine özel |
+| **AI evaluation tools** | Yavaş, rapor bazlı, güvensiz | Hızlı, verdict bazlı, kanıtlı |
+
+### Yeni Pozisyon
+
+Council **tavsiye pazarının** AI alternatifi, code generation pazarının değil.
+
+> *"Eski dünya: fikrini eşine anlatırsın, yalan söyler.*
+> *Yeni dünya: Council'a anlatırsın, dürüstçe söyler."*
+
+### Why Now?
+
+- LLM'ler artık yeterince güvenilir (hallüsinasyon yönetilebilir)
+- Multi-agent pattern'lar olgun (Claude Code, MetaGPT)
+- AI coding tools doyma noktasında, planning tools boş
+- Indie hacker/solo founder pazarı büyüyor (no-code dalgasıyla)
+- İnsanlar AI'dan bilgi almaya alışkın (ChatGPT effect)
+
+---
+
+## BÖLÜM 11: MONETİZASYON (REVİZE)
+
+### 2026 Trendi
+
+Hybrid pricing 2026 standardı (%61 SaaS, %85 AI lider).
+
+### Council v2 Model
+
+**Not:** Fiyat rakamları TBD. PMF'den sonra kesinleşir.
+
+```
+┌─────────────────────────────────────────────┐
+│  FREE (Acquisition)                         │
+│  - 3 verdict/ay                             │
+│  - Basic confidence score                   │
+│  - Verdict card paylaşımı                   │
+│  - "Powered by Council" branding            │
+└─────────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────────┐
+│  PRO (Ana Hedef)                            │
+│  - Sınırsız verdict                         │
+│  - Agent-Reach / Exa entegrasyonu           │
+│  - Detaylı drill-down                       │
+│  - Roast mode                               │
+│  - Fikir günlüğü + pazar güncellemeleri     │
+│  - Rakip uyarıları                          │
+│  - PDF export                               │
+└─────────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────────┐
+│  STUDIO (Power User / Pro Tier)             │
+│  - Her şey Pro'da                           │
+│  - Simulation mode (şirketi izle)           │
+│  - Board meeting view                       │
+│  - Custom departmanlar                      │
+│  - Team collaboration                       │
+│  - API access                               │
+└─────────────────────────────────────────────┘
+```
+
+### Retention Features → Pro'da
+
+Bölüm 8'deki retention mekanizmaları (fikir günlüğü, pazar güncellemeleri, rakip uyarıları) **Pro tier'a özel**. Bu, Free → Pro geçişinin motoru.
+
+### Pricing Stratejisi
+
+- **Free:** Geniş funnel
+- **Pro:** Impulse buy bölgesinde ($9-19 range)
+- **Studio:** Power user tier ($39-59 range)
+
+**Fiyat belirleme:** İlk 100 kullanıcı free, sonra fiyat A/B test.
+
+---
+
+## BÖLÜM 12: KULLANICI DENEYİMİ (BASITLEŞTIRILDI)
+
+### Eski UX (Karmaşık)
+- 5 mod
+- 12 departman
+- 4 segment
+- 3 output formatı
+
+### Yeni UX (Tek Akış)
+
+```
+Landing → Input → Loading (5-10 sn) → Verdict → [Derinleş ▼]
+```
+
+**O kadar.** Mod seçici yok, segment seçici yok, karmaşıklık yok.
+
+### Tek Varsayılan Akış
+
+#### 1. Landing
+- 1 cümle promise: *"Fikrine dürüst cevap veren AI yatırımcı"*
+- 1 demo video (15 sn)
+- Input box (büyük, ortada)
+
+#### 2. Input
+```
+┌────────────────────────────────────────┐
+│                                        │
+│  Fikrin nedir?                         │
+│                                        │
+│  ┌────────────────────────────────┐    │
+│  │ Online terapi platformu        │    │
+│  │ yapmak istiyorum...            │    │
+│  │                                │    │
+│  └────────────────────────────────┘    │
+│                                        │
+│         [Dürüst cevap al →]            │
+│                                        │
+└────────────────────────────────────────┘
+```
+
+#### 3. Loading (Hikaye ile)
+```
+⏳ Verdict hazırlanıyor...
+
+   ✓ Fikir anlaşıldı
+   ✓ Pazar taranıyor
+   ○ Sebepler derleniyor
+```
+Kullanıcı ne olduğunu görür → beklemeye razı olur.
+
+#### 4. Verdict
+Bölüm 2'deki Verdict format'ı. Ana sayfa bu.
+
+#### 5. Derinleş (Opsiyonel)
+- Detaylı sebepler
+- Kaynaklar
+- Alternatif öneriler ("Pivot öneri")
+- Departman raporları (power user için)
+
+### Adaptive Complexity
+
+Sistem otomatik karar verir:
+- Basit fikir → 3 departman çalışır, hızlı verdict
+- Karmaşık fikir → 8+ departman çalışır, detaylı verdict
+- Enterprise fikir → Full 12 departman, deep analysis
+
+**Kullanıcı farkında olmaz.** Backend sırrı.
+
+### Power User Path
+
+Drill-down ile her şeyi görebilir:
+- "Görüntü: Verdict" (varsayılan)
+- "Görüntü: Departman raporları"
+- "Görüntü: Ham veri"
+- "Görüntü: Source timeline"
+
+Varsayılan basit, power user için derinlik var.
+
+---
+
+## BÖLÜM 13: v1'İN DURUMU (TEKNİK BACKGROUND)
 
 ### Tech Stack
 
 - **Framework:** Next.js 16 (App Router) + React 19 + TypeScript 5
-- **AI:** @anthropic-ai/sdk + @ai-sdk/anthropic (Vercel AI SDK)
+- **AI:** @anthropic-ai/sdk + @ai-sdk/anthropic
 - **Database:** Supabase (PostgreSQL)
-- **UI:** TailwindCSS 4 + shadcn/ui (base-nova)
+- **UI:** TailwindCSS 4 + shadcn/ui
 - **Validation:** Zod 4
-- **Code Sandbox:** @codesandbox/sandpack-react
-- **PDF:** html2canvas + jspdf
 
-### Proje Yapısı (Özet)
+### Mevcut 13 Ajan (v1)
 
-```
-council/
-├── src/
-│   ├── app/
-│   │   ├── page.tsx                 # Ana sayfa
-│   │   ├── api/
-│   │   │   ├── mission/route.ts     # Ana brief üretimi
-│   │   │   ├── intake/route.ts      # Konuşmalı intake
-│   │   │   ├── projects/            # Proje orkestrasyonu
-│   │   │   └── threads/             # Thread yönetimi
-│   │   ├── brief/[id]/              # Brief görüntüleme
-│   │   └── thread/[id]/              # Thread görüntüleme
-│   │
-│   ├── components/
-│   │   ├── genesis/                  # Genesis view
-│   │   ├── brief-view.tsx            # Brief display
-│   │   └── council-conversation.tsx  # Konuşma UI
-│   │
-│   └── lib/
-│       ├── agents/                   # 13 ajan definition
-│       ├── orchestrator/             # Phase state machine
-│       ├── optimization/             # Model selection, token budgets
-│       └── threads/                  # Thread management
-│
-├── supabase/migrations/              # 5 migration
-└── benchmark/                        # Evaluation results
-```
-
-### Mevcut 13 Ajan
-
-1. strategist — Chief strategist
-2. architect — System architect
-3. designer — Product design
-4. backend_engineer
-5. frontend_engineer
-6. devops
-7. devops_deploy
-8. qa_writer
-9. security
-10. legal
-11. marketing
-12. product_manager
-13. support_docs
-14. triage — Request routing
+strategist, architect, designer, backend_engineer, frontend_engineer, devops, devops_deploy, qa_writer, security, legal, marketing, product_manager, support_docs, triage
 
 ### v1'in 6 Fazlı Pipeline'ı
 
@@ -102,348 +707,58 @@ council/
 Phase 1: Strategic Intake (strategist)
 Phase 2: Product Definition (product_manager + legal)
 Phase 3: Architecture & Design (architect + designer + security_threat)
-Phase 4: Implementation (backend + frontend + devops + qa_writer) ⚠️ PLACEHOLDER
-Phase 5: Verification & Hardening (qa_execution + security_audit + sre) ⚠️ PLACEHOLDER
+Phase 4: Implementation — ⚠️ PLACEHOLDER
+Phase 5: Verification & Hardening — ⚠️ PLACEHOLDER
 Phase 6: Release & Operate (devops_deploy + marketing + support_docs)
 ```
 
 ### v1'deki Eksikler
 
-- ❌ Phase 4-5 tool agents `return null` — kod üretimi, test, deploy çalışmıyor
-- ❌ Ajanlar arası iletişim yok (sadece sıralı fazlar)
-- ❌ Departman yapısı yok (düz liste)
-- ❌ Şirket metaforu yok
-- ❌ Gerçek dış dünya erişimi yok (Agent-Reach yok)
-- ❌ Hafıza yok (önceki projelerden öğrenme yok)
-- ❌ Hiyerarşi/karar zinciri yok (CEO, dept lead kavramı yok)
-- ❌ Bütçe yönetimi basit token sayacı
-- ❌ Dinamik ölçekleme yok (hep aynı 13 ajan)
+- ❌ Phase 4-5 tool agents `return null`
+- ❌ Ajanlar arası iletişim yok
+- ❌ Departman yapısı yok
+- ❌ Gerçek dış dünya erişimi yok
+- ❌ Hafıza yok
+- ❌ Hiyerarşi yok
+- ❌ Bütçe yönetimi basit
+- ❌ Dinamik ölçekleme yok
 
-**Vizyon yakınlığı:** ~%30 — iskelet var, ruh eksik.
-
----
-
-## BÖLÜM 3: REFERANS KAYNAKLAR
-
-### Referans 1: Claude Code (C:\repo\claude_ref\code)
-
-**Ne:** Anthropic'in resmi CLI ajanı, TypeScript + Bun, ~1,900 dosya, 48K+ satır.
-
-**Council v2 için çıkarımlar:**
-
-#### Mimari Kalıplar
-- **Tool-based agent spawning** (AgentTool): Sub-agent'ları background/foreground task olarak spawn et
-- **Team-based swarm** (TeamCreateTool + SendMessageTool): Departman/ekip yapısı
-- **In-process teammates**: Paralel senkron ajanlar
-- **Permission system**: default/plan/bypass/auto modları
-- **Hook system**: Session-scoped middleware
-- **MCP integration**: Hem client hem server
-- **Feature flags** (Bun bundle): Dead code elimination
-
-#### Maliyet Optimizasyon Kalıpları (Claude Code'dan)
-
-| Pattern | Tasarruf |
-|---------|----------|
-| Prompt caching (ephemeral + 1h TTL) | %60-90 input maliyeti |
-| Model tiering (Haiku $1/$5, Sonnet $3/$15, Opus $15/$75) | %50-80 |
-| Deferred tools / lazy loading | %10-30 |
-| Context compaction (microcompact + full) | %70-85 faz arası |
-| Output token capping (default 8K, P99 kullanım 4,911) | %50-70 output |
-| Parallel tool execution (StreamingToolExecutor) | %50-60 latency |
-| File state cache (LRU 100 entries, 25MB) | %20-40 |
-| Smart escalation (Haiku → Sonnet → Opus) | %40-90 |
-| Prefetch & speculation | %20-30 latency |
-
-#### KRİTİK KEŞİF: Tek API Call ile Çok Tool
-
-Claude Code'un asıl sırrı — **5 tool kullanan ajan 1 API call yapıyor, 5 değil.**
-
-```
-1 API Call → Model 5 tool_use döndürür → 5 tool paralel çalışır → 1 API Call (sonuçlarla)
-Toplam: 2 API call ile 5 iş yapıldı
-```
-
-#### Error Handling Pattern'ları (17 adet)
-
-1. **Exponential backoff + jitter:** 500ms × 2^n, ±25% jitter, max 32s
-2. **429 handling:** Tier-aware retry (enterprise retry, standard bail)
-3. **529 overload:** Max 3 retry → FallbackTriggeredError → lower model
-4. **Token overflow:** Parse error, reduce max_tokens, retry (floor 3000)
-5. **Stream interruption:** Non-streaming fallback on 404
-6. **Stale connection:** ECONNRESET/EPIPE → disable keep-alive, fresh client
-7. **Persistent retry:** 5 dk max backoff, 30s heartbeat chunks, 6 saat reset cap
-8. **SSL errors:** Extract cause chain, provide proxy hints
-9. **Tool failure classification:** `classifyToolError` → telemetry-safe
-10. **Permission timeout:** Promise.race with timeout → fail-safe deny
-11. **Auth refresh:** 401 → OAuth refresh, 403 → revoked detection
-12. **Fast mode fallback:** Capacity → switch to standard, preserve cache
-13. **Graceful shutdown:** Failsafe timer, 2s cleanup cap, 500ms analytics flush
-14. **Conversation recovery:** Filter unresolved tool uses, inject continuation
-15. **Compaction fallback:** Failed compact → continue with original
-16. **Network retry:** APIConnectionError → always retryable
-17. **Model fallback cascade:** Opus → Sonnet → Haiku
-
-### Referans 2: Agent-Reach (C:\repo\Agent-Reach-main)
-
-**Ne:** Python CLI v1.4.0, AI agent'lara 17+ sosyal/içerik platformunda internet erişimi sağlar.
-
-**17 Platform:**
-- Web (Jina Reader), YouTube (yt-dlp), GitHub (gh CLI), RSS, V2EX, Reddit (rdt-cli)
-- Bilibili, Exa Search, Twitter/X (twitter-cli), Weibo, WeChat, Xiaohongshu
-- Douyin/TikTok, LinkedIn, Xueqiu, Xiaoyuzhou podcast, Bilibili
-
-**Council v2 için değer:** Marketing departmanının LLM hayali yerine **gerçek veri**:
-- Twitter'da trend analizi
-- Reddit'te kullanıcı tartışmaları
-- LinkedIn'de rakip şirket profilleri
-- YouTube'da sektör videoları
-- GitHub'da rakip açık kaynak projeler
-
-**Entegrasyon riski:** Python (Agent-Reach) ↔ TypeScript (Council) bridge — shell command veya HTTP API.
+**Not:** v2'de bunların çoğu **core problem değil** — output quality önce gelir. v2.0'da sadece "tek fikir → tek verdict" çalışsın yeter.
 
 ---
 
-## BÖLÜM 4: DEPARTMAN YAPISI
+## BÖLÜM 14: MİMARİ — "COMPANY BRAIN" (TEKNİK ALTYAPI)
 
-### Gerçek Bir Şirketin Departmanları (Araştırma Sonucu)
+### Felsefe
 
-Milyar dolarlık yazılım şirketlerinde **18 üst departman, 75+ alt birim** var:
+Mimari **kullanıcıya görünmez**. Backend sırrı.
 
-1. Executive Leadership / CEO Office
-2. Engineering (Frontend, Backend, Platform, Data, ML/AI, QA, Release, Security, DevEx, TPM)
-3. Product Management (Core PM, Product Ops, Product Analytics, Technical PM, Product Strategy)
-4. Design (Product Design, UX Research, Visual/Brand, Content Design, Design Systems, Motion, Design Ops)
-5. Marketing (Product Marketing, Demand Gen, Content, Brand, DevRel, Community, Events, Marketing Ops, Partner, Localization)
-6. Sales (SDR/BDR, AEs, Enterprise Sales, Solutions Engineering, Sales Ops, Channel, RevOps)
-7. Customer Success (CSM, Onboarding, Support, Professional Services, Education, CS Ops, Trust & Safety)
-8. Finance (FP&A, Accounting, Tax, Treasury, Billing, Internal Audit, IR, Procurement)
-9. People/HR (Recruiting, People Ops, Comp & Benefits, L&D, People Analytics, DEIB, Employee Relations, HRBPs, Workplace)
-10. Legal (Commercial, Employment, IP, Privacy, Regulatory, Corporate, Litigation, Public Policy)
-11. IT (IT Ops, Enterprise Apps, IT Security, Network, IT Asset Management)
-12. Security/InfoSec (SecOps, AppSec, GRC, IAM, Red Team, Security Architecture)
-13. Data & Analytics (BI, Data Science, Product Analytics, Data Governance, Experimentation)
-14. R&D / Innovation (Research Labs, Incubation, Emerging Tech)
-15. Corporate Development / M&A
-16. Communications / PR
-17. Business Development / Partnerships
-18. Specialized Functions (Localization, Accessibility, Sustainability/ESG, Real Estate)
+Ama iyi mimari = düşük maliyet + yüksek hız → **sürdürülebilirlik**.
 
-### Council v2 için Sadeleştirilmiş 12 Departman
-
-```
-🏢 COUNCIL INC.
-│
-│  ══════════════════════════════════════
-│   C-SUITE (Yönetim Katmanı)
-│  ══════════════════════════════════════
-│
-├── 🎯 CEO Office (Strateji & Karar)
-│   ├── Chief Strategist — vizyon, go/no-go kararı
-│   └── Chief of Staff — departmanlar arası koordinasyon
-│
-├── 💻 CTO Office (Teknik Liderlik)
-│   ├── VP Engineering — teknik yön, mimari kararlar
-│   └── Security Architect — tehdit modelleme
-│
-├── 📦 CPO Office (Ürün Liderliği)
-│   ├── VP Product — ne yapılacak, neden
-│   └── UX Research Lead — kullanıcı ihtiyaçları
-│
-│  ══════════════════════════════════════
-│   CORE DEPARTMENTS (Üretim)
-│  ══════════════════════════════════════
-│
-├── 🏗️ Engineering Dept
-│   ├── Backend Engineer
-│   ├── Frontend Engineer
-│   ├── DevOps / Platform Engineer
-│   └── QA Engineer
-│
-├── 🎨 Design Dept
-│   ├── Product Designer (UI/UX)
-│   ├── Design System Engineer
-│   └── Content Designer (UX writing)
-│
-├── 📊 Data & Analytics Dept
-│   ├── Product Analyst
-│   └── BI Analyst
-│
-│  ══════════════════════════════════════
-│   BUSINESS DEPARTMENTS (Pazarlama & Satış)
-│  ══════════════════════════════════════
-│
-├── 📢 Marketing Dept (Agent-Reach entegreli)
-│   ├── Product Marketing — pozisyonlama, mesaj
-│   ├── Market Research — gerçek pazar verisi
-│   ├── Content Marketing — blog, tweet, içerik
-│   └── Growth / SEO — organik büyüme
-│
-├── 💼 Sales & BD Dept
-│   ├── Solutions Architect — teknik demo
-│   └── BD Manager — partnerlik stratejisi
-│
-├── 🤝 Customer Success Dept
-│   ├── Support Lead — dokümantasyon
-│   └── Onboarding Specialist — müşteri eğitimi
-│
-│  ══════════════════════════════════════
-│   SUPPORT DEPARTMENTS (Destek)
-│  ══════════════════════════════════════
-│
-├── ⚖️ Legal & Compliance Dept
-│   ├── Privacy Counsel — GDPR/KVKK
-│   ├── IP Counsel — patent, lisans
-│   └── Commercial Counsel — sözleşme
-│
-├── 💰 Finance Dept
-│   ├── FP&A — bütçe, maliyet analizi
-│   ├── Billing — fiyatlandırma modeli
-│   └── Procurement — vendor yönetimi
-│
-└── 👥 HR / People Dept
-    ├── Talent Acquisition — "ajan işe alım"
-    └── Performance Analytics — ajan performansı
-```
-
-**Toplam:** 12 departman, 28 rol
-
-### Departmanlar Nasıl Görünecek? — 5 Alternatif
-
-Kullanıcı 12 departmanı doğrudan görmez. Seçilen gösterim stratejisi:
-
-#### Alternatif A: Progressive Disclosure
-Varsayılan: Sadece CEO raporu + 3 kritik departman. "Daha fazla göster" butonu ile diğerleri açılır.
-
-#### Alternatif B: Dynamic Department Selection (ÖNERİLEN)
-Triage projeye göre departmanları seçer:
-- Blog sitesi → 3 departman
-- Fintech → 8 departman
-- AI startup → 10 departman
-- Enterprise → 12 departman
-
-#### Alternatif C: Filtered Views by Persona
-Kullanıcı başlangıçta rolünü seçer: [Girişimci] [Geliştirici] [Öğrenci]
-
-#### Alternatif D: Quick Summary + Deep Dive
-Ana sayfa 1 paragraf özet, "Departman raporları" sekmesi.
-
-#### Alternatif E: Output-Driven (ÖNERİLEN)
-Departmanları gösterme, 3 büyük "output paket" göster:
-- "Fikir analizi" (CEO + Market)
-- "Teknik plan" (Eng + Design + DevOps)
-- "İş planı" (Finance + Marketing + Legal)
-
-**Önerilen kombinasyon:** B + E. Backend adaptive 12 departman, UI 3 output paketi.
-
----
-
-## BÖLÜM 5: İLETİŞİM STRATEJİSİ
-
-### İletişim Tipleri
-
-```typescript
-type MessageType = 
-  | "request"      // İş talebi: "Bunu yap"
-  | "deliverable"  // Teslim: "İşte sonuç"
-  | "review"       // İnceleme: "Buna bak, görüşünü söyle"
-  | "approval"     // Onay: "Onaylıyor musun?"
-  | "broadcast"    // Duyuru: "Herkes bilsin"
-  | "escalation"   // Yükseltme: "Bunu çözemedim, üste taşı"
-```
-
-### İletişim Kanalları
-
-1. **Dikey (Yukarı/Aşağı):** CEO ↔ CTO ↔ Engineering Lead ↔ Backend Engineer
-2. **Yatay (Departmanlar arası):** Product → Engineering, Marketing → Sales
-3. **Broadcast:** CEO → ALL: "Proje onaylandı"
-4. **Peer Review:** Backend ↔ Frontend: "API kontratı bu olsun"
-
-### İletişim Matrisi (Kim Kiminle Konuşur)
-
-```
-              CEO  CTO  CPO  ENG  DES  DAT  MKT  SAL  CS   LEG  FIN  HR
-CEO            ·    ●    ●    ○    ○    ○    ○    ○    ○    ●    ●    ○
-CTO            ●    ·    ●    ●    ○    ○    ·    ·    ·    ○    ○    ·
-CPO            ●    ●    ·    ●    ●    ●    ●    ○    ●    ○    ·    ·
-Engineering    ○    ●    ●    ·    ●    ○    ·    ·    ○    ○    ·    ·
-Design         ○    ○    ●    ●    ·    ○    ●    ·    ·    ·    ·    ·
-Data           ○    ○    ●    ○    ○    ·    ●    ○    ○    ·    ●    ·
-Marketing      ○    ·    ●    ·    ●    ●    ·    ●    ○    ○    ○    ·
-Sales          ○    ·    ○    ·    ·    ○    ●    ·    ●    ●    ●    ·
-CS             ○    ·    ●    ○    ·    ○    ○    ●    ·    ○    ·    ·
-Legal          ●    ○    ○    ○    ·    ·    ○    ●    ○    ·    ●    ●
-Finance        ●    ○    ·    ·    ·    ●    ○    ●    ·    ●    ·    ○
-HR             ○    ·    ·    ·    ·    ·    ·    ·    ·    ●    ○    ·
-
-● = Sık iletişim    ○ = Ara sıra    · = Nadir/yok
-```
-
-### Memo Sistemi (Maliyet-Verimli İletişim)
-
-Departmanlar arası her mesaj **bir API call değil**. Memo sistemi:
-1. Phase çalışır → Tüm departman çıktıları "memo" olarak bus'a yazılır (LOCAL, 0 API call)
-2. Sonraki faz bu memo'ları context olarak alır
-3. TEK API call ile tüm memo'lar işlenir
-
-```typescript
-interface DeptMessage {
-  id: string
-  from: DepartmentId
-  to: DepartmentId | "ALL"
-  type: MessageType
-  priority: "critical" | "normal" | "low"
-  payload: any
-  requires_response: boolean
-  deadline_phase: number
-}
-
-class CompanyBus {
-  private mailboxes: Map<DepartmentId, DeptMessage[]>
-  
-  send(msg: DeptMessage) {
-    this.mailboxes.get(msg.to)?.push(msg)
-  }
-  
-  broadcast(from: DepartmentId, payload: any) {
-    for (const dept of this.mailboxes.keys()) {
-      this.send({ from, to: dept, type: "broadcast", payload, ... })
-    }
-  }
-  
-  collectForPhase(phase: number): Map<DepartmentId, DeptMessage[]> {
-    return this.drainMailboxes(phase)
-  }
-}
-```
-
----
-
-## BÖLÜM 6: MİMARİ — "COMPANY BRAIN"
-
-### Ana Fikir: Her Ajan Ayrı API Call Değil
+### Ana Fikir: Tek API Call ile Çok Departman
 
 **v1 sorunu:**
 ```
-Her ajan = ayrı API call:
-CEO($0.03) + Architect($0.03) + Designer($0.03) + ... 10 call = ~$0.25/request
+Her ajan = ayrı API call
+10 call = ~$0.25/request
 ```
 
-**v2 çözümü:** Departmanları ayrı API call değil, **tool** olarak tanımla. Tek API session içinde model hangi departmanı aktive edeceğine karar versin.
+**v2 çözümü:**
+Departmanları tool olarak tanımla, tek API session içinde LLM hangi departmanı aktive edeceğine karar versin.
 
 ```typescript
-// Her departman bir TOOL
 const companyTools = [
   {
-    name: "engineering_dept",
-    description: "Backend/Frontend/DevOps analizi yapar",
-    input_schema: { task: string, context: string }
+    name: "market_research",
+    description: "Gerçek pazar verisi getirir (Agent-Reach/Exa)",
+    input_schema: { keywords: string[] }
   },
   {
-    name: "marketing_dept", 
-    description: "Pazar araştırması ve strateji üretir (Agent-Reach ile gerçek veri)",
-    input_schema: { task: string, brief: string }
+    name: "legal_check",
+    description: "Compliance ve yasal risk analizi",
+    input_schema: { domain: string }
   },
-  // ... diğer departmanlar
+  // ... diğerleri
 ]
 ```
 
@@ -452,646 +767,441 @@ const companyTools = [
 ```
 ┌─────────────────────────────────────────────┐
 │  KADEME 1: LOCAL ORCHESTRATOR (0 API call)  │
-│  TypeScript state machine                    │
-│  - Departman routing                         │
-│  - Tool result caching                       │
-│  - Context management                        │
-│  - Approval gates                            │
-│  - Agent-Reach calls (dış araştırma)        │
+│  - Triage (deterministic)                   │
+│  - Context management                       │
+│  - Agent-Reach/Exa calls                    │
+│  - Template-based deps (Legal, Finance)     │
 └──────────────────┬──────────────────────────┘
                    │
 ┌──────────────────▼──────────────────────────┐
 │  KADEME 2: TOOL-USE LOOP (1-2 API call)     │
-│  Tek API session, çok departman              │
-│  - Model CEO gibi düşünür                    │
-│  - Departmanları tool olarak çağırır         │
-│  - Paralel tool execution                    │
+│  - LLM CEO rolünde                           │
+│  - Departman tool çağırır                    │
+│  - Parallel execution                        │
 │  - Streaming response                        │
 └──────────────────┬──────────────────────────┘
                    │
 ┌──────────────────▼──────────────────────────┐
 │  KADEME 3: ESCALATION (nadir, 1 API call)   │
-│  Sadece karmaşık durumlar için               │
-│  - Opus ile derin analiz                     │
-│  - Güvenlik kritik kararlar                  │
-│  - Çelişki çözümü                            │
+│  - Karmaşık durumlar için Opus               │
 └─────────────────────────────────────────────┘
 ```
 
-### Local vs LLM Departmanlar
+### Local vs LLM Boundary
 
 **LOCAL (0 API call) — template/rule-based:**
-- Finance (hesaplama)
+- Finance (hesaplama, deterministik)
 - Legal (compliance checklist)
 - QA (test template)
 - DevOps (infra template)
-- Support Docs (template)
-- HR (metrik toplama)
 - Triage (keyword routing)
 
-**LLM GEREKLİ (tool-use loop içinde):**
-- CEO (strateji, karar)
+**LLM GEREKLİ — yaratıcılık lazım:**
+- CEO (strateji, karar sentezi)
 - Architect (yaratıcı tasarım)
 - Product Manager (kullanıcı analizi)
 - Designer (yaratıcı UX)
-- Marketing (içerik yazımı)
+- Marketing (içerik + insight üretimi)
 
-**Sonuç:** 12 departmandan 7'si local, 6'sı tek API session'da tool olarak.
+**Karar kriteri:**
+```
+Deterministik + template mümkün? → LOCAL
+Yaratıcılık + context-dependent? → LLM
+Template + subjective enhancement? → HYBRID (template first, LLM optional)
+```
 
-### Maliyet Karşılaştırması
+### Non-Determinism Sorunu (P10)
+
+**Sorun:** LLM "hangi departmanı çağıralım" deterministik değil.
+
+**Çözüm:** İki katmanlı karar:
+1. **Triage katmanı deterministik:** `project_type → required_departments` map (hard-coded)
+2. **LLM departman İÇİNDEKİ kararı alır:** ne yazacağı, nasıl yorumlayacağı
+
+Aynı input → aynı departman listesi → aynı sonuç (neredeyse).
+
+### Maliyet
 
 ```
-v1 (her ajan ayrı call):
-  10 API call × ~2K input × ~2K output
-  ≈ $0.25/request
+v1 (her ajan ayrı call): ~$0.25/request
+v2 Company Brain:        ~$0.03-0.05/request
 
-v2 Company Brain:
-  Kademe 1 (local): 7 departman × 0 call = $0.00
-  Kademe 2 (tool-use): 2 call × ~4K input × ~4K output
-    + prompt cache hit (%90) input maliyeti %10
-  ≈ $0.02-0.05/request
-
-TASARRUF: 5-12x ucuz, aynı veya daha iyi kalite
+Tasarruf: 5-8x
 ```
 
 ---
 
-## BÖLÜM 7: MALİYET OPTİMİZASYONU
+## BÖLÜM 15: MALİYET OPTİMİZASYONU (CLAUDE CODE'DAN)
 
-### Claude Code'dan Alınan 9 Teknik
+### 9 Teknik
 
-#### 1. Prompt Caching
+#### 1. Prompt Caching (%60-90 tasarruf)
 ```typescript
 system: [{
   type: "text",
   text: systemPrompt,
-  cache_control: { type: "ephemeral" }  // 5 dk cache (1h optional)
+  cache_control: { type: "ephemeral" }
 }]
 ```
-**Tasarruf:** %60-90 input maliyeti (cache hit durumunda read 10x ucuz)
 
 #### 2. Model Tiering
 ```
-Haiku ($1/$5):     Triage, sınıflandırma, HR, Finance hesap
-Sonnet ($3/$15):   Çoğu departman çalışanı
-Opus ($15/$75):    CEO kararları, kritik mimari, güvenlik
-```
-**Tasarruf:** Haiku Opus'tan 15x ucuz
-
-#### 3. Deferred Tools
-Her departman kendi tool setini görür. CEO tümünü, Engineer sadece engineering tool'larını.
-**Tasarruf:** Agent başına ~5-20K token
-
-#### 4. Context Compaction
-```
-Phase 1 çıktısı: 5000 token (tam rapor)
-Phase 2'ye giden: 800 token (özet)  ← %84 tasarruf
+Haiku ($1/$5):     Triage, sınıflandırma
+Sonnet ($3/$15):   Çoğu iş
+Opus ($15/$75):    CEO, Architect, kritik
 ```
 
-#### 5. Output Token Capping
+#### 3. Deferred Tools (%10-30 tasarruf)
+Her departman kendi tool setini görür.
+
+#### 4. Context Compaction (%70-85 faz arası)
+Eski çıktılar özet olarak sonraki faza geçer.
+
+#### 5. Output Token Capping (%50-70 output)
 ```
-Triage/HR/CFO:        max 2K token
-Product/Legal/QA:     max 4K token
-Engineer/Architect:   max 8K token
-CEO (final rapor):    max 16K token
+Triage: 2K | Legal/QA: 4K | Engineer: 8K | CEO: 16K
 ```
-**Tasarruf:** Output %50-70 azalma
 
 #### 6. Parallel Execution
-Bağımsız departmanlar `Promise.all` ile paralel çalışır. Süre %50-60 kısalır.
+Bağımsız tool'lar `Promise.all` ile paralel.
 
 #### 7. File State Cache (LRU)
-Aynı proje verisini tekrar tekrar okuma. 100 entry, 25MB cache.
+Aynı veriyi tekrar okuma.
 
 #### 8. Smart Escalation
-```
-Basit: Haiku → bitti
-Orta: Haiku → Sonnet → bitti
-Karmaşık: Haiku → Opus → bitti
-```
+Haiku → Sonnet → Opus cascade.
 
 #### 9. Prefetch & Speculation
-Kullanıcı yazarken arka planda triage başlat, ajan system prompt'larını warm-up yap.
+Kullanıcı yazarken arka planda hazırlık.
 
-### Toplam Etki
-
-Hepsini uygularsan: **Aynı kalitede çıktı, 5-10x daha ucuz.**
+**Toplam etki:** Aynı kalitede 5-10x ucuz.
 
 ---
 
-## BÖLÜM 8: HATA YÖNETİMİ (RESILIENCE)
+## BÖLÜM 16: HATA YÖNETİMİ (CLAUDE CODE'DAN 17 PATTERN)
 
-### Claude Code'dan 17 Error Handling Pattern
+### Kritik Pattern'lar
 
 | Pattern | Kullanım |
 |---------|----------|
-| Exponential backoff + jitter (500ms × 2ⁿ, ±%25) | Tüm API retry |
-| 429 tier-aware retry | Rate limit handling |
-| 529 overload → model fallback (max 3 retry) | Overload → lower tier |
-| Token overflow → parse + reduce max_tokens | Context limit |
-| Stream 404 → non-streaming fallback | Stream interrupt |
-| ECONNRESET/EPIPE → disable keep-alive + fresh client | Stale connection |
-| Persistent retry (5 dk max, 30s heartbeat, 6h reset) | Unattended sessions |
-| SSL error → extract cause + hints | Corporate proxy |
-| `classifyToolError` → telemetry-safe | Tool failure |
-| Permission timeout → fail-safe deny | Permission check |
-| 401 → OAuth refresh, 403 → revoked detect | Auth failure |
-| Fast mode cooldown on 429 | Capacity mgmt |
-| Graceful shutdown (2s cleanup, 500ms analytics) | Exit |
-| `filterUnresolvedToolUses` + continuation | Mid-turn interrupt |
+| Exponential backoff + jitter | Tüm API retry |
+| 429 tier-aware retry | Rate limit |
+| 529 overload → fallback model | Overload cascade |
+| Token overflow → reduce + retry | Context limit |
+| Stream 404 → non-streaming | Stream interrupt |
+| Stale connection → fresh client | Network |
+| Tool failure → telemetry-safe error | Agent crash |
 | Compaction fail → original messages | Compact error |
-| APIConnectionError always retryable | Network |
-| Model fallback cascade (Opus → Sonnet → Haiku) | Persistent fail |
+| Model fallback (Opus → Sonnet → Haiku) | Persistent fail |
 
-### Council v2 Resilience Mimarisi
+### Council v2 Resilience Katmanı
 
-```typescript
-// src/lib/resilience/
-├── withRetry.ts          // Claude Code pattern
-├── errorClassifier.ts    // Telemetry-safe error mapping
-├── fallbackCascade.ts    // Model degradation
-├── compactRecovery.ts    // Phase output compaction fallback
-└── agentReachFallback.ts // Agent-Reach timeout → cached data
 ```
+src/lib/resilience/
+├── withRetry.ts          # Claude Code pattern
+├── errorClassifier.ts    # Telemetry-safe
+├── fallbackCascade.ts    # Model degradation
+├── compactRecovery.ts    # Compaction fallback
+└── searchFallback.ts     # Exa/Agent-Reach timeout → cached
+```
+
+### Trust Layer ile Bağlantı
+
+Hata durumunda kullanıcıya **dürüst ol**:
+> *"Bu fikir için tam veri alamadım. Güvenim %50. Daha kesin cevap için tekrar dene."*
+
+Hata → hallüsinasyon değil, hata → dürüstlük.
 
 ---
 
-## BÖLÜM 9: TAM SİMÜLASYON ÖRNEĞİ
+## BÖLÜM 17: DEPARTMAN YAPISI (BACKEND SIRRI)
 
-**Senaryo:** *"Online terapi platformu yapmak istiyorum. Terapistler ve hastalar video görüşme yapabilecek, notlar tutulacak, ödeme sistemi olacak."*
+### Not
 
-### Phase 0: Triage (LOCAL, 0 API call)
-```
-⏱️ 0.5 sn | $0.00
-Keywords: ["terapi", "video", "ödeme", "sağlık"]
-Complexity: COMPLEX (HIPAA/KVKK + WebRTC + PCI)
-Mode: Normal (Draft & Review)
-Required departments: ALL
-Model tier: Sonnet (CEO) + Haiku (destek)
-```
+Bu bölüm eskiden "core vizyon"du. Artık **teknik arka plan**.
 
-### Phase 1: CEO Strategic Assessment (1 API call — Sonnet)
-```
-⏱️ 3 sn | $0.03
+Kullanıcı departmanları görmez. Sadece verdict'i görür. Departmanlar **insight üretim motoru**.
 
-Model tool_use ile departmanları aktive eder:
-→ market_research() — Agent-Reach ile Twitter/Reddit/LinkedIn
-→ legal_review() — HIPAA/KVKK checklist
-→ finance_assessment() — maliyet hesabı
-
-Tool'lar LOCAL çalışır paralel, 0 API call:
-
-market_research:
-  Twitter: 15K tweet/hafta "teletherapy", %68 pozitif
-  Reddit: r/therapy — "BetterHelp overpriced" 2.3K upvote
-  LinkedIn: 340 iş ilanı (büyüyen pazar)
-
-legal_review:
-  HIPAA: BAA gerekli, encryption, audit logs
-  KVKK: açık rıza, saklama süresi, silme hakkı
-  Video: çift taraflı kayıt onayı
-
-finance_assessment:
-  MVP: WebRTC ($50) + Stripe (2.9%) + DB ($25) = $200/ay
-  Breakeven: 50 terapist × $49/ay
-
-CEO sentez:
-  Verdict: PROMISING (72/100)
-  Görev dağılımı: CTO, CPO, Marketing, Legal
-```
-
-### Phase 2: Product & Architecture (1 API call — Sonnet, cache hit)
-```
-⏱️ 5 sn | $0.04
-
-tool_use: product_definition() → User journey + feature list
-tool_use: architecture_design() → Next.js + Supabase + Twilio + Stripe
-tool_use: security_threat_model() → STRIDE for healthcare
-```
-
-### Phase 3: Engineering & Design (1 API call — Sonnet)
-```
-⏱️ 8 sn | $0.05
-
-tool_use: frontend_spec() — Component tree
-tool_use: backend_spec() — Schema + API endpoints
-tool_use: design_spec() — Design tokens
-tool_use: devops_plan() — Vercel + Supabase
-```
-
-### Phase 4: Go-to-Market & Support (1 API call — Haiku)
-```
-⏱️ 3 sn | $0.005
-
-tool_use: marketing_strategy() — Agent-Reach hashtag analizi
-tool_use: documentation() — Doc template
-tool_use: pricing_model() — Rekabetçi fiyat
-```
-
-### Phase 5: Final Synthesis (1 API call — Sonnet)
-```
-⏱️ 3 sn | $0.03
-
-CEO final rapor:
-  Verdict: PROMISING (72/100)
-  Tech Stack: Next.js + Supabase + Twilio + Stripe
-  MVP Maliyet: $200/ay
-  Breakeven: 50 terapist × $29/ay
-  Timeline: 6 hafta MVP, 12 hafta public launch
-```
-
-### Toplam Maliyet
+### 12 Departman (Backend)
 
 ```
-Phase 0: Triage (local)              $0.000  |  0.5 sn
-Phase 1: CEO Assessment (Sonnet)     $0.030  |  3 sn
-Phase 2: Product & Arch (Sonnet)     $0.040  |  5 sn (cache hit)
-Phase 3: Engineering (Sonnet)        $0.050  |  8 sn
-Phase 4: Go-to-Market (Haiku)        $0.005  |  3 sn
-Phase 5: Final Synthesis (Sonnet)    $0.030  |  3 sn
-────────────────────────────────────────────────────
-TOPLAM:                              $0.155  |  22.5 sn
-API calls:                           5 (v1'de 10-13)
-Local tool çalıştırma:               15+
-Gerçek pazar verisi:                 ✅ (Agent-Reach)
+C-SUITE (Karar)
+├── CEO Office      — Verdict sentezi
+├── CTO Office      — Teknik fizibilite
+└── CPO Office      — Ürün/kullanıcı analizi
 
-vs v1: $0.25, 45-60 sn, 0 gerçek veri
-→ %38 daha ucuz, %60 daha hızlı, gerçek veri ile
+CORE (Üretim)
+├── Engineering     — Tech feasibility + stack
+├── Design          — UX/UI kritik noktalar
+└── Data & Analytics — Pazar verisi işleme
+
+BUSINESS (Pazar)
+├── Marketing       — Pazar araştırma (Agent-Reach/Exa)
+├── Sales & BD      — Go-to-market
+└── Customer Success — Retention/adoption
+
+SUPPORT (Risk)
+├── Legal & Compliance — Risk checklist
+├── Finance         — Maliyet/gelir modeli
+└── HR / People     — Operasyonel risk
 ```
+
+### Adaptive Selection
+
+Triage karar verir:
+- Basit fikir (blog) → 3 departman
+- Orta fikir (SaaS) → 6 departman
+- Karmaşık fikir (fintech) → 10 departman
+- Enterprise → 12 departman
+
+Kullanıcı fark etmez, backend otomatik.
+
+### UI'da Yeri
+
+Ana ekranda: **yok**. Verdict + 3 sebep var.
+
+Drill-down'da: **var**. "Detaylı raporlar" sekmesi altında power user için.
 
 ---
 
-## BÖLÜM 10: KULLANICI DENEYİMİ — MOD SEÇENEKLERİ
+## BÖLÜM 18: MODEL SEÇİMİ
 
-### 5 Alternatif Mod
+| Model | Fiyat | Kullanım |
+|-------|-------|----------|
+| Claude Haiku 4.5 | $1/$5 | Triage, routing, fallback |
+| Claude Sonnet 4.6 | $3/$15 | Çoğu departman, ana iş |
+| Claude Opus 4.6 | $15/$75 | CEO (verdict), kritik kararlar |
+| DeepSeek V3 | $0.27/$1.1 | Opsiyonel fallback, code-heavy |
 
-#### 1. Board Meeting Mode (Yönetim Kurulu)
-Her adımda kullanıcı onayı. En çok kontrol, en yavaş.
+**Önerilen mix (v2.0):**
+- CEO + Architect: Opus (kalite kritik)
+- Çoğu departman: Sonnet (denge)
+- Triage: Haiku (ucuz)
 
-#### 2. Autopilot Mode (Tam Otonom)
-Kullanıcı sadece sonucu görür. En hızlı, en az friction.
-
-#### 3. Draft & Review Mode (ÖNERİLEN)
-Hızlı taslak → kullanıcı onayı → full analiz. Ucuz doğrulama.
-
-#### 4. Progressive Mode (Kademeli Derinleşme)
-```
-Seviye 1 (ücretsiz): Tek cümle verdict
-Seviye 2 ($0.02): Departman özetleri
-Seviye 3 ($0.08): Full Company Brain
-Seviye 4 ($0.20): Opus + Agent-Reach derin
-```
-
-#### 5. Smart Auto Mode (Akıllı Otomatik)
-Triage karmaşıklığa göre modu seçer.
-
-### Önerilen UX
-
-```
-┌─────────────────────────────────────────┐
-│  Nasıl çalışmamı istersin?              │
-│                                         │
-│  ⚡ Hızlı    — Direkt sonuç ver         │
-│  📋 Normal   — Taslak göster, onaylat   │  ← varsayılan
-│  🏛️ Detaylı  — Her adımda onay iste     │
-│                                         │
-│  (Sistem karmaşıklığa göre önerir)      │
-└─────────────────────────────────────────┘
-```
-
-| Mod | API Calls | Maliyet | Süre | Kontrol |
-|-----|-----------|---------|------|---------|
-| Hızlı | 2-3 | $0.02-0.05 | 5-10 sn | Düşük |
-| Normal | 3-4 | $0.05-0.10 | 10-20 sn | Orta |
-| Detaylı | 4-6 | $0.10-0.25 | 30-60 sn | Yüksek |
+Multi-provider gerekli değil — Claude ecosystem içinde kal.
 
 ---
 
-## BÖLÜM 11: KULLANICI SEGMENTLERİ
+## BÖLÜM 19: v2 ROADMAP (YENİ ÖNCELİKLENDİRME)
 
-### 4 Segment
+### v2.0 — "Dürüst Verdict" (Core MVP)
 
-```
-Segment A: Fikir Sahibi / Girişimci
-  İster: "Fikrim iyi mi? Para kazanır mı?"
-  Alır: CEO verdict + market research + maliyet
-  Mod: Hızlı
+**Amaç:** Tek bir fikri alıp, dürüst, güvenilir bir verdict ver.
 
-Segment B: No-Code / Vibe Coder  
-  İster: "Basit bir web sitesi yap"
-  Alır: Çalışan kod + deployment talimatı
-  Mod: Normal
+**Scope:**
+- v1 Phase 4-5 fix (sadece gerekirse — verdict için şart değil)
+- Company Brain mimarisi (basit, tek API session)
+- Prompt caching (temel)
+- Model tiering (Opus + Sonnet + Haiku)
+- **Output quality** (golden examples + test set)
+- **Trust layer** (confidence, sources, guardrails)
+- **Core UX** (input → verdict → drill-down)
+- 3 aktif departman: CEO + Market Research + Finance
+- Verdict card (shareable)
 
-Segment C: Teknik Geliştirici
-  İster: "Karmaşık mimari, best practices"
-  Alır: Full şirket simülasyonu, architecture docs
-  Mod: Detaylı
+**Scope dışı:**
+- Agent-Reach (v2.1'e)
+- Full 12 departman (v2.2'ye)
+- Simulation (v2.3'e)
+- Monetizasyon (v2.1'e)
+- Retention features (v2.1'e)
 
-Segment D: Öğrenmeye Çalışan
-  İster: "Nasıl yapılır, neden böyle?"
-  Alır: Açıklamalı çıktı, "öğretici mod"
-  Mod: Explain
-```
+### v2.1 — "Real Data + Retention"
 
----
+- Exa/Tavily entegrasyonu (Agent-Reach alternative)
+- Marketing departmanı → gerçek veri
+- 6 departman aktif
+- Fikir günlüğü
+- Pazar güncellemeleri (email)
+- Rakip uyarıları
+- Free/Pro tier'lar
 
-## BÖLÜM 12: COMPETITIVE LANDSCAPE
+### v2.2 — "Full Company"
 
-### Rakip Matrisi (Nisan 2026)
+- 12 departman aktif
+- Adaptive department selection
+- Inter-department memo sistemi
+- Local tool ecosystem (Eta + json-rules-engine)
+- Output-driven UI
 
-| Ürün | Ne Yapar | Fiyat | Güçlü | Zayıf |
-|------|----------|-------|-------|-------|
-| **MetaGPT** | Multi-agent SW şirketi | Open source | Structured SOP | Code only, framework |
-| **ChatDev** | Sanal SW şirketi, dialog | Open source | Quality metrics | Code only, research |
-| **CrewAI** | Multi-agent orchestration | OS + paid | Esneklik, role-based | Framework, not product |
-| **Devin** | Otonom AI yazılım mühendisi | $20-500/ay + $2.25/ACU | Gerçek coding | Sadece kod, pahalı |
-| **Bolt.new** | AI app builder browser | Free → $25/ay | Preview, hosting | Frontend-heavy |
-| **Lovable** | AI app builder | Free → $25 → $50/ay | Full-stack + Supabase | Web app only |
-| **Cursor** | AI code editor | Free → $20 → $40/user | IDE integration | Developer only |
-| **v0.dev** | UI component generator | Free → paid | Shadcn/Tailwind | UI only |
-| **AutoGen** | Multi-agent framework | OS | Research/POC | Not production |
+### v2.3 — "Studio Mode"
 
-### Pazar Boşluğu
+- Simulation mode (şirketi izle)
+- Board meeting view
+- Viral sharing features
+- Roast mode
+- Public ideas feed
 
-Hiçbiri şunları BİRLİKTE yapmıyor:
-1. **Fikirden** başlayan (kod/başlangıç noktası yok)
-2. **İş tarafına** odaklanan (sadece kod değil, pazar + hukuk + finans)
-3. **Gerçek veri** ile çalışan (hallüsinasyon değil, Agent-Reach)
-4. **Herkes için** erişilebilir (developer olmaya gerek yok)
-5. **Şirket metaforu** ile sunulan (anlaşılır UX)
+### v2.4 — "Scale & Intelligence"
 
-### Stratejik Karar Noktaları
-
-**Karar 1: Council kod yazar mı?**
-- ✅ Yazarsa → Bolt/Lovable rakibi (zor savaş)
-- ❌ Yazmazsa → Niş ama differentiated
-- **Önerilen orta yol:** "Başlangıç paketi" üret (scaffold + README + roadmap), full build değil
-
-**Karar 2: Hedef kitle?**
-- Developer pazarında Cursor/Devin hakim, kırmak zor
-- Girişimci/iş pazarı daha az doymuş
-- **Önerilen:** Non-technical founder + early-stage girişimci
-
-**Karar 3: Framework mi, ürün mü?**
-- **Önerilen:** Ürün (web app), framework değil
+- Şirket hafızası (önceki projelerden öğrenme)
+- Custom department creation
+- Team collaboration
+- API access
 
 ---
 
-## BÖLÜM 13: MONETİZASYON
+## BÖLÜM 20: 27 PROBLEME CEVAPLAR
 
-### 2026 Trendi
+Dış bir inceleme ile tespit edilen 27 problem ve çözümler:
 
-Araştırma: **Hybrid pricing 2026 standardı** (%61 SaaS, %85 AI lider). Saf usage-based veya saf subscription öldü.
+### CORE PRODUCT PROBLEMS
 
-### Council v2 Öneri: 3-Tier Hybrid
+**P1 — Undefined Core Value Proposition** → **ÇÖZÜLDÜ**
+Yeni promise: *"Fikrin hakkında kimsenin söyleyemediği gerçeği söyleyen AI yatırımcı"*
 
-```
-┌─────────────────────────────────────────────┐
-│  FREE (Acquisition)                         │
-│  - 3 değerlendirme/ay                       │
-│  - Hızlı mod only                           │
-│  - Agent-Reach yok                          │
-│  - "Powered by Council" branding            │
-│  Maliyet: ~$0.05/kullanıcı                  │
-└─────────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────┐
-│  STARTER — $15/ay  (Ana hedef)              │
-│  - 30 değerlendirme/ay                      │
-│  - Tüm modlar                               │
-│  - Agent-Reach (100 arama/ay)               │
-│  - PDF export                               │
-│  - Thread history                           │
-│  Maliyet: ~$4.5/kullanıcı → $10.5 kar       │
-└─────────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────┐
-│  PRO — $49/ay  (Power user)                 │
-│  - Sınırsız değerlendirme                   │
-│  - Opus mod                                 │
-│  - Agent-Reach sınırsız                     │
-│  - Custom departmanlar                      │
-│  - Team (3 kullanıcı)                       │
-│  - API access                               │
-│  Maliyet: ~$15/kullanıcı → $34 kar          │
-└─────────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────┐
-│  PAY-AS-YOU-GO (Pro üstü)                   │
-│  - $0.50/değerlendirme (extra)              │
-│  - $2/Agent-Reach deep research             │
-└─────────────────────────────────────────────┘
-```
+**P2 — Lack of Single Killer Output** → **ÇÖZÜLDÜ**
+Verdict + 3 sebep (Bölüm 2)
 
-### Neden $15 ana tier?
-- Rakipler $20-25: **fiyat avantajı şart**
-- $15 "impulse buy" bölgesinde
-- Break-even: ~200 Pro kullanıcı
+**P3 — Over-scoped Product Vision** → **KISMEN ÇÖZÜLDÜ**
+v2.0 scope'u küçüldü: sadece Idea Validator (Ürün A). Studio v2.3'e.
 
-### Unit Economics
-- Ortalama Starter: $15 gelir - $4.5 maliyet = **$10.5 kar/ay**
-- LTV/CAC hedefi: 3x
+**P4 — Weak First Use Case** → **ÇÖZÜLDÜ**
+Landing'de demo video + tek fikir örneği
 
----
+**P5 — No Clear 'Why Now'** → **ÇÖZÜLDÜ**
+Bölüm 10'da cevaplandı
 
-## BÖLÜM 14: LOCAL TOOL STRATEJİSİ
+### UX PROBLEMS
 
-### Template-Based Code Generation
+**P6 — Overcomplex UX** → **ÇÖZÜLDÜ**
+Tek akış: input → verdict → drill-down. Mod yok, segment yok.
 
-| Tool | Pros | Use Case |
-|------|------|----------|
-| **Hygen** | EJS, hızlı, file-based | Component/page generation |
-| **Plop** | Handlebars, programmatic | Structured output |
-| **Eta** | TypeScript-native, modern | En iyi seçim |
+**P7 — Simulation Over Value** → **ÇÖZÜLDÜ**
+Simulation artık core değil, growth engine (Studio mode)
 
-### Rule Engines (Legal/Compliance)
+**P8 — Lack of Simplicity** → **ÇÖZÜLDÜ**
+UX basitleştirildi (Bölüm 12)
 
-| Tool | Özellikler |
-|------|-----------|
-| **json-rules-engine** | Declarative, JSON-based, ~3k★ |
-| **Rools** | TypeScript support, function-based |
-| **node-rules** | Forward chaining, stable |
+**P9 — No Clear User Journey** → **ÇÖZÜLDÜ**
+Canonical flow: Landing → Input → Loading → Verdict → Derinleş
 
-**Önerilen:** `json-rules-engine` (declarative, serializable, test edilebilir)
+### TECHNICAL PROBLEMS
 
-### Validation & Structured Output
+**P10 — Non-deterministic Tool Orchestration** → **ÇÖZÜLDÜ**
+Triage deterministic, LLM sadece internal reasoning
 
-- **Zod** — Schema validation (v1'de zaten var)
-- **JSON Schema** — Language-agnostic
+**P11 — Debugging Complexity** → **İLERİ VERSİYONDA**
+Structured trace ID + replay mechanism → v2.2
 
-### Hybrid Pattern (Template + LLM)
+**P12 — Agent-Reach Integration Risk** → **ÇÖZÜLDÜ**
+v2.0'da Agent-Reach yok. Exa/Tavily ile başla.
 
-```typescript
-// Örnek: Legal departmanı
-function generateLegalReport(input: LegalInput): LegalReport {
-  // 1. LOCAL: Static checklist
-  const checklist = runComplianceChecklist(input.domain, LEGAL_RULES)
-  
-  // 2. LOCAL: Template doldur
-  const baseReport = renderTemplate('legal-report.eta', { checklist, input })
-  
-  // 3. LLM (opsiyonel): Kritik risk varsa
-  if (checklist.criticalRisks.length > 0) {
-    return enhanceWithLLM(baseReport, checklist.criticalRisks)
-  }
-  
-  return baseReport  // API call yok
-}
-```
+**P13 — External Data Reliability** → **ÇÖZÜLDÜ**
+Unified search API (Exa/Tavily) — stabil provider
 
-**%80 template + %20 LLM enhancement = optimum kalite/maliyet**
+**P14 — Latency Risk** → **KISMEN**
+Streaming UX + optimistic loading + max 30sn budget
 
-### Önerilen Stack
+**P15 — Missing Caching Layer** → **PLANLANDI**
+4 katmanlı cache: LLM native, market data (Redis), template, full brief
 
-```
-Templates:   Eta (primary) + Hygen (scaffolding)
-Validation:  Zod (mevcut)
-Rules:       json-rules-engine
-Math:        Native + decimal.js
-Scanning:    Semgrep (Phase 5 QA)
-Formats:     Markdown + structured JSON
-```
+**P16 — Context Explosion** → **ÇÖZÜLDÜ**
+Aggressive compaction per phase
+
+### ARCHITECTURE PROBLEMS
+
+**P17 — Unclear Local vs LLM Boundary** → **ÇÖZÜLDÜ**
+Bölüm 14'te net kriter
+
+**P18 — Tool Over-Abstraction** → **KISMEN**
+Compute functions (local) vs Reasoning tools (LLM) ayrımı
+
+**P19 — Scaling Complexity** → **ERTELENDİ**
+100 kullanıcıdan sonra endişelen
+
+### PRODUCT STRATEGY PROBLEMS
+
+**P20 — Unfocused Target Audience** → **ÇÖZÜLDÜ**
+Beachhead: indie hacker / non-technical founder
+
+**P21 — Premature Monetization** → **ÇÖZÜLDÜ**
+Model var, fiyat TBD (PMF sonrası)
+
+**P22 — No Retention Strategy** → **ÇÖZÜLDÜ**
+Bölüm 8'de 5 mekanizma
+
+**P23 — No Data Moat Strategy** → **İLERİ VERSİYONDA**
+Aggregate insights → v2.4+
+
+**P24 — No Feedback Loop** → **PLANLANDI**
+1-tık rating + per-section feedback + prompt optimization
+
+### EXECUTION RISKS
+
+**P25 — Solo Development Risk** → **KABUL**
+Claude ile yapılabilir, sprint bazlı çalış
+
+**P26 — Phase 4-5 Incomplete** → **DEĞERLENDİRİLDİ**
+Verdict için şart değil, opsiyonel v2.0
+
+**P27 — Feature Creep Risk** → **ÇÖZÜLDÜ**
+v2.0 frozen scope: 9 madde, ek yok
 
 ---
 
-## BÖLÜM 15: MODEL SEÇİMİ
-
-### Seçenekler
-
-| Model | Input/Output (per Mtok) | Güç | Kullanım |
-|-------|-------------------------|-----|----------|
-| Claude Haiku 4.5 | $1 / $5 | Orta | Triage, routing, local fallback |
-| Claude Sonnet 4.6 | $3 / $15 | Yüksek | Çoğu departman, ana iş |
-| **Claude Opus 4.6** | **$15 / $75** | **En Yüksek** | CEO, Architect, kritik |
-| GPT-5 (OpenAI) | Benzer | Yüksek | Alternatif provider |
-| Gemini 2.5 Pro | Benzer | Yüksek | 2M context, multimodal |
-| DeepSeek V3 | $0.27 / $1.1 | Orta-Yüksek | Çok ucuz code-heavy |
-| Llama 4 / Qwen | Self-hosted | Değişken | 0 API maliyet, altyapı |
-
-### Önerilen Mix
-
-```
-CEO + Architect (kritik):         Opus 4.6
-Çoğu departman (standart):        Sonnet 4.6
-Triage + classification:          Haiku 4.5
-Agent-Reach (external research):  Local (no LLM)
-Fallback (provider diversity):    DeepSeek V3 (opsiyonel)
-```
-
-**Neden Claude ecosystem?** Prompt caching, tool-use patterns, agent consistency, aynı token counting.
-
----
-
-## BÖLÜM 16: PM DEĞERLENDİRMESİ
-
-### Artılar
-1. ✅ Vizyon güçlü ve differentiating (AI virtual company niş)
-2. ✅ v1 çalışan iskelet sunuyor (sıfırdan değil)
-3. ✅ Agent-Reach gerçek değer katıyor (hallüsinasyon çözümü)
-4. ✅ Maliyet optimizasyon stratejisi sağlam
-5. ✅ Kullanıcı kontrol modları doğru yaklaşım
-6. ✅ Hybrid mimari teknik olarak akıllıca
-
-### Eksiler / Riskler
-7. ⚠️ Scope çok büyük → kabul edildi, devam
-8. ⚠️ Kullanıcı segmentasyonu net → 4 segment tanımlandı
-9. ⚠️ 12 departman anlamsız → Alternatif B+E ile çözüldü
-10. ⚠️ Happy path → Claude Code 17 pattern uyarlandı
-11. ⚠️ Şirket hissi vs değer → Adaptive mode (Yol C)
-12. ⚠️ Agent-Reach Python-TypeScript → HTTP bridge gerekli
-13. ⚠️ Competitive landscape → analiz edildi, gap belirlendi
-14. ⚠️ Monetizasyon → 3-tier hybrid kararlaştırıldı
-15. ⚠️ v1 Phase 4-5 placeholder → v2'de düzeltilecek
-16. ⚠️ Local tool kalitesi → Eta + json-rules-engine + Zod stack
-17. ⚠️ Solo dev riski → Claude ile yapılabilir (kabul)
-
----
-
-## BÖLÜM 17: KARAR VERİLMESİ GEREKENLER
-
-### Onay Bekleyen 8 Karar
+## BÖLÜM 21: KARAR VERİLMESİ GEREKENLER
 
 | # | Karar | Önerim | Status |
 |---|-------|--------|--------|
-| 1 | Departman UI | Alternatif B + E (adaptive + output-driven) | ⏳ |
-| 2 | Şirket hissi vs değer | Yol C (Adaptive — triage karar verir) | ⏳ |
-| 3 | Ana LLM | Opus (kritik) + Sonnet (çoğu) + Haiku (triage) | ⏳ |
-| 4 | Differentiation | "Fikir → tam strateji, gerçek veriyle" | ⏳ |
-| 5 | Kod yazar mı? | Scaffold evet, full build hayır | ⏳ |
-| 6 | Hedef kitle | Non-technical founder + indie hacker | ⏳ |
-| 7 | Monetizasyon | Free → $15 Starter → $49 Pro | ⏳ |
-| 8 | Stack | TypeScript + Next.js + Eta + Zod | ⏳ |
+| 1 | Value proposition | "AI investor, dürüst cevap" | ⏳ onay |
+| 2 | Killer output | Verdict + 3 sebep (not rapor) | ⏳ onay |
+| 3 | Simulation'ın yeri | Growth engine / Studio mode | ⏳ onay |
+| 4 | Agent-Reach yaklaşımı | v2.0'da yok, Exa kullan | ⏳ onay |
+| 5 | 2 ürün ayrımı | Council + Council Studio | ⏳ onay |
+| 6 | Target audience | Indie hacker / non-tech founder | ⏳ onay |
+| 7 | Tone | Brutal honest investor | ⏳ onay |
+| 8 | MVP priority | Output quality > architecture | ⏳ onay |
+| 9 | Trust layer | Mandatory, 5 bileşen | ⏳ onay |
+| 10 | v2.0 scope | 9 madde, frozen | ⏳ onay |
 
 ---
 
-## BÖLÜM 18: v2 ROADMAP TASLAĞI
+## BÖLÜM 22: META-SONUÇ
 
-### Fazlandırma (önerilen sıralama)
+### Eski Doküman Ne Diyordu?
 
-#### v2.0 — Core Foundation
-- v1 Phase 4-5 düzeltme (tool agents çalışır hale getir)
-- Company Brain mimarisi (tek API session, tool-use loop)
-- Prompt caching (tüm ajanlar)
-- Model tiering (Opus/Sonnet/Haiku mix)
-- Resilience layer (17 pattern'dan kritik 5'i)
-- Basic departman UI (C-suite view)
-- 3 departman aktif: CEO + Engineering + Marketing
+*"Council bir sanal yazılım şirketi — 12 departmanı, 28 rolü, 5 modu var."*
 
-#### v2.1 — Real World Access
-- Agent-Reach entegrasyonu (Python bridge)
-- Marketing departmanı → gerçek Twitter/Reddit/LinkedIn verisi
-- Kullanıcı modları (Hızlı/Normal/Detaylı)
-- 6 departman aktif (+ Design + Legal + Finance)
+Bu **mühendis gözüyle** yazılmış bir vizyon. Nasıl çalıştığını anlatıyor. Ama **neden kimse umursar?** sorusuna cevap vermiyor.
 
-#### v2.2 — Full Company
-- 12 departman aktif
-- Adaptive department selection (triage bazlı)
-- Inter-department communication (memo sistemi)
-- Local tool ecosystem (Eta templates, json-rules-engine)
-- Output-driven UI (3 paket)
+### Yeni Doküman Ne Diyor?
 
-#### v2.3 — Intelligence Layer
-- Şirket hafızası (önceki projelerden öğrenme)
-- CFO departmanı (akıllı bütçe yönetimi)
-- HR departmanı (ajan performans takibi)
-- Dinamik ölçekleme
+*"Council fikrin hakkında kimsenin söyleyemediği gerçeği söyleyen bir AI yatırımcıdır."*
 
-#### v2.4 — Monetization & Growth
-- Subscription tiers (Free/Starter/Pro)
-- Pay-as-you-go add-on
-- Team collaboration
-- API access
-- Analytics dashboard
+Bu **kullanıcı gözüyle** yazılmış bir vizyon. Neden umursaması gerektiğini söylüyor. Nasıl çalıştığı **backend sırrı**.
 
-#### v2.5 — Studio Mode
-- "Şirketi izle" UX (canlı simülasyon)
-- Board meeting mode
-- Custom department creation
-- Viral sharing features
+### Asıl Ders
 
----
+Önceki dokümanda eksik olan:
+- ❌ Psikoloji
+- ❌ Kullanıcı davranışı
+- ❌ Duygusal trigger
+- ❌ Trust
+- ❌ Viral mekanizmalar
+- ❌ Retention doğası
 
-## BÖLÜM 19: SONUÇ VE SONRAKİ ADIMLAR
+Yeni dokümanda var:
+- ✅ "Emin olmak" = gerçek ihtiyaç
+- ✅ Karar = killer output (rapor değil)
+- ✅ Tone = investor (analyst değil)
+- ✅ Trust layer = ürünün etik omurgası
+- ✅ Viral mekanizmalar = growth engine
+- ✅ Retention = doğal geliş sebebi
 
-### Özet
+### Tek Cümle
 
-Council v2, v1'in "danışmanlık paneli" konseptinden **"sanal yazılım şirketi"** konseptine evrim.
-
-- **Vizyon:** Milyar dolarlık şirketin tüm departmanlarına sahip AI sanal şirket
-- **Differentiator:** Evaluation + Planning + Real Data, hep birlikte
-- **Teknik strateji:** Company Brain (tek API session, çok tool)
-- **Maliyet stratejisi:** Claude Code pattern'larından 9 teknik
-- **Kalite stratejisi:** Hybrid (local template + LLM enhancement)
-- **UX stratejisi:** Adaptive (triage karar verir, kullanıcı modu seçer)
-- **Monetizasyon:** 3-tier hybrid pricing
+> **Council bir "AI company simulator" değil, bir "AI decision engine" — dürüst kararlar verir.**
 
 ### Sonraki Adımlar
 
-1. **8 karar noktasını onayla** (Bölüm 17)
-2. **v2.0 detaylı implementation planı** yaz
-3. **v1 Phase 4-5 düzeltme** prioritize et
-4. **Company Brain PoC** yap
-5. **İlk 3 departman** implement et (CEO, Engineering, Marketing)
+1. **10 kararı onayla** (Bölüm 21)
+2. **v2.0 minimal scope ile başla:** sadece "tek fikir → dürüst verdict"
+3. **Output quality'ye odaklan:** golden examples + prompt engineering
+4. **Trust layer'ı build et:** confidence + sources + guardrails
+5. **Core UX build et:** input → verdict → drill-down
+6. **İlk 50 kullanıcıyla test et**
+7. **v2.1'e geç:** Exa, retention, Pro tier
 
 ---
 
@@ -1108,29 +1218,21 @@ Council v2, v1'in "danışmanlık paneli" konseptinden **"sanal yazılım şirke
 - [Top 5 AI Agent Frameworks 2026 - Intuz](https://www.intuz.com/blog/top-5-ai-agent-frameworks-2025)
 - [LangGraph vs CrewAI vs AutoGen 2026](https://o-mega.ai/articles/langgraph-vs-crewai-vs-autogen-top-10-agent-frameworks-2026)
 - [MetaGPT vs ChatDev](https://smythos.com/ai-agents/ai-agent-builders/metagpt-vs-chatdev/)
-- [What is MetaGPT - IBM](https://www.ibm.com/think/topics/metagpt)
-- [What is ChatDev - IBM](https://www.ibm.com/think/topics/chatdev)
 
 **AI Code Builders:**
 - [Cursor vs Bolt vs Lovable 2026](https://lovable.dev/guides/cursor-vs-bolt-vs-lovable-comparison)
-- [AI App Builder Pricing 2026 - Taskade](https://www.taskade.com/blog/best-bolt-new-alternatives)
-- [Best AI App Builder 2026 - Mocha](https://getmocha.com/blog/best-ai-app-builder-2026/)
-- [Devin 2.0 Pricing - VentureBeat](https://venturebeat.com/programming-development/devin-2-0-is-here-cognition-slashes-price-of-ai-software-engineer-to-20-per-month-from-500)
-- [Devin Pricing - Lindy](https://www.lindy.ai/blog/devin-pricing)
+- [AI App Builder Pricing 2026](https://getmocha.com/blog/best-ai-app-builder-2026/)
+- [Devin 2.0 Pricing](https://venturebeat.com/programming-development/devin-2-0-is-here-cognition-slashes-price-of-ai-software-engineer-to-20-per-month-from-500)
 
 **AI Monetization:**
 - [2026 AI Agent Pricing Playbook - Chargebee](https://www.chargebee.com/blog/pricing-ai-agents-playbook/)
-- [2026 Guide to AI Pricing Models - Monetizely](https://www.getmonetizely.com/blogs/the-2026-guide-to-saas-ai-and-agentic-pricing-models)
-- [AI Monetization Seats/Tokens/Hybrid - Data-Mania](https://www.data-mania.com/blog/ai-monetization-seats-tokens-hybrid-models/)
-- [AI Pricing Playbook - Bessemer Venture Partners](https://www.bvp.com/atlas/the-ai-pricing-and-monetization-playbook)
+- [2026 Guide to AI Pricing - Monetizely](https://www.getmonetizely.com/blogs/the-2026-guide-to-saas-ai-and-agentic-pricing-models)
 
-**Local Tools & Templates:**
-- [TypeScript Code Generation Tools Comparison](https://github.com/Ofadiman/code-generation-tools-comparison)
-- [Hygen Code Generator](https://github.com/jondot/hygen)
+**Local Tools:**
 - [json-rules-engine](https://github.com/CacheControl/json-rules-engine)
-- [5 Best Node.js Rule Engines](https://www.nected.ai/blog/rule-engine-in-node-js-javascript)
+- [Hygen Code Generator](https://github.com/jondot/hygen)
 
 ---
 
 *Bu doküman bir canlı dokümandır. Beyin fırtınası ilerledikçe güncellenebilir.*
-*Son güncelleme: 2026-04-06*
+*Son büyük revizyon: 2026-04-06 (Ürün psikolojisi perspektifi)*

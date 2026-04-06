@@ -1,0 +1,210 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "name": "council-golden-test-cases",
+    "description": "20 golden test cases for Council v2 verdict engine. Each has input + expected verdict + quality criteria. Use these to evaluate every prompt change.",
+    "scoring": {
+      "verdict_correct": "Does the verdict match expected? (pass/fail)",
+      "reasons_quality": "Are reasons specific, evidence-based, not generic? (1-10)",
+      "tone_correct": "Brutal honest but respectful? No jargon? (1-10)",
+      "confidence_calibrated": "Is confidence score appropriate for available data? (1-10)",
+      "actionable": "Can the user DO something with this verdict? (1-10)",
+      "would_share": "Would someone screenshot and tweet this? (1-10)"
+    }
+  },
+
+  "test_cases": [
+    {
+      "id": "GT-01",
+      "category": "clear_dont",
+      "input": "Instagram clone yapmak istiyorum",
+      "expected_verdict": "DONT",
+      "expected_confidence_range": [85, 100],
+      "quality_notes": "Should be very confident. Reason: impossible to compete with Instagram. Should NOT be polite about it. Should suggest what to do instead.",
+      "red_flags_if_output_contains": ["interesting idea", "could potentially", "there might be an opportunity"]
+    },
+    {
+      "id": "GT-02",
+      "category": "clear_go",
+      "input": "I want to build a tool that converts Figma designs to production React code with 1:1 accuracy",
+      "expected_verdict": "GO",
+      "expected_confidence_range": [70, 90],
+      "quality_notes": "Hot market, real pain point, existing traction (Locofy, Anima). Should say GO but flag the competition. Confidence not 95+ because crowded.",
+      "red_flags_if_output_contains": ["no market for this", "too technical"]
+    },
+    {
+      "id": "GT-03",
+      "category": "clear_pivot",
+      "input": "Yapay zeka ile herkesin kendi podcast'ini otomatik oluşturabileceği bir platform",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_range": [60, 85],
+      "quality_notes": "Market exists but 'everyone' is wrong target. Should suggest niching down (e.g., businesses, course creators). Generic 'AI podcast' = no differentiation.",
+      "red_flags_if_output_contains": ["great idea", "huge market"]
+    },
+    {
+      "id": "GT-04",
+      "category": "vague_input",
+      "input": "bir uygulama yapmak istiyorum",
+      "expected_verdict": "DONT",
+      "expected_confidence_range": [20, 50],
+      "quality_notes": "Input is too vague. Confidence should be VERY LOW. Should ask for more detail or say 'I can't evaluate this without more info'. Should NOT hallucinate a specific app idea.",
+      "red_flags_if_output_contains": ["this app could", "the mobile app market"]
+    },
+    {
+      "id": "GT-05",
+      "category": "regulated_industry",
+      "input": "Online pharmacy where people can order prescription drugs and get them delivered same-day",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_range": [75, 95],
+      "quality_notes": "Legal/regulatory is the #1 issue. Should flag FDA, pharmacy license, state-by-state regulation. Should suggest OTC-only or telehealth pivot. Financial model works if legal clears.",
+      "red_flags_if_output_contains": ["easy to build", "just need a website"]
+    },
+    {
+      "id": "GT-06",
+      "category": "saturated_market",
+      "input": "Bir proje yonetim araci yapmak istiyorum, Jira'dan daha basit olacak",
+      "expected_verdict": "DONT",
+      "expected_confidence_range": [80, 95],
+      "quality_notes": "Extremely saturated: Linear, Notion, Asana, Monday, ClickUp, Height, Plane... 'Simpler Jira' has been tried 100 times. Should name specific competitors. Should suggest extreme niche if anything.",
+      "red_flags_if_output_contains": ["there's always room", "simplicity is underrated"]
+    },
+    {
+      "id": "GT-07",
+      "category": "good_niche",
+      "input": "AI tool that reads legal contracts and highlights unfair clauses for freelancers",
+      "expected_verdict": "GO",
+      "expected_confidence_range": [70, 90],
+      "quality_notes": "Specific target (freelancers), real pain point, AI-native, defensible if trained on contract data. Should flag: not legal advice disclaimer needed.",
+      "red_flags_if_output_contains": ["too niche", "small market"]
+    },
+    {
+      "id": "GT-08",
+      "category": "hardware_complex",
+      "input": "Smart dog collar that monitors health and sends alerts to vet",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_range": [60, 80],
+      "quality_notes": "Good idea but hardware + vet integration = very complex + expensive. Should suggest software-only pivot (existing collar data analysis) or partnership model.",
+      "red_flags_if_output_contains": ["easy to manufacture", "just need sensors"]
+    },
+    {
+      "id": "GT-09",
+      "category": "timing_play",
+      "input": "Platform for companies to manage their AI agent workforce — hiring, monitoring, billing AI agents",
+      "expected_verdict": "GO",
+      "expected_confidence_range": [65, 85],
+      "quality_notes": "Timing is perfect (2026 AI agent explosion). Early mover advantage. Should flag: market still forming, might be too early. But the trend is clear.",
+      "red_flags_if_output_contains": ["AI is overhyped", "no demand"]
+    },
+    {
+      "id": "GT-10",
+      "category": "local_market",
+      "input": "Turkiye'de restoranlara ozel bir online siparis sistemi, Yemeksepeti'ne alternatif",
+      "expected_verdict": "DONT",
+      "expected_confidence_range": [85, 100],
+      "quality_notes": "Yemeksepeti/Getir/Trendyol Yemek dominate. Capital-intensive, logistics nightmare. Should be very confident DONT. Local market knowledge important.",
+      "red_flags_if_output_contains": ["disrupt", "better UX could win"]
+    },
+    {
+      "id": "GT-11",
+      "category": "b2b_saas",
+      "input": "SaaS tool that automatically generates SOC2 compliance documentation from your codebase",
+      "expected_verdict": "GO",
+      "expected_confidence_range": [75, 95],
+      "quality_notes": "High pain, high willingness to pay, technical moat. Competitors exist (Vanta, Drata) but they're expensive. Should say GO with 'find your wedge' advice.",
+      "red_flags_if_output_contains": ["compliance is boring", "no one cares about SOC2"]
+    },
+    {
+      "id": "GT-12",
+      "category": "social_network",
+      "input": "A social network for book lovers where you can share highlights and discuss chapters",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_range": [60, 80],
+      "quality_notes": "Goodreads exists (Amazon-owned). StoryGraph growing. Problem: social networks need critical mass. Should suggest: NOT a social network, but a tool (highlight manager) that has social features.",
+      "red_flags_if_output_contains": ["the next Goodreads", "social networks are easy"]
+    },
+    {
+      "id": "GT-13",
+      "category": "crypto_web3",
+      "input": "Decentralized freelance marketplace on blockchain",
+      "expected_verdict": "DONT",
+      "expected_confidence_range": [75, 95],
+      "quality_notes": "Blockchain adds complexity without solving real freelancer problems. Upwork/Fiverr work. Users don't care about decentralization. Payment processing is already solved.",
+      "red_flags_if_output_contains": ["web3 is the future", "decentralization solves trust"]
+    },
+    {
+      "id": "GT-14",
+      "category": "education",
+      "input": "AI tutor that adapts to each student's learning style and pace, for K-12 math",
+      "expected_verdict": "GO",
+      "expected_confidence_range": [65, 85],
+      "quality_notes": "Real problem, parents will pay, AI makes it possible now. But: school sales cycles are brutal. Should say GO for B2C (parents), flag B2B (schools) as hard.",
+      "red_flags_if_output_contains": ["education doesn't make money", "too competitive"]
+    },
+    {
+      "id": "GT-15",
+      "category": "low_confidence",
+      "input": "A platform for urban farmers to sell produce directly to restaurants in Lagos, Nigeria",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_range": [30, 55],
+      "quality_notes": "MUST have low confidence — limited data on Lagos market. Should explicitly say 'I don't have enough data on this specific market'. Should NOT hallucinate Lagos-specific statistics.",
+      "red_flags_if_output_contains": ["the Lagos market is worth $X billion", "Nigerian agriculture data shows"]
+    },
+    {
+      "id": "GT-16",
+      "category": "already_exists",
+      "input": "I want to build Notion but better",
+      "expected_verdict": "DONT",
+      "expected_confidence_range": [90, 100],
+      "quality_notes": "Notion has $10B+ valuation, massive moat. 'But better' is not a strategy. Should be blunt. Should suggest: what SPECIFIC thing about Notion is broken for WHICH specific user?",
+      "red_flags_if_output_contains": ["there's always room for improvement", "you could differentiate"]
+    },
+    {
+      "id": "GT-17",
+      "category": "creator_economy",
+      "input": "Newsletter platform specifically for indie game developers to build audience",
+      "expected_verdict": "GO",
+      "expected_confidence_range": [55, 75],
+      "quality_notes": "Niche is good (indie game devs). But newsletter platforms are commoditized (Substack, Beehiiv, ConvertKit). Should say GO only if there's a game-specific angle (Steam integration, gameplay GIFs in emails).",
+      "red_flags_if_output_contains": ["newsletter market is dead", "too niche to matter"]
+    },
+    {
+      "id": "GT-18",
+      "category": "deeptech",
+      "input": "Protein folding prediction tool for small biotech companies that can't afford AlphaFold infrastructure",
+      "expected_verdict": "GO",
+      "expected_confidence_range": [50, 75],
+      "quality_notes": "Real technical problem. AlphaFold is open but infra is expensive. But: tiny market, very technical, long sales cycle. Confidence medium because domain expertise needed. Should NOT pretend to understand biotech deeply.",
+      "red_flags_if_output_contains": ["protein folding market is $X billion", "I've analyzed the biotech landscape"]
+    },
+    {
+      "id": "GT-19",
+      "category": "marketplace",
+      "input": "Ikinci el cocuk kiyafeti alis-veris platformu, anneler arasinda",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_range": [65, 85],
+      "quality_notes": "Demand exists (parents resell constantly) but marketplace cold start problem. Letgo/Trendyol already used. Should suggest: start as WhatsApp group/community first, not platform. Or Instagram-based.",
+      "red_flags_if_output_contains": ["marketplace is easy", "just build an app"]
+    },
+    {
+      "id": "GT-20",
+      "category": "ai_wrapper",
+      "input": "ChatGPT wrapper that makes it easier to write marketing copy",
+      "expected_verdict": "DONT",
+      "expected_confidence_range": [85, 100],
+      "quality_notes": "Classic 'thin wrapper' problem. Jasper, Copy.ai, Writesonic already exist AND struggling. OpenAI/Anthropic keep eating the wrapper layer. Should be very direct: 'You'll be competing with your own API provider.'",
+      "red_flags_if_output_contains": ["AI writing is a growing market", "you could add unique features"]
+    }
+  ],
+
+  "evaluation_rubric": {
+    "pass_criteria": {
+      "verdict_accuracy": "At least 17/20 verdicts match expected (85%)",
+      "avg_reasons_quality": "Average >= 7/10",
+      "avg_tone": "Average >= 7/10",
+      "avg_confidence_calibration": "Average >= 7/10, AND no case where confidence is >80 when expected <60",
+      "zero_hallucination": "0 cases where specific numbers/stats are fabricated without source",
+      "no_red_flags": "0 cases containing red flag phrases"
+    },
+    "how_to_run": "For each test case: 1) Send input to Council API. 2) Parse JSON output. 3) Check verdict matches expected. 4) Check confidence in expected range. 5) Check output does NOT contain red_flags. 6) Human-rate reasons_quality, tone, confidence_calibration, actionable, would_share (1-10 each)."
+  }
+}
