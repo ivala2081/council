@@ -78,10 +78,12 @@ export function buildIntakePrompt(
 }
 
 export function parseReflection(text: string): IntakeContext | null {
-  const match = text.match(/\[REFLECTION\]([\s\S]*?)\[\/REFLECTION\]/);
-  if (!match) return null;
+  // Support truncated reflections (missing closing tag)
+  const match = text.match(/\[REFLECTION\]([\s\S]*?)(?:\[\/REFLECTION\]|$)/);
+  const fallback = !match ? text.match(/(Target:.+[\s\S]*)/m) : null;
+  if (!match && !fallback) return null;
 
-  const block = match[1];
+  const block = match?.[1] ?? fallback?.[1] ?? "";
   const get = (key: string) => {
     const m = block.match(new RegExp(`${key}:\\s*(.+)`, "i"));
     return m?.[1]?.trim() ?? "";
@@ -99,5 +101,6 @@ export function parseReflection(text: string): IntakeContext | null {
 }
 
 export function isReflection(text: string): boolean {
-  return text.includes("[REFLECTION]") && text.includes("[/REFLECTION]");
+  // Accept reflection even if closing tag was truncated
+  return text.includes("[REFLECTION]") || /^Target:.+\nProblem:.+/m.test(text);
 }

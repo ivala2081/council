@@ -63,7 +63,7 @@ const VerdictSchema = z.object({
   idea_summary: z.string(),
   reasons: z.array(ReasonSchema),
   confidence: ConfidenceSchema,
-  pivot_suggestion: PivotSchema.optional(),
+  pivot_suggestion: PivotSchema.nullable().optional(),
   financials: z.object({
     estimated_mvp_cost_monthly_usd: z.number(),
     breakeven_users: z.number().int(),
@@ -323,7 +323,7 @@ async function callClaude(
           cache_control: { type: "ephemeral" as const },
         },
       ],
-      tools: TOOLS,
+      // Tools omitted: eval tests verdict JSON output only; tools aren't implemented here
       messages: [{ role: "user", content: userMessage }],
     });
 

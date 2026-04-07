@@ -1,0 +1,297 @@
+"use client";
+
+import { useState } from "react";
+import type { V2Verdict } from "@/lib/agents/types";
+
+// ---- Verdict Styles ----
+const verdictConfig = {
+  GO: {
+    label: "GO",
+    emoji: "",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/20",
+    text: "text-emerald-600 dark:text-emerald-400",
+    dot: "bg-emerald-500",
+    barColor: "bg-emerald-500",
+    tagline: "Do it.",
+  },
+  PIVOT: {
+    label: "PIVOT",
+    emoji: "",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+    text: "text-amber-600 dark:text-amber-400",
+    dot: "bg-amber-500",
+    barColor: "bg-amber-500",
+    tagline: "Change one thing.",
+  },
+  DONT: {
+    label: "DON'T",
+    emoji: "",
+    bg: "bg-red-500/10",
+    border: "border-red-500/20",
+    text: "text-red-600 dark:text-red-400",
+    dot: "bg-red-500",
+    barColor: "bg-red-500",
+    tagline: "Walk away.",
+  },
+} as const;
+
+const confidenceColor = (score: number) =>
+  score >= 80
+    ? "text-emerald-600 dark:text-emerald-400"
+    : score >= 60
+      ? "text-amber-600 dark:text-amber-400"
+      : score >= 40
+        ? "text-orange-600 dark:text-orange-400"
+        : "text-red-600 dark:text-red-400";
+
+const confidenceBarColor = (score: number) =>
+  score >= 80 ? "bg-emerald-500" : score >= 60 ? "bg-amber-500" : score >= 40 ? "bg-orange-500" : "bg-red-500";
+
+const evidenceLabel: Record<string, string> = {
+  market_data: "Market",
+  competitor: "Competitor",
+  financial: "Financial",
+  technical: "Technical",
+  legal: "Legal",
+  pattern: "Pattern",
+  training_data: "Known data",
+  assumption: "Assumption",
+};
+
+interface VerdictCardProps {
+  verdict: V2Verdict;
+  missionId?: string | null;
+}
+
+export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
+  const [showDetails, setShowDetails] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const config = verdictConfig[verdict.verdict];
+  const conf = verdict.confidence;
+
+  const handleCopy = () => {
+    const url = missionId
+      ? `${window.location.origin}/brief/${missionId}`
+      : window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const handleTweet = () => {
+    const text = verdict.shareable?.tweet ?? `Council verdict: ${verdict.verdict} — ${verdict.idea_summary}`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  return (
+    <div className="w-full max-w-xl mx-auto space-y-4">
+      {/* Main verdict card */}
+      <div className={`rounded-2xl border ${config.border} ${config.bg} overflow-hidden`}>
+        {/* Verdict header */}
+        <div className="px-6 pt-6 pb-4">
+          <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+            &ldquo;{verdict.idea_summary}&rdquo;
+          </p>
+
+          <div className="flex items-center gap-3 mb-1">
+            <div className={`w-3 h-3 rounded-full ${config.dot}`} />
+            <span className={`text-3xl font-black tracking-tight ${config.text}`}>
+              {config.label}
+            </span>
+          </div>
+          <p className={`text-sm font-medium ${config.text} opacity-70`}>{config.tagline}</p>
+        </div>
+
+        {/* Confidence bar */}
+        <div className="px-6 pb-4">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Confidence
+            </span>
+            <span className={`text-sm font-bold tabular-nums ${confidenceColor(conf.score)}`}>
+              {conf.score}%
+            </span>
+          </div>
+          <div className="h-2 rounded-full bg-foreground/5 overflow-hidden">
+            <div
+              className={`h-full rounded-full ${confidenceBarColor(conf.score)} transition-all duration-700`}
+              style={{ width: `${conf.score}%` }}
+            />
+          </div>
+          {conf.missing_data && conf.missing_data.length > 0 ? (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {conf.missing_data.map((d, i) => (
+                <span key={i} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                  {d}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        {/* 3 Reasons */}
+        <div className="border-t border-foreground/5">
+          {verdict.reasons.map((reason, i) => (
+            <div
+              key={i}
+              className={`px-6 py-4 ${i < verdict.reasons.length - 1 ? "border-b border-foreground/5" : ""}`}
+            >
+              <div className="flex gap-3">
+                <span className={`shrink-0 w-6 h-6 rounded-full ${config.bg} ${config.text} flex items-center justify-center text-xs font-bold border ${config.border}`}>
+                  {i + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm text-foreground leading-relaxed">{reason.text}</p>
+                  {reason.evidence ? (
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                        {evidenceLabel[reason.evidence.type] ?? reason.evidence.type}
+                      </span>
+                      {reason.evidence.source ? (
+                        <span className="text-[10px] text-muted-foreground truncate">
+                          {reason.evidence.source}
+                        </span>
+                      ) : null}
+                    </div>
+                  ) : null}
+                  {showDetails && reason.evidence?.detail ? (
+                    <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+                      {reason.evidence.detail}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pivot suggestion */}
+        {verdict.pivot_suggestion ? (
+          <div className="px-6 py-4 border-t border-foreground/5 bg-foreground/[0.02]">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
+              Instead, try this
+            </p>
+            <p className="text-sm font-medium text-foreground">{verdict.pivot_suggestion.suggestion}</p>
+            <p className="text-xs text-muted-foreground mt-1">{verdict.pivot_suggestion.why}</p>
+          </div>
+        ) : null}
+      </div>
+
+      {/* Expand / collapse details */}
+      <button
+        onClick={() => setShowDetails(!showDetails)}
+        className="w-full text-center text-xs text-muted-foreground hover:text-foreground transition-colors py-1"
+      >
+        {showDetails ? "Hide details" : "Show evidence details"}
+      </button>
+
+      {/* Optional sections when expanded */}
+      {showDetails ? (
+        <div className="space-y-3">
+          {/* Financials */}
+          {verdict.financials ? (
+            <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                Financials
+              </p>
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <p className="text-muted-foreground text-xs">MVP Cost</p>
+                  <p className="font-semibold">${verdict.financials.estimated_mvp_cost_monthly_usd}/mo</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground text-xs">Breakeven</p>
+                  <p className="font-semibold">{verdict.financials.breakeven_users} users</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground text-xs">Suggested Price</p>
+                  <p className="font-semibold">${verdict.financials.suggested_price_usd}/mo</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground text-xs">Model</p>
+                  <p className="font-semibold">{verdict.financials.business_model}</p>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          {/* Tech snapshot */}
+          {verdict.tech_snapshot ? (
+            <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                Tech Snapshot
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Stack</span>
+                  <span className="font-medium">{verdict.tech_snapshot.stack_suggestion}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Complexity</span>
+                  <span className="font-medium capitalize">{verdict.tech_snapshot.complexity}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">MVP Timeline</span>
+                  <span className="font-medium">{verdict.tech_snapshot.estimated_mvp_weeks} weeks</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          {/* Legal flags */}
+          {verdict.legal_flags && verdict.legal_flags.length > 0 ? (
+            <div className="rounded-xl border border-red-500/10 bg-red-500/5 p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-red-600 dark:text-red-400 mb-3">
+                Legal Flags
+              </p>
+              <div className="space-y-2">
+                {verdict.legal_flags.map((flag, i) => (
+                  <div key={i} className="text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                        flag.severity === "critical" ? "bg-red-500/20 text-red-600 dark:text-red-400" :
+                        flag.severity === "high" ? "bg-orange-500/20 text-orange-600 dark:text-orange-400" :
+                        "bg-muted text-muted-foreground"
+                      }`}>
+                        {flag.severity.toUpperCase()}
+                      </span>
+                      <span className="font-medium">{flag.risk}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-0.5 ml-[calc(theme(spacing.1.5)*2+theme(spacing.2))]">
+                      {flag.action}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      {/* Share bar */}
+      <div className="flex items-center gap-2 pt-1">
+        <button
+          onClick={handleCopy}
+          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border bg-card hover:bg-muted/30 transition-colors text-sm"
+        >
+          <svg className="w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+          </svg>
+          {copied ? "Copied!" : "Copy link"}
+        </button>
+        <button
+          onClick={handleTweet}
+          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border bg-card hover:bg-muted/30 transition-colors text-sm"
+        >
+          <svg className="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          Tweet
+        </button>
+      </div>
+    </div>
+  );
+}

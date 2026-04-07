@@ -226,17 +226,15 @@ export function CouncilConversation({
         </button>
       </div>
 
-      {/* Skip link — only on first question */}
-      {messages.length === 1 && (
-        <button
-          onClick={onSkip}
-          className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors text-center"
-        >
-          {language === "tr"
-            ? "Fikrimi direkt anlatmak istiyorum"
-            : "I want to describe my idea directly"}
-        </button>
-      )}
+      {/* Skip link */}
+      <button
+        onClick={onSkip}
+        className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors text-center"
+      >
+        {language === "tr"
+          ? "Fikrimi direkt anlatmak istiyorum"
+          : "I want to describe my idea directly"}
+      </button>
     </div>
   );
 }

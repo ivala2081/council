@@ -3,12 +3,15 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { BriefView } from "@/components/brief-view";
 import { ConciseBriefView } from "@/components/concise-brief-view";
+import { VerdictCard } from "@/components/verdict-card";
 import { FeedbackForm } from "@/components/feedback-form";
 import {
   strategicBriefSchema,
   conciseBriefSchema,
+  v2VerdictSchema,
   type StrategicBrief,
   type ConciseBrief,
+  type V2Verdict,
 } from "@/lib/agents/types";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { trackEvent } from "@/lib/track-event";
@@ -20,7 +23,7 @@ import type { IntakeContext } from "@/lib/intake/conversation-engine";
 import { CompareModal } from "@/components/compare-modal";
 import { ShortcutHint } from "@/components/shortcut-hint";
 
-type BriefMode = "full" | "concise" | "deep";
+type BriefMode = "verdict" | "full" | "concise" | "deep";
 
 interface ThreadSummary {
   id: string;
@@ -77,24 +80,43 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [missionId, setMissionId] = useState<string | null>(null);
   const [threadId, setThreadId] = useState<string | null>(null);
-  const [mode, setMode] = useState<BriefMode>("full");
+  const [mode, setMode] = useState<BriefMode>("verdict");
   const [threads, setThreads] = useState<ThreadSummary[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
   const briefRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Determine initial view
+  // Determine initial view — fast fallback if Supabase is unavailable
   useEffect(() => {
     const token = getOwnerToken();
-    fetch(`/api/threads?token=${token}`)
-      .then((r) => r.json())
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3000);
+
+    fetch(`/api/threads?token=${token}`, { signal: controller.signal })
+      .then((r) => {
+        if (!r.ok) throw new Error("API error");
+        return r.json();
+      })
       .then((data) => {
         const t = data.threads ?? [];
         setThreads(t);
         setViewState(t.length > 0 ? "greeting" : "intake");
       })
-      .catch(() => setViewState("intake"));
+      .catch(() => setViewState("intake"))
+      .finally(() => clearTimeout(timeout));
   }, []);
+
+  const parsedVerdict = useMemo<V2Verdict | null>(() => {
+    if (!completion || isLoading || mode !== "verdict") return null;
+    try {
+      const cleaned = completion.replace(/^```json\s*/i, "").replace(/```\s*$/, "").trim();
+      const parsed = JSON.parse(cleaned);
+      const result = v2VerdictSchema.safeParse(parsed);
+      return result.success ? result.data : null;
+    } catch {
+      return null;
+    }
+  }, [completion, isLoading, mode]);
 
   const parsedBrief = useMemo<StrategicBrief | null>(() => {
     if (!completion || isLoading || (mode !== "full" && mode !== "deep")) return null;
@@ -122,7 +144,7 @@ export default function Home() {
     }
   }, [completion, isLoading, mode]);
 
-  const hasBrief = parsedBrief || parsedConciseBrief;
+  const hasBrief = parsedVerdict || parsedBrief || parsedConciseBrief;
 
   useEffect(() => {
     if (hasBrief) {
@@ -133,16 +155,27 @@ export default function Home() {
 
   useEffect(() => {
     if (hasBrief && missionId) {
-      const brief = parsedBrief || parsedConciseBrief;
-      const v = brief?.verdict;
-      trackEvent({
-        event: "brief_generated",
-        thread_id: threadId ?? undefined,
-        mission_id: missionId,
-        run_number: 1,
-        verdict: v?.verdict,
-        score: v?.councilScore,
-      });
+      if (parsedVerdict) {
+        trackEvent({
+          event: "verdict_generated",
+          thread_id: threadId ?? undefined,
+          mission_id: missionId,
+          run_number: 1,
+          verdict: parsedVerdict.verdict,
+          score: parsedVerdict.confidence.score,
+        });
+      } else {
+        const brief = parsedBrief || parsedConciseBrief;
+        const v = brief?.verdict;
+        trackEvent({
+          event: "brief_generated",
+          thread_id: threadId ?? undefined,
+          mission_id: missionId,
+          run_number: 1,
+          verdict: v?.verdict,
+          score: v?.councilScore,
+        });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasBrief, missionId]);
@@ -157,12 +190,13 @@ export default function Home() {
 
       try {
         const ownerToken = getOwnerToken();
-        const res = await fetch("/api/mission", {
+        const endpoint = mode === "verdict" ? "/api/verdict" : "/api/mission";
+        const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             prompt: text,
-            mode: mode === "deep" ? "deep" : mode,
+            ...(mode !== "verdict" && { mode: mode === "deep" ? "deep" : mode }),
             ownerToken,
           }),
         });
@@ -279,11 +313,11 @@ export default function Home() {
 
             {/* Value proposition */}
             <div className="mt-8 flex items-center justify-center gap-6 text-[11px] text-muted-foreground/40 select-none">
-              <span>Score across 5 dimensions</span>
+              <span>GO, PIVOT, or DON&apos;T</span>
               <span className="text-muted-foreground/20">·</span>
-              <span>Risk &amp; strength analysis</span>
+              <span>3 reasons with evidence</span>
               <span className="text-muted-foreground/20">·</span>
-              <span>7-day sprint — 30 seconds</span>
+              <span>10 seconds — brutally honest</span>
             </div>
           </div>
         )}
@@ -331,7 +365,7 @@ export default function Home() {
                   />
                   <div className="flex items-center justify-between px-3 pb-3 pt-1">
                     <div className="flex items-center rounded-lg bg-muted/60 p-0.5">
-                      {(["full", "concise", "deep"] as BriefMode[]).map((m) => (
+                      {(["verdict", "full", "concise", "deep"] as BriefMode[]).map((m) => (
                         <button
                           key={m}
                           type="button"
@@ -342,7 +376,7 @@ export default function Home() {
                               : "text-muted-foreground hover:text-foreground"
                           }`}
                         >
-                          {m === "full" ? "Full Brief" : m === "concise" ? "Decisions Only" : "Deep"}
+                          {m === "verdict" ? "Verdict" : m === "full" ? "Full Brief" : m === "concise" ? "Decisions Only" : "Deep"}
                         </button>
                       ))}
                     </div>
@@ -381,7 +415,9 @@ export default function Home() {
             </div>
             <div className="pt-1.5">
               <p className="text-[15px] text-muted-foreground">
-                {mode === "concise"
+                {mode === "verdict"
+                  ? "Evaluating your idea"
+                  : mode === "concise"
                   ? "Generating decision brief"
                   : mode === "deep"
                   ? "Deep analysis in progress — this may take a moment"
@@ -413,6 +449,25 @@ export default function Home() {
 
         {/* Brief results */}
         <div ref={briefRef}>
+          {parsedVerdict && !isLoading && viewState === "brief" && (
+            <div className="py-8 animate-in fade-in duration-300">
+              <VerdictCard verdict={parsedVerdict} missionId={missionId} />
+              {threadId ? (
+                <div className="mt-4 max-w-xl mx-auto">
+                  <a
+                    href={`/thread/${threadId}`}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border bg-card hover:bg-muted/30 transition-colors text-sm"
+                  >
+                    Go to thread
+                  </a>
+                </div>
+              ) : null}
+              <div className="mt-6 max-w-xl mx-auto">
+                <FeedbackForm missionId={missionId} />
+              </div>
+            </div>
+          )}
+
           {parsedBrief && !isLoading && viewState === "brief" && (
             <div className="py-8 animate-in fade-in duration-300">
               <BriefView brief={parsedBrief} />
