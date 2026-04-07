@@ -22,7 +22,7 @@ export type ModelId = (typeof MODEL_TIERS)[ModelTier];
 
 // --- Anthropic Pricing (USD per million tokens, as of 2025-05) ---
 export const ANTHROPIC_PRICING: Record<
-  ModelId,
+  string,
   {
     inputPerMillion: number;
     outputPerMillion: number;
@@ -47,6 +47,12 @@ export const ANTHROPIC_PRICING: Record<
     outputPerMillion: 75.0,
     cacheWritePerMillion: 18.75,
     cacheReadPerMillion: 1.50,
+  },
+  "claude-sonnet-4-6": {
+    inputPerMillion: 3.0,
+    outputPerMillion: 15.0,
+    cacheWritePerMillion: 3.75,
+    cacheReadPerMillion: 0.30,
   },
 };
 
