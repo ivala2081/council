@@ -1,0 +1,2604 @@
+{
+  "meta": {
+    "timestamp": "2026-04-09T15:52:38.046Z",
+    "model": "claude-sonnet-4-6",
+    "prompt_version": "2.4.0",
+    "total_cases": 20,
+    "verdict_accuracy": "16/20",
+    "check_pass_rate": "153/160",
+    "filter": null
+  },
+  "results": [
+    {
+      "id": "GT-01",
+      "category": "clear_dont",
+      "input": "Instagram clone yapmak istiyorum",
+      "expected_verdict": "DONT",
+      "actual_verdict": "DONT",
+      "confidence": {
+        "score": 95,
+        "label": "very_high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "DONT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "95 in [85-100]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "DONT",
+        "idea_summary": "Instagram clone — a photo/video sharing social network replicating Instagram's core product",
+        "reasons": [
+          {
+            "text": "You're competing directly with Meta on their core product. Meta has 3+ billion users, $40B+ annual ad revenue, and an algorithm trained on decades of data. You cannot out-resource them.",
+            "evidence": {
+              "type": "financial",
+              "source": "Meta Q4 2024 earnings report",
+              "detail": "Meta's family of apps has 3.27 billion daily active users. Instagram alone has 2 billion monthly actives. No clone has ever meaningfully competed with this."
+            }
+          },
+          {
+            "text": "The social network cold-start problem will kill you before you get traction. Nobody joins a photo app with no photos, no friends, and no algorithm.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Every Instagram clone in the last decade has failed at cold-start. Even well-funded attempts like Vero, Ello, and Glass never broke through. BeReal briefly got traction with a format innovation — not by cloning."
+            }
+          },
+          {
+            "text": "You gave me zero differentiation. No niche, no format innovation, no specific user group — just 'clone'. That's not a business, that's a homework project.",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "If there's a specific angle you haven't told me — a niche community, a privacy-first model, a specific country with weak Instagram penetration — that changes everything. Come back with that."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 95,
+          "label": "very_high"
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Instagram Clone — DONT",
+          "card_subtitle": "Competing with Meta on their core product is not a strategy. It's a way to waste a year of your life.",
+          "tweet": "Submitted an Instagram clone idea to Council. Verdict: DONT. 'You're competing with Meta on their core product. That's not a business, that's a homework project.' Brutal but fair. #startups"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"DONT\",\n  \"idea_summary\": \"Instagram clone — a photo/video sharing social network replicating Instagram's core product\",\n  \"reasons\": [\n    {\n      \"text\": \"You're competing directly with Meta on their core product. Meta has 3+ billion users, $40B+ annual ad revenue, and an algorithm trained on decades of data. You cannot out-resource them.\",\n      \"evidence\": {\n        \"type\": \"financial\",\n        \"source\": \"Meta Q4 2024 earnings report\",\n        \"detail\": \"Meta's family of apps has 3.27 billion daily active users. Instagram alone has 2 billion monthly actives. No clone has ever meaningfully competed with this.\"\n      }\n    },\n    {\n      \"text\": \"The social network cold-start problem will kill you before you get traction. Nobody joins a photo app with no photos, no friends, and no algorithm.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Every Instagram clone in the last decade has failed at cold-start. Even well-funded attempts like Vero, Ello, and Glass never broke through. BeReal briefly got traction with a format innovation — not by cloning.\"\n      }\n    },\n    {\n      \"text\": \"You gave me zero differentiation. No niche, no format innovation, no specific user group — just 'clone'. That's not a business, that's a homework project.\",\n      \"evidence\": {\n        \"type\": \"assumption\",\n        \"source\": \"assumption\",\n        \"detail\": \"If there's a specific angle you haven't told me — a niche community, a privacy-first model, a specific country with weak Instagram penetration — that changes everything. Come back with that.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 95,\n    \"label\": \"very_high\"\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Instagram Clone — DONT\",\n    \"card_subtitle\": \"Competing with Meta on their core product is not a strategy. It's a way to waste a year of your life.\",\n    \"tweet\": \"Submitted an Instagram clone idea to Council. Verdict: DONT. 'You're competing with Meta on their core product. That's not a business, that's a homework project.' Brutal but fair. #startups\"\n  }\n}\n```",
+      "timing_ms": 13303,
+      "tokens": {
+        "input": 14,
+        "output": 615,
+        "cache_read": 0,
+        "cache_write": 6726
+      },
+      "cost_usd": 0.034447500000000006,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-02",
+      "category": "clear_go",
+      "input": "I want to build a tool that converts Figma designs to production React code with 1:1 accuracy",
+      "expected_verdict": "GO",
+      "actual_verdict": "GO",
+      "confidence": {
+        "score": 78,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "GO (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "78 in [70-90]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "GO",
+        "idea_summary": "Figma-to-React tool that generates production-ready code with pixel-perfect accuracy",
+        "reasons": [
+          {
+            "text": "This is a real, documented pain point. Designers hand off Figma files, devs spend days translating them manually. The gap between design and code is one of the most complained-about workflows in product teams.",
+            "evidence": {
+              "type": "market_data",
+              "source": "training_data",
+              "detail": "Figma has 4M+ active users. The design-to-code gap is consistently ranked as a top friction point in developer surveys (Stack Overflow, State of JS). Multiple funded startups (Anima, Locofy, Builder.io) exist specifically because this pain is real and recurring."
+            }
+          },
+          {
+            "text": "The market is hot and the timing is right. AI code generation has finally reached a quality level where '1:1 accuracy' is plausible — this wasn't true 3 years ago. That's your window.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Locofy raised $7M, Anima has been around for years but still generates messy code, Builder.io acquired Mitosis. None have cracked truly production-ready output. The AI wave (GPT-4V, Claude vision) opens a new technical path that older players didn't have."
+            }
+          },
+          {
+            "text": "Your wedge is the word 'production' — existing tools generate code you still have to clean up. If you actually solve that, you own the market. That's a real differentiator, not a marketing claim.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "The #1 complaint about Anima, Locofy, and Figma's own Dev Mode is that output requires heavy manual cleanup — wrong component structure, inline styles, no reusability. A tool that outputs idiomatic React with proper component hierarchy, Tailwind or CSS modules, and real prop interfaces would be genuinely new."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 78,
+          "label": "high"
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 800,
+          "breakeven_users": 40,
+          "suggested_price_usd": 29,
+          "business_model": "SaaS subscription — per seat or per project. Target individual devs first ($29/mo), then team plans ($99/mo). Enterprise (Figma org-level) is the long-term prize."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Figma Plugin API + Node.js backend + GPT-4V or Claude for visual understanding + AST-based code generation for structure. Output to React + Tailwind or CSS Modules. Consider a VS Code extension as secondary surface.",
+          "complexity": "complex",
+          "estimated_mvp_weeks": 10
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Figma → React: Council says GO",
+          "card_subtitle": "Real pain, hot timing, and a wedge that matters — if you actually nail 'production-ready'.",
+          "tweet": "Pitched a Figma-to-React code tool to Council AI. Verdict: GO. 'The word production is your wedge. Existing tools generate code you still have to clean up. Solve that, and you own the market.' 🟢"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"GO\",\n  \"idea_summary\": \"Figma-to-React tool that generates production-ready code with pixel-perfect accuracy\",\n  \"reasons\": [\n    {\n      \"text\": \"This is a real, documented pain point. Designers hand off Figma files, devs spend days translating them manually. The gap between design and code is one of the most complained-about workflows in product teams.\",\n      \"evidence\": {\n        \"type\": \"market_data\",\n        \"source\": \"training_data\",\n        \"detail\": \"Figma has 4M+ active users. The design-to-code gap is consistently ranked as a top friction point in developer surveys (Stack Overflow, State of JS). Multiple funded startups (Anima, Locofy, Builder.io) exist specifically because this pain is real and recurring.\"\n      }\n    },\n    {\n      \"text\": \"The market is hot and the timing is right. AI code generation has finally reached a quality level where '1:1 accuracy' is plausible — this wasn't true 3 years ago. That's your window.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Locofy raised $7M, Anima has been around for years but still generates messy code, Builder.io acquired Mitosis. None have cracked truly production-ready output. The AI wave (GPT-4V, Claude vision) opens a new technical path that older players didn't have.\"\n      }\n    },\n    {\n      \"text\": \"Your wedge is the word 'production' — existing tools generate code you still have to clean up. If you actually solve that, you own the market. That's a real differentiator, not a marketing claim.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"The #1 complaint about Anima, Locofy, and Figma's own Dev Mode is that output requires heavy manual cleanup — wrong component structure, inline styles, no reusability. A tool that outputs idiomatic React with proper component hierarchy, Tailwind or CSS modules, and real prop interfaces would be genuinely new.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 78,\n    \"label\": \"high\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 800,\n    \"breakeven_users\": 40,\n    \"suggested_price_usd\": 29,\n    \"business_model\": \"SaaS subscription — per seat or per project. Target individual devs first ($29/mo), then team plans ($99/mo). Enterprise (Figma org-level) is the long-term prize.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Figma Plugin API + Node.js backend + GPT-4V or Claude for visual understanding + AST-based code generation for structure. Output to React + Tailwind or CSS Modules. Consider a VS Code extension as secondary surface.\",\n    \"complexity\": \"complex\",\n    \"estimated_mvp_weeks\": 10\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Figma → React: Council says GO\",\n    \"card_subtitle\": \"Real pain, hot timing, and a wedge that matters — if you actually nail 'production-ready'.\",\n    \"tweet\": \"Pitched a Figma-to-React code tool to Council AI. Verdict: GO. 'The word production is your wedge. Existing tools generate code you still have to clean up. Solve that, and you own the market.' 🟢\"\n  }\n}\n```",
+      "timing_ms": 19307,
+      "tokens": {
+        "input": 29,
+        "output": 926,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0159078,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-03",
+      "category": "clear_pivot",
+      "input": "Yapay zeka ile herkesin kendi podcast'ini otomatik oluşturabileceği bir platform",
+      "expected_verdict": "PIVOT",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 78,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "PIVOT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "78 in [60-85]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "AI ile herkesin otomatik podcast oluşturabileceği genel amaçlı platform",
+        "reasons": [
+          {
+            "text": "Bu alan zaten kalabalık. Spotify'ın Anchor'u satın alması, Adobe Podcast, Descript, ElevenLabs ve onlarca başka araç bu sorunu çözmeye çalışıyor. 'Herkes için AI podcast' konumlandırması seni görünmez kılıyor.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Anchor (Spotify), Descript, Adobe Podcast Enhanced Speech, ElevenLabs voice cloning, Podcastle, Riverside.fm — hepsi AI özellikli podcast araçları. Spotify 2019'da Anchor'u ~340M dolara aldı."
+            }
+          },
+          {
+            "text": "'Herkes' hedef kitle değil. Podcast dinleyicilerinin %80'i hiç podcast üretmez. Gerçek acı noktası olan spesifik bir segment yok — bu yüzden pazarlama maliyetin tavan yapar, dönüşüm oranın dibe vurur.",
+            "evidence": {
+              "type": "pattern",
+              "source": "assumption",
+              "detail": "Geniş hedef kitle = yüksek CAC, düşük retention. 'Herkes için' araçlar genellikle ya niche rakipler tarafından ezilir ya da ürün odağını kaybeder. Canva bile başta tasarımcı olmayanlar için grafik tasarım diyerek niş başladı."
+            }
+          },
+          {
+            "text": "Temel içgüdü doğru — içerik üretimini demokratize etmek gerçek bir trend. Ama 'otomatik podcast' çok geniş. Hangi içerik türü? Hangi kullanıcı? Hangi dil? Bu sorulara cevap olmadan ürün yok, sadece fikir var.",
+            "evidence": {
+              "type": "market_data",
+              "source": "training_data",
+              "detail": "Global podcast market 2023'te ~23B dolar, 2030'a kadar büyüme bekleniyor. Ama büyüyen pazar tek başına yeterli değil — büyüyen pazarda rekabet de büyür."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 78,
+          "label": "high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Genel 'herkes' yerine spesifik bir segment seç: örneğin Türkçe içerik üreten YouTuber'lar, B2B şirketlerin thought leadership podcast'leri, ya da eğitim kurumları için otomatik ders podcast'i.",
+          "why": "Spesifik segment = net acı noktası = düşük CAC + yüksek retention. Türkçe pazarda AI podcast araçları hâlâ zayıf — bu gerçek bir boşluk olabilir ama önce doğrulaman gerekiyor."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 800,
+          "breakeven_users": 160,
+          "suggested_price_usd": 29,
+          "business_model": "SaaS abonelik — aylık episode limiti ile freemium, pro plan $29/ay"
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Next.js + ElevenLabs/OpenAI TTS API + Whisper (transkript) + FFmpeg (ses işleme) + S3 (depolama)",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 6
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "AI Podcast Platformu → PIVOT",
+          "card_subtitle": "'Herkes için' diye bir pazar yok. Spesifik bir segment bul, sonra gel.",
+          "tweet": "\"AI ile herkes podcast yapsın\" fikrine Council'ın yorumu: PIVOT. Spotify, Adobe, Descript zaten orada. 'Herkes' hedef kitle değil. Türkçe içerik üreticileri veya B2B thought leadership gibi spesifik bir segmente odaklan. Sonra konuş. 🎙️"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"AI ile herkesin otomatik podcast oluşturabileceği genel amaçlı platform\",\n  \"reasons\": [\n    {\n      \"text\": \"Bu alan zaten kalabalık. Spotify'ın Anchor'u satın alması, Adobe Podcast, Descript, ElevenLabs ve onlarca başka araç bu sorunu çözmeye çalışıyor. 'Herkes için AI podcast' konumlandırması seni görünmez kılıyor.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Anchor (Spotify), Descript, Adobe Podcast Enhanced Speech, ElevenLabs voice cloning, Podcastle, Riverside.fm — hepsi AI özellikli podcast araçları. Spotify 2019'da Anchor'u ~340M dolara aldı.\"\n      }\n    },\n    {\n      \"text\": \"'Herkes' hedef kitle değil. Podcast dinleyicilerinin %80'i hiç podcast üretmez. Gerçek acı noktası olan spesifik bir segment yok — bu yüzden pazarlama maliyetin tavan yapar, dönüşüm oranın dibe vurur.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"assumption\",\n        \"detail\": \"Geniş hedef kitle = yüksek CAC, düşük retention. 'Herkes için' araçlar genellikle ya niche rakipler tarafından ezilir ya da ürün odağını kaybeder. Canva bile başta tasarımcı olmayanlar için grafik tasarım diyerek niş başladı.\"\n      }\n    },\n    {\n      \"text\": \"Temel içgüdü doğru — içerik üretimini demokratize etmek gerçek bir trend. Ama 'otomatik podcast' çok geniş. Hangi içerik türü? Hangi kullanıcı? Hangi dil? Bu sorulara cevap olmadan ürün yok, sadece fikir var.\",\n      \"evidence\": {\n        \"type\": \"market_data\",\n        \"source\": \"training_data\",\n        \"detail\": \"Global podcast market 2023'te ~23B dolar, 2030'a kadar büyüme bekleniyor. Ama büyüyen pazar tek başına yeterli değil — büyüyen pazarda rekabet de büyür.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 78,\n    \"label\": \"high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Genel 'herkes' yerine spesifik bir segment seç: örneğin Türkçe içerik üreten YouTuber'lar, B2B şirketlerin thought leadership podcast'leri, ya da eğitim kurumları için otomatik ders podcast'i.\",\n    \"why\": \"Spesifik segment = net acı noktası = düşük CAC + yüksek retention. Türkçe pazarda AI podcast araçları hâlâ zayıf — bu gerçek bir boşluk olabilir ama önce doğrulaman gerekiyor.\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 800,\n    \"breakeven_users\": 160,\n    \"suggested_price_usd\": 29,\n    \"business_model\": \"SaaS abonelik — aylık episode limiti ile freemium, pro plan $29/ay\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Next.js + ElevenLabs/OpenAI TTS API + Whisper (transkript) + FFmpeg (ses işleme) + S3 (depolama)\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 6\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"AI Podcast Platformu → PIVOT\",\n    \"card_subtitle\": \"'Herkes için' diye bir pazar yok. Spesifik bir segment bul, sonra gel.\",\n    \"tweet\": \"\\\"AI ile herkes podcast yapsın\\\" fikrine Council'ın yorumu: PIVOT. Spotify, Adobe, Descript zaten orada. 'Herkes' hedef kitle değil. Türkçe içerik üreticileri veya B2B thought leadership gibi spesifik bir segmente odaklan. Sonra konuş. 🎙️\"\n  }\n}\n```",
+      "timing_ms": 25483,
+      "tokens": {
+        "input": 33,
+        "output": 1241,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0206328,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-04",
+      "category": "vague_input",
+      "input": "bir uygulama yapmak istiyorum",
+      "expected_verdict": "DONT",
+      "actual_verdict": "DONT",
+      "confidence": {
+        "score": 95,
+        "label": "very_high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "DONT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": false,
+          "detail": "95 outside [20-50]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "DONT",
+        "idea_summary": "Belirsiz bir uygulama fikri — hiçbir detay yok",
+        "reasons": [
+          {
+            "text": "Ortada değerlendirilebilecek bir fikir yok. 'Bir uygulama yapmak istiyorum' bir fikir değil, bir niyet.",
+            "evidence": {
+              "type": "pattern",
+              "source": "assumption",
+              "detail": "10.000 pitch'ten öğrendiğim şey şu: problem tanımlanmadan çözüm inşa edilmez. Kimin sorunu? Ne sorunu? Neden şimdi?"
+            }
+          },
+          {
+            "text": "Hangi pazara giriyorsun, kimi hedefliyorsun, ne satacaksın — bunların hiçbirini bilmiyorum. Değerlendirmem için en az bunlar lazım.",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "Hedef kitle, problem, çözüm, gelir modeli — bunlardan en az biri olmadan hiçbir yatırımcı sana zaman ayırmaz."
+            }
+          },
+          {
+            "text": "Sana 'belki işe yarar' demek sana yardım etmez. Geri dön, somut bir fikir getir.",
+            "evidence": {
+              "type": "pattern",
+              "source": "assumption",
+              "detail": "Örnek: 'Serbest çalışan yazılımcılar için fatura takip uygulaması' — bu değerlendirilebilir. 'Bir uygulama yapmak istiyorum' değerlendirilemez."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 95,
+          "label": "very_high"
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Fikir yok, karar yok.",
+          "card_subtitle": "'Bir uygulama yapmak istiyorum' bir pitch değil. Somut bir problemle geri gel.",
+          "tweet": "Yatırımcıya 'bir uygulama yapmak istiyorum' dersen aldığın cevap: DONT. Kimin sorunu? Ne sorunu? Neden sen? Bunlar olmadan konuşacak bir şey yok. #startup #girişim"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"DONT\",\n  \"idea_summary\": \"Belirsiz bir uygulama fikri — hiçbir detay yok\",\n  \"reasons\": [\n    {\n      \"text\": \"Ortada değerlendirilebilecek bir fikir yok. 'Bir uygulama yapmak istiyorum' bir fikir değil, bir niyet.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"assumption\",\n        \"detail\": \"10.000 pitch'ten öğrendiğim şey şu: problem tanımlanmadan çözüm inşa edilmez. Kimin sorunu? Ne sorunu? Neden şimdi?\"\n      }\n    },\n    {\n      \"text\": \"Hangi pazara giriyorsun, kimi hedefliyorsun, ne satacaksın — bunların hiçbirini bilmiyorum. Değerlendirmem için en az bunlar lazım.\",\n      \"evidence\": {\n        \"type\": \"assumption\",\n        \"source\": \"assumption\",\n        \"detail\": \"Hedef kitle, problem, çözüm, gelir modeli — bunlardan en az biri olmadan hiçbir yatırımcı sana zaman ayırmaz.\"\n      }\n    },\n    {\n      \"text\": \"Sana 'belki işe yarar' demek sana yardım etmez. Geri dön, somut bir fikir getir.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"assumption\",\n        \"detail\": \"Örnek: 'Serbest çalışan yazılımcılar için fatura takip uygulaması' — bu değerlendirilebilir. 'Bir uygulama yapmak istiyorum' değerlendirilemez.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 95,\n    \"label\": \"very_high\"\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Fikir yok, karar yok.\",\n    \"card_subtitle\": \"'Bir uygulama yapmak istiyorum' bir pitch değil. Somut bir problemle geri gel.\",\n    \"tweet\": \"Yatırımcıya 'bir uygulama yapmak istiyorum' dersen aldığın cevap: DONT. Kimin sorunu? Ne sorunu? Neden sen? Bunlar olmadan konuşacak bir şey yok. #startup #girişim\"\n  }\n}\n```",
+      "timing_ms": 12715,
+      "tokens": {
+        "input": 17,
+        "output": 695,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0124428,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-05",
+      "category": "regulated_industry",
+      "input": "Online pharmacy where people can order prescription drugs and get them delivered same-day",
+      "expected_verdict": "PIVOT",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 82,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "PIVOT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "82 in [75-95]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "Same-day delivery online pharmacy for prescription drugs",
+        "reasons": [
+          {
+            "text": "Prescription drug delivery is heavily regulated. In most countries, you need a licensed pharmacist on-site, controlled substance handling licenses, and state/country-by-state operating permits. This isn't a moat — it's a wall that takes years and millions to clear.",
+            "evidence": {
+              "type": "legal",
+              "source": "DEA, FDA, state pharmacy boards (US context)",
+              "detail": "In the US alone, you need a pharmacy license in every state you operate, DEA Schedule II-V controlled substance registration, and compliance with HIPAA for prescription data. EU, UK, and other markets have equivalent or stricter frameworks."
+            }
+          },
+          {
+            "text": "The incumbents here are not startups — they're Amazon (RxPass), CVS (same-day in 20+ cities), Walgreens, and well-funded players like Alto Pharmacy and Capsule. You're not entering a gap, you're entering a war.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Amazon Pharmacy launched in 2020 with Prime same-day delivery integration. Alto Pharmacy raised $350M+. Capsule raised $300M+ before being acquired. These players have the licenses, the logistics, and the capital already deployed."
+            }
+          },
+          {
+            "text": "Same-day delivery for prescriptions is a logistics nightmare — cold chain for some drugs, signature requirements, controlled substance chain-of-custody rules. Unit economics are brutal without massive scale.",
+            "evidence": {
+              "type": "financial",
+              "source": "assumption",
+              "detail": "Last-mile same-day delivery costs $8-15 per order in most urban markets. Average prescription margin is thin (often $2-10 on generics). You need either high-margin specialty drugs or massive volume to survive — both require scale you won't have at launch."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 82,
+          "label": "high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Don't compete on prescription delivery. Own a specific underserved niche: OTC + wellness products with same-day delivery, OR a telehealth-to-pharmacy pipeline for a specific condition (e.g., mental health meds, GLP-1s, sexual health).",
+          "why": "Telehealth-linked pharmacies for specific conditions (Hims, Ro, Done) have proven the model works when you control the prescription funnel AND the fulfillment. Pick one condition, own it end-to-end."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 50000,
+          "breakeven_users": 5000,
+          "suggested_price_usd": 15,
+          "business_model": "Delivery fee + pharmacy margin on drugs + potential PBM/insurance reimbursement. Margin is thin without specialty drug focus."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "The tech is the easy part. The hard part is pharmacy management software (PMS) integration, e-prescribing (Surescripts network), and last-mile logistics API (DoorDash Drive, Uber Direct).",
+          "complexity": "complex",
+          "estimated_mvp_weeks": 24
+        },
+        "legal_flags": [
+          {
+            "risk": "Pharmacy operating license required in every jurisdiction you serve",
+            "severity": "critical",
+            "action": "Consult a healthcare regulatory attorney before writing a single line of code. Licensing timeline is 6-24 months per state/country."
+          },
+          {
+            "risk": "Controlled substance handling (DEA Schedule II-V in US)",
+            "severity": "critical",
+            "action": "Requires separate DEA registration, physical security requirements, and strict record-keeping. Many investors won't touch this without a licensed pharmacist co-founder."
+          },
+          {
+            "risk": "Patient data (HIPAA in US, GDPR in EU)",
+            "severity": "high",
+            "action": "Prescription data is PHI. You need a full HIPAA compliance program, BAAs with all vendors, and breach notification protocols from day one."
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Same-Day Rx Delivery: PIVOT",
+          "card_subtitle": "The idea isn't wrong. The battlefield is. Amazon, CVS, and $300M startups are already there.",
+          "tweet": "Pitched an online pharmacy with same-day prescription delivery. Council said PIVOT. The licenses alone take 2 years. Amazon Pharmacy already exists. The real play? Own one condition end-to-end — telehealth + fulfillment. That's how Hims won. #StartupAdvice"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"Same-day delivery online pharmacy for prescription drugs\",\n  \"reasons\": [\n    {\n      \"text\": \"Prescription drug delivery is heavily regulated. In most countries, you need a licensed pharmacist on-site, controlled substance handling licenses, and state/country-by-state operating permits. This isn't a moat — it's a wall that takes years and millions to clear.\",\n      \"evidence\": {\n        \"type\": \"legal\",\n        \"source\": \"DEA, FDA, state pharmacy boards (US context)\",\n        \"detail\": \"In the US alone, you need a pharmacy license in every state you operate, DEA Schedule II-V controlled substance registration, and compliance with HIPAA for prescription data. EU, UK, and other markets have equivalent or stricter frameworks.\"\n      }\n    },\n    {\n      \"text\": \"The incumbents here are not startups — they're Amazon (RxPass), CVS (same-day in 20+ cities), Walgreens, and well-funded players like Alto Pharmacy and Capsule. You're not entering a gap, you're entering a war.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Amazon Pharmacy launched in 2020 with Prime same-day delivery integration. Alto Pharmacy raised $350M+. Capsule raised $300M+ before being acquired. These players have the licenses, the logistics, and the capital already deployed.\"\n      }\n    },\n    {\n      \"text\": \"Same-day delivery for prescriptions is a logistics nightmare — cold chain for some drugs, signature requirements, controlled substance chain-of-custody rules. Unit economics are brutal without massive scale.\",\n      \"evidence\": {\n        \"type\": \"financial\",\n        \"source\": \"assumption\",\n        \"detail\": \"Last-mile same-day delivery costs $8-15 per order in most urban markets. Average prescription margin is thin (often $2-10 on generics). You need either high-margin specialty drugs or massive volume to survive — both require scale you won't have at launch.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 82,\n    \"label\": \"high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Don't compete on prescription delivery. Own a specific underserved niche: OTC + wellness products with same-day delivery, OR a telehealth-to-pharmacy pipeline for a specific condition (e.g., mental health meds, GLP-1s, sexual health).\",\n    \"why\": \"Telehealth-linked pharmacies for specific conditions (Hims, Ro, Done) have proven the model works when you control the prescription funnel AND the fulfillment. Pick one condition, own it end-to-end.\"\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"Pharmacy operating license required in every jurisdiction you serve\",\n      \"severity\": \"critical\",\n      \"action\": \"Consult a healthcare regulatory attorney before writing a single line of code. Licensing timeline is 6-24 months per state/country.\"\n    },\n    {\n      \"risk\": \"Controlled substance handling (DEA Schedule II-V in US)\",\n      \"severity\": \"critical\",\n      \"action\": \"Requires separate DEA registration, physical security requirements, and strict record-keeping. Many investors won't touch this without a licensed pharmacist co-founder.\"\n    },\n    {\n      \"risk\": \"Patient data (HIPAA in US, GDPR in EU)\",\n      \"severity\": \"high\",\n      \"action\": \"Prescription data is PHI. You need a full HIPAA compliance program, BAAs with all vendors, and breach notification protocols from day one.\"\n    }\n  ],\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 50000,\n    \"breakeven_users\": 5000,\n    \"suggested_price_usd\": 15,\n    \"business_model\": \"Delivery fee + pharmacy margin on drugs + potential PBM/insurance reimbursement. Margin is thin without specialty drug focus.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"The tech is the easy part. The hard part is pharmacy management software (PMS) integration, e-prescribing (Surescripts network), and last-mile logistics API (DoorDash Drive, Uber Direct).\",\n    \"complexity\": \"complex\",\n    \"estimated_mvp_weeks\": 24\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Same-Day Rx Delivery: PIVOT\",\n    \"card_subtitle\": \"The idea isn't wrong. The battlefield is. Amazon, CVS, and $300M startups are already there.\",\n    \"tweet\": \"Pitched an online pharmacy with same-day prescription delivery. Council said PIVOT. The licenses alone take 2 years. Amazon Pharmacy already exists. The real play? Own one condition end-to-end — telehealth + fulfillment. That's how Hims won. #StartupAdvice\"\n  }\n}\n```",
+      "timing_ms": 25587,
+      "tokens": {
+        "input": 21,
+        "output": 1247,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0207228,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-06",
+      "category": "saturated_market",
+      "input": "Bir proje yonetim araci yapmak istiyorum, Jira'dan daha basit olacak",
+      "expected_verdict": "DONT",
+      "actual_verdict": "DONT",
+      "confidence": {
+        "score": 88,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "DONT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "88 in [80-95]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "DONT",
+        "idea_summary": "Jira'dan daha basit bir proje yönetim aracı",
+        "reasons": [
+          {
+            "text": "Bu fikir zaten kalabalık bir pazarda. Linear, Notion, Basecamp, ClickUp, Asana — hepsi 'Jira'dan daha basit' sloganıyla çıktı. Bu artık bir konum değil, bir klişe.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Linear 2022'de $4B değerlemeye ulaştı, ClickUp $4B+ topladı. Pazar doymuş durumda ve her biri 'sadelik' üzerine kurulu."
+            }
+          },
+          {
+            "text": "Sadelik tek başına bir wedge değil. Neden insanlar Linear'ı bırakıp seni kullansın? Buna net bir cevabın yok.",
+            "evidence": {
+              "type": "pattern",
+              "source": "assumption",
+              "detail": "'Daha basit' demek, rakibin zayıf noktasını değil, kendi eksikliğini anlatır. Hangi spesifik kullanıcı segmenti, hangi spesifik iş akışı için daha iyi olacak?"
+            }
+          },
+          {
+            "text": "Proje yönetim araçları network effect'e ihtiyaç duyar — takımlar birlikte göç eder. Yeni bir oyuncunun bu eşiği aşması için çok güçlü bir neden gerekir.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "B2B SaaS'ta switching cost yüksek. Takımlar araç değiştirmez, acı çekmedikçe. 'Daha basit' acıyı çözmez, sadece farklı bir arayüz sunar."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 88,
+          "label": "high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Genel proje yönetimi değil, spesifik bir segment seç: freelancer'lar, ajanslar, solo yazılımcılar, inşaat firmaları — ve o segmentin Jira/Linear'ın çözemediği spesifik bir sorununu çöz.",
+          "why": "Segment ne kadar spesifik olursa, rekabet o kadar az olur. 'Ajanslar için müşteri onay sürecini yöneten proje aracı' — bu bir fikir. 'Daha basit Jira' değil."
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Daha Basit Jira = DONT",
+          "card_subtitle": "Linear, Notion, ClickUp zaten bu sloganla çıktı. Sadelik bir ürün değil, bir özellik.",
+          "tweet": "'Jira'dan daha basit proje aracı' yapıyorum dersen, Linear sana güler. Bu pozisyon dolu. Spesifik bir segment bul, o segmentin spesifik acısını çöz. Genel sadelik artık yeterli değil. #startup #productmarket"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"DONT\",\n  \"idea_summary\": \"Jira'dan daha basit bir proje yönetim aracı\",\n  \"reasons\": [\n    {\n      \"text\": \"Bu fikir zaten kalabalık bir pazarda. Linear, Notion, Basecamp, ClickUp, Asana — hepsi 'Jira'dan daha basit' sloganıyla çıktı. Bu artık bir konum değil, bir klişe.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Linear 2022'de $4B değerlemeye ulaştı, ClickUp $4B+ topladı. Pazar doymuş durumda ve her biri 'sadelik' üzerine kurulu.\"\n      }\n    },\n    {\n      \"text\": \"Sadelik tek başına bir wedge değil. Neden insanlar Linear'ı bırakıp seni kullansın? Buna net bir cevabın yok.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"assumption\",\n        \"detail\": \"'Daha basit' demek, rakibin zayıf noktasını değil, kendi eksikliğini anlatır. Hangi spesifik kullanıcı segmenti, hangi spesifik iş akışı için daha iyi olacak?\"\n      }\n    },\n    {\n      \"text\": \"Proje yönetim araçları network effect'e ihtiyaç duyar — takımlar birlikte göç eder. Yeni bir oyuncunun bu eşiği aşması için çok güçlü bir neden gerekir.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"B2B SaaS'ta switching cost yüksek. Takımlar araç değiştirmez, acı çekmedikçe. 'Daha basit' acıyı çözmez, sadece farklı bir arayüz sunar.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 88,\n    \"label\": \"high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Genel proje yönetimi değil, spesifik bir segment seç: freelancer'lar, ajanslar, solo yazılımcılar, inşaat firmaları — ve o segmentin Jira/Linear'ın çözemediği spesifik bir sorununu çöz.\",\n    \"why\": \"Segment ne kadar spesifik olursa, rekabet o kadar az olur. 'Ajanslar için müşteri onay sürecini yöneten proje aracı' — bu bir fikir. 'Daha basit Jira' değil.\"\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Daha Basit Jira = DONT\",\n    \"card_subtitle\": \"Linear, Notion, ClickUp zaten bu sloganla çıktı. Sadelik bir ürün değil, bir özellik.\",\n    \"tweet\": \"'Jira'dan daha basit proje aracı' yapıyorum dersen, Linear sana güler. Bu pozisyon dolu. Spesifik bir segment bul, o segmentin spesifik acısını çöz. Genel sadelik artık yeterli değil. #startup #productmarket\"\n  }\n}\n```",
+      "timing_ms": 19455,
+      "tokens": {
+        "input": 35,
+        "output": 956,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0163578,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-07",
+      "category": "good_niche",
+      "input": "AI tool that reads legal contracts and highlights unfair clauses for freelancers",
+      "expected_verdict": "GO",
+      "actual_verdict": "GO",
+      "confidence": {
+        "score": 78,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "GO (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "78 in [70-90]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "GO",
+        "idea_summary": "AI contract reviewer that flags unfair clauses specifically for freelancers",
+        "reasons": [
+          {
+            "text": "Freelancers are a massive, underserved segment with a real legal pain point. 59 million Americans freelance and almost none can afford a lawyer to review every contract.",
+            "evidence": {
+              "type": "market_data",
+              "source": "Upwork Future Workforce Report / training_data",
+              "detail": "59M freelancers in the US alone. Average contract review by a lawyer costs $300-500. Most freelancers skip it entirely and get burned by IP assignment clauses, non-competes, and late payment terms."
+            }
+          },
+          {
+            "text": "Competitors like DoNotPay and LegalZoom exist but target consumers broadly — nobody owns the freelancer-specific angle with clause-level education and plain-English explanations.",
+            "evidence": {
+              "type": "competitor",
+              "source": "DoNotPay, LegalZoom, Ironclad — training_data",
+              "detail": "Ironclad and Docusign target enterprise. DoNotPay is consumer-general. Spellbook targets lawyers. The freelancer niche with specific clause libraries (IP grabs, kill fees, scope creep, non-competes) is genuinely unclaimed at the product level."
+            }
+          },
+          {
+            "text": "Freelancers pay for tools that protect their income — this is a direct money-saver, which makes conversion and willingness-to-pay much easier than productivity tools.",
+            "evidence": {
+              "type": "pattern",
+              "source": "SaaS pricing pattern — training_data",
+              "detail": "Tools that save money (or prevent losing it) convert better than tools that save time. A freelancer who got burned by a bad IP clause will pay $20/month without blinking. This is a fear-based purchase, which is the easiest kind."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 78,
+          "label": "high"
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 800,
+          "breakeven_users": 80,
+          "suggested_price_usd": 12,
+          "business_model": "Freemium — 1 free contract review/month, $12/month for unlimited. Upsell: lawyer referral network (affiliate revenue per referral)."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "GPT-4o or Claude for clause extraction + classification. PDF/DOCX parsing via LlamaParse or Unstructured.io. Next.js frontend. Supabase for storage.",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 6
+        },
+        "legal_flags": [
+          {
+            "risk": "Unauthorized practice of law (UPL) if the tool gives legal advice vs. legal information",
+            "severity": "high",
+            "action": "Frame all output as 'this clause is commonly considered unfair' not 'you should reject this clause.' Add clear disclaimer. Talk to a startup lawyer before launch — one hour, not expensive."
+          },
+          {
+            "risk": "Liability if a freelancer relies on your analysis and loses money",
+            "severity": "medium",
+            "action": "Terms of service must explicitly state this is not legal advice. Consider E&O insurance once you hit meaningful revenue."
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "AI Contract Reviewer for Freelancers — GO",
+          "card_subtitle": "Real pain, real market, no one owns this niche yet. Watch the legal lines.",
+          "tweet": "Council verdict: GO on AI contract review for freelancers. 59M freelancers, $400 lawyer fees they skip, and nobody owns this niche. The UPL legal risk is real but manageable. Build it. #startups #freelance #legaltech"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"GO\",\n  \"idea_summary\": \"AI contract reviewer that flags unfair clauses specifically for freelancers\",\n  \"reasons\": [\n    {\n      \"text\": \"Freelancers are a massive, underserved segment with a real legal pain point. 59 million Americans freelance and almost none can afford a lawyer to review every contract.\",\n      \"evidence\": {\n        \"type\": \"market_data\",\n        \"source\": \"Upwork Future Workforce Report / training_data\",\n        \"detail\": \"59M freelancers in the US alone. Average contract review by a lawyer costs $300-500. Most freelancers skip it entirely and get burned by IP assignment clauses, non-competes, and late payment terms.\"\n      }\n    },\n    {\n      \"text\": \"Competitors like DoNotPay and LegalZoom exist but target consumers broadly — nobody owns the freelancer-specific angle with clause-level education and plain-English explanations.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"DoNotPay, LegalZoom, Ironclad — training_data\",\n        \"detail\": \"Ironclad and Docusign target enterprise. DoNotPay is consumer-general. Spellbook targets lawyers. The freelancer niche with specific clause libraries (IP grabs, kill fees, scope creep, non-competes) is genuinely unclaimed at the product level.\"\n      }\n    },\n    {\n      \"text\": \"Freelancers pay for tools that protect their income — this is a direct money-saver, which makes conversion and willingness-to-pay much easier than productivity tools.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"SaaS pricing pattern — training_data\",\n        \"detail\": \"Tools that save money (or prevent losing it) convert better than tools that save time. A freelancer who got burned by a bad IP clause will pay $20/month without blinking. This is a fear-based purchase, which is the easiest kind.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 78,\n    \"label\": \"high\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 800,\n    \"breakeven_users\": 80,\n    \"suggested_price_usd\": 12,\n    \"business_model\": \"Freemium — 1 free contract review/month, $12/month for unlimited. Upsell: lawyer referral network (affiliate revenue per referral).\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"GPT-4o or Claude for clause extraction + classification. PDF/DOCX parsing via LlamaParse or Unstructured.io. Next.js frontend. Supabase for storage.\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 6\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"Unauthorized practice of law (UPL) if the tool gives legal advice vs. legal information\",\n      \"severity\": \"high\",\n      \"action\": \"Frame all output as 'this clause is commonly considered unfair' not 'you should reject this clause.' Add clear disclaimer. Talk to a startup lawyer before launch — one hour, not expensive.\"\n    },\n    {\n      \"risk\": \"Liability if a freelancer relies on your analysis and loses money\",\n      \"severity\": \"medium\",\n      \"action\": \"Terms of service must explicitly state this is not legal advice. Consider E&O insurance once you hit meaningful revenue.\"\n    }\n  ],\n  \"shareable\": {\n    \"card_title\": \"AI Contract Reviewer for Freelancers — GO\",\n    \"card_subtitle\": \"Real pain, real market, no one owns this niche yet. Watch the legal lines.\",\n    \"tweet\": \"Council verdict: GO on AI contract review for freelancers. 59M freelancers, $400 lawyer fees they skip, and nobody owns this niche. The UPL legal risk is real but manageable. Build it. #startups #freelance #legaltech\"\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  }\n}\n```",
+      "timing_ms": 21552,
+      "tokens": {
+        "input": 22,
+        "output": 1031,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0174828,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-08",
+      "category": "hardware_complex",
+      "input": "Smart dog collar that monitors health and sends alerts to vet",
+      "expected_verdict": "PIVOT",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 72,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "PIVOT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "72 in [60-80]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "Smart dog collar with health monitoring and direct vet alerts",
+        "reasons": [
+          {
+            "text": "The hardware is the killer. Smart pet wearables have a graveyard of failed companies — Whistle, FitBark, Voyce — because margins are brutal, returns are high, and pet owners don't pay $200+ for collars consistently.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Whistle raised $30M+ and still struggled with unit economics. Voyce shut down despite vet partnerships. Hardware startups in pet tech die on COGS, not on idea quality."
+            }
+          },
+          {
+            "text": "Sending alerts directly to vets is a workflow problem, not a tech problem. Vets don't want raw sensor data — they're already overwhelmed. Without a clinical protocol built around this, vets will ignore the alerts.",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "Vet adoption of new digital tools is notoriously slow. Without a named vet partner or clinical study backing the alert thresholds, this is a liability, not a feature."
+            }
+          },
+          {
+            "text": "Whistle GO Explore and Fi already own the GPS/activity tracking space with millions of users. You'd be entering a market with entrenched hardware players and no stated wedge.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Fi Series 3 has 500K+ subscribers. Whistle has vet integrations already in progress. The collar hardware market is not wide open — it's consolidating."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 72,
+          "label": "high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Skip the hardware. Build the vet-alert SOFTWARE layer that works with existing collars (Fi, Whistle APIs) and sells to vet clinics as a monitoring dashboard.",
+          "why": "Vets will pay SaaS fees for patient monitoring tools. You avoid hardware hell, plug into existing collar data, and own the clinical workflow — which no one has nailed yet."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 3000,
+          "breakeven_users": 150,
+          "suggested_price_usd": 49,
+          "business_model": "SaaS per vet clinic per month, or B2B2C through vet practices"
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "React dashboard + Node backend + Fi/Whistle API integrations + Twilio for alerts. No hardware needed for MVP.",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 10
+        },
+        "legal_flags": [
+          {
+            "risk": "Health alert thresholds could constitute medical advice if not validated clinically",
+            "severity": "high",
+            "action": "Partner with a licensed vet to define alert protocols before launch. Add clear disclaimers that alerts are informational, not diagnostic."
+          },
+          {
+            "risk": "Pet health data privacy — no HIPAA equivalent for pets but state laws vary",
+            "severity": "low",
+            "action": "Standard privacy policy and data handling terms. Not a blocker."
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Smart Dog Collar → PIVOT",
+          "card_subtitle": "Good instinct, wrong layer. Skip the hardware. Own the vet workflow instead.",
+          "tweet": "Pitched a smart dog collar with vet alerts. Council said PIVOT: skip the hardware graveyard, build the software layer on top of Fi/Whistle APIs, sell to vet clinics as SaaS. The collar is solved. The clinical workflow isn't. 🐕"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"Smart dog collar with health monitoring and direct vet alerts\",\n  \"reasons\": [\n    {\n      \"text\": \"The hardware is the killer. Smart pet wearables have a graveyard of failed companies — Whistle, FitBark, Voyce — because margins are brutal, returns are high, and pet owners don't pay $200+ for collars consistently.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Whistle raised $30M+ and still struggled with unit economics. Voyce shut down despite vet partnerships. Hardware startups in pet tech die on COGS, not on idea quality.\"\n      }\n    },\n    {\n      \"text\": \"Sending alerts directly to vets is a workflow problem, not a tech problem. Vets don't want raw sensor data — they're already overwhelmed. Without a clinical protocol built around this, vets will ignore the alerts.\",\n      \"evidence\": {\n        \"type\": \"assumption\",\n        \"source\": \"assumption\",\n        \"detail\": \"Vet adoption of new digital tools is notoriously slow. Without a named vet partner or clinical study backing the alert thresholds, this is a liability, not a feature.\"\n      }\n    },\n    {\n      \"text\": \"Whistle GO Explore and Fi already own the GPS/activity tracking space with millions of users. You'd be entering a market with entrenched hardware players and no stated wedge.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Fi Series 3 has 500K+ subscribers. Whistle has vet integrations already in progress. The collar hardware market is not wide open — it's consolidating.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 72,\n    \"label\": \"high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Skip the hardware. Build the vet-alert SOFTWARE layer that works with existing collars (Fi, Whistle APIs) and sells to vet clinics as a monitoring dashboard.\",\n    \"why\": \"Vets will pay SaaS fees for patient monitoring tools. You avoid hardware hell, plug into existing collar data, and own the clinical workflow — which no one has nailed yet.\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 3000,\n    \"breakeven_users\": 150,\n    \"suggested_price_usd\": 49,\n    \"business_model\": \"SaaS per vet clinic per month, or B2B2C through vet practices\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"React dashboard + Node backend + Fi/Whistle API integrations + Twilio for alerts. No hardware needed for MVP.\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 10\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"Health alert thresholds could constitute medical advice if not validated clinically\",\n      \"severity\": \"high\",\n      \"action\": \"Partner with a licensed vet to define alert protocols before launch. Add clear disclaimers that alerts are informational, not diagnostic.\"\n    },\n    {\n      \"risk\": \"Pet health data privacy — no HIPAA equivalent for pets but state laws vary\",\n      \"severity\": \"low\",\n      \"action\": \"Standard privacy policy and data handling terms. Not a blocker.\"\n    }\n  ],\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Smart Dog Collar → PIVOT\",\n    \"card_subtitle\": \"Good instinct, wrong layer. Skip the hardware. Own the vet workflow instead.\",\n    \"tweet\": \"Pitched a smart dog collar with vet alerts. Council said PIVOT: skip the hardware graveyard, build the software layer on top of Fi/Whistle APIs, sell to vet clinics as SaaS. The collar is solved. The clinical workflow isn't. 🐕\"\n  }\n}\n```",
+      "timing_ms": 21118,
+      "tokens": {
+        "input": 18,
+        "output": 1017,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.017272799999999998,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-09",
+      "category": "timing_play",
+      "input": "Platform for companies to manage their AI agent workforce — hiring, monitoring, billing AI agents",
+      "expected_verdict": "GO",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 62,
+        "label": "medium"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": false,
+          "detail": "expected GO, got PIVOT"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": false,
+          "detail": "62 outside [65-85]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "B2B platform to hire, monitor, and bill AI agents like an HR system for autonomous AI workers",
+        "reasons": [
+          {
+            "text": "The pain is real — companies deploying 10+ agents have no unified way to track costs, performance, or failures. But 'manage AI agents' is too broad. Monitoring, billing, and hiring are three different products.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Every successful devtools company picked ONE job first. Datadog started with monitoring only. Stripe started with payments only. Trying to own hiring + monitoring + billing simultaneously means you'll be mediocre at all three."
+            }
+          },
+          {
+            "text": "The space is moving fast and incumbents are already circling. LangSmith does agent observability. Orb and Metronome do usage-based billing. Temporal handles agent orchestration. You're describing a bundle of things that funded companies already own.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "LangSmith (LangChain) has deep adoption in agent monitoring. Orb raised $19.1M for usage-based billing infra. Temporal has enterprise contracts for workflow/agent orchestration. None of them own the full 'AI workforce' layer — that gap is real, but the bundle approach is risky."
+            }
+          },
+          {
+            "text": "The 'hiring' metaphor is the most interesting and least crowded angle — no one owns the agent procurement and onboarding workflow. That's where I'd focus.",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "Agent marketplaces (hire a pre-built agent for a task) don't have a clear winner yet. This is an assumption — I'd need to validate whether enterprises actually want to 'hire' agents from a marketplace vs. build their own."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 62,
+          "label": "medium",
+          "missing_data": [
+            "How many companies are currently running 10+ AI agents in production? Without this, TAM is a guess.",
+            "Do enterprise buyers want a unified platform or best-of-breed tools? Buyer behavior data missing.",
+            "Is 'agent hiring' a real procurement pain or just a metaphor that sounds good?"
+          ]
+        },
+        "pivot_suggestion": {
+          "suggestion": "Drop billing and monitoring. Own the 'agent hiring and onboarding' layer — a marketplace where companies find, vet, and deploy pre-built agents with SLAs.",
+          "why": "No one owns agent procurement. LangSmith owns observability. Orb owns billing. The gap is: where do I find a reliable agent for X task, deploy it safely, and hold someone accountable for its performance?"
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 8000,
+          "breakeven_users": 40,
+          "suggested_price_usd": 500,
+          "business_model": "SaaS per seat or per agent managed, with marketplace take-rate (10-20%) if you go the procurement route"
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Next.js frontend, Node/Python backend, Postgres for agent registry, OpenTelemetry for monitoring hooks if you keep that feature",
+          "complexity": "complex",
+          "estimated_mvp_weeks": 12
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "AI Agent Workforce Platform → PIVOT",
+          "card_subtitle": "Real pain, wrong scope. Drop billing + monitoring. Own agent hiring — nobody does that yet.",
+          "tweet": "Pitched: platform to hire, monitor & bill AI agents. Verdict: PIVOT. LangSmith owns monitoring. Orb owns billing. The gap? Agent PROCUREMENT. No one owns 'find a reliable agent, deploy it, hold it accountable.' Build that one thing first. @Council"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"B2B platform to hire, monitor, and bill AI agents like an HR system for autonomous AI workers\",\n  \"reasons\": [\n    {\n      \"text\": \"The pain is real — companies deploying 10+ agents have no unified way to track costs, performance, or failures. But 'manage AI agents' is too broad. Monitoring, billing, and hiring are three different products.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Every successful devtools company picked ONE job first. Datadog started with monitoring only. Stripe started with payments only. Trying to own hiring + monitoring + billing simultaneously means you'll be mediocre at all three.\"\n      }\n    },\n    {\n      \"text\": \"The space is moving fast and incumbents are already circling. LangSmith does agent observability. Orb and Metronome do usage-based billing. Temporal handles agent orchestration. You're describing a bundle of things that funded companies already own.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"LangSmith (LangChain) has deep adoption in agent monitoring. Orb raised $19.1M for usage-based billing infra. Temporal has enterprise contracts for workflow/agent orchestration. None of them own the full 'AI workforce' layer — that gap is real, but the bundle approach is risky.\"\n      }\n    },\n    {\n      \"text\": \"The 'hiring' metaphor is the most interesting and least crowded angle — no one owns the agent procurement and onboarding workflow. That's where I'd focus.\",\n      \"evidence\": {\n        \"type\": \"assumption\",\n        \"source\": \"assumption\",\n        \"detail\": \"Agent marketplaces (hire a pre-built agent for a task) don't have a clear winner yet. This is an assumption — I'd need to validate whether enterprises actually want to 'hire' agents from a marketplace vs. build their own.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 62,\n    \"label\": \"medium\",\n    \"missing_data\": [\n      \"How many companies are currently running 10+ AI agents in production? Without this, TAM is a guess.\",\n      \"Do enterprise buyers want a unified platform or best-of-breed tools? Buyer behavior data missing.\",\n      \"Is 'agent hiring' a real procurement pain or just a metaphor that sounds good?\"\n    ]\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Drop billing and monitoring. Own the 'agent hiring and onboarding' layer — a marketplace where companies find, vet, and deploy pre-built agents with SLAs.\",\n    \"why\": \"No one owns agent procurement. LangSmith owns observability. Orb owns billing. The gap is: where do I find a reliable agent for X task, deploy it safely, and hold someone accountable for its performance?\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Next.js frontend, Node/Python backend, Postgres for agent registry, OpenTelemetry for monitoring hooks if you keep that feature\",\n    \"complexity\": \"complex\",\n    \"estimated_mvp_weeks\": 12\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 8000,\n    \"breakeven_users\": 40,\n    \"suggested_price_usd\": 500,\n    \"business_model\": \"SaaS per seat or per agent managed, with marketplace take-rate (10-20%) if you go the procurement route\"\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"AI Agent Workforce Platform → PIVOT\",\n    \"card_subtitle\": \"Real pain, wrong scope. Drop billing + monitoring. Own agent hiring — nobody does that yet.\",\n    \"tweet\": \"Pitched: platform to hire, monitor & bill AI agents. Verdict: PIVOT. LangSmith owns monitoring. Orb owns billing. The gap? Agent PROCUREMENT. No one owns 'find a reliable agent, deploy it, hold it accountable.' Build that one thing first. @Council\"\n  }\n}\n```",
+      "timing_ms": 22363,
+      "tokens": {
+        "input": 23,
+        "output": 1046,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.017707800000000003,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-10",
+      "category": "local_market",
+      "input": "Turkiye'de restoranlara ozel bir online siparis sistemi, Yemeksepeti'ne alternatif",
+      "expected_verdict": "DONT",
+      "actual_verdict": "DONT",
+      "confidence": {
+        "score": 88,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "DONT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "88 in [85-100]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "DONT",
+        "idea_summary": "Türkiye'de restoranlara özel online sipariş platformu, Yemeksepeti'ne rakip",
+        "reasons": [
+          {
+            "text": "Yemeksepeti, Delivery Hero tarafından 2015'te ~589 milyon dolara satın alındı. Türkiye'de onlarca milyon kullanıcısı ve binlerce restoran ortağı var. Bu ağ etkisini sıfırdan kırmak neredeyse imkânsız.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Delivery Hero / Yemeksepeti Türkiye pazarında dominant konumda. Getir ve Trendyol Yemek gibi devler de aynı pastayı paylaşıyor. Üç büyük oyuncu zaten milyarlarca dolar yatırdı."
+            }
+          },
+          {
+            "text": "Bu pazar ağ etkisiyle çalışır: daha fazla restoran → daha fazla kullanıcı → daha fazla restoran. Sen başladığında sıfır kullanıcın var, rakibin milyonlarca. Hiçbir pazarlama bütçesi bu uçurumu kapatamaz.",
+            "evidence": {
+              "type": "pattern",
+              "source": "assumption",
+              "detail": "İki taraflı pazar dinamiği. Uber Eats, DoorDash gibi örneklerde bile yeni girenler ya çok büyük sermayeyle girdi ya da çok niş bir segmentle. 'Genel alternatif' olarak girmek tarihsel olarak başarısız."
+            }
+          },
+          {
+            "text": "Yemeksepeti + Getir + Trendyol Yemek üçlüsü komisyon savaşına girmiş durumda. Restoranlar zaten düşük marjlarla çalışıyor; seni denemek için mevcut platformu bırakma riski almaz.",
+            "evidence": {
+              "type": "financial",
+              "source": "training_data",
+              "detail": "Türkiye'de yemek delivery komisyonları %20-30 bandında. Restoranlar bu oranlardan şikayetçi ama alternatif platform için müşteri tabanı olmadan geçiş yapmaz. Tavuk-yumurta problemi."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 88,
+          "label": "high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Yemeksepeti'ne rakip olma. Onun çözemediği bir sorunu çöz: restoranlara beyaz etiket sipariş sistemi sat (kendi web sitelerinden komisyonsuz sipariş alabilsinler).",
+          "why": "Restoranlar Yemeksepeti'nin %25 komisyonundan nefret ediyor ama alternatifi yok. Onlara kendi müşteri tabanlarını oluşturma aracı ver. Bu model Türkiye'de henüz dominant bir oyuncuya sahip değil. Flipdish, Owner.com gibi Batı örnekleri var."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 3000,
+          "breakeven_users": 80,
+          "suggested_price_usd": 149,
+          "business_model": "Restoran başına aylık SaaS aboneliği (komisyon yok). Restoranın kendi siparişlerini kendi sitesinden almasını sağla."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Next.js + Supabase + Stripe (veya iyzico TR için). Beyaz etiket için subdomain mimarisi.",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 8
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Yemeksepeti'ne rakip mi? HAYIR.",
+          "card_subtitle": "Milyarlarca dolarlık ağ etkisine karşı sıfır kullanıcıyla savaşamazsın.",
+          "tweet": "\"Yemeksepeti alternatifi yapacağım\" — Bu fikri Council'a sorduk. Cevap: DONT. Ama pivot var: Yemeksepeti'ne rakip olma, restoranların kendi sipariş sistemini kur. Komisyon yok, SaaS modeli. #GirişimFikirler"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"DONT\",\n  \"idea_summary\": \"Türkiye'de restoranlara özel online sipariş platformu, Yemeksepeti'ne rakip\",\n  \"reasons\": [\n    {\n      \"text\": \"Yemeksepeti, Delivery Hero tarafından 2015'te ~589 milyon dolara satın alındı. Türkiye'de onlarca milyon kullanıcısı ve binlerce restoran ortağı var. Bu ağ etkisini sıfırdan kırmak neredeyse imkânsız.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Delivery Hero / Yemeksepeti Türkiye pazarında dominant konumda. Getir ve Trendyol Yemek gibi devler de aynı pastayı paylaşıyor. Üç büyük oyuncu zaten milyarlarca dolar yatırdı.\"\n      }\n    },\n    {\n      \"text\": \"Bu pazar ağ etkisiyle çalışır: daha fazla restoran → daha fazla kullanıcı → daha fazla restoran. Sen başladığında sıfır kullanıcın var, rakibin milyonlarca. Hiçbir pazarlama bütçesi bu uçurumu kapatamaz.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"assumption\",\n        \"detail\": \"İki taraflı pazar dinamiği. Uber Eats, DoorDash gibi örneklerde bile yeni girenler ya çok büyük sermayeyle girdi ya da çok niş bir segmentle. 'Genel alternatif' olarak girmek tarihsel olarak başarısız.\"\n      }\n    },\n    {\n      \"text\": \"Yemeksepeti + Getir + Trendyol Yemek üçlüsü komisyon savaşına girmiş durumda. Restoranlar zaten düşük marjlarla çalışıyor; seni denemek için mevcut platformu bırakma riski almaz.\",\n      \"evidence\": {\n        \"type\": \"financial\",\n        \"source\": \"training_data\",\n        \"detail\": \"Türkiye'de yemek delivery komisyonları %20-30 bandında. Restoranlar bu oranlardan şikayetçi ama alternatif platform için müşteri tabanı olmadan geçiş yapmaz. Tavuk-yumurta problemi.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 88,\n    \"label\": \"high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Yemeksepeti'ne rakip olma. Onun çözemediği bir sorunu çöz: restoranlara beyaz etiket sipariş sistemi sat (kendi web sitelerinden komisyonsuz sipariş alabilsinler).\",\n    \"why\": \"Restoranlar Yemeksepeti'nin %25 komisyonundan nefret ediyor ama alternatifi yok. Onlara kendi müşteri tabanlarını oluşturma aracı ver. Bu model Türkiye'de henüz dominant bir oyuncuya sahip değil. Flipdish, Owner.com gibi Batı örnekleri var.\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 3000,\n    \"breakeven_users\": 80,\n    \"suggested_price_usd\": 149,\n    \"business_model\": \"Restoran başına aylık SaaS aboneliği (komisyon yok). Restoranın kendi siparişlerini kendi sitesinden almasını sağla.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Next.js + Supabase + Stripe (veya iyzico TR için). Beyaz etiket için subdomain mimarisi.\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 8\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Yemeksepeti'ne rakip mi? HAYIR.\",\n    \"card_subtitle\": \"Milyarlarca dolarlık ağ etkisine karşı sıfır kullanıcıyla savaşamazsın.\",\n    \"tweet\": \"\\\"Yemeksepeti alternatifi yapacağım\\\" — Bu fikri Council'a sorduk. Cevap: DONT. Ama pivot var: Yemeksepeti'ne rakip olma, restoranların kendi sipariş sistemini kur. Komisyon yok, SaaS modeli. #GirişimFikirler\"\n  }\n}\n```",
+      "timing_ms": 25782,
+      "tokens": {
+        "input": 35,
+        "output": 1284,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0212778,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-11",
+      "category": "b2b_saas",
+      "input": "SaaS tool that automatically generates SOC2 compliance documentation from your codebase",
+      "expected_verdict": "GO",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 82,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": false,
+          "detail": "expected GO, got PIVOT"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "82 in [75-95]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "SaaS that auto-generates SOC2 compliance docs by scanning your codebase",
+        "reasons": [
+          {
+            "text": "SOC2 compliance is a real, painful, expensive problem — companies spend $30k-$100k+ on first audits. The demand is unquestionable. But the pain isn't documentation generation, it's evidence collection, control implementation, and auditor trust.",
+            "evidence": {
+              "type": "market_data",
+              "source": "training_data",
+              "detail": "SOC2 audit costs range from $30k-$100k for first-time certifications. The market pain is real and well-documented. Vanta raised $150M, Drata raised $200M — both targeting this exact space."
+            }
+          },
+          {
+            "text": "Vanta, Drata, Secureframe, and Tugboat Logic already do automated compliance — and they're well-funded, deeply integrated, and trusted by auditors. 'Auto-generating docs from codebase' is a feature inside these platforms, not a standalone product.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Vanta ($1.6B valuation), Drata ($2B valuation), Secureframe (Series B) all automate SOC2 evidence collection including code-level integrations via GitHub, Jira, AWS. The incumbents are entrenched."
+            }
+          },
+          {
+            "text": "Auditors don't accept auto-generated docs at face value — they need evidence trails, control narratives, and human attestation. A doc generator without the audit workflow behind it fails at the finish line.",
+            "evidence": {
+              "type": "technical",
+              "source": "assumption",
+              "detail": "SOC2 Type II requires continuous evidence collection over 6-12 months. Documentation is the output, not the bottleneck. The hard part is mapping controls to evidence and maintaining them — which requires integrations, not just doc generation."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 82,
+          "label": "high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Target the gap Vanta/Drata can't own: startups too small to afford $10k/yr SaaS. Build a one-time, self-serve SOC2 readiness kit — code scanner + gap report + editable policy templates — priced at $500 flat.",
+          "why": "Vanta's minimum contract is ~$7k-$10k/yr. Seed-stage startups need SOC2 to close enterprise deals but can't justify that spend. A cheap, one-time 'get audit-ready' tool has no direct competitor at that price point and can upsell to ongoing monitoring later."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 800,
+          "breakeven_users": 20,
+          "suggested_price_usd": 499,
+          "business_model": "One-time purchase for readiness report + policy templates. Upsell to $99/mo ongoing monitoring once they're audit-ready."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "GitHub/GitLab OAuth for codebase scanning, static analysis for security controls detection, templated policy doc generation (Markdown/PDF). Next.js frontend, Node backend, simple rule engine.",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 8
+        },
+        "legal_flags": [
+          {
+            "risk": "Auto-generated compliance docs could give false confidence — if a startup fails an audit after using your tool, liability exposure is real.",
+            "severity": "high",
+            "action": "Add explicit disclaimers that output is a starting point, not auditor-approved. Do not claim 'audit-ready' in marketing. Consider a liability waiver in ToS."
+          },
+          {
+            "risk": "Scanning customer codebases means handling potentially sensitive IP and secrets.",
+            "severity": "high",
+            "action": "Run scanning client-side or in isolated sandboxes. Never store raw code. Get your own SOC2 — the irony of a compliance tool without compliance would kill sales."
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "SOC2 Doc Generator → PIVOT",
+          "card_subtitle": "Real pain, wrong angle. Vanta owns the space. Go cheaper, go one-time, go where they won't.",
+          "tweet": "Pitched: SaaS that auto-generates SOC2 docs from your codebase. Verdict: PIVOT. Vanta/Drata already do this at $10k/yr. The gap? Seed-stage startups who need SOC2 but can't afford enterprise compliance tools. Build the $499 version. #startups #saas"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"SaaS that auto-generates SOC2 compliance docs by scanning your codebase\",\n  \"reasons\": [\n    {\n      \"text\": \"SOC2 compliance is a real, painful, expensive problem — companies spend $30k-$100k+ on first audits. The demand is unquestionable. But the pain isn't documentation generation, it's evidence collection, control implementation, and auditor trust.\",\n      \"evidence\": {\n        \"type\": \"market_data\",\n        \"source\": \"training_data\",\n        \"detail\": \"SOC2 audit costs range from $30k-$100k for first-time certifications. The market pain is real and well-documented. Vanta raised $150M, Drata raised $200M — both targeting this exact space.\"\n      }\n    },\n    {\n      \"text\": \"Vanta, Drata, Secureframe, and Tugboat Logic already do automated compliance — and they're well-funded, deeply integrated, and trusted by auditors. 'Auto-generating docs from codebase' is a feature inside these platforms, not a standalone product.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Vanta ($1.6B valuation), Drata ($2B valuation), Secureframe (Series B) all automate SOC2 evidence collection including code-level integrations via GitHub, Jira, AWS. The incumbents are entrenched.\"\n      }\n    },\n    {\n      \"text\": \"Auditors don't accept auto-generated docs at face value — they need evidence trails, control narratives, and human attestation. A doc generator without the audit workflow behind it fails at the finish line.\",\n      \"evidence\": {\n        \"type\": \"technical\",\n        \"source\": \"assumption\",\n        \"detail\": \"SOC2 Type II requires continuous evidence collection over 6-12 months. Documentation is the output, not the bottleneck. The hard part is mapping controls to evidence and maintaining them — which requires integrations, not just doc generation.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 82,\n    \"label\": \"high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Target the gap Vanta/Drata can't own: startups too small to afford $10k/yr SaaS. Build a one-time, self-serve SOC2 readiness kit — code scanner + gap report + editable policy templates — priced at $500 flat.\",\n    \"why\": \"Vanta's minimum contract is ~$7k-$10k/yr. Seed-stage startups need SOC2 to close enterprise deals but can't justify that spend. A cheap, one-time 'get audit-ready' tool has no direct competitor at that price point and can upsell to ongoing monitoring later.\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 800,\n    \"breakeven_users\": 20,\n    \"suggested_price_usd\": 499,\n    \"business_model\": \"One-time purchase for readiness report + policy templates. Upsell to $99/mo ongoing monitoring once they're audit-ready.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"GitHub/GitLab OAuth for codebase scanning, static analysis for security controls detection, templated policy doc generation (Markdown/PDF). Next.js frontend, Node backend, simple rule engine.\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 8\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"Auto-generated compliance docs could give false confidence — if a startup fails an audit after using your tool, liability exposure is real.\",\n      \"severity\": \"high\",\n      \"action\": \"Add explicit disclaimers that output is a starting point, not auditor-approved. Do not claim 'audit-ready' in marketing. Consider a liability waiver in ToS.\"\n    },\n    {\n      \"risk\": \"Scanning customer codebases means handling potentially sensitive IP and secrets.\",\n      \"severity\": \"high\",\n      \"action\": \"Run scanning client-side or in isolated sandboxes. Never store raw code. Get your own SOC2 — the irony of a compliance tool without compliance would kill sales.\"\n    }\n  ],\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"SOC2 Doc Generator → PIVOT\",\n    \"card_subtitle\": \"Real pain, wrong angle. Vanta owns the space. Go cheaper, go one-time, go where they won't.\",\n    \"tweet\": \"Pitched: SaaS that auto-generates SOC2 docs from your codebase. Verdict: PIVOT. Vanta/Drata already do this at $10k/yr. The gap? Seed-stage startups who need SOC2 but can't afford enterprise compliance tools. Build the $499 version. #startups #saas\"\n  }\n}\n```",
+      "timing_ms": 25668,
+      "tokens": {
+        "input": 24,
+        "output": 1249,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0207528,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-12",
+      "category": "social_network",
+      "input": "A social network for book lovers where you can share highlights and discuss chapters",
+      "expected_verdict": "PIVOT",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 82,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "PIVOT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": false,
+          "detail": "82 outside [60-80]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "Social network for book lovers to share highlights and discuss chapters",
+        "reasons": [
+          {
+            "text": "Goodreads has 150M+ users and owns this space. Amazon bought them in 2013 and hasn't improved them — which means the pain is real, but also means you're fighting a deeply entrenched network effect, not just a product.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Goodreads has 150M registered users. Storygraph launched as an alternative and gained traction specifically because Goodreads is neglected — but even Storygraph struggles with social features. Literal, Bookship, and Fable have all tried this angle."
+            }
+          },
+          {
+            "text": "Building a social network from scratch is a cold-start death trap. You need readers AND their friends on the platform simultaneously, or nobody stays. This is the hardest problem in consumer tech.",
+            "evidence": {
+              "type": "pattern",
+              "source": "assumption",
+              "detail": "Every 'Goodreads killer' since 2010 has failed to reach critical mass. Fable pivoted to book clubs. Literal is tiny. The cold-start problem in social reading has killed dozens of well-funded attempts."
+            }
+          },
+          {
+            "text": "The highlight-sharing angle is genuinely underserved — Kindle highlights exist but are buried, and there's no social layer on top of them. That specific job-to-be-done is your real wedge, not the social network.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Readwise built a $10M+ ARR business just on surfacing highlights — without being a social network. The social layer on highlights is largely unsolved. This is where the opportunity actually lives."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 82,
+          "label": "high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Don't build a social network. Build a highlight-sharing tool first — let readers publish their Kindle/Apple Books highlights publicly, follow other readers' highlights, and comment on specific passages.",
+          "why": "This solves a real pain point without needing both sides of a network at launch. You grow through content (public highlight pages are SEO-able). Social features emerge naturally once you have users. Readwise proved the demand; you add the social layer they deliberately skipped."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 300,
+          "breakeven_users": 500,
+          "suggested_price_usd": 6,
+          "business_model": "Freemium SaaS — free for basic highlight sharing, paid for unlimited imports, reading stats, and private book clubs"
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Next.js + Supabase + Kindle highlight parser (email import or .txt upload). No custom infra needed at MVP.",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 8
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Goodreads killer? PIVOT first.",
+          "card_subtitle": "The highlight-sharing angle is real. The social network wrapper will kill you before you get there.",
+          "tweet": "Pitched a social network for book lovers. Council said PIVOT: 'Don't build a social network. Build a highlight-sharing tool. Readwise proved the demand — you add the social layer they skipped.' Cold-start kills social. Content scales. #buildinpublic"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"Social network for book lovers to share highlights and discuss chapters\",\n  \"reasons\": [\n    {\n      \"text\": \"Goodreads has 150M+ users and owns this space. Amazon bought them in 2013 and hasn't improved them — which means the pain is real, but also means you're fighting a deeply entrenched network effect, not just a product.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Goodreads has 150M registered users. Storygraph launched as an alternative and gained traction specifically because Goodreads is neglected — but even Storygraph struggles with social features. Literal, Bookship, and Fable have all tried this angle.\"\n      }\n    },\n    {\n      \"text\": \"Building a social network from scratch is a cold-start death trap. You need readers AND their friends on the platform simultaneously, or nobody stays. This is the hardest problem in consumer tech.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"assumption\",\n        \"detail\": \"Every 'Goodreads killer' since 2010 has failed to reach critical mass. Fable pivoted to book clubs. Literal is tiny. The cold-start problem in social reading has killed dozens of well-funded attempts.\"\n      }\n    },\n    {\n      \"text\": \"The highlight-sharing angle is genuinely underserved — Kindle highlights exist but are buried, and there's no social layer on top of them. That specific job-to-be-done is your real wedge, not the social network.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Readwise built a $10M+ ARR business just on surfacing highlights — without being a social network. The social layer on highlights is largely unsolved. This is where the opportunity actually lives.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 82,\n    \"label\": \"high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Don't build a social network. Build a highlight-sharing tool first — let readers publish their Kindle/Apple Books highlights publicly, follow other readers' highlights, and comment on specific passages.\",\n    \"why\": \"This solves a real pain point without needing both sides of a network at launch. You grow through content (public highlight pages are SEO-able). Social features emerge naturally once you have users. Readwise proved the demand; you add the social layer they deliberately skipped.\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 300,\n    \"breakeven_users\": 500,\n    \"suggested_price_usd\": 6,\n    \"business_model\": \"Freemium SaaS — free for basic highlight sharing, paid for unlimited imports, reading stats, and private book clubs\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Next.js + Supabase + Kindle highlight parser (email import or .txt upload). No custom infra needed at MVP.\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 8\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Goodreads killer? PIVOT first.\",\n    \"card_subtitle\": \"The highlight-sharing angle is real. The social network wrapper will kill you before you get there.\",\n    \"tweet\": \"Pitched a social network for book lovers. Council said PIVOT: 'Don't build a social network. Build a highlight-sharing tool. Readwise proved the demand — you add the social layer they skipped.' Cold-start kills social. Content scales. #buildinpublic\"\n  }\n}\n```",
+      "timing_ms": 20951,
+      "tokens": {
+        "input": 20,
+        "output": 949,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.016252799999999998,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-13",
+      "category": "crypto_web3",
+      "input": "Decentralized freelance marketplace on blockchain",
+      "expected_verdict": "DONT",
+      "actual_verdict": "DONT",
+      "confidence": {
+        "score": 85,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "DONT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "85 in [75-95]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "DONT",
+        "idea_summary": "Decentralized freelance marketplace built on blockchain technology",
+        "reasons": [
+          {
+            "text": "Upwork, Fiverr, and Toptal have network effects with millions of buyers and sellers. You can't out-network them with a blockchain wrapper — that's not a wedge, that's a feature.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Upwork has 18M+ registered freelancers and 5M+ clients. Fiverr IPO'd at $7B valuation. Network effect marketplaces are historically the hardest category to disrupt from scratch."
+            }
+          },
+          {
+            "text": "This has been tried repeatedly. Braintrust, Ethlance, Freelancer on blockchain — none broke through. The blockchain angle adds friction (wallets, gas fees, crypto volatility) without solving the actual pain: finding good clients and getting paid reliably.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Braintrust raised $100M+ and still has a fraction of Upwork's volume. Ethlance has been live since 2017 with minimal traction. The pattern is consistent: blockchain adds complexity, not value, for mainstream freelancers."
+            }
+          },
+          {
+            "text": "Freelancers don't want decentralization — they want clients and fast payment. Crypto volatility and wallet UX are active barriers to adoption for the 99% of freelancers who just want to get paid in dollars.",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "This is based on the pattern of failed crypto-native consumer products. The target user (freelancer) is not crypto-native. The pain point (payment, trust, finding work) is already solved well enough by incumbents for most users."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 85,
+          "label": "high"
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Decentralized Freelance Marketplace: DONT",
+          "card_subtitle": "Blockchain doesn't fix the real problem. Network effects do. You don't have those.",
+          "tweet": "Pitched a decentralized freelance marketplace. Council said DONT. Braintrust raised $100M and still can't touch Upwork. Blockchain adds friction, not clients. The hard part was never payments — it was trust and network. #startups #web3"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"DONT\",\n  \"idea_summary\": \"Decentralized freelance marketplace built on blockchain technology\",\n  \"reasons\": [\n    {\n      \"text\": \"Upwork, Fiverr, and Toptal have network effects with millions of buyers and sellers. You can't out-network them with a blockchain wrapper — that's not a wedge, that's a feature.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Upwork has 18M+ registered freelancers and 5M+ clients. Fiverr IPO'd at $7B valuation. Network effect marketplaces are historically the hardest category to disrupt from scratch.\"\n      }\n    },\n    {\n      \"text\": \"This has been tried repeatedly. Braintrust, Ethlance, Freelancer on blockchain — none broke through. The blockchain angle adds friction (wallets, gas fees, crypto volatility) without solving the actual pain: finding good clients and getting paid reliably.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Braintrust raised $100M+ and still has a fraction of Upwork's volume. Ethlance has been live since 2017 with minimal traction. The pattern is consistent: blockchain adds complexity, not value, for mainstream freelancers.\"\n      }\n    },\n    {\n      \"text\": \"Freelancers don't want decentralization — they want clients and fast payment. Crypto volatility and wallet UX are active barriers to adoption for the 99% of freelancers who just want to get paid in dollars.\",\n      \"evidence\": {\n        \"type\": \"assumption\",\n        \"source\": \"assumption\",\n        \"detail\": \"This is based on the pattern of failed crypto-native consumer products. The target user (freelancer) is not crypto-native. The pain point (payment, trust, finding work) is already solved well enough by incumbents for most users.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 85,\n    \"label\": \"high\"\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Decentralized Freelance Marketplace: DONT\",\n    \"card_subtitle\": \"Blockchain doesn't fix the real problem. Network effects do. You don't have those.\",\n    \"tweet\": \"Pitched a decentralized freelance marketplace. Council said DONT. Braintrust raised $100M and still can't touch Upwork. Blockchain adds friction, not clients. The hard part was never payments — it was trust and network. #startups #web3\"\n  }\n}\n```",
+      "timing_ms": 14045,
+      "tokens": {
+        "input": 15,
+        "output": 683,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0122628,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-14",
+      "category": "education",
+      "input": "AI tutor that adapts to each student's learning style and pace, for K-12 math",
+      "expected_verdict": "GO",
+      "actual_verdict": "GO",
+      "confidence": {
+        "score": 78,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "GO (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "78 in [65-85]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "GO",
+        "idea_summary": "Adaptive AI tutor for K-12 math that adjusts to each student's learning style and pace",
+        "reasons": [
+          {
+            "text": "Parents pay real money for math tutoring — the US K-12 tutoring market is $8B+. AI enables 1-on-1 personalization at $10/month instead of $80/hour. The price-to-value gap is massive.",
+            "evidence": {
+              "type": "market_data",
+              "source": "training_data",
+              "detail": "US private tutoring market estimated $8-10B annually. Kumon alone has 300K+ US students at $150-200/month. AI can undercut by 90% while delivering comparable or better personalization."
+            }
+          },
+          {
+            "text": "Khanmigo (Khan Academy) proves AI math tutoring works and parents/schools adopt it — but it's free and broad. A paid, math-only product with deeper adaptive logic has room to win on depth.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Khanmigo launched 2023, Photomath acquired by Google, Mathway popular for step-by-step. None are fully adaptive in real-time to learning style. Synthesis (Elon Musk's school spinoff) charges $35/month and is growing fast — proves willingness to pay."
+            }
+          },
+          {
+            "text": "K-12 math has a defined curriculum (Common Core, state standards) — this is a solvable scoping problem. You're not boiling the ocean; you're building a tutor with a known syllabus.",
+            "evidence": {
+              "type": "technical",
+              "source": "assumption",
+              "detail": "Common Core math standards are public and structured. This means you can build grade-by-grade mastery trees, measure gaps precisely, and adapt without needing general AI reasoning. Constraint is an advantage here."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 78,
+          "label": "high"
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 3000,
+          "breakeven_users": 300,
+          "suggested_price_usd": 15,
+          "business_model": "B2C subscription ($15/month per student) with optional B2B2C school district licensing"
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "GPT-4o or Claude for tutoring logic, Next.js frontend, Supabase for student progress tracking, MathJax or KaTeX for math rendering",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 8
+        },
+        "legal_flags": [
+          {
+            "risk": "COPPA compliance required for users under 13 — data collection from children is heavily regulated",
+            "severity": "high",
+            "action": "Build parental consent flows from day one. Do not store chat logs from under-13 users without explicit parental opt-in. Consult a lawyer before launch."
+          },
+          {
+            "risk": "FERPA applies if you sell to schools — student education records have strict handling rules",
+            "severity": "medium",
+            "action": "If going B2B with schools, get a Data Processing Agreement template ready and avoid selling or sharing student data."
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "AI Math Tutor for K-12 — GO",
+          "card_subtitle": "Real pain, parents pay, defined curriculum. The wedge is price vs. Kumon + depth vs. Khanmigo.",
+          "tweet": "Pitched an AI math tutor for K-12 to @Council. Verdict: GO. Parents pay $150/month for Kumon. AI can do it for $15. Defined curriculum = solvable problem. Watch out for COPPA though. 🧮"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"GO\",\n  \"idea_summary\": \"Adaptive AI tutor for K-12 math that adjusts to each student's learning style and pace\",\n  \"reasons\": [\n    {\n      \"text\": \"Parents pay real money for math tutoring — the US K-12 tutoring market is $8B+. AI enables 1-on-1 personalization at $10/month instead of $80/hour. The price-to-value gap is massive.\",\n      \"evidence\": {\n        \"type\": \"market_data\",\n        \"source\": \"training_data\",\n        \"detail\": \"US private tutoring market estimated $8-10B annually. Kumon alone has 300K+ US students at $150-200/month. AI can undercut by 90% while delivering comparable or better personalization.\"\n      }\n    },\n    {\n      \"text\": \"Khanmigo (Khan Academy) proves AI math tutoring works and parents/schools adopt it — but it's free and broad. A paid, math-only product with deeper adaptive logic has room to win on depth.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Khanmigo launched 2023, Photomath acquired by Google, Mathway popular for step-by-step. None are fully adaptive in real-time to learning style. Synthesis (Elon Musk's school spinoff) charges $35/month and is growing fast — proves willingness to pay.\"\n      }\n    },\n    {\n      \"text\": \"K-12 math has a defined curriculum (Common Core, state standards) — this is a solvable scoping problem. You're not boiling the ocean; you're building a tutor with a known syllabus.\",\n      \"evidence\": {\n        \"type\": \"technical\",\n        \"source\": \"assumption\",\n        \"detail\": \"Common Core math standards are public and structured. This means you can build grade-by-grade mastery trees, measure gaps precisely, and adapt without needing general AI reasoning. Constraint is an advantage here.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 78,\n    \"label\": \"high\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 3000,\n    \"breakeven_users\": 300,\n    \"suggested_price_usd\": 15,\n    \"business_model\": \"B2C subscription ($15/month per student) with optional B2B2C school district licensing\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"GPT-4o or Claude for tutoring logic, Next.js frontend, Supabase for student progress tracking, MathJax or KaTeX for math rendering\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 8\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"COPPA compliance required for users under 13 — data collection from children is heavily regulated\",\n      \"severity\": \"high\",\n      \"action\": \"Build parental consent flows from day one. Do not store chat logs from under-13 users without explicit parental opt-in. Consult a lawyer before launch.\"\n    },\n    {\n      \"risk\": \"FERPA applies if you sell to schools — student education records have strict handling rules\",\n      \"severity\": \"medium\",\n      \"action\": \"If going B2B with schools, get a Data Processing Agreement template ready and avoid selling or sharing student data.\"\n    }\n  ],\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"AI Math Tutor for K-12 — GO\",\n    \"card_subtitle\": \"Real pain, parents pay, defined curriculum. The wedge is price vs. Kumon + depth vs. Khanmigo.\",\n    \"tweet\": \"Pitched an AI math tutor for K-12 to @Council. Verdict: GO. Parents pay $150/month for Kumon. AI can do it for $15. Defined curriculum = solvable problem. Watch out for COPPA though. 🧮\"\n  }\n}\n```",
+      "timing_ms": 21405,
+      "tokens": {
+        "input": 27,
+        "output": 1031,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0174828,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-15",
+      "category": "low_confidence",
+      "input": "A platform for urban farmers to sell produce directly to restaurants in Lagos, Nigeria",
+      "expected_verdict": "PIVOT",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 42,
+        "label": "low"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "PIVOT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "42 in [30-55]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "5 items listed"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "B2B marketplace connecting urban farmers to restaurants in Lagos, Nigeria",
+        "reasons": [
+          {
+            "text": "The pain point is real — Lagos restaurants struggle with fresh produce supply chains, and urban farming is growing in Nigerian cities. But I don't have reliable data on how urban farmers currently sell, what margins look like, or whether restaurants will pay a platform fee.",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "I have limited training data on Lagos-specific agri-food supply chains, informal market dynamics, and restaurant procurement behavior. This is a critical gap."
+            }
+          },
+          {
+            "text": "Two-sided marketplaces in informal economies are brutally hard to bootstrap. Lagos has strong informal trader networks — your platform has to beat WhatsApp groups and existing middlemen who already have trust and relationships.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Twiga Foods in Kenya tried a similar model (farmers to vendors) and raised $50M+ but still struggled with unit economics and logistics. The informal middleman is a structural competitor, not just a feature gap."
+            }
+          },
+          {
+            "text": "Cold-start problem is severe: farmers won't join without restaurant buyers, restaurants won't join without farmer supply. You need to manually seed both sides, which requires boots on the ground in Lagos — expensive and slow.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Every two-sided marketplace faces this. In emerging markets with low digital trust, the problem is amplified. You likely need to act as the middleman yourself first before building the platform."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 42,
+          "label": "low",
+          "missing_data": [
+            "How do Lagos restaurants currently source fresh produce — direct from markets, middlemen, or existing apps?",
+            "What percentage of Lagos urban farmers have smartphones and use digital payment tools (OPay, Flutterwave, etc.)?",
+            "Are there existing Nigerian competitors (e.g., Vendease, Alerzo, Omnibiz) already serving this exact segment?",
+            "What is the average order size and margin a restaurant spends on fresh produce weekly?",
+            "Is the regulatory environment for food commerce in Lagos permissive or restrictive?"
+          ]
+        },
+        "pivot_suggestion": {
+          "suggestion": "Don't build the marketplace first. Become the supplier. Aggregate produce from 10-20 urban farmers yourself, sell directly to 5-10 restaurants, own the logistics. Build the platform only after proving the unit economics manually.",
+          "why": "This kills the cold-start problem and gives you real data on pricing, logistics, and trust dynamics before you write a line of marketplace code. Vendease did this in Nigeria and it worked."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 800,
+          "breakeven_users": 15,
+          "suggested_price_usd": 0,
+          "business_model": "Take a 10-15% commission per transaction, or charge restaurants a monthly subscription for guaranteed supply. Do NOT charge farmers upfront — they have no margin for that."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Don't build an app yet. Use WhatsApp Business + Google Sheets + Paystack for payments. Build a web app only when you hit 20+ active restaurants.",
+          "complexity": "simple",
+          "estimated_mvp_weeks": 2
+        },
+        "legal_flags": [
+          {
+            "risk": "Food safety and handling regulations in Lagos — NAFDAC compliance may be required for food commerce platforms",
+            "severity": "medium",
+            "action": "Check NAFDAC and Lagos State Ministry of Agriculture requirements before scaling. At MVP stage with manual ops, risk is low."
+          },
+          {
+            "risk": "Payment and escrow regulations — holding funds between farmers and restaurants may require a fintech license",
+            "severity": "medium",
+            "action": "Use Paystack or Flutterwave as the payment layer — they handle CBN compliance. Don't hold funds yourself."
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Lagos Urban Farm Marketplace → PIVOT",
+          "card_subtitle": "Real pain, but don't build the platform first. Become the supplier. Prove the economics manually.",
+          "tweet": "Pitched: marketplace for urban farmers → Lagos restaurants. Verdict: PIVOT. The pain is real but the cold-start will kill you. Become the middleman first. Build the app after you've done 50 orders by hand. @Council"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"B2B marketplace connecting urban farmers to restaurants in Lagos, Nigeria\",\n  \"reasons\": [\n    {\n      \"text\": \"The pain point is real — Lagos restaurants struggle with fresh produce supply chains, and urban farming is growing in Nigerian cities. But I don't have reliable data on how urban farmers currently sell, what margins look like, or whether restaurants will pay a platform fee.\",\n      \"evidence\": {\n        \"type\": \"assumption\",\n        \"source\": \"assumption\",\n        \"detail\": \"I have limited training data on Lagos-specific agri-food supply chains, informal market dynamics, and restaurant procurement behavior. This is a critical gap.\"\n      }\n    },\n    {\n      \"text\": \"Two-sided marketplaces in informal economies are brutally hard to bootstrap. Lagos has strong informal trader networks — your platform has to beat WhatsApp groups and existing middlemen who already have trust and relationships.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Twiga Foods in Kenya tried a similar model (farmers to vendors) and raised $50M+ but still struggled with unit economics and logistics. The informal middleman is a structural competitor, not just a feature gap.\"\n      }\n    },\n    {\n      \"text\": \"Cold-start problem is severe: farmers won't join without restaurant buyers, restaurants won't join without farmer supply. You need to manually seed both sides, which requires boots on the ground in Lagos — expensive and slow.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Every two-sided marketplace faces this. In emerging markets with low digital trust, the problem is amplified. You likely need to act as the middleman yourself first before building the platform.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 42,\n    \"label\": \"low\",\n    \"missing_data\": [\n      \"How do Lagos restaurants currently source fresh produce — direct from markets, middlemen, or existing apps?\",\n      \"What percentage of Lagos urban farmers have smartphones and use digital payment tools (OPay, Flutterwave, etc.)?\",\n      \"Are there existing Nigerian competitors (e.g., Vendease, Alerzo, Omnibiz) already serving this exact segment?\",\n      \"What is the average order size and margin a restaurant spends on fresh produce weekly?\",\n      \"Is the regulatory environment for food commerce in Lagos permissive or restrictive?\"\n    ]\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Don't build the marketplace first. Become the supplier. Aggregate produce from 10-20 urban farmers yourself, sell directly to 5-10 restaurants, own the logistics. Build the platform only after proving the unit economics manually.\",\n    \"why\": \"This kills the cold-start problem and gives you real data on pricing, logistics, and trust dynamics before you write a line of marketplace code. Vendease did this in Nigeria and it worked.\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 800,\n    \"breakeven_users\": 15,\n    \"suggested_price_usd\": 0,\n    \"business_model\": \"Take a 10-15% commission per transaction, or charge restaurants a monthly subscription for guaranteed supply. Do NOT charge farmers upfront — they have no margin for that.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Don't build an app yet. Use WhatsApp Business + Google Sheets + Paystack for payments. Build a web app only when you hit 20+ active restaurants.\",\n    \"complexity\": \"simple\",\n    \"estimated_mvp_weeks\": 2\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"Food safety and handling regulations in Lagos — NAFDAC compliance may be required for food commerce platforms\",\n      \"severity\": \"medium\",\n      \"action\": \"Check NAFDAC and Lagos State Ministry of Agriculture requirements before scaling. At MVP stage with manual ops, risk is low.\"\n    },\n    {\n      \"risk\": \"Payment and escrow regulations — holding funds between farmers and restaurants may require a fintech license\",\n      \"severity\": \"medium\",\n      \"action\": \"Use Paystack or Flutterwave as the payment layer — they handle CBN compliance. Don't hold funds yourself.\"\n    }\n  ],\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Lagos Urban Farm Marketplace → PIVOT\",\n    \"card_subtitle\": \"Real pain, but don't build the platform first. Become the supplier. Prove the economics manually.\",\n    \"tweet\": \"Pitched: marketplace for urban farmers → Lagos restaurants. Verdict: PIVOT. The pain is real but the cold-start will kill you. Become the middleman first. Build the app after you've done 50 orders by hand. @Council\"\n  }\n}\n```",
+      "timing_ms": 25906,
+      "tokens": {
+        "input": 21,
+        "output": 1202,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.020047799999999998,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-16",
+      "category": "already_exists",
+      "input": "I want to build Notion but better",
+      "expected_verdict": "DONT",
+      "actual_verdict": "DONT",
+      "confidence": {
+        "score": 95,
+        "label": "very_high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "DONT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "95 in [90-100]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "DONT",
+        "idea_summary": "A general-purpose Notion competitor with no stated differentiation",
+        "reasons": [
+          {
+            "text": "Notion has 30M+ users, $10B valuation, and years of product moat. 'Better' is not a strategy — it's a wish.",
+            "evidence": {
+              "type": "market_data",
+              "source": "training_data",
+              "detail": "Notion raised $275M at $10B valuation in 2021. They have 30M+ users and deep integrations across the productivity stack."
+            }
+          },
+          {
+            "text": "This space has already been fought over. Coda, Craft, Obsidian, Anytype, Capacities — all tried to be 'Notion but better.' Most are niche survivors, not Notion killers.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Coda raised $100M+. Craft has strong Apple ecosystem traction. Obsidian won the local-first niche. None dethroned Notion. The lesson: you need a specific wedge, not a better general product."
+            }
+          },
+          {
+            "text": "You gave me zero differentiation. No target user, no specific pain point, no technical angle. There is nothing to evaluate here except the word 'better.'",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "Without a specific wedge — local-first, offline, a specific profession, a specific workflow — this is just a clone with ambition. Ambition doesn't win markets."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 95,
+          "label": "very_high"
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Notion but better? Hard pass.",
+          "card_subtitle": "'Better' is not a strategy. Notion has 30M users and a $10B moat. Come back with a wedge.",
+          "tweet": "Pitched 'Notion but better' to Council AI. Verdict: DONT. 'Better is a wish, not a strategy.' Back to the drawing board. 🔴"
+        }
+      },
+      "raw_text": "{\"verdict\":\"DONT\",\"idea_summary\":\"A general-purpose Notion competitor with no stated differentiation\",\"reasons\":[{\"text\":\"Notion has 30M+ users, $10B valuation, and years of product moat. 'Better' is not a strategy — it's a wish.\",\"evidence\":{\"type\":\"market_data\",\"source\":\"training_data\",\"detail\":\"Notion raised $275M at $10B valuation in 2021. They have 30M+ users and deep integrations across the productivity stack.\"}},{\"text\":\"This space has already been fought over. Coda, Craft, Obsidian, Anytype, Capacities — all tried to be 'Notion but better.' Most are niche survivors, not Notion killers.\",\"evidence\":{\"type\":\"competitor\",\"source\":\"training_data\",\"detail\":\"Coda raised $100M+. Craft has strong Apple ecosystem traction. Obsidian won the local-first niche. None dethroned Notion. The lesson: you need a specific wedge, not a better general product.\"}},{\"text\":\"You gave me zero differentiation. No target user, no specific pain point, no technical angle. There is nothing to evaluate here except the word 'better.'\",\"evidence\":{\"type\":\"assumption\",\"source\":\"assumption\",\"detail\":\"Without a specific wedge — local-first, offline, a specific profession, a specific workflow — this is just a clone with ambition. Ambition doesn't win markets.\"}}],\"confidence\":{\"score\":95,\"label\":\"very_high\"},\"tone_check\":{\"is_brutal_honest\":true,\"is_respectful\":true,\"avoids_jargon\":true},\"shareable\":{\"card_title\":\"Notion but better? Hard pass.\",\"card_subtitle\":\"'Better' is not a strategy. Notion has 30M users and a $10B moat. Come back with a wedge.\",\"tweet\":\"Pitched 'Notion but better' to Council AI. Verdict: DONT. 'Better is a wish, not a strategy.' Back to the drawing board. 🔴\"}}",
+      "timing_ms": 11241,
+      "tokens": {
+        "input": 14,
+        "output": 476,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0091578,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-17",
+      "category": "creator_economy",
+      "input": "Newsletter platform specifically for indie game developers to build audience",
+      "expected_verdict": "GO",
+      "actual_verdict": "GO",
+      "confidence": {
+        "score": 72,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "GO (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "72 in [55-75]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "GO",
+        "idea_summary": "Newsletter platform built specifically for indie game developers to grow and monetize their audience",
+        "reasons": [
+          {
+            "text": "Indie game devs are a specific, underserved segment with real audience-building pain. They need devlog-friendly formats, Steam wishlist CTAs, and itch.io integrations — none of which Beehiiv, Substack, or ConvertKit offer natively.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Indie devs consistently complain on r/gamedev and Twitter about generic newsletter tools not fitting their workflow. Devlogs, screenshot embeds, build progress updates, and game launch sequences are unique content patterns with no dedicated tooling."
+            }
+          },
+          {
+            "text": "The indie game market is growing fast — over 10,000 games shipped on Steam annually — and devs who build an audience before launch dramatically outperform those who don't. There's a documented 'wishlist before launch' playbook that a purpose-built tool could own.",
+            "evidence": {
+              "type": "market_data",
+              "source": "training_data",
+              "detail": "Steam data shows 10,000+ games released per year. Indie devs with pre-launch email lists consistently hit higher Day 1 sales. This is a known pattern in the indie dev community — tools like Mailchimp don't support Steam wishlist embeds or launch countdown sequences."
+            }
+          },
+          {
+            "text": "You don't need to beat Substack on features — you need to be the obvious choice for one niche. 'Ghost for writers' worked. 'Beehiiv for media companies' worked. 'X for indie game devs' is the same playbook in a niche nobody has claimed yet.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Vertical SaaS playbook: take a horizontal tool category, add 5-10 domain-specific features, and own the niche. Ghost ($5M+ ARR) did this for writers. The indie game dev community is tight-knit, vocal on social media, and actively shares tools they love — strong organic growth potential."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 72,
+          "label": "high"
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 400,
+          "breakeven_users": 80,
+          "suggested_price_usd": 19,
+          "business_model": "Monthly SaaS subscription. Tier 1: free up to 500 subscribers. Tier 2: $19/mo for 500-5k subs + Steam/itch integrations. Tier 3: $49/mo for launch sequences, analytics, monetization tools."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Next.js + Resend (email delivery) + Postgres + Stripe. Integrate Steam API for wishlist widgets and itch.io embed support. Start with a fork or wrapper around an open email editor.",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 8
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Newsletter platform for indie game devs: GO",
+          "card_subtitle": "Specific niche, real pain, no incumbent owns it. The vertical SaaS playbook applied to a vocal, tool-sharing community.",
+          "tweet": "Pitched: newsletter platform built for indie game devs. Verdict: GO. Substack doesn't do Steam wishlist CTAs. Beehiiv doesn't do devlog formats. Nobody owns this niche yet — and indie devs share tools they love. Classic vertical SaaS play. 🎮"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"GO\",\n  \"idea_summary\": \"Newsletter platform built specifically for indie game developers to grow and monetize their audience\",\n  \"reasons\": [\n    {\n      \"text\": \"Indie game devs are a specific, underserved segment with real audience-building pain. They need devlog-friendly formats, Steam wishlist CTAs, and itch.io integrations — none of which Beehiiv, Substack, or ConvertKit offer natively.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Indie devs consistently complain on r/gamedev and Twitter about generic newsletter tools not fitting their workflow. Devlogs, screenshot embeds, build progress updates, and game launch sequences are unique content patterns with no dedicated tooling.\"\n      }\n    },\n    {\n      \"text\": \"The indie game market is growing fast — over 10,000 games shipped on Steam annually — and devs who build an audience before launch dramatically outperform those who don't. There's a documented 'wishlist before launch' playbook that a purpose-built tool could own.\",\n      \"evidence\": {\n        \"type\": \"market_data\",\n        \"source\": \"training_data\",\n        \"detail\": \"Steam data shows 10,000+ games released per year. Indie devs with pre-launch email lists consistently hit higher Day 1 sales. This is a known pattern in the indie dev community — tools like Mailchimp don't support Steam wishlist embeds or launch countdown sequences.\"\n      }\n    },\n    {\n      \"text\": \"You don't need to beat Substack on features — you need to be the obvious choice for one niche. 'Ghost for writers' worked. 'Beehiiv for media companies' worked. 'X for indie game devs' is the same playbook in a niche nobody has claimed yet.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Vertical SaaS playbook: take a horizontal tool category, add 5-10 domain-specific features, and own the niche. Ghost ($5M+ ARR) did this for writers. The indie game dev community is tight-knit, vocal on social media, and actively shares tools they love — strong organic growth potential.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 72,\n    \"label\": \"high\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 400,\n    \"breakeven_users\": 80,\n    \"suggested_price_usd\": 19,\n    \"business_model\": \"Monthly SaaS subscription. Tier 1: free up to 500 subscribers. Tier 2: $19/mo for 500-5k subs + Steam/itch integrations. Tier 3: $49/mo for launch sequences, analytics, monetization tools.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Next.js + Resend (email delivery) + Postgres + Stripe. Integrate Steam API for wishlist widgets and itch.io embed support. Start with a fork or wrapper around an open email editor.\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 8\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Newsletter platform for indie game devs: GO\",\n    \"card_subtitle\": \"Specific niche, real pain, no incumbent owns it. The vertical SaaS playbook applied to a vocal, tool-sharing community.\",\n    \"tweet\": \"Pitched: newsletter platform built for indie game devs. Verdict: GO. Substack doesn't do Steam wishlist CTAs. Beehiiv doesn't do devlog formats. Nobody owns this niche yet — and indie devs share tools they love. Classic vertical SaaS play. 🎮\"\n  }\n}\n```",
+      "timing_ms": 20635,
+      "tokens": {
+        "input": 16,
+        "output": 981,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.016732800000000003,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-18",
+      "category": "deeptech",
+      "input": "Protein folding prediction tool for small biotech companies that can't afford AlphaFold infrastructure",
+      "expected_verdict": "GO",
+      "actual_verdict": "PIVOT",
+      "confidence": {
+        "score": 72,
+        "label": "high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": false,
+          "detail": "expected GO, got PIVOT"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "72 in [50-75]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "present"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "PIVOT",
+        "idea_summary": "Affordable protein folding prediction tool targeting small biotechs priced out of AlphaFold infrastructure",
+        "reasons": [
+          {
+            "text": "The pain is real — small biotechs genuinely can't afford GPU clusters for AlphaFold2 runs — but the problem is already being solved. ColabFold runs on Google Colab for free, and ESMFold gives sub-second predictions via API. You're not cheaper than free.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "ColabFold (Mirdita et al., 2022) dramatically reduced AlphaFold2 compute requirements. ESMFold (Meta AI) offers a free REST API. Chai-1 and OpenFold are also open-source alternatives. The 'can't afford it' problem has largely been solved at the infrastructure level."
+            }
+          },
+          {
+            "text": "The real unmet need isn't raw folding — it's interpretation, workflow integration, and actionable output. Small biotech teams don't lack predictions; they lack people who can turn predictions into drug design decisions.",
+            "evidence": {
+              "type": "assumption",
+              "source": "assumption",
+              "detail": "This is based on the pattern that commoditized compute problems get solved by open source, but downstream workflow and interpretation problems remain sticky. I don't have direct survey data from small biotech teams — this needs validation."
+            }
+          },
+          {
+            "text": "If you compete on 'cheaper folding,' you're in a race to zero against Meta, Google DeepMind, and open-source communities with billion-dollar research budgets. That's a race you cannot win.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "AlphaFold3 was released by DeepMind with a free server. Google has structural incentive to keep this free (cloud upsell). Competing on price against free-tier academic tools is a documented startup failure pattern in bioinfo."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 72,
+          "label": "high",
+          "missing_data": [
+            "Direct interviews with small biotech teams on where they actually get stuck (folding vs. interpretation vs. wet lab validation)",
+            "Whether ColabFold/ESMFold free tiers have reliability/SLA gaps that small biotechs would pay to fix"
+          ]
+        },
+        "pivot_suggestion": {
+          "suggestion": "Don't sell folding. Sell what comes AFTER folding: binding site analysis, mutation effect prediction, or structure-to-assay workflow automation — wrapped in a UI a non-computational biologist can use.",
+          "why": "The folding layer is commoditized. The interpretation and decision-support layer is not. Small biotechs have biologists, not bioinformaticians — that's the real gap."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 3000,
+          "breakeven_users": 15,
+          "suggested_price_usd": 299,
+          "business_model": "SaaS per seat or per project, targeting biotech teams of 5-20 people. Annual contracts preferred — biotech budget cycles are annual."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "ESMFold or ColabFold as the folding backend (don't build this), PyMOL/Mol* for visualization, Python + FastAPI backend, React frontend. Focus engineering on the workflow layer, not the model.",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 10
+        },
+        "legal_flags": [
+          {
+            "risk": "AlphaFold3 model weights have a restrictive license — commercial use requires explicit permission from Google DeepMind",
+            "severity": "high",
+            "action": "Use ESMFold (MIT-adjacent) or ColabFold as backend. Read AlphaFold3 license before touching those weights commercially."
+          },
+          {
+            "risk": "If predictions are used in IND filings or clinical contexts, FDA may classify software as a medical device (SaMD)",
+            "severity": "medium",
+            "action": "Add clear disclaimers that output is for research use only. Talk to a regulatory attorney before marketing to clinical-stage biotechs."
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "Protein Folding Tool for Small Biotech → PIVOT",
+          "card_subtitle": "You can't out-cheap free. The real gap is after the fold, not the fold itself.",
+          "tweet": "Pitched: affordable protein folding for small biotechs. Verdict: PIVOT. ColabFold is free. ESMFold is free. You can't win a price war against Meta and DeepMind. The real money is in what happens AFTER the prediction. Build that instead. #biotech #startups"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"PIVOT\",\n  \"idea_summary\": \"Affordable protein folding prediction tool targeting small biotechs priced out of AlphaFold infrastructure\",\n  \"reasons\": [\n    {\n      \"text\": \"The pain is real — small biotechs genuinely can't afford GPU clusters for AlphaFold2 runs — but the problem is already being solved. ColabFold runs on Google Colab for free, and ESMFold gives sub-second predictions via API. You're not cheaper than free.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"ColabFold (Mirdita et al., 2022) dramatically reduced AlphaFold2 compute requirements. ESMFold (Meta AI) offers a free REST API. Chai-1 and OpenFold are also open-source alternatives. The 'can't afford it' problem has largely been solved at the infrastructure level.\"\n      }\n    },\n    {\n      \"text\": \"The real unmet need isn't raw folding — it's interpretation, workflow integration, and actionable output. Small biotech teams don't lack predictions; they lack people who can turn predictions into drug design decisions.\",\n      \"evidence\": {\n        \"type\": \"assumption\",\n        \"source\": \"assumption\",\n        \"detail\": \"This is based on the pattern that commoditized compute problems get solved by open source, but downstream workflow and interpretation problems remain sticky. I don't have direct survey data from small biotech teams — this needs validation.\"\n      }\n    },\n    {\n      \"text\": \"If you compete on 'cheaper folding,' you're in a race to zero against Meta, Google DeepMind, and open-source communities with billion-dollar research budgets. That's a race you cannot win.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"AlphaFold3 was released by DeepMind with a free server. Google has structural incentive to keep this free (cloud upsell). Competing on price against free-tier academic tools is a documented startup failure pattern in bioinfo.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 72,\n    \"label\": \"high\",\n    \"missing_data\": [\n      \"Direct interviews with small biotech teams on where they actually get stuck (folding vs. interpretation vs. wet lab validation)\",\n      \"Whether ColabFold/ESMFold free tiers have reliability/SLA gaps that small biotechs would pay to fix\"\n    ]\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Don't sell folding. Sell what comes AFTER folding: binding site analysis, mutation effect prediction, or structure-to-assay workflow automation — wrapped in a UI a non-computational biologist can use.\",\n    \"why\": \"The folding layer is commoditized. The interpretation and decision-support layer is not. Small biotechs have biologists, not bioinformaticians — that's the real gap.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"ESMFold or ColabFold as the folding backend (don't build this), PyMOL/Mol* for visualization, Python + FastAPI backend, React frontend. Focus engineering on the workflow layer, not the model.\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 10\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 3000,\n    \"breakeven_users\": 15,\n    \"suggested_price_usd\": 299,\n    \"business_model\": \"SaaS per seat or per project, targeting biotech teams of 5-20 people. Annual contracts preferred — biotech budget cycles are annual.\"\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"AlphaFold3 model weights have a restrictive license — commercial use requires explicit permission from Google DeepMind\",\n      \"severity\": \"high\",\n      \"action\": \"Use ESMFold (MIT-adjacent) or ColabFold as backend. Read AlphaFold3 license before touching those weights commercially.\"\n    },\n    {\n      \"risk\": \"If predictions are used in IND filings or clinical contexts, FDA may classify software as a medical device (SaMD)\",\n      \"severity\": \"medium\",\n      \"action\": \"Add clear disclaimers that output is for research use only. Talk to a regulatory attorney before marketing to clinical-stage biotechs.\"\n    }\n  ],\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"Protein Folding Tool for Small Biotech → PIVOT\",\n    \"card_subtitle\": \"You can't out-cheap free. The real gap is after the fold, not the fold itself.\",\n    \"tweet\": \"Pitched: affordable protein folding for small biotechs. Verdict: PIVOT. ColabFold is free. ESMFold is free. You can't win a price war against Meta and DeepMind. The real money is in what happens AFTER the prediction. Build that instead. #biotech #startups\"\n  }\n}\n```",
+      "timing_ms": 26614,
+      "tokens": {
+        "input": 27,
+        "output": 1272,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0210978,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-19",
+      "category": "marketplace",
+      "input": "Ikinci el cocuk kiyafeti alis-veris platformu, anneler arasinda",
+      "expected_verdict": "PIVOT",
+      "actual_verdict": "GO",
+      "confidence": {
+        "score": 68,
+        "label": "medium"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": false,
+          "detail": "expected PIVOT, got GO"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "68 in [65-85]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "GO",
+        "idea_summary": "Anneler arası ikinci el çocuk kıyafeti alım-satım platformu",
+        "reasons": [
+          {
+            "text": "Çocuklar kıyafetleri çok hızlı büyüdüğü için anneler sürekli alım-satım döngüsünde. Bu, organik tekrar eden işlem demek — retention problemi yok.",
+            "evidence": {
+              "type": "pattern",
+              "source": "training_data",
+              "detail": "Çocuk kıyafeti ortalama 3-6 ay kullanılıyor. Bir aile yılda 4-6 kez beden değiştiriyor. Bu frekans, ikinci el platformları için ideal."
+            }
+          },
+          {
+            "text": "Vinted, Poshmark gibi genel platformlar var ama annelere özel topluluk dinamiği yok. 'Anneler arası' açısı güven ve niş odak sağlıyor — bu gerçek bir wedge.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data",
+              "detail": "Vinted Türkiye'de aktif ama genel kitle için. Letgo/Dolap da var. Hiçbiri 'anne topluluğu' kimliğiyle konumlanmamış. Kidizen (ABD) bu modeli kanıtladı."
+            }
+          },
+          {
+            "text": "Ekonomik baskı ikinci el pazarını büyütüyor. Türkiye'de enflasyon ortamında anneler çocuk kıyafetine para harcamak istemiyor — zamanlama iyi.",
+            "evidence": {
+              "type": "market_data",
+              "source": "training_data",
+              "detail": "Türkiye'de 2022-2024 enflasyon ortamında ikinci el e-ticaret büyüdü. Dolap kullanıcı sayısı bu dönemde arttı. Çocuk segmenti özelinde veri yok ama genel trend destekliyor."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 68,
+          "label": "medium",
+          "missing_data": [
+            "Türkiye'de çocuk ikinci el pazarının büyüklüğü (segment bazlı veri yok)",
+            "Dolap'ta çocuk kıyafeti işlem hacmi — rakip ne kadar büyük?",
+            "Annelerin mevcut platformlarda yaşadığı spesifik sorunlar (kullanıcı araştırması gerekli)"
+          ]
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 800,
+          "breakeven_users": 500,
+          "suggested_price_usd": 0,
+          "business_model": "İşlem komisyonu (%8-12) veya satıcıdan aylık abonelik. Başlangıçta komisyon modeli daha kolay."
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "React Native (iOS+Android), Firebase veya Supabase backend, Cloudinary görsel yönetimi, İyzico ödeme entegrasyonu",
+          "complexity": "moderate",
+          "estimated_mvp_weeks": 10
+        },
+        "legal_flags": [
+          {
+            "risk": "İkinci el satışta fatura/vergi yükümlülüğü — bireysel satıcılar için belirsizlik",
+            "severity": "medium",
+            "action": "Türkiye'de C2C platformlar için vergi muafiyeti sınırlarını hukuki danışmanla netleştir"
+          },
+          {
+            "risk": "Çocuk ürünlerinde güvenlik standartları — satıcı kontrolü",
+            "severity": "low",
+            "action": "Kullanım koşullarına hasarlı/güvensiz ürün yasağı ekle, raporlama mekanizması kur"
+          }
+        ],
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "İkinci El Çocuk Kıyafeti Platformu: GO",
+          "card_subtitle": "Anneler arası niş + yüksek işlem frekansı + enflasyon rüzgarı. Zamanlama doğru.",
+          "tweet": "Anneler arası ikinci el çocuk kıyafeti platformu fikri Council'a soruldu. Karar: GO. Çocuklar 3 ayda beden değiştiriyor, retention bedava geliyor. 'Anne topluluğu' açısı Vinted'dan farklılaştırıyor. Şimdi yap. #ikinciel #girişim"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"GO\",\n  \"idea_summary\": \"Anneler arası ikinci el çocuk kıyafeti alım-satım platformu\",\n  \"reasons\": [\n    {\n      \"text\": \"Çocuklar kıyafetleri çok hızlı büyüdüğü için anneler sürekli alım-satım döngüsünde. Bu, organik tekrar eden işlem demek — retention problemi yok.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"training_data\",\n        \"detail\": \"Çocuk kıyafeti ortalama 3-6 ay kullanılıyor. Bir aile yılda 4-6 kez beden değiştiriyor. Bu frekans, ikinci el platformları için ideal.\"\n      }\n    },\n    {\n      \"text\": \"Vinted, Poshmark gibi genel platformlar var ama annelere özel topluluk dinamiği yok. 'Anneler arası' açısı güven ve niş odak sağlıyor — bu gerçek bir wedge.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data\",\n        \"detail\": \"Vinted Türkiye'de aktif ama genel kitle için. Letgo/Dolap da var. Hiçbiri 'anne topluluğu' kimliğiyle konumlanmamış. Kidizen (ABD) bu modeli kanıtladı.\"\n      }\n    },\n    {\n      \"text\": \"Ekonomik baskı ikinci el pazarını büyütüyor. Türkiye'de enflasyon ortamında anneler çocuk kıyafetine para harcamak istemiyor — zamanlama iyi.\",\n      \"evidence\": {\n        \"type\": \"market_data\",\n        \"source\": \"training_data\",\n        \"detail\": \"Türkiye'de 2022-2024 enflasyon ortamında ikinci el e-ticaret büyüdü. Dolap kullanıcı sayısı bu dönemde arttı. Çocuk segmenti özelinde veri yok ama genel trend destekliyor.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 68,\n    \"label\": \"medium\",\n    \"missing_data\": [\n      \"Türkiye'de çocuk ikinci el pazarının büyüklüğü (segment bazlı veri yok)\",\n      \"Dolap'ta çocuk kıyafeti işlem hacmi — rakip ne kadar büyük?\",\n      \"Annelerin mevcut platformlarda yaşadığı spesifik sorunlar (kullanıcı araştırması gerekli)\"\n    ]\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 800,\n    \"breakeven_users\": 500,\n    \"suggested_price_usd\": 0,\n    \"business_model\": \"İşlem komisyonu (%8-12) veya satıcıdan aylık abonelik. Başlangıçta komisyon modeli daha kolay.\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"React Native (iOS+Android), Firebase veya Supabase backend, Cloudinary görsel yönetimi, İyzico ödeme entegrasyonu\",\n    \"complexity\": \"moderate\",\n    \"estimated_mvp_weeks\": 10\n  },\n  \"legal_flags\": [\n    {\n      \"risk\": \"İkinci el satışta fatura/vergi yükümlülüğü — bireysel satıcılar için belirsizlik\",\n      \"severity\": \"medium\",\n      \"action\": \"Türkiye'de C2C platformlar için vergi muafiyeti sınırlarını hukuki danışmanla netleştir\"\n    },\n    {\n      \"risk\": \"Çocuk ürünlerinde güvenlik standartları — satıcı kontrolü\",\n      \"severity\": \"low\",\n      \"action\": \"Kullanım koşullarına hasarlı/güvensiz ürün yasağı ekle, raporlama mekanizması kur\"\n    }\n  ],\n  \"shareable\": {\n    \"card_title\": \"İkinci El Çocuk Kıyafeti Platformu: GO\",\n    \"card_subtitle\": \"Anneler arası niş + yüksek işlem frekansı + enflasyon rüzgarı. Zamanlama doğru.\",\n    \"tweet\": \"Anneler arası ikinci el çocuk kıyafeti platformu fikri Council'a soruldu. Karar: GO. Çocuklar 3 ayda beden değiştiriyor, retention bedava geliyor. 'Anne topluluğu' açısı Vinted'dan farklılaştırıyor. Şimdi yap. #ikinciel #girişim\"\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  }\n}\n```",
+      "timing_ms": 26235,
+      "tokens": {
+        "input": 29,
+        "output": 1330,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0219678,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    },
+    {
+      "id": "GT-20",
+      "category": "ai_wrapper",
+      "input": "ChatGPT wrapper that makes it easier to write marketing copy",
+      "expected_verdict": "DONT",
+      "actual_verdict": "DONT",
+      "confidence": {
+        "score": 92,
+        "label": "very_high"
+      },
+      "checks": [
+        {
+          "name": "schema_valid",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "verdict_correct",
+          "passed": true,
+          "detail": "DONT (correct)"
+        },
+        {
+          "name": "confidence_calibrated",
+          "passed": true,
+          "detail": "92 in [85-100]"
+        },
+        {
+          "name": "no_red_flags",
+          "passed": true,
+          "detail": "clean"
+        },
+        {
+          "name": "3_reasons",
+          "passed": true,
+          "detail": "3 reasons"
+        },
+        {
+          "name": "pivot_has_suggestion",
+          "passed": true,
+          "detail": "n/a (not PIVOT)"
+        },
+        {
+          "name": "low_conf_missing_data",
+          "passed": true,
+          "detail": "n/a (confidence >= 60)"
+        },
+        {
+          "name": "tone_self_check",
+          "passed": true,
+          "detail": "all true"
+        }
+      ],
+      "raw_output": {
+        "verdict": "DONT",
+        "idea_summary": "ChatGPT wrapper for writing marketing copy",
+        "reasons": [
+          {
+            "text": "You're not building a product — you're building a thin layer on top of someone else's product. OpenAI can add a 'marketing copy' mode to ChatGPT tomorrow, and they have.",
+            "evidence": {
+              "type": "competitor",
+              "source": "OpenAI ChatGPT",
+              "detail": "ChatGPT already has custom GPTs, system prompts, and memory. The 'marketing copy' use case is one of the most common prompts on the platform. No moat here."
+            }
+          },
+          {
+            "text": "This market is already saturated with funded, established players. Jasper raised $125M. Copy.ai has millions of users. You'd be entering a crowded space with no differentiation.",
+            "evidence": {
+              "type": "competitor",
+              "source": "training_data — Jasper, Copy.ai, Writesonic, Rytr",
+              "detail": "At least 10+ funded competitors exist in AI marketing copy. Most are already struggling with commoditization as ChatGPT improves. New entrants without a wedge don't survive this."
+            }
+          },
+          {
+            "text": "There's no wedge stated here — no specific niche, no specific format, no specific pain point that existing tools miss. 'Easier' is not a business.",
+            "evidence": {
+              "type": "pattern",
+              "source": "assumption",
+              "detail": "Every successful tool in this space won by going narrow: email sequences only, ad copy only, a specific industry (real estate, SaaS). 'Marketing copy' is too broad to own."
+            }
+          }
+        ],
+        "confidence": {
+          "score": 92,
+          "label": "very_high"
+        },
+        "pivot_suggestion": {
+          "suggestion": "Pick ONE specific format (cold emails, Google Ads, product descriptions) for ONE specific industry (e-commerce, SaaS, real estate) and own that niche completely.",
+          "why": "Narrow tools win because they can train on domain-specific examples, offer templates that actually convert, and charge more. 'AI cold email writer for SaaS founders' is a business. 'Marketing copy tool' is not."
+        },
+        "financials": {
+          "estimated_mvp_cost_monthly_usd": 500,
+          "breakeven_users": 50,
+          "suggested_price_usd": 29,
+          "business_model": "Monthly SaaS subscription — but only viable with a specific niche angle"
+        },
+        "tech_snapshot": {
+          "stack_suggestion": "Next.js + OpenAI API + Stripe — straightforward build",
+          "complexity": "simple",
+          "estimated_mvp_weeks": 3
+        },
+        "tone_check": {
+          "is_brutal_honest": true,
+          "is_respectful": true,
+          "avoids_jargon": true
+        },
+        "shareable": {
+          "card_title": "ChatGPT Wrapper for Marketing Copy",
+          "card_subtitle": "Jasper raised $125M and is struggling. You'd be competitor #11 with no wedge.",
+          "tweet": "Pitched: 'ChatGPT wrapper for marketing copy.' Verdict: DONT. Jasper raised $125M and is fighting for survival. 'Easier' is not a wedge. If you want to win, pick ONE format + ONE industry and own it. @Council"
+        }
+      },
+      "raw_text": "```json\n{\n  \"verdict\": \"DONT\",\n  \"idea_summary\": \"ChatGPT wrapper for writing marketing copy\",\n  \"reasons\": [\n    {\n      \"text\": \"You're not building a product — you're building a thin layer on top of someone else's product. OpenAI can add a 'marketing copy' mode to ChatGPT tomorrow, and they have.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"OpenAI ChatGPT\",\n        \"detail\": \"ChatGPT already has custom GPTs, system prompts, and memory. The 'marketing copy' use case is one of the most common prompts on the platform. No moat here.\"\n      }\n    },\n    {\n      \"text\": \"This market is already saturated with funded, established players. Jasper raised $125M. Copy.ai has millions of users. You'd be entering a crowded space with no differentiation.\",\n      \"evidence\": {\n        \"type\": \"competitor\",\n        \"source\": \"training_data — Jasper, Copy.ai, Writesonic, Rytr\",\n        \"detail\": \"At least 10+ funded competitors exist in AI marketing copy. Most are already struggling with commoditization as ChatGPT improves. New entrants without a wedge don't survive this.\"\n      }\n    },\n    {\n      \"text\": \"There's no wedge stated here — no specific niche, no specific format, no specific pain point that existing tools miss. 'Easier' is not a business.\",\n      \"evidence\": {\n        \"type\": \"pattern\",\n        \"source\": \"assumption\",\n        \"detail\": \"Every successful tool in this space won by going narrow: email sequences only, ad copy only, a specific industry (real estate, SaaS). 'Marketing copy' is too broad to own.\"\n      }\n    }\n  ],\n  \"confidence\": {\n    \"score\": 92,\n    \"label\": \"very_high\"\n  },\n  \"pivot_suggestion\": {\n    \"suggestion\": \"Pick ONE specific format (cold emails, Google Ads, product descriptions) for ONE specific industry (e-commerce, SaaS, real estate) and own that niche completely.\",\n    \"why\": \"Narrow tools win because they can train on domain-specific examples, offer templates that actually convert, and charge more. 'AI cold email writer for SaaS founders' is a business. 'Marketing copy tool' is not.\"\n  },\n  \"financials\": {\n    \"estimated_mvp_cost_monthly_usd\": 500,\n    \"breakeven_users\": 50,\n    \"suggested_price_usd\": 29,\n    \"business_model\": \"Monthly SaaS subscription — but only viable with a specific niche angle\"\n  },\n  \"tech_snapshot\": {\n    \"stack_suggestion\": \"Next.js + OpenAI API + Stripe — straightforward build\",\n    \"complexity\": \"simple\",\n    \"estimated_mvp_weeks\": 3\n  },\n  \"tone_check\": {\n    \"is_brutal_honest\": true,\n    \"is_respectful\": true,\n    \"avoids_jargon\": true\n  },\n  \"shareable\": {\n    \"card_title\": \"ChatGPT Wrapper for Marketing Copy\",\n    \"card_subtitle\": \"Jasper raised $125M and is struggling. You'd be competitor #11 with no wedge.\",\n    \"tweet\": \"Pitched: 'ChatGPT wrapper for marketing copy.' Verdict: DONT. Jasper raised $125M and is fighting for survival. 'Easier' is not a wedge. If you want to win, pick ONE format + ONE industry and own it. @Council\"\n  }\n}\n```",
+      "timing_ms": 17138,
+      "tokens": {
+        "input": 19,
+        "output": 885,
+        "cache_read": 6726,
+        "cache_write": 0
+      },
+      "cost_usd": 0.0152928,
+      "error": null,
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    }
+  ]
+}
