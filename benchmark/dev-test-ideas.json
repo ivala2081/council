@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "version": "1.0",
+    "name": "Council v2 Developer Test Set",
+    "description": "20 developer-focused ideas to validate Council's verdict quality on technical audience post-deploy",
+    "created": "2026-04-09",
+    "purpose": "Real-world validation of v2 MVP after deploy",
+    "total_cases": 20,
+    "expected_total_cost_usd": 0.40,
+    "expected_total_time_minutes": 10
+  },
+
+  "test_cases": [
+    {
+      "id": "DT-01",
+      "category": "clone_obvious_dont",
+      "language": "en",
+      "idea": "Yet another todo app for developers",
+      "expected_verdict": "DONT",
+      "expected_confidence_min": 80,
+      "what_we_test": "Does Council instantly recognize the most cliched dev project?"
+    },
+    {
+      "id": "DT-02",
+      "category": "incumbent_dont",
+      "language": "tr",
+      "idea": "VS Code rakibi yapmak istiyorum, daha hizli olacak ve AI built-in olacak",
+      "expected_verdict": "DONT",
+      "expected_confidence_min": 80,
+      "what_we_test": "Recognizes Microsoft + Cursor competition, doesn't fall for 'better X' pitch"
+    },
+    {
+      "id": "DT-03",
+      "category": "thin_wrapper_dont",
+      "language": "en",
+      "idea": "ChatGPT wrapper that helps you write better Python code",
+      "expected_verdict": "DONT",
+      "expected_confidence_min": 75,
+      "what_we_test": "Detects 'thin AI wrapper' anti-pattern + Cursor/Copilot competition"
+    },
+    {
+      "id": "DT-04",
+      "category": "blockchain_solution_seeking_problem",
+      "language": "en",
+      "idea": "Blockchain-based GitHub alternative — decentralized code hosting that nobody can take down",
+      "expected_verdict": "DONT",
+      "expected_confidence_min": 75,
+      "what_we_test": "Recognizes 'tech looking for problem' + GitHub moat"
+    },
+
+    {
+      "id": "DT-05",
+      "category": "specific_dev_tool_go",
+      "language": "en",
+      "idea": "CLI tool that takes a screenshot of any website and outputs a matching Tailwind config (colors, spacing, fonts) using vision AI",
+      "expected_verdict": "GO",
+      "expected_confidence_min": 65,
+      "what_we_test": "Recognizes specific pain + clear use case, gives GO despite being niche"
+    },
+    {
+      "id": "DT-06",
+      "category": "niche_b2b_go",
+      "language": "en",
+      "idea": "Bug tracker built specifically for solo developers — no projects, no boards, no Jira-style complexity, just a prioritized list with severity tags",
+      "expected_verdict": "GO",
+      "expected_confidence_min": 60,
+      "what_we_test": "Recognizes valid niche carve-out from saturated Jira/Linear market"
+    },
+    {
+      "id": "DT-07",
+      "category": "workflow_tool_go",
+      "language": "en",
+      "idea": "Automated changelog generator that turns git commits into release notes using LLM, with customizable templates per project",
+      "expected_verdict": "GO",
+      "expected_confidence_min": 65,
+      "what_we_test": "Real dev workflow pain, AI makes it possible, low competition"
+    },
+    {
+      "id": "DT-08",
+      "category": "hot_b2b_space_go",
+      "language": "en",
+      "idea": "Prompt versioning and A/B testing platform for teams running LLMs in production — like LaunchDarkly but for prompts",
+      "expected_verdict": "GO",
+      "expected_confidence_min": 70,
+      "what_we_test": "Hot space, real B2B pain, recognizable analogy. Should GO with confidence."
+    },
+
+    {
+      "id": "DT-09",
+      "category": "broad_alternative_pivot",
+      "language": "en",
+      "idea": "Open source alternative to Vercel for self-hosting Next.js apps",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_min": 60,
+      "what_we_test": "Detects 'too broad'  scope (Coolify/SST exist), should suggest niching"
+    },
+    {
+      "id": "DT-10",
+      "category": "crowded_but_viable_pivot",
+      "language": "en",
+      "idea": "AI code reviewer that analyzes GitHub pull requests and suggests improvements",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_min": 55,
+      "what_we_test": "Crowded space (CodeRabbit, Greptile, Diamond) — should suggest specific angle"
+    },
+    {
+      "id": "DT-11",
+      "category": "vague_target_pivot",
+      "language": "en",
+      "idea": "Slack bot that uses AI to help remote teams be more productive",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_min": 50,
+      "what_we_test": "Vague target ('more productive'), should ask for specific job"
+    },
+    {
+      "id": "DT-12",
+      "category": "exists_but_niche_pivot",
+      "language": "en",
+      "idea": "Browser extension that auto-fills web forms on any website using AI",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_min": 55,
+      "what_we_test": "Exists (1Password, browser native, AI extensions) — should suggest specific niche"
+    },
+
+    {
+      "id": "DT-13",
+      "category": "vague_low_confidence",
+      "language": "tr",
+      "idea": "Developerlar icin bir SaaS yapmak istiyorum",
+      "expected_verdict": "DONT",
+      "expected_confidence_min": 25,
+      "expected_confidence_max": 50,
+      "what_we_test": "Should refuse to evaluate vague input, low confidence, ask for specifics"
+    },
+    {
+      "id": "DT-14",
+      "category": "vague_low_confidence",
+      "language": "tr",
+      "idea": "AI ile bir tool yapacagim ama ne yapacagimi henuz bilmiyorum",
+      "expected_verdict": "DONT",
+      "expected_confidence_min": 20,
+      "expected_confidence_max": 45,
+      "what_we_test": "User explicitly admits no idea — should not hallucinate one"
+    },
+    {
+      "id": "DT-15",
+      "category": "vague_low_confidence",
+      "language": "tr",
+      "idea": "Bir uygulama fikrim var ama detayini sonra dusunecegim",
+      "expected_verdict": "DONT",
+      "expected_confidence_min": 20,
+      "expected_confidence_max": 50,
+      "what_we_test": "Refuses to evaluate non-idea, no hallucination"
+    },
+
+    {
+      "id": "DT-16",
+      "category": "deep_tech_edge",
+      "language": "en",
+      "idea": "Self-hosted GitHub Copilot alternative using local LLMs (Llama 4) — runs on developer's own machine, zero data sent to cloud",
+      "expected_verdict": "GO",
+      "expected_confidence_min": 55,
+      "what_we_test": "Real privacy concern, technical feasibility, niche but growing. Should GO but flag enterprise sales."
+    },
+    {
+      "id": "DT-17",
+      "category": "meta_dev_tool",
+      "language": "en",
+      "idea": "TypeScript-first wrapper for Anthropic SDK with built-in retry logic, observability, and type-safe streaming responses",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_min": 50,
+      "what_we_test": "Real but very niche pain (would I really pay?). Vercel AI SDK exists. Should PIVOT to bigger value."
+    },
+    {
+      "id": "DT-18",
+      "category": "deep_tech_competition",
+      "language": "en",
+      "idea": "Vector database optimized for code embeddings — claims 5x faster search than pgvector for codebases over 1M files",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_min": 45,
+      "what_we_test": "Deep tech, real benchmark claim, but Pinecone/Turbopuffer/Qdrant exist. Should challenge differentiation."
+    },
+    {
+      "id": "DT-19",
+      "category": "ide_extension_go",
+      "language": "en",
+      "idea": "VSCode extension that turns natural language into shell commands, with safety preview before execution",
+      "expected_verdict": "GO",
+      "expected_confidence_min": 55,
+      "what_we_test": "Real terminal pain point, safety angle is differentiator. Should GO with low-medium confidence."
+    },
+    {
+      "id": "DT-20",
+      "category": "marketplace_cold_start",
+      "language": "en",
+      "idea": "Marketplace where developers buy and sell custom GitHub Action templates and CI/CD workflow recipes",
+      "expected_verdict": "PIVOT",
+      "expected_confidence_min": 55,
+      "what_we_test": "Marketplace cold-start problem + GitHub Marketplace already exists. Should suggest different model."
+    }
+  ],
+
+  "test_protocol": {
+    "url": "https://councilpro-f1333e60x-halavi1394-gmailcoms-projects.vercel.app",
+    "steps": [
+      "Open URL",
+      "Copy 'idea' text from one test case",
+      "Paste into Council input box",
+      "Press Enter",
+      "Wait 15-30 seconds",
+      "Read the verdict",
+      "Note: actual_verdict, confidence_score, first_reason_quality, felt_honest (1-10), would_share (yes/no)"
+    ],
+    "tip": "Don't run all 20 in one session — your eyes/judgment will get tired. Do 5 at a time, take breaks."
+  },
+
+  "reporting_format": {
+    "instructions": "After running tests, paste this back to the prompt engineer in chat",
+    "template_per_test": {
+      "id": "DT-XX",
+      "actual_verdict": "GO|PIVOT|DONT",
+      "actual_confidence": "0-100",
+      "first_reason_summary": "1-line summary of the first reason",
+      "subjective_scores": {
+        "felt_brutal_honest": "1-10 (1=fluffy, 10=bites)",
+        "felt_actionable": "1-10 (1=generic, 10=specific advice)",
+        "would_share": "yes|no|maybe",
+        "would_use_again": "yes|no|maybe"
+      },
+      "red_flags": "free text — anything weird, hallucinated, generic, or wrong",
+      "surprise": "free text — anything that surprised you (good or bad)"
+    }
+  }
+}
