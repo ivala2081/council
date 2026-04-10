@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { V2Verdict } from "@/lib/agents/types";
+import { useLang } from "@/lib/i18n";
 
 // ---- URL helpers for clickable evidence sources ----
 function isUrl(s: string | undefined): s is string {
@@ -24,33 +25,27 @@ function shortenUrl(url: string): string {
 const verdictConfig = {
   GO: {
     label: "GO",
-    emoji: "",
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/20",
     text: "text-emerald-600 dark:text-emerald-400",
     dot: "bg-emerald-500",
     barColor: "bg-emerald-500",
-    tagline: "Do it.",
   },
   PIVOT: {
     label: "PIVOT",
-    emoji: "",
     bg: "bg-amber-500/10",
     border: "border-amber-500/20",
     text: "text-amber-600 dark:text-amber-400",
     dot: "bg-amber-500",
     barColor: "bg-amber-500",
-    tagline: "Change one thing.",
   },
   DONT: {
     label: "DON'T",
-    emoji: "",
     bg: "bg-red-500/10",
     border: "border-red-500/20",
     text: "text-red-600 dark:text-red-400",
     dot: "bg-red-500",
     barColor: "bg-red-500",
-    tagline: "Walk away.",
   },
 } as const;
 
@@ -66,27 +61,34 @@ const confidenceColor = (score: number) =>
 const confidenceBarColor = (score: number) =>
   score >= 80 ? "bg-emerald-500" : score >= 60 ? "bg-amber-500" : score >= 40 ? "bg-orange-500" : "bg-red-500";
 
-const evidenceLabel: Record<string, string> = {
-  market_data: "Market",
-  competitor: "Competitor",
-  financial: "Financial",
-  technical: "Technical",
-  legal: "Legal",
-  pattern: "Pattern",
-  training_data: "Known data",
-  assumption: "Assumption",
-};
-
 interface VerdictCardProps {
   verdict: V2Verdict;
   missionId?: string | null;
 }
 
 export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
+  const { t } = useLang();
   const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
   const config = verdictConfig[verdict.verdict];
   const conf = verdict.confidence;
+
+  const tagline = {
+    GO: t("verdict_go_tagline"),
+    PIVOT: t("verdict_pivot_tagline"),
+    DONT: t("verdict_dont_tagline"),
+  }[verdict.verdict];
+
+  const evidenceLabel: Record<string, string> = {
+    market_data: t("evidence_market_data"),
+    competitor: t("evidence_competitor"),
+    financial: t("evidence_financial"),
+    technical: t("evidence_technical"),
+    legal: t("evidence_legal"),
+    pattern: t("evidence_pattern"),
+    training_data: t("evidence_training_data"),
+    assumption: t("evidence_assumption"),
+  };
 
   const handleCopy = () => {
     const url = missionId
@@ -119,14 +121,14 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
               {config.label}
             </span>
           </div>
-          <p className={`text-sm font-medium ${config.text} opacity-70`}>{config.tagline}</p>
+          <p className={`text-sm font-medium ${config.text} opacity-70`}>{tagline}</p>
         </div>
 
         {/* Confidence bar */}
         <div className="px-6 pb-4">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-              Confidence
+              {t("confidence_label")}
             </span>
             <span className={`text-sm font-bold tabular-nums ${confidenceColor(conf.score)}`}>
               {conf.score}%
@@ -204,7 +206,7 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
         {verdict.pivot_suggestion ? (
           <div className="px-6 py-4 border-t border-foreground/5 bg-foreground/[0.02]">
             <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
-              Instead, try this
+              {t("instead_try")}
             </p>
             <p className="text-sm font-medium text-foreground">{verdict.pivot_suggestion.suggestion}</p>
             <p className="text-xs text-muted-foreground mt-1">{verdict.pivot_suggestion.why}</p>
@@ -217,7 +219,7 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
         onClick={() => setShowDetails(!showDetails)}
         className="w-full text-center text-xs text-muted-foreground hover:text-foreground transition-colors py-1"
       >
-        {showDetails ? "Hide details" : "Show evidence details"}
+        {showDetails ? t("hide_details") : t("show_details")}
       </button>
 
       {/* Optional sections when expanded */}
@@ -227,23 +229,23 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
           {verdict.financials ? (
             <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-                Financials
+                {t("financials_title")}
               </p>
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div>
-                  <p className="text-muted-foreground text-xs">MVP Cost</p>
+                  <p className="text-muted-foreground text-xs">{t("mvp_cost")}</p>
                   <p className="font-semibold">${verdict.financials.estimated_mvp_cost_monthly_usd}/mo</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground text-xs">Breakeven</p>
-                  <p className="font-semibold">{verdict.financials.breakeven_users} users</p>
+                  <p className="text-muted-foreground text-xs">{t("breakeven")}</p>
+                  <p className="font-semibold">{verdict.financials.breakeven_users} {t("users")}</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground text-xs">Suggested Price</p>
+                  <p className="text-muted-foreground text-xs">{t("suggested_price")}</p>
                   <p className="font-semibold">${verdict.financials.suggested_price_usd}/mo</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground text-xs">Model</p>
+                  <p className="text-muted-foreground text-xs">{t("business_model")}</p>
                   <p className="font-semibold">{verdict.financials.business_model}</p>
                 </div>
               </div>
@@ -254,20 +256,20 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
           {verdict.tech_snapshot ? (
             <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-                Tech Snapshot
+                {t("tech_title")}
               </p>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Stack</span>
+                  <span className="text-muted-foreground">{t("stack")}</span>
                   <span className="font-medium">{verdict.tech_snapshot.stack_suggestion}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Complexity</span>
+                  <span className="text-muted-foreground">{t("complexity")}</span>
                   <span className="font-medium capitalize">{verdict.tech_snapshot.complexity}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">MVP Timeline</span>
-                  <span className="font-medium">{verdict.tech_snapshot.estimated_mvp_weeks} weeks</span>
+                  <span className="text-muted-foreground">{t("mvp_timeline")}</span>
+                  <span className="font-medium">{verdict.tech_snapshot.estimated_mvp_weeks} {t("weeks")}</span>
                 </div>
               </div>
             </div>
@@ -277,7 +279,7 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
           {verdict.legal_flags && verdict.legal_flags.length > 0 ? (
             <div className="rounded-xl border border-red-500/10 bg-red-500/5 p-4">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-red-600 dark:text-red-400 mb-3">
-                Legal Flags
+                {t("legal_title")}
               </p>
               <div className="space-y-2">
                 {verdict.legal_flags.map((flag, i) => (
@@ -312,7 +314,7 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
           <svg className="w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
           </svg>
-          {copied ? "Copied!" : "Copy link"}
+          {copied ? t("copied") : t("copy_link")}
         </button>
         <button
           onClick={handleTweet}
@@ -321,7 +323,7 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
           <svg className="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
-          Tweet
+          {t("tweet")}
         </button>
       </div>
     </div>

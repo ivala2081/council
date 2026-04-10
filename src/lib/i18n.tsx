@@ -1,0 +1,251 @@
+"use client";
+
+import {
+  createContext,
+  useContext,
+  useState,
+  type ReactNode,
+} from "react";
+
+// ============================================================
+// Types
+// ============================================================
+
+export type Lang = "en" | "tr";
+
+// ============================================================
+// Dictionary
+// ============================================================
+
+const dict = {
+  // -- Page: Landing --
+  headline: {
+    en: "Honest verdict on your idea",
+    tr: "Fikrine dürüst cevap",
+  },
+  subheadline: {
+    en: "10 seconds, 3 reasons, brutally honest.",
+    tr: "10 saniye, 3 sebep, acımasızca dürüst.",
+  },
+  placeholder: {
+    en: "Describe your idea...",
+    tr: "Fikrini anlat...",
+  },
+  submit_button: {
+    en: "Get honest verdict",
+    tr: "Dürüst cevap al",
+  },
+  try_label: {
+    en: "Try:",
+    tr: "Dene:",
+  },
+  input_hint: {
+    en: "Enter to send · Shift+Enter for newline",
+    tr: "Enter ile gönder · Shift+Enter yeni satır",
+  },
+  try_again: {
+    en: "Try again",
+    tr: "Tekrar dene",
+  },
+
+  // -- Page: Loading --
+  loading_step_1: {
+    en: "Reading your idea...",
+    tr: "Fikrin okunuyor...",
+  },
+  loading_step_2: {
+    en: "Checking the market...",
+    tr: "Pazar kontrol ediliyor...",
+  },
+  loading_step_3: {
+    en: "Analyzing risks...",
+    tr: "Riskler analiz ediliyor...",
+  },
+  loading_step_4: {
+    en: "Building the verdict...",
+    tr: "Karar oluşturuluyor...",
+  },
+  loading_step_5: {
+    en: "Deep analysis — complex ideas take longer...",
+    tr: "Derin analiz — karmaşık fikirler biraz daha uzun sürer...",
+  },
+
+  // -- Page: Verdict --
+  council_heard: {
+    en: "Council heard",
+    tr: "Council şunu anladı",
+  },
+  not_quite: {
+    en: "Not quite?",
+    tr: "Tam değil mi?",
+  },
+  try_another: {
+    en: "Try another idea",
+    tr: "Başka bir fikir dene",
+  },
+  new_idea_tooltip: {
+    en: "New idea",
+    tr: "Yeni fikir",
+  },
+
+  // -- VerdictCard: Verdict labels --
+  verdict_go_tagline: {
+    en: "Do it.",
+    tr: "Yap.",
+  },
+  verdict_pivot_tagline: {
+    en: "Change one thing.",
+    tr: "Bir şeyi değiştir.",
+  },
+  verdict_dont_tagline: {
+    en: "Walk away.",
+    tr: "Vazgeç.",
+  },
+  confidence_label: {
+    en: "Confidence",
+    tr: "Güven",
+  },
+
+  // -- VerdictCard: Drill-down --
+  show_details: {
+    en: "Show evidence details",
+    tr: "Kanıt detaylarını göster",
+  },
+  hide_details: {
+    en: "Hide details",
+    tr: "Detayları gizle",
+  },
+  instead_try: {
+    en: "Instead, try this",
+    tr: "Bunun yerine bunu dene",
+  },
+
+  // -- VerdictCard: Financials --
+  financials_title: {
+    en: "Financials",
+    tr: "Finansal",
+  },
+  mvp_cost: {
+    en: "MVP Cost",
+    tr: "MVP Maliyet",
+  },
+  breakeven: {
+    en: "Breakeven",
+    tr: "Başabaş",
+  },
+  suggested_price: {
+    en: "Suggested Price",
+    tr: "Önerilen Fiyat",
+  },
+  business_model: {
+    en: "Model",
+    tr: "Model",
+  },
+
+  // -- VerdictCard: Tech Snapshot --
+  tech_title: {
+    en: "Tech Snapshot",
+    tr: "Teknik Özet",
+  },
+  stack: {
+    en: "Stack",
+    tr: "Stack",
+  },
+  complexity: {
+    en: "Complexity",
+    tr: "Karmaşıklık",
+  },
+  mvp_timeline: {
+    en: "MVP Timeline",
+    tr: "MVP Süre",
+  },
+  weeks: {
+    en: "weeks",
+    tr: "hafta",
+  },
+  users: {
+    en: "users",
+    tr: "kullanıcı",
+  },
+
+  // -- VerdictCard: Legal --
+  legal_title: {
+    en: "Legal Flags",
+    tr: "Yasal Riskler",
+  },
+
+  // -- VerdictCard: Share --
+  copy_link: {
+    en: "Copy link",
+    tr: "Link kopyala",
+  },
+  copied: {
+    en: "Copied!",
+    tr: "Kopyalandı!",
+  },
+  tweet: {
+    en: "Tweet",
+    tr: "Tweet",
+  },
+
+  // -- Evidence type labels --
+  evidence_market_data: { en: "Market", tr: "Pazar" },
+  evidence_competitor: { en: "Competitor", tr: "Rakip" },
+  evidence_financial: { en: "Financial", tr: "Finansal" },
+  evidence_technical: { en: "Technical", tr: "Teknik" },
+  evidence_legal: { en: "Legal", tr: "Yasal" },
+  evidence_pattern: { en: "Pattern", tr: "Örüntü" },
+  evidence_training_data: { en: "Known data", tr: "Bilinen veri" },
+  evidence_assumption: { en: "Assumption", tr: "Varsayım" },
+} as const;
+
+export type DictKey = keyof typeof dict;
+
+// ============================================================
+// Context + Hook
+// ============================================================
+
+const LangContext = createContext<{
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: (key: DictKey) => string;
+}>({
+  lang: "en",
+  setLang: () => {},
+  t: (key) => dict[key]?.en ?? key,
+});
+
+function detectLang(): Lang {
+  if (typeof window === "undefined") return "en";
+  const saved = localStorage.getItem("council-lang");
+  if (saved === "en" || saved === "tr") return saved;
+  const browser = navigator.language?.toLowerCase() ?? "";
+  return browser.startsWith("tr") ? "tr" : "en";
+}
+
+export function LangProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<Lang>(() => {
+    // SSR-safe: only access browser APIs on client
+    if (typeof window === "undefined") return "en";
+    return detectLang();
+  });
+
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    localStorage.setItem("council-lang", l);
+  };
+
+  const t = (key: DictKey): string => {
+    return dict[key]?.[lang] ?? dict[key]?.en ?? key;
+  };
+
+  return (
+    <LangContext.Provider value={{ lang, setLang, t }}>
+      {children}
+    </LangContext.Provider>
+  );
+}
+
+export function useLang() {
+  return useContext(LangContext);
+}
