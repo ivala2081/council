@@ -4,6 +4,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import Exa from "exa-js";
 import { z } from "zod";
 import promptConfig from "@/../prompts/v2-system-prompt.json";
 import schemaConfig from "@/../prompts/v2-output-schema.json";
@@ -47,7 +48,7 @@ const EvidenceSchema = z.object({
 });
 
 const ReasonSchema = z.object({
-  text: z.string().max(200),
+  text: z.string(),
   evidence: EvidenceSchema,
 });
 
@@ -59,8 +60,8 @@ const ConfidenceSchema = z.object({
 
 const PivotSchema = z
   .object({
-    suggestion: z.string().max(200),
-    why: z.string().max(200),
+    suggestion: z.string(),
+    why: z.string(),
   })
   .optional();
 
@@ -72,15 +73,15 @@ const ToneCheckSchema = z.object({
 
 const ShareableSchema = z
   .object({
-    card_title: z.string().max(60),
-    card_subtitle: z.string().max(120),
-    tweet: z.string().max(280),
+    card_title: z.string(),
+    card_subtitle: z.string(),
+    tweet: z.string(),
   })
   .optional();
 
 const VerdictSchema = z.object({
   verdict: z.enum(["GO", "PIVOT", "DONT"]),
-  idea_summary: z.string().max(100),
+  idea_summary: z.string(),
   reasons: z.array(ReasonSchema).length(3),
   confidence: ConfidenceSchema,
   pivot_suggestion: PivotSchema,
@@ -266,29 +267,144 @@ function errorResponse(
 }
 
 // ============================================================
-// Anthropic call with retry
+// Exa Search — market_research tool handler
 // ============================================================
 
-type CallResult =
-  | { ok: true; verdict: Verdict; usage: Anthropic.Messages.Usage; kind: "success" }
-  | { ok: false; kind: "validation_failed"; errors: string[] }
-  | { ok: false; kind: "api_error"; error: Error };
+// Lazy-init Exa client (only when tool is called)
+let exaClient: InstanceType<typeof Exa> | null = null;
+function getExaClient(): InstanceType<typeof Exa> {
+  if (!exaClient) {
+    const key = process.env.EXA_API_KEY;
+    if (!key) throw new Error("EXA_API_KEY not configured");
+    exaClient = new Exa(key);
+  }
+  return exaClient;
+}
 
-async function callAnthropicOnce(
+interface MarketResearchInput {
+  keywords: string[];
+  intent:
+    | "validate_demand"
+    | "find_competitors"
+    | "check_sentiment"
+    | "find_pricing";
+}
+
+interface MarketResearchResult {
+  query: string;
+  results: Array<{
+    title: string;
+    url: string;
+    snippet: string;
+    date: string | null;
+    relevance: number;
+  }>;
+  source: "exa_search";
+  result_count: number;
+}
+
+async function executeMarketResearch(
+  input: MarketResearchInput,
+): Promise<MarketResearchResult> {
+  const exa = getExaClient();
+
+  // Build search query from keywords + intent
+  const intentPrefix: Record<string, string> = {
+    validate_demand: "user demand pain points for",
+    find_competitors: "competitors alternatives to",
+    check_sentiment: "user reviews opinions about",
+    find_pricing: "pricing plans cost of",
+  };
+  const query = `${intentPrefix[input.intent] ?? ""} ${input.keywords.join(" ")}`.trim();
+
+  try {
+    const searchResults = await exa.searchAndContents(query, {
+      numResults: 5,
+      text: { maxCharacters: 300 },
+      type: "auto",
+    });
+
+    return {
+      query,
+      results: searchResults.results.map((r) => ({
+        title: r.title ?? "Untitled",
+        url: r.url,
+        snippet: (r.text ?? "").slice(0, 300),
+        date: r.publishedDate ?? null,
+        relevance: r.score ?? 0,
+      })),
+      source: "exa_search",
+      result_count: searchResults.results.length,
+    };
+  } catch (err) {
+    // Don't leak API details in error
+    console.error(
+      "[verdict] Exa search failed:",
+      err instanceof Error ? err.message : "unknown",
+    );
+    return {
+      query,
+      results: [],
+      source: "exa_search",
+      result_count: 0,
+    };
+  }
+}
+
+// ============================================================
+// Tool extraction from prompt config
+// ============================================================
+
+// Extract only market_research tool from prompt config
+const MARKET_RESEARCH_TOOL = promptConfig.tools.find(
+  (t: { name: string }) => t.name === "market_research",
+);
+
+// Build the tools array for the API call (only if EXA_API_KEY is configured)
+function getActiveTools(): Anthropic.Messages.Tool[] | undefined {
+  if (!process.env.EXA_API_KEY) return undefined; // No key = no tools = fallback to training data
+  if (!MARKET_RESEARCH_TOOL) return undefined;
+
+  return [
+    {
+      name: MARKET_RESEARCH_TOOL.name,
+      description: MARKET_RESEARCH_TOOL.description,
+      input_schema:
+        MARKET_RESEARCH_TOOL.input_schema as Anthropic.Messages.Tool.InputSchema,
+    },
+  ];
+}
+
+// ============================================================
+// Anthropic call with tool-use loop
+// ============================================================
+
+async function callAnthropicWithTools(
   client: Anthropic,
   idea: string,
-  isRetry: boolean,
-  prevErrors?: string[],
-): Promise<CallResult> {
-  const userMessage = isRetry
-    ? `Your previous response failed schema validation. Errors: ${prevErrors?.join("; ") ?? "unknown"}. ` +
-      `Respond with valid JSON only, matching the schema exactly. No markdown, no explanation outside JSON.\n\n` +
-      `Evaluate this idea:\n\n${idea}`
-    : `Evaluate this idea and respond with valid JSON only:\n\n${idea}`;
+): Promise<{ verdict: Verdict; usage: Anthropic.Messages.Usage }> {
+  const tools = getActiveTools();
+  const messages: Anthropic.Messages.MessageParam[] = [
+    {
+      role: "user",
+      content: `Evaluate this idea and respond with valid JSON only:\n\n${idea}`,
+    },
+  ];
 
-  let response: Anthropic.Messages.Message;
-  try {
-    response = await client.messages.create({
+  const totalUsage: Anthropic.Messages.Usage = {
+    input_tokens: 0,
+    output_tokens: 0,
+    cache_read_input_tokens: 0,
+    cache_creation_input_tokens: 0,
+    cache_creation: null,
+    inference_geo: null,
+    server_tool_use: null,
+    service_tier: null,
+  };
+
+  // Max 3 turns: initial + tool results + possible second tool round
+  for (let turn = 0; turn < 3; turn++) {
+    const response = await client.messages.create({
       model: promptConfig.meta.model,
       max_tokens: promptConfig.meta.max_tokens,
       temperature: promptConfig.meta.temperature,
@@ -299,70 +415,83 @@ async function callAnthropicOnce(
           cache_control: { type: "ephemeral" },
         },
       ],
-      messages: [{ role: "user", content: userMessage }],
+      messages,
+      ...(tools && { tools }),
     });
-  } catch (err) {
-    return { ok: false, kind: "api_error", error: err as Error };
+
+    // Accumulate token usage
+    totalUsage.input_tokens += response.usage.input_tokens;
+    totalUsage.output_tokens += response.usage.output_tokens;
+    totalUsage.cache_read_input_tokens =
+      (totalUsage.cache_read_input_tokens ?? 0) +
+      (response.usage.cache_read_input_tokens ?? 0);
+    totalUsage.cache_creation_input_tokens =
+      (totalUsage.cache_creation_input_tokens ?? 0) +
+      (response.usage.cache_creation_input_tokens ?? 0);
+
+    // Check if model wants to use a tool
+    const toolUseBlocks = response.content.filter(
+      (b): b is Anthropic.Messages.ToolUseBlock => b.type === "tool_use",
+    );
+
+    if (toolUseBlocks.length > 0 && response.stop_reason === "tool_use") {
+      // Execute tools and collect results
+      const toolResults: Anthropic.Messages.ToolResultBlockParam[] = [];
+
+      for (const toolBlock of toolUseBlocks) {
+        if (toolBlock.name === "market_research") {
+          const result = await executeMarketResearch(
+            toolBlock.input as MarketResearchInput,
+          );
+          console.log(
+            `[verdict] Exa search: "${result.query}" → ${result.result_count} results`,
+          );
+          toolResults.push({
+            type: "tool_result",
+            tool_use_id: toolBlock.id,
+            content: JSON.stringify(result),
+          });
+        } else {
+          // Unknown tool — return error so LLM falls back gracefully
+          toolResults.push({
+            type: "tool_result",
+            tool_use_id: toolBlock.id,
+            content: JSON.stringify({
+              error: `Tool ${toolBlock.name} not implemented yet`,
+            }),
+            is_error: true,
+          });
+        }
+      }
+
+      // Add assistant message + tool results to conversation
+      messages.push({ role: "assistant", content: response.content });
+      messages.push({ role: "user", content: toolResults });
+
+      continue; // next turn — LLM sees tool results and writes verdict
+    }
+
+    // No tool use — extract verdict from text
+    const textContent = response.content.find(
+      (c): c is Anthropic.Messages.TextBlock => c.type === "text",
+    );
+    if (!textContent) {
+      throw new Error("No text content in response");
+    }
+
+    const parsed = extractAndParseJSON(textContent.text);
+    const result = VerdictSchema.safeParse(parsed);
+    if (!result.success) {
+      throw new Error(
+        `VALIDATION_FAILED: ${result.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`,
+      );
+    }
+
+    return { verdict: result.data, usage: totalUsage };
   }
 
-  // Extract text content
-  const textContent = response.content.find((c) => c.type === "text");
-  if (!textContent || textContent.type !== "text") {
-    return {
-      ok: false,
-      kind: "api_error",
-      error: new Error("No text content in response"),
-    };
-  }
-
-  // Extract & parse JSON
-  let parsed: unknown;
-  try {
-    parsed = extractAndParseJSON(textContent.text);
-  } catch (err) {
-    return {
-      ok: false,
-      kind: "validation_failed",
-      errors: [
-        `JSON parse failed: ${err instanceof Error ? err.message : String(err)}`,
-      ],
-    };
-  }
-
-  // Validate against schema
-  const result = VerdictSchema.safeParse(parsed);
-  if (!result.success) {
-    return {
-      ok: false,
-      kind: "validation_failed",
-      errors: result.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`),
-    };
-  }
-
-  return { ok: true, kind: "success", verdict: result.data, usage: response.usage };
-}
-
-async function callAnthropicWithRetry(idea: string): Promise<{
-  verdict: Verdict;
-  usage: Anthropic.Messages.Usage;
-}> {
-  const client = new Anthropic();
-
-  // Attempt 1: standard request
-  const attempt1 = await callAnthropicOnce(client, idea, false);
-  if (attempt1.ok) return { verdict: attempt1.verdict, usage: attempt1.usage };
-
-  // Attempt 2: validation failed → retry with corrective message
-  if (attempt1.kind === "validation_failed") {
-    const attempt2 = await callAnthropicOnce(client, idea, true, attempt1.errors);
-    if (attempt2.ok) return { verdict: attempt2.verdict, usage: attempt2.usage };
-    const errs =
-      attempt2.kind === "validation_failed" ? attempt2.errors.join("; ") : "unknown";
-    throw new Error(`VALIDATION_FAILED: ${errs}`);
-  }
-
-  // Other failure types propagate up
-  throw attempt1.error;
+  // Should never reach here (max 2 turns), but safety fallback
+  throw new Error("VALIDATION_FAILED: Max tool turns exceeded");
 }
 
 // ============================================================
@@ -428,11 +557,12 @@ export async function POST(request: NextRequest) {
     return errorResponse("INVALID_INPUT", "Idea too short after sanitization", 400);
   }
 
-  // Call Anthropic with retry logic
+  // Call Anthropic with tool-use loop
   let verdict: Verdict;
   let usage: Anthropic.Messages.Usage;
   try {
-    const result = await callAnthropicWithRetry(idea);
+    const client = new Anthropic();
+    const result = await callAnthropicWithTools(client, idea);
     verdict = result.verdict;
     usage = result.usage;
   } catch (err) {
