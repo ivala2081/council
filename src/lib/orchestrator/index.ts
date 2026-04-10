@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../supabase-server";
 import type {
   AgentName,
   ComplexityClass,
@@ -15,11 +15,6 @@ import { PhaseFailureError } from "./recovery";
 // ============================================================
 // AiCompanyOS Orchestrator — State Machine
 // ============================================================
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-);
 
 /** Create a new project from a Council thread */
 export async function createProject(

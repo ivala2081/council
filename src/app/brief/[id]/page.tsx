@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase-server";
 import { notFound } from "next/navigation";
 import {
   strategicBriefSchema,
@@ -7,11 +7,6 @@ import {
 import type { Metadata } from "next";
 import { BriefPageHeader } from "./header";
 import { BriefContent } from "./brief-content";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 type Params = Promise<{ id: string }>;
 

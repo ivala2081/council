@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 import { VerdictCard } from "@/components/verdict-card";
 import { v2VerdictSchema, type V2Verdict } from "@/lib/agents/types";
@@ -23,6 +23,12 @@ const LOADING_STEPS = [
   { delay: 25000, text: "Deep analysis — complex ideas take longer..." },
 ];
 
+const EXAMPLES = [
+  { icon: "💡", text: "Instagram clone yapmak istiyorum" },
+  { icon: "⚙️", text: "AI tool that reads legal contracts for freelancers" },
+  { icon: "🚀", text: "Platform for companies to manage AI agent workforce" },
+];
+
 // ============================================================
 // Page
 // ============================================================
@@ -34,6 +40,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
+  const lastIdeaRef = useRef<string>("");
 
   // Idle → input on mount
   useEffect(() => {
@@ -55,6 +62,7 @@ export default function Home() {
   const handleSubmit = useCallback(async () => {
     if (!idea.trim() || idea.trim().length < 10 || isLoading) return;
 
+    lastIdeaRef.current = idea.trim();
     setIsLoading(true);
     setError(null);
     setVerdict(null);
@@ -101,6 +109,13 @@ export default function Home() {
       setIsLoading(false);
     }
   }, [idea, isLoading]);
+
+  const handleNotQuite = () => {
+    setIdea(lastIdeaRef.current);
+    setVerdict(null);
+    setError(null);
+    setViewState("input");
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -182,6 +197,24 @@ export default function Home() {
                 </div>
               </form>
 
+              {/* Landing example chips — only when idea is empty */}
+              {idea.trim().length === 0 && (
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                  <span className="text-[11px] text-muted-foreground/60 mr-1">Try:</span>
+                  {EXAMPLES.map((ex) => (
+                    <button
+                      key={ex.text}
+                      type="button"
+                      onClick={() => setIdea(ex.text)}
+                      className="text-[11px] px-3 py-1.5 rounded-full border border-border/60 bg-card hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <span className="mr-1">{ex.icon}</span>
+                      {ex.text.length > 45 ? ex.text.slice(0, 42) + "…" : ex.text}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               {error && (
                 <div className="mt-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-600 dark:text-red-400">
                   {error}
@@ -225,6 +258,24 @@ export default function Home() {
         {/* Verdict */}
         {viewState === "verdict" && verdict && (
           <div className="py-8">
+            {/* Council heard header */}
+            <div className="max-w-xl mx-auto mb-4 px-1">
+              <p className="text-[11px] uppercase tracking-wider text-muted-foreground/60 mb-1">
+                Council heard
+              </p>
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-sm text-foreground leading-relaxed italic">
+                  &ldquo;{verdict.idea_summary}&rdquo;
+                </p>
+                <button
+                  onClick={handleNotQuite}
+                  className="shrink-0 text-[11px] text-muted-foreground/60 hover:text-foreground transition-colors whitespace-nowrap"
+                >
+                  Not quite?
+                </button>
+              </div>
+            </div>
+
             <VerdictCard verdict={verdict} missionId={null} />
 
             <div className="mt-6 text-center">
@@ -233,6 +284,7 @@ export default function Home() {
                   setIdea("");
                   setVerdict(null);
                   setError(null);
+                  lastIdeaRef.current = "";
                   setViewState("input");
                 }}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"

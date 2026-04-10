@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase-server";
 import { createProject } from "@/lib/orchestrator";
 import { strategicBriefSchema } from "@/lib/agents/types";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-);
 
 /** GET /api/projects — List user's projects */
 export async function GET(req: NextRequest) {

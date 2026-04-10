@@ -3,6 +3,23 @@
 import { useState } from "react";
 import type { V2Verdict } from "@/lib/agents/types";
 
+// ---- URL helpers for clickable evidence sources ----
+function isUrl(s: string | undefined): s is string {
+  if (!s) return false;
+  return s.startsWith("http://") || s.startsWith("https://");
+}
+
+function shortenUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    const path = u.pathname === "/" ? "" : u.pathname.slice(0, 30);
+    return host + (path.length > 0 ? path + (u.pathname.length > 30 ? "…" : "") : "");
+  } catch {
+    return url.slice(0, 40) + (url.length > 40 ? "…" : "");
+  }
+}
+
 // ---- Verdict Styles ----
 const verdictConfig = {
   GO: {
@@ -151,9 +168,24 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
                         {evidenceLabel[reason.evidence.type] ?? reason.evidence.type}
                       </span>
                       {reason.evidence.source ? (
-                        <span className="text-[10px] text-muted-foreground truncate">
-                          {reason.evidence.source}
-                        </span>
+                        isUrl(reason.evidence.source) ? (
+                          <a
+                            href={reason.evidence.source}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[10px] text-muted-foreground hover:text-foreground transition-colors truncate inline-flex items-center gap-0.5 underline decoration-dotted underline-offset-2"
+                            title={reason.evidence.source}
+                          >
+                            {shortenUrl(reason.evidence.source)}
+                            <svg className="w-2.5 h-2.5 shrink-0 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                          </a>
+                        ) : (
+                          <span className="text-[10px] text-muted-foreground truncate">
+                            {reason.evidence.source}
+                          </span>
+                        )
                       ) : null}
                     </div>
                   ) : null}
