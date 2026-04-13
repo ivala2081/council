@@ -161,8 +161,8 @@
           },
           "tweet": {
             "type": "string",
-            "maxLength": 280,
-            "description": "Pre-written tweet about this verdict"
+            "maxLength": 230,
+            "description": "Pre-written viral tweet about this verdict. REQUIRED FORMAT (4 lines, use \\n for newlines):\nLine 1: 'Council said [VERDICT] on my startup idea.' (VERDICT = GO / PIVOT / DON'T)\nLine 2: (blank)\nLine 3: One brutal insight from the verdict — the sharpest reason, max 100 chars, no hedging, no jargon\nLine 4: (blank)\nLine 5: '#Council #StartupIdea'\nTotal must be under 230 chars. URL will be appended separately — do NOT include a URL. Do NOT add quotes around Line 1. Keep Line 3 punchy and shareable — write it like something worth retweeting."
           }
         }
       }

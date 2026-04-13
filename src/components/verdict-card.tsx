@@ -131,7 +131,22 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
   };
 
   const handleTweet = () => {
-    const text = verdict.shareable?.tweet ?? `Council verdict: ${verdict.verdict} — ${verdict.idea_summary}`;
+    const verdictLabel = verdict.verdict === "DONT" ? "DON'T" : verdict.verdict;
+    const topReason = verdict.reasons[0]?.text ?? "";
+    const fallbackText = `Council said ${verdictLabel} on my startup idea.\n\n${topReason.length > 100 ? topReason.slice(0, 97) + "..." : topReason}\n\n#Council #StartupIdea`;
+
+    let text = verdict.shareable?.tweet ?? fallbackText;
+
+    // Safety net: ensure hashtags are always present
+    if (!text.includes("#Council")) {
+      text = text.trimEnd() + "\n\n#Council #StartupIdea";
+    }
+
+    // Enforce 230 char limit (leaves room for URL Twitter appends)
+    if (text.length > 230) {
+      text = text.slice(0, 227) + "...";
+    }
+
     const url = verdictId ? `${window.location.origin}/v/${verdictId}` : "";
     const tweetUrl = url
       ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`

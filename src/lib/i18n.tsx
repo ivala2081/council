@@ -185,8 +185,8 @@ const dict = {
     tr: "Kopyalandı!",
   },
   tweet: {
-    en: "Tweet",
-    tr: "Tweet",
+    en: "Share on X",
+    tr: "X'te Paylaş",
   },
 
   // -- Evidence type labels --
