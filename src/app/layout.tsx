@@ -16,19 +16,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://councilpro.vercel.app"),
-  title: "Council — Your Startup's Strategic Memory",
+  title: "Council — Honest AI verdict on your startup idea",
   description:
-    "Evaluate your startup idea, track progress over time, and make better decisions. Council scores your idea across 5 dimensions, identifies risks, and gives you a concrete 7-day action plan. Come back with updates — Council remembers.",
+    "Get a GO, PIVOT, or DON'T verdict in 30 seconds. Real market data, 3 evidence-backed reasons, brutally honest. No sugarcoating.",
   openGraph: {
-    title: "Council — Your Startup's Strategic Memory",
-    description: "Evaluate your startup idea, track progress over time, and make better decisions.",
+    title: "Council — Honest AI verdict on your startup idea",
+    description:
+      "Get a GO, PIVOT, or DON'T verdict in 30 seconds. Real market data, 3 evidence-backed reasons, brutally honest.",
     type: "website",
     url: "https://councilpro.vercel.app",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Council — Your Startup's Strategic Memory",
-    description: "Evaluate your startup idea, track progress over time, and make better decisions.",
+    title: "Council — Honest AI verdict on your startup idea",
+    description:
+      "Get a GO, PIVOT, or DON'T verdict in 30 seconds. Real market data, 3 evidence-backed reasons, brutally honest.",
   },
 };
 

@@ -257,6 +257,44 @@ const dict = {
     tr: "önce",
   },
 
+  // -- Landing: Value Proposition --
+  value_prop_1: {
+    en: "Real market data",
+    tr: "Gerçek pazar verisi",
+  },
+  value_prop_1_desc: {
+    en: "Live web search, not guesswork",
+    tr: "Canlı web araması, tahmin değil",
+  },
+  value_prop_2: {
+    en: "3 evidence-backed reasons",
+    tr: "3 kanıta dayalı sebep",
+  },
+  value_prop_2_desc: {
+    en: "Every claim has a source",
+    tr: "Her iddia kaynağıyla",
+  },
+  value_prop_3: {
+    en: "Brutally honest",
+    tr: "Acımasızca dürüst",
+  },
+  value_prop_3_desc: {
+    en: "No sugarcoating, no jargon",
+    tr: "Laf kalabalığı yok",
+  },
+  loading_estimate: {
+    en: "~30 seconds — real data takes a moment",
+    tr: "~30 saniye — gerçek veri biraz zaman alır",
+  },
+  footer_open_source: {
+    en: "Open source",
+    tr: "Açık kaynak",
+  },
+  footer_built_with: {
+    en: "Built with Claude",
+    tr: "Claude ile yapıldı",
+  },
+
   // -- Re-evaluation --
   re_eval_badge: {
     en: "Re-evaluation",

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Council — Your Startup's Strategic Memory";
+export const alt = "Council — Honest AI verdict on your startup idea";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,7 +48,7 @@ export default function Image() {
               Council
             </span>
             <span style={{ fontSize: 24, color: "#888", marginTop: 4 }}>
-              Your Startup&apos;s Strategic Memory
+              Honest AI verdict on your startup idea
             </span>
           </div>
         </div>
