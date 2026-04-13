@@ -32,7 +32,55 @@ const EXAMPLES = [
   "Instagram clone yapmak istiyorum",
   "AI tool that reads legal contracts for freelancers",
   "Platform for companies to manage AI agent workforce",
+  "SaaS for restaurant inventory management",
+  "Chrome extension that detects dark patterns",
 ];
+
+function useTypingPlaceholder(examples: string[], enabled: boolean): string {
+  const [text, setText] = useState("");
+  const stateRef = useRef({ index: 0, char: 0, phase: "type" as "type" | "delete" | "pause" });
+
+  useEffect(() => {
+    if (!enabled) { setText(""); return }
+
+    let timeout: ReturnType<typeof setTimeout>;
+
+    function tick() {
+      const s = stateRef.current;
+      const current = examples[s.index];
+
+      if (s.phase === "type") {
+        s.char++;
+        setText(current.slice(0, s.char));
+        if (s.char >= current.length) {
+          s.phase = "pause";
+          timeout = setTimeout(tick, 2000);
+        } else {
+          timeout = setTimeout(tick, 60);
+        }
+      } else if (s.phase === "pause") {
+        s.phase = "delete";
+        timeout = setTimeout(tick, 30);
+      } else if (s.phase === "delete") {
+        s.char--;
+        setText(current.slice(0, s.char));
+        if (s.char <= 0) {
+          s.index = (s.index + 1) % examples.length;
+          s.phase = "type";
+          timeout = setTimeout(tick, 500);
+        } else {
+          timeout = setTimeout(tick, 30);
+        }
+      }
+    }
+
+    timeout = setTimeout(tick, 500);
+    return () => clearTimeout(timeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled]);
+
+  return text;
+}
 
 // ============================================================
 // Page
@@ -42,6 +90,7 @@ export default function Home() {
   const { t } = useLang();
   const [viewState, setViewState] = useState<ViewState>("input");
   const [idea, setIdea] = useState("");
+  const typingPlaceholder = useTypingPlaceholder(EXAMPLES, idea.length === 0);
   const [verdict, setVerdict] = useState<V2Verdict | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [verdictId, setVerdictId] = useState<string | null>(null);
@@ -221,7 +270,7 @@ export default function Home() {
                       }
                     }}
                     rows={3}
-                    placeholder={t("placeholder")}
+                    placeholder={typingPlaceholder || t("placeholder")}
                     className="w-full resize-none bg-transparent px-4 pt-4 pb-2 text-[15px] leading-relaxed placeholder:text-muted-foreground/50 focus:outline-none"
                     disabled={isLoading}
                     autoFocus
@@ -237,22 +286,6 @@ export default function Home() {
                   </div>
                 </div>
               </form>
-
-              {/* Example chips — text only, no emoji */}
-              {idea.trim().length === 0 && (
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-                  {EXAMPLES.map((ex) => (
-                    <button
-                      key={ex}
-                      type="button"
-                      onClick={() => { setIdea(ex); reEvalEntryRef.current = null }}
-                      className="text-xs px-3 py-1.5 rounded-full border border-border/30 text-muted-foreground hover:text-foreground hover:border-border/60 transition-colors"
-                    >
-                      {ex.length > 45 ? ex.slice(0, 42) + "…" : ex}
-                    </button>
-                  ))}
-                </div>
-              )}
 
               {/* Error */}
               {error && (
