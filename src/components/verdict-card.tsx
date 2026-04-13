@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { V2Verdict } from "@/lib/agents/types";
 import { useLang } from "@/lib/i18n";
 import { saveFeedback, getFeedback } from "@/lib/storage";
@@ -72,19 +72,15 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
   const { t } = useLang();
   const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [feedbackState, setFeedbackState] = useState<"idle" | "rated" | "commenting" | "done">("idle");
-  const [feedbackRating, setFeedbackRating] = useState<"up" | "down" | null>(null);
+  // Check if already rated (lazy init from localStorage)
+  const existingFeedback = verdictId ? getFeedback(verdictId) : null;
+  const [feedbackState, setFeedbackState] = useState<"idle" | "rated" | "commenting" | "done">(
+    existingFeedback ? "done" : "idle"
+  );
+  const [feedbackRating, setFeedbackRating] = useState<"up" | "down" | null>(
+    existingFeedback?.rating ?? null
+  );
   const [feedbackComment, setFeedbackComment] = useState("");
-
-  // Check if already rated
-  useEffect(() => {
-    if (!verdictId) return;
-    const existing = getFeedback(verdictId);
-    if (existing) {
-      setFeedbackRating(existing.rating);
-      setFeedbackState("done");
-    }
-  }, [verdictId]);
 
   const handleFeedback = (rating: "up" | "down") => {
     setFeedbackRating(rating);
@@ -165,7 +161,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
         {/* Confidence bar */}
         <div className="px-6 pb-4">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               {t("confidence_label")}
             </span>
             <span className={`text-sm font-bold tabular-nums ${confidenceColor(conf.score)}`}>
@@ -181,7 +177,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
           {conf.missing_data && conf.missing_data.length > 0 ? (
             <div className="mt-2 flex flex-wrap gap-1.5">
               {conf.missing_data.map((d, i) => (
-                <span key={i} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
                   {d}
                 </span>
               ))}
@@ -204,7 +200,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
                   <p className="text-sm text-foreground leading-relaxed">{reason.text}</p>
                   {reason.evidence ? (
                     <div className="mt-1.5 flex items-center gap-2">
-                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                      <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                         {evidenceLabel[reason.evidence.type] ?? reason.evidence.type}
                       </span>
                       {reason.evidence.source ? (
@@ -213,7 +209,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
                             href={reason.evidence.source}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] text-muted-foreground hover:text-foreground transition-colors truncate inline-flex items-center gap-0.5 underline decoration-dotted underline-offset-2"
+                            className="text-xs text-muted-foreground hover:text-foreground transition-colors truncate inline-flex items-center gap-0.5 underline decoration-dotted underline-offset-2"
                             title={reason.evidence.source}
                           >
                             {shortenUrl(reason.evidence.source)}
@@ -222,7 +218,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
                             </svg>
                           </a>
                         ) : (
-                          <span className="text-[10px] text-muted-foreground truncate">
+                          <span className="text-xs text-muted-foreground truncate">
                             {reason.evidence.source}
                           </span>
                         )
@@ -243,7 +239,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
         {/* Pivot suggestion */}
         {verdict.pivot_suggestion ? (
           <div className="px-6 py-4 border-t border-foreground/5 bg-foreground/[0.02]">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
               {t("instead_try")}
             </p>
             <p className="text-sm font-medium text-foreground">{verdict.pivot_suggestion.suggestion}</p>
@@ -266,7 +262,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
           {/* Financials */}
           {verdict.financials ? (
             <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
                 {t("financials_title")}
               </p>
               <div className="grid grid-cols-2 gap-3 text-sm">
@@ -293,7 +289,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
           {/* Tech snapshot */}
           {verdict.tech_snapshot ? (
             <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
                 {t("tech_title")}
               </p>
               <div className="space-y-2 text-sm">
@@ -316,14 +312,14 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
           {/* Legal flags */}
           {verdict.legal_flags && verdict.legal_flags.length > 0 ? (
             <div className="rounded-xl border border-red-500/10 bg-red-500/5 p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-red-600 dark:text-red-400 mb-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-red-600 dark:text-red-400 mb-3">
                 {t("legal_title")}
               </p>
               <div className="space-y-2">
                 {verdict.legal_flags.map((flag, i) => (
                   <div key={i} className="text-sm">
                     <div className="flex items-center gap-2">
-                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                      <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${
                         flag.severity === "critical" ? "bg-red-500/20 text-red-600 dark:text-red-400" :
                         flag.severity === "high" ? "bg-orange-500/20 text-orange-600 dark:text-orange-400" :
                         "bg-muted text-muted-foreground"
@@ -370,7 +366,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
         <div className="pt-2">
           {feedbackState === "idle" && (
             <div className="flex items-center justify-center gap-3">
-              <span className="text-[11px] text-muted-foreground/60">{t("feedback_helpful")}</span>
+              <span className="text-xs text-muted-foreground/70">{t("feedback_helpful")}</span>
               <button
                 onClick={() => handleFeedback("up")}
                 className="w-8 h-8 rounded-lg border border-border/60 flex items-center justify-center hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-colors text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400"
@@ -398,7 +394,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
                 onChange={(e) => setFeedbackComment(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter") submitFeedback() }}
                 placeholder={t("feedback_comment_placeholder")}
-                className="flex-1 text-xs px-3 py-2 rounded-lg border border-border/60 bg-transparent placeholder:text-muted-foreground/40 focus:outline-none"
+                className="flex-1 text-xs px-3 py-2 rounded-lg border border-border/60 bg-transparent placeholder:text-muted-foreground/60 focus:outline-none"
                 autoFocus
                 maxLength={200}
               />
@@ -412,7 +408,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
           )}
 
           {feedbackState === "done" && (
-            <p className="text-center text-[11px] text-muted-foreground/60">
+            <p className="text-center text-xs text-muted-foreground/70">
               {feedbackRating === "up" ? "👍" : "👎"} {t("feedback_thanks")}
             </p>
           )}
