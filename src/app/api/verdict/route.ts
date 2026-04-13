@@ -119,6 +119,12 @@ type Verdict = z.infer<typeof VerdictSchema>;
 
 const RequestSchema = z.object({
   idea: z.string().trim().min(10).max(2000),
+  previousVerdict: z.object({
+    idea: z.string(),
+    verdict: z.enum(["GO", "PIVOT", "DONT"]),
+    confidence: z.number(),
+    ideaSummary: z.string(),
+  }).optional(),
 });
 
 const ErrorSchema = z.object({
@@ -511,12 +517,33 @@ function getActiveTools(): Anthropic.Messages.Tool[] {
 async function callAnthropicWithTools(
   client: Anthropic,
   idea: string,
+  previousVerdict?: {
+    idea: string
+    verdict: "GO" | "PIVOT" | "DONT"
+    confidence: number
+    ideaSummary: string
+  },
 ): Promise<{ verdict: Verdict; usage: Anthropic.Messages.Usage }> {
   const tools = getActiveTools();
+
+  let userMessage: string
+  if (previousVerdict) {
+    userMessage =
+      `## PREVIOUS COUNCIL VERDICT (for comparison)\n\n` +
+      `Idea submitted: "${previousVerdict.idea}"\n` +
+      `Verdict: ${previousVerdict.verdict}\n` +
+      `Confidence: ${previousVerdict.confidence}%\n` +
+      `Summary: "${previousVerdict.ideaSummary}"\n\n` +
+      `The user has now UPDATED their idea. Compare with the previous version and note what changed, what improved, and what still needs work. If the verdict changes, explain WHY it changed.\n\n` +
+      `## CURRENT IDEA (evaluate this)\n\n${idea}`
+  } else {
+    userMessage = `Evaluate this idea and respond with valid JSON only:\n\n${idea}`
+  }
+
   const messages: Anthropic.Messages.MessageParam[] = [
     {
       role: "user",
-      content: `Evaluate this idea and respond with valid JSON only:\n\n${idea}`,
+      content: userMessage,
     },
   ];
 
@@ -706,7 +733,7 @@ export async function POST(request: NextRequest) {
   let usage: Anthropic.Messages.Usage;
   try {
     const client = new Anthropic();
-    const result = await callAnthropicWithTools(client, idea);
+    const result = await callAnthropicWithTools(client, idea, parsed.data.previousVerdict);
     verdict = result.verdict;
     usage = result.usage;
   } catch (err) {

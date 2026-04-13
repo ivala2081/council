@@ -255,6 +255,16 @@ const dict = {
     en: "ago",
     tr: "önce",
   },
+
+  // -- Re-evaluation --
+  re_eval_badge: {
+    en: "Re-evaluation",
+    tr: "Tekrar değerlendirme",
+  },
+  re_eval_previous: {
+    en: "Previous verdict",
+    tr: "Önceki karar",
+  },
 } as const;
 
 export type DictKey = keyof typeof dict;

@@ -50,6 +50,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const lastIdeaRef = useRef<string>("");
+  const reEvalEntryRef = useRef<HistoryEntry | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
 
@@ -90,10 +91,20 @@ export default function Home() {
     setViewState("loading");
 
     try {
+      const fetchBody: Record<string, unknown> = { idea: idea.trim() }
+      if (reEvalEntryRef.current) {
+        fetchBody.previousVerdict = {
+          idea: reEvalEntryRef.current.idea,
+          verdict: reEvalEntryRef.current.verdict,
+          confidence: reEvalEntryRef.current.confidence,
+          ideaSummary: reEvalEntryRef.current.ideaSummary,
+        }
+      }
+
       const res = await fetch("/api/verdict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idea: idea.trim() }),
+        body: JSON.stringify(fetchBody),
       });
 
       const json = await res.json();
@@ -163,6 +174,7 @@ export default function Home() {
   };
 
   const handleReEvaluate = (entry: HistoryEntry) => {
+    reEvalEntryRef.current = entry;
     setIdea(entry.idea);
     setVerdict(null);
     setError(null);
@@ -187,6 +199,7 @@ export default function Home() {
                   setIdea("");
                   setVerdict(null);
                   setError(null);
+                  reEvalEntryRef.current = null;
                   setViewState("input");
                 }}
                 className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-muted transition-colors"
@@ -258,7 +271,7 @@ export default function Home() {
                     <button
                       key={ex.text}
                       type="button"
-                      onClick={() => setIdea(ex.text)}
+                      onClick={() => { setIdea(ex.text); reEvalEntryRef.current = null }}
                       className="text-[11px] px-3 py-1.5 rounded-full border border-border/60 bg-card hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <span className="mr-1">{ex.icon}</span>
@@ -385,6 +398,18 @@ export default function Home() {
         {/* Verdict */}
         {viewState === "verdict" && verdict && (
           <div className="py-8">
+            {/* Re-evaluation badge */}
+            {reEvalEntryRef.current && (
+              <div className="max-w-xl mx-auto mb-3 px-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs text-blue-600 dark:text-blue-400">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
+                  </svg>
+                  {t("re_eval_badge")} &middot; {t("re_eval_previous")}: {reEvalEntryRef.current.verdict} ({reEvalEntryRef.current.confidence}%)
+                </div>
+              </div>
+            )}
+
             {/* Council heard header */}
             <div className="max-w-xl mx-auto mb-4 px-1">
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground/60 mb-1">
@@ -413,6 +438,7 @@ export default function Home() {
                   setVerdictId(null);
                   setError(null);
                   lastIdeaRef.current = "";
+                  reEvalEntryRef.current = null;
                   setViewState("input");
                 }}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
