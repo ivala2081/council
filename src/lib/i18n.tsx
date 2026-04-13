@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
   type ReactNode,
 } from "react";
 
@@ -292,11 +293,12 @@ function detectLang(): Lang {
 }
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => {
-    // SSR-safe: only access browser APIs on client
-    if (typeof window === "undefined") return "en";
-    return detectLang();
-  });
+  // Always start with "en" on server to avoid hydration mismatch.
+  // Client detects actual language after mount via useEffect.
+  const [lang, setLangState] = useState<Lang>("en");
+
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setLangState(detectLang()) }, []);
 
   const setLang = (l: Lang) => {
     setLangState(l);
