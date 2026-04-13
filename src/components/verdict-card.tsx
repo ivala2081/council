@@ -140,28 +140,24 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto space-y-4">
+    <div className="w-full max-w-lg mx-auto space-y-3">
       {/* Main verdict card */}
-      <div className={`rounded-2xl border ${config.border} ${config.bg} overflow-hidden`}>
+      <div className={`rounded-xl border ${config.border} ${config.bg} overflow-hidden`}>
         {/* Verdict header */}
-        <div className="px-6 pt-6 pb-4">
-          <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
-            &ldquo;{verdict.idea_summary}&rdquo;
-          </p>
-
+        <div className="px-5 pt-5 pb-3">
           <div className="flex items-center gap-3 mb-1">
-            <div className={`w-3 h-3 rounded-full ${config.dot}`} />
-            <span className={`text-3xl font-black tracking-tight ${config.text}`}>
+            <div className={`w-2.5 h-2.5 rounded-full ${config.dot}`} />
+            <span className={`text-2xl font-black tracking-tight ${config.text}`}>
               {config.label}
             </span>
           </div>
-          <p className={`text-sm font-medium ${config.text} opacity-70`}>{tagline}</p>
+          <p className={`text-sm ${config.text} opacity-70`}>{tagline}</p>
         </div>
 
         {/* Confidence bar */}
-        <div className="px-6 pb-4">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <div className="px-5 pb-3">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
               {t("confidence_label")}
             </span>
             <span className={`text-sm font-bold tabular-nums ${confidenceColor(conf.score)}`}>
@@ -190,10 +186,10 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
           {verdict.reasons.map((reason, i) => (
             <div
               key={i}
-              className={`px-6 py-4 ${i < verdict.reasons.length - 1 ? "border-b border-foreground/5" : ""}`}
+              className={`px-5 py-3 ${i < verdict.reasons.length - 1 ? "border-b border-foreground/5" : ""}`}
             >
               <div className="flex gap-3">
-                <span className={`shrink-0 w-6 h-6 rounded-full ${config.bg} ${config.text} flex items-center justify-center text-xs font-bold border ${config.border}`}>
+                <span className={`shrink-0 w-5 h-5 rounded-full ${config.bg} ${config.text} flex items-center justify-center text-[11px] font-bold`}>
                   {i + 1}
                 </span>
                 <div className="min-w-0 flex-1">
@@ -238,8 +234,8 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
 
         {/* Pivot suggestion */}
         {verdict.pivot_suggestion ? (
-          <div className="px-6 py-4 border-t border-foreground/5 bg-foreground/[0.02]">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
+          <div className="px-5 py-3 border-t border-foreground/5 bg-foreground/[0.02]">
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-1">
               {t("instead_try")}
             </p>
             <p className="text-sm font-medium text-foreground">{verdict.pivot_suggestion.suggestion}</p>
@@ -261,7 +257,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
         <div className="space-y-3">
           {/* Financials */}
           {verdict.financials ? (
-            <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
+            <div className="rounded-lg border border-border/30 bg-card p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
                 {t("financials_title")}
               </p>
@@ -288,7 +284,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
 
           {/* Tech snapshot */}
           {verdict.tech_snapshot ? (
-            <div className="rounded-xl border bg-card p-4 ring-1 ring-foreground/5">
+            <div className="rounded-lg border border-border/30 bg-card p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
                 {t("tech_title")}
               </p>
@@ -343,7 +339,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
       <div className="flex items-center gap-2 pt-1">
         <button
           onClick={handleCopy}
-          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border bg-card hover:bg-muted/30 transition-colors text-sm"
+          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border/30 bg-card hover:bg-muted/30 transition-colors text-sm"
         >
           <svg className="w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
@@ -352,7 +348,7 @@ export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps)
         </button>
         <button
           onClick={handleTweet}
-          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border bg-card hover:bg-muted/30 transition-colors text-sm"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border/30 bg-card hover:bg-muted/30 transition-colors text-sm"
         >
           <svg className="w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
