@@ -1,0 +1,173 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "name": "council-verdict-schema",
+    "description": "Zod-compatible output schema for Council v2 verdicts. Use this to validate LLM output."
+  },
+
+  "verdict_schema": {
+    "type": "object",
+    "required": ["verdict", "idea_summary", "reasons", "confidence", "tone_check"],
+    "properties": {
+
+      "verdict": {
+        "type": "string",
+        "enum": ["GO", "PIVOT", "DONT"],
+        "description": "The decision. GO = do it. PIVOT = change something. DONT = stop."
+      },
+
+      "idea_summary": {
+        "type": "string",
+        "maxLength": 100,
+        "description": "One-line restatement of the idea in Council's own words. Proves we understood."
+      },
+
+      "reasons": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "required": ["text", "evidence"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "The reason itself. 1-2 sentences max. Plain language."
+            },
+            "evidence": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["market_data", "competitor", "financial", "technical", "legal", "pattern", "training_data", "assumption"],
+                  "description": "What kind of evidence backs this reason"
+                },
+                "source": {
+                  "type": "string",
+                  "description": "Where this evidence comes from. URL, platform name, or 'assumption' if guessing."
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "Supporting detail for drill-down. Can be longer."
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "confidence": {
+        "type": "object",
+        "required": ["score", "label"],
+        "properties": {
+          "score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "How confident Council is in this verdict"
+          },
+          "label": {
+            "type": "string",
+            "enum": ["very_high", "high", "medium", "low", "very_low"]
+          },
+          "missing_data": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "What data would increase confidence. Required if score < 60."
+          }
+        }
+      },
+
+      "pivot_suggestion": {
+        "type": "object",
+        "description": "Required when verdict is PIVOT. Optional for DONT.",
+        "properties": {
+          "suggestion": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "What to change"
+          },
+          "why": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Why this pivot would work"
+          }
+        }
+      },
+
+      "financials": {
+        "type": "object",
+        "description": "Optional. Included when finance_calc tool was used.",
+        "properties": {
+          "estimated_mvp_cost_monthly_usd": { "type": "number" },
+          "breakeven_users": { "type": "integer" },
+          "suggested_price_usd": { "type": "number" },
+          "business_model": { "type": "string" }
+        }
+      },
+
+      "tech_snapshot": {
+        "type": "object",
+        "description": "Optional. Brief tech assessment.",
+        "properties": {
+          "stack_suggestion": { "type": "string" },
+          "complexity": {
+            "type": "string",
+            "enum": ["simple", "moderate", "complex", "very_complex"]
+          },
+          "estimated_mvp_weeks": { "type": "integer" }
+        }
+      },
+
+      "legal_flags": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "risk": { "type": "string" },
+            "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+            "action": { "type": "string" }
+          }
+        },
+        "description": "Optional. Legal/compliance risks if relevant."
+      },
+
+      "tone_check": {
+        "type": "object",
+        "required": ["is_brutal_honest", "is_respectful", "avoids_jargon"],
+        "description": "Self-check. LLM validates its own tone before responding.",
+        "properties": {
+          "is_brutal_honest": { "type": "boolean" },
+          "is_respectful": { "type": "boolean" },
+          "avoids_jargon": { "type": "boolean" }
+        }
+      },
+
+      "shareable": {
+        "type": "object",
+        "description": "Pre-formatted content for sharing",
+        "properties": {
+          "card_title": {
+            "type": "string",
+            "maxLength": 60,
+            "description": "Short title for verdict card"
+          },
+          "card_subtitle": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "One-line verdict summary for social sharing"
+          },
+          "tweet": {
+            "type": "string",
+            "maxLength": 280,
+            "description": "Pre-written tweet about this verdict"
+          }
+        }
+      }
+    }
+  },
+
+  "zod_typescript": "// Copy this into your codebase\nimport { z } from 'zod'\n\nconst EvidenceSchema = z.object({\n  type: z.enum(['market_data', 'competitor', 'financial', 'technical', 'legal', 'pattern', 'training_data', 'assumption']),\n  source: z.string().optional(),\n  detail: z.string().optional(),\n})\n\nconst ReasonSchema = z.object({\n  text: z.string().max(200),\n  evidence: EvidenceSchema,\n})\n\nconst ConfidenceSchema = z.object({\n  score: z.number().int().min(0).max(100),\n  label: z.enum(['very_high', 'high', 'medium', 'low', 'very_low']),\n  missing_data: z.array(z.string()).optional(),\n})\n\nconst PivotSchema = z.object({\n  suggestion: z.string().max(200),\n  why: z.string().max(200),\n}).optional()\n\nconst ToneCheckSchema = z.object({\n  is_brutal_honest: z.boolean(),\n  is_respectful: z.boolean(),\n  avoids_jargon: z.boolean(),\n})\n\nconst ShareableSchema = z.object({\n  card_title: z.string().max(60),\n  card_subtitle: z.string().max(120),\n  tweet: z.string().max(280),\n}).optional()\n\nexport const VerdictSchema = z.object({\n  verdict: z.enum(['GO', 'PIVOT', 'DONT']),\n  idea_summary: z.string().max(100),\n  reasons: z.array(ReasonSchema).length(3),\n  confidence: ConfidenceSchema,\n  pivot_suggestion: PivotSchema,\n  financials: z.object({\n    estimated_mvp_cost_monthly_usd: z.number(),\n    breakeven_users: z.number().int(),\n    suggested_price_usd: z.number(),\n    business_model: z.string(),\n  }).optional(),\n  tech_snapshot: z.object({\n    stack_suggestion: z.string(),\n    complexity: z.enum(['simple', 'moderate', 'complex', 'very_complex']),\n    estimated_mvp_weeks: z.number().int(),\n  }).optional(),\n  legal_flags: z.array(z.object({\n    risk: z.string(),\n    severity: z.enum(['critical', 'high', 'medium', 'low']),\n    action: z.string(),\n  })).optional(),\n  tone_check: ToneCheckSchema,\n  shareable: ShareableSchema,\n})\n\nexport type Verdict = z.infer<typeof VerdictSchema>"
+}

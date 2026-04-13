@@ -286,18 +286,11 @@ async function dispatchToolAgent(
   };
 }
 
-/** Max output tokens — code-gen agents get higher budgets */
+/** Max output tokens — uses V2 agent-specific budgets from config */
 function getMaxTokens(tier: ModelTier, agentName?: AgentName): number {
-  // Code-generation and docs agents need more headroom for multi-file output
-  const highTokenAgents: AgentName[] = [
-    "backend_engineer",
-    "frontend_engineer",
-    "qa_writer",
-    "support_docs",
-    "marketing",
-  ];
-  if (agentName && highTokenAgents.includes(agentName)) {
-    return 32768;
+  if (agentName) {
+    const { getMaxTokens: getAgentMaxTokens } = require("../optimization/config");
+    return getAgentMaxTokens(agentName);
   }
 
   switch (tier) {
@@ -316,54 +309,49 @@ function getMaxTokens(tier: ModelTier, agentName?: AgentName): number {
 function getAgentSystemPrompt(agentName: AgentName): string {
   // Lazy-load prompts to avoid circular imports and keep dispatcher light
   // Phase 2-3 agents have full prompts; Phase 4+ use inline stubs until Sprint 3
+  // V2: Consolidated agent prompts with shared preamble
+  const { SHARED_PREAMBLE } = require("../optimization/config");
+
   const prompts: Partial<Record<AgentName, () => string>> = {
-    product_manager: () => {
-      const { PRODUCT_MANAGER_SYSTEM_PROMPT } = require("../agents/product-manager");
-      return PRODUCT_MANAGER_SYSTEM_PROMPT;
+    ceo: () => {
+      const { CEO_SYSTEM_PROMPT } = require("../agents/ceo");
+      return CEO_SYSTEM_PROMPT;
     },
-    legal: () => {
-      const { LEGAL_SYSTEM_PROMPT } = require("../agents/legal");
-      return LEGAL_SYSTEM_PROMPT;
+    product_scope: () => {
+      const { PRODUCT_SCOPE_SYSTEM_PROMPT } = require("../agents/product-scope");
+      return SHARED_PREAMBLE + "\n\n" + PRODUCT_SCOPE_SYSTEM_PROMPT;
     },
-    architect: () => {
-      const { ARCHITECT_SYSTEM_PROMPT } = require("../agents/architect");
-      return ARCHITECT_SYSTEM_PROMPT;
+    tech_architect: () => {
+      const { TECH_ARCHITECT_SYSTEM_PROMPT } = require("../agents/tech-architect");
+      return SHARED_PREAMBLE + "\n\n" + TECH_ARCHITECT_SYSTEM_PROMPT;
     },
     designer: () => {
       const { DESIGNER_SYSTEM_PROMPT } = require("../agents/designer");
-      return DESIGNER_SYSTEM_PROMPT;
+      return SHARED_PREAMBLE + "\n\n" + DESIGNER_SYSTEM_PROMPT;
     },
-    security_threat: () => {
-      const { SECURITY_THREAT_SYSTEM_PROMPT } = require("../agents/security");
-      return SECURITY_THREAT_SYSTEM_PROMPT;
+    fullstack_engineer: () => {
+      const { FULLSTACK_ENGINEER_SYSTEM_PROMPT } = require("../agents/fullstack-engineer");
+      return SHARED_PREAMBLE + "\n\n" + FULLSTACK_ENGINEER_SYSTEM_PROMPT;
     },
     backend_engineer: () => {
       const { BACKEND_ENGINEER_SYSTEM_PROMPT } = require("../agents/backend-engineer");
-      return BACKEND_ENGINEER_SYSTEM_PROMPT;
+      return SHARED_PREAMBLE + "\n\n" + BACKEND_ENGINEER_SYSTEM_PROMPT;
     },
     frontend_engineer: () => {
       const { FRONTEND_ENGINEER_SYSTEM_PROMPT } = require("../agents/frontend-engineer");
-      return FRONTEND_ENGINEER_SYSTEM_PROMPT;
+      return SHARED_PREAMBLE + "\n\n" + FRONTEND_ENGINEER_SYSTEM_PROMPT;
     },
-    devops: () => {
-      const { DEVOPS_SYSTEM_PROMPT } = require("../agents/devops");
-      return DEVOPS_SYSTEM_PROMPT;
+    infra_ops: () => {
+      const { INFRA_OPS_SYSTEM_PROMPT } = require("../agents/infra-ops");
+      return SHARED_PREAMBLE + "\n\n" + INFRA_OPS_SYSTEM_PROMPT;
     },
     qa_writer: () => {
       const { QA_WRITER_SYSTEM_PROMPT } = require("../agents/qa-writer");
-      return QA_WRITER_SYSTEM_PROMPT;
+      return SHARED_PREAMBLE + "\n\n" + QA_WRITER_SYSTEM_PROMPT;
     },
-    devops_deploy: () => {
-      const { DEVOPS_DEPLOY_SYSTEM_PROMPT } = require("../agents/devops-deploy");
-      return DEVOPS_DEPLOY_SYSTEM_PROMPT;
-    },
-    marketing: () => {
-      const { MARKETING_SYSTEM_PROMPT } = require("../agents/marketing");
-      return MARKETING_SYSTEM_PROMPT;
-    },
-    support_docs: () => {
-      const { SUPPORT_DOCS_SYSTEM_PROMPT } = require("../agents/support-docs");
-      return SUPPORT_DOCS_SYSTEM_PROMPT;
+    content_writer: () => {
+      const { CONTENT_WRITER_SYSTEM_PROMPT } = require("../agents/content-writer");
+      return SHARED_PREAMBLE + "\n\n" + CONTENT_WRITER_SYSTEM_PROMPT;
     },
   };
 

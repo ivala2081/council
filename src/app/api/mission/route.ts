@@ -1,6 +1,6 @@
 import { anthropic } from "@ai-sdk/anthropic";
 import { streamText, Output } from "ai";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase-server";
 import { STRATEGIST_SYSTEM_PROMPT, STRATEGIST_CONCISE_PROMPT } from "@/lib/agents/strategist";
 import { strategicBriefSchema, conciseBriefSchema } from "@/lib/agents/types";
 import {
@@ -19,11 +19,6 @@ import { computeDelta } from "@/lib/threads/delta";
 import { checkRateLimit } from "@/lib/rate-limit";
 
 export const maxDuration = 120;
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 export async function POST(req: Request) {
   let body: Record<string, unknown>;

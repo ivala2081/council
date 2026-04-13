@@ -1,5 +1,6 @@
 type EventName =
   | "brief_generated"
+  | "verdict_generated"
   | "thread_viewed"
   | "second_run_submitted"
   | "delta_banner_viewed"

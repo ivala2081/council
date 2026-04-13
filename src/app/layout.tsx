@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SandpackCSS } from "@/components/sandpack-styles";
+import { LangProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,7 +51,9 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('council_theme');var d=t==='dark'||(t===null&&matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.classList.add('dark')}catch(e){}})()`,
           }}
         />
-        {children}
+        <LangProvider>
+          {children}
+        </LangProvider>
       </body>
     </html>
   );

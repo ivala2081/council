@@ -102,12 +102,18 @@ export function PhaseOutputCard({ agentName, output }: PhaseOutputCardProps) {
 
 function renderStructuredOutput(agentName: string, output: Record<string, unknown>): React.ReactNode | null {
   switch (agentName) {
+    // V2 consolidated agents
+    case "product_scope":
+      return <ProductSpecView data={(output as Record<string, unknown>).productSpec as Record<string, unknown> ?? output} />;
+    case "tech_architect":
+      return <TechSpecView data={(output as Record<string, unknown>).techSpec as Record<string, unknown> ?? output} />;
+    case "designer":
+      return <DesignSpecView data={output} />;
+    // Legacy names (backward compat)
     case "product_manager":
       return <ProductSpecView data={output} />;
     case "architect":
       return <TechSpecView data={output} />;
-    case "designer":
-      return <DesignSpecView data={output} />;
     case "legal":
       return <LegalCheckView data={output} />;
     case "security_threat":

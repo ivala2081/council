@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "timestamp": "2026-04-06T12:34:09.090Z",
+    "model": "claude-sonnet-4-6",
+    "prompt_version": "2.0.0",
+    "total_cases": 1,
+    "verdict_accuracy": "0/1",
+    "check_pass_rate": "0/0",
+    "filter": "GT-01"
+  },
+  "results": [
+    {
+      "id": "GT-01",
+      "category": "clear_dont",
+      "input": "Instagram clone yapmak istiyorum",
+      "expected_verdict": "DONT",
+      "actual_verdict": null,
+      "confidence": null,
+      "checks": [],
+      "raw_output": null,
+      "raw_text": "",
+      "timing_ms": 0,
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "cost_usd": 0,
+      "error": "API call failed (547ms): 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZnXQjF6V4QHAajThesfj\"}",
+      "human_review": {
+        "reasons_quality": null,
+        "tone": null,
+        "actionable": null,
+        "would_share": null
+      }
+    }
+  ]
+}

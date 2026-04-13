@@ -22,7 +22,7 @@ export type ModelId = (typeof MODEL_TIERS)[ModelTier];
 
 // --- Anthropic Pricing (USD per million tokens, as of 2025-05) ---
 export const ANTHROPIC_PRICING: Record<
-  ModelId,
+  string,
   {
     inputPerMillion: number;
     outputPerMillion: number;
@@ -47,6 +47,12 @@ export const ANTHROPIC_PRICING: Record<
     outputPerMillion: 75.0,
     cacheWritePerMillion: 18.75,
     cacheReadPerMillion: 1.50,
+  },
+  "claude-sonnet-4-6": {
+    inputPerMillion: 3.0,
+    outputPerMillion: 15.0,
+    cacheWritePerMillion: 3.75,
+    cacheReadPerMillion: 0.30,
   },
 };
 
@@ -84,6 +90,49 @@ export const ADAPTIVE_TOKEN_BUDGETS: Record<
   pivot_decision: { maxOutputTokens: 4500, temperature: 0.7 },
   follow_up: { maxOutputTokens: 3000, temperature: 0.7 },
 };
+
+// --- Agent-Specific Token Budgets (V2) ---
+// Max output tokens per agent, tuned for cost optimization
+import type { AgentName } from "../agents/types";
+
+export const AGENT_TOKEN_BUDGETS: Partial<Record<AgentName, { maxOutputTokens: number }>> = {
+  ceo: { maxOutputTokens: 200 },
+  strategist: { maxOutputTokens: 5000 },
+  product_scope: { maxOutputTokens: 4096 },
+  tech_architect: { maxOutputTokens: 8192 },
+  designer: { maxOutputTokens: 8192 },
+  fullstack_engineer: { maxOutputTokens: 16384 },
+  backend_engineer: { maxOutputTokens: 32768 },
+  frontend_engineer: { maxOutputTokens: 32768 },
+  infra_ops: { maxOutputTokens: 16384 },
+  qa_writer: { maxOutputTokens: 16384 },
+  verification: { maxOutputTokens: 1024 },
+  content_writer: { maxOutputTokens: 16384 },
+};
+
+/** Get max output tokens for an agent, with complexity override */
+export function getMaxTokens(agentName: AgentName, complexity?: string): number {
+  const budget = AGENT_TOKEN_BUDGETS[agentName];
+  if (!budget) return 4096;
+
+  // Simple projects get reduced budgets for design agents
+  if (complexity === "simple") {
+    if (agentName === "designer") return 4096;
+    if (agentName === "fullstack_engineer") return 16384;
+  }
+
+  return budget.maxOutputTokens;
+}
+
+// --- Shared System Prompt Preamble (cached across agents) ---
+export const SHARED_PREAMBLE = `You are an agent of Council, an AI-powered software company. You produce structured JSON output.
+
+RULES:
+- Respond with ONLY valid JSON. No markdown fences, no explanation text.
+- Be specific to THIS project. Never give generic advice.
+- All code must be production-ready TypeScript with strict types.
+- Default stack: Next.js 16 + React 19 + Supabase + Tailwind CSS 4 + shadcn/ui + Vercel.
+`;
 
 // --- Default Model Selection ---
 export const DEFAULT_MODEL = MODEL_TIERS.balanced;

@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../supabase-server";
 import type {
   AgentName,
   ComplexityClass,
@@ -8,18 +8,13 @@ import type {
   ProjectState,
   StrategicBrief,
 } from "../agents/types";
-import { PHASES, getPhaseDefinition, getNextPhase, phaseRequiresApproval, phaseToProjectStatus, createInitialPhases } from "./phases";
+import { PHASES, getPhaseDefinition, getNextPhase, phaseRequiresApproval, phaseToProjectStatus, createInitialPhases, getAgentsForComplexity } from "./phases";
 import { dispatchPhaseAgents, type DispatchResult } from "./dispatcher";
 import { PhaseFailureError } from "./recovery";
 
 // ============================================================
 // AiCompanyOS Orchestrator — State Machine
 // ============================================================
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-);
 
 /** Create a new project from a Council thread */
 export async function createProject(
@@ -93,8 +88,10 @@ export async function* runProject(projectId: string): AsyncGenerator<PhaseUpdate
     const contracts = await loadContracts(projectId);
     const agentInputs = buildAgentInputs(currentPhase, contracts);
 
-    // Filter agents that are LLM-based for this phase (skip tool agents until Sprint 4)
-    const agentsToRun = phaseDef.agents.filter(
+    // V2: Get agents based on project complexity
+    const phaseAgents = getAgentsForComplexity(currentPhase, complexity as ComplexityClass);
+    // Filter out tool agents until Sprint 4
+    const agentsToRun = phaseAgents.filter(
       (a) => !["qa_execution", "security_audit", "sre"].includes(a)
     );
 
@@ -296,6 +293,19 @@ async function loadProjectState(projectId: string): Promise<ProjectState> {
       case "strategist":
         contracts.strategicBrief = out.output;
         break;
+      // V2 consolidated agents
+      case "product_scope":
+        contracts.productSpec = out.output?.productSpec ?? out.output;
+        contracts.legalCheck = out.output?.legalCheck;
+        break;
+      case "tech_architect":
+        contracts.techSpec = out.output?.techSpec ?? out.output;
+        contracts.securityAnalysis = out.output?.security;
+        break;
+      case "designer":
+        contracts.designSpec = out.output;
+        break;
+      // Legacy agent names (backward compat with existing DB records)
       case "product_manager":
         contracts.productSpec = out.output;
         break;
@@ -304,9 +314,6 @@ async function loadProjectState(projectId: string): Promise<ProjectState> {
         break;
       case "architect":
         contracts.techSpec = out.output;
-        break;
-      case "designer":
-        contracts.designSpec = out.output;
         break;
       case "security_threat":
         contracts.threatModel = out.output;

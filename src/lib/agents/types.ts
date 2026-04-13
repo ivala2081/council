@@ -120,6 +120,70 @@ export type Verdict = z.infer<typeof verdictSchema>;
 export type Confidence = z.infer<typeof confidenceSchema>;
 export type ConfidenceTag = z.infer<typeof confidenceTagSchema>;
 
+// ============================================================
+// V2 Verdict Engine — GO / PIVOT / DONT
+// ============================================================
+
+const v2EvidenceSchema = z.object({
+  type: z.enum(["market_data", "competitor", "financial", "technical", "legal", "pattern", "training_data", "assumption"]),
+  source: z.string().optional(),
+  detail: z.string().optional(),
+});
+
+const v2ReasonSchema = z.object({
+  text: z.string(),
+  evidence: v2EvidenceSchema,
+});
+
+const v2ConfidenceSchema = z.object({
+  score: z.number().int().min(0).max(100),
+  label: z.enum(["very_high", "high", "medium", "low", "very_low"]),
+  missing_data: z.array(z.string()).optional(),
+});
+
+const v2PivotSchema = z.object({
+  suggestion: z.string(),
+  why: z.string(),
+});
+
+const v2ToneCheckSchema = z.object({
+  is_brutal_honest: z.boolean(),
+  is_respectful: z.boolean(),
+  avoids_jargon: z.boolean(),
+});
+
+export const v2VerdictSchema = z.object({
+  verdict: z.enum(["GO", "PIVOT", "DONT"]),
+  idea_summary: z.string(),
+  reasons: z.array(v2ReasonSchema),
+  confidence: v2ConfidenceSchema,
+  pivot_suggestion: v2PivotSchema.nullable().optional(),
+  financials: z.object({
+    estimated_mvp_cost_monthly_usd: z.number(),
+    breakeven_users: z.number().int(),
+    suggested_price_usd: z.number(),
+    business_model: z.string(),
+  }).optional(),
+  tech_snapshot: z.object({
+    stack_suggestion: z.string(),
+    complexity: z.enum(["simple", "moderate", "complex", "very_complex"]),
+    estimated_mvp_weeks: z.number().int(),
+  }).optional(),
+  legal_flags: z.array(z.object({
+    risk: z.string(),
+    severity: z.enum(["critical", "high", "medium", "low"]),
+    action: z.string(),
+  })).optional(),
+  tone_check: v2ToneCheckSchema,
+  shareable: z.object({
+    card_title: z.string(),
+    card_subtitle: z.string(),
+    tweet: z.string(),
+  }).optional(),
+});
+
+export type V2Verdict = z.infer<typeof v2VerdictSchema>;
+
 // --- Concise Brief Schema (Verdict + Decisions + What Must Be True) ---
 export const conciseBriefSchema = z.object({
   verdict: z.object({
@@ -430,6 +494,8 @@ export interface ProjectState {
     techSpec?: TechSpec;
     designSpec?: DesignSpec;
     threatModel?: ThreatModel;
+    /** V2: merged tech_architect security output */
+    securityAnalysis?: TechArchitectOutput["security"];
     files?: GeneratedFile[];
     verificationReport?: VerificationReport;
     deploymentResult?: DeploymentResult;
@@ -437,25 +503,69 @@ export interface ProjectState {
 }
 
 export type AgentName =
+  | "ceo"
   | "strategist"
-  | "product_manager"
-  | "legal"
-  | "architect"
+  | "product_scope"
+  | "tech_architect"
   | "designer"
-  | "security_threat"
+  | "fullstack_engineer"
   | "backend_engineer"
   | "frontend_engineer"
-  | "devops"
+  | "infra_ops"
   | "qa_writer"
   | "qa_execution"
   | "security_audit"
   | "sre"
   | "verification"
+  | "content_writer";
+
+/** @deprecated Use new consolidated agent names instead */
+export type LegacyAgentName =
+  | "product_manager"
+  | "legal"
+  | "architect"
+  | "security_threat"
+  | "devops"
   | "devops_deploy"
   | "marketing"
   | "support_docs";
 
 export type ModelTier = "haiku" | "sonnet" | "deepseek" | "tool";
+
+// ============================================================
+// Merged Output Schemas (V2 consolidated agents)
+// ============================================================
+
+/** ProductScope = ProductSpec + LegalCheck in a single agent call */
+export const productScopeOutputSchema = z.object({
+  productSpec: productSpecSchema,
+  legalCheck: legalCheckSchema,
+});
+export type ProductScopeOutput = z.infer<typeof productScopeOutputSchema>;
+
+/** TechArchitect = TechSpec + top-5 threats + auth design integrated */
+export const techArchitectOutputSchema = z.object({
+  techSpec: techSpecSchema,
+  security: z.object({
+    topThreats: z.array(z.object({
+      entry: z.string(),
+      threat: z.string(),
+      severity: severitySchema,
+      mitigation: z.string(),
+    })).max(5),
+    authDesign: threatModelSchema.shape.authDesign,
+    recommendations: z.array(z.string()),
+  }),
+});
+export type TechArchitectOutput = z.infer<typeof techArchitectOutputSchema>;
+
+/** CEO agent response for conversational fallback */
+export const ceoResponseSchema = z.object({
+  message: z.string(),
+  intent: z.enum(["greeting", "status_update", "recommendation", "clarification", "approval_prompt"]),
+  suggestedActions: z.array(z.string()).optional(),
+});
+export type CeoResponse = z.infer<typeof ceoResponseSchema>;
 
 export interface AgentDefinition {
   name: AgentName;
