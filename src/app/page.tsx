@@ -28,17 +28,43 @@ function formatTimeAgo(timestamp: number): string {
   return `${days}d`;
 }
 
-const EXAMPLES = [
-  "Instagram clone yapmak istiyorum",
-  "AI tool that reads legal contracts for freelancers",
-  "Platform for companies to manage AI agent workforce",
-  "SaaS for restaurant inventory management",
-  "Chrome extension that detects dark patterns",
-];
+const EXAMPLES: Record<"en" | "tr", string[]> = {
+  en: [
+    "AI tool that reads legal contracts for freelancers",
+    "Platform for companies to manage AI agent workforce",
+    "SaaS for restaurant inventory management",
+    "Chrome extension that detects dark patterns on shopping sites",
+    "Marketplace connecting local farmers with restaurants",
+    "AI tutor for K-12 math students",
+    "Open source alternative to Notion for developers",
+    "Subscription box for indie board games",
+    "App that tracks and reduces household food waste",
+    "Browser-based collaborative design tool for non-designers",
+  ],
+  tr: [
+    "Instagram clone yapmak istiyorum",
+    "Freelancerlar için yapay zeka destekli sözleşme analizi",
+    "Restoran stok yönetimi için SaaS platformu",
+    "Çiftçileri restoranlarla buluşturan pazar yeri",
+    "K-12 öğrencileri için yapay zeka matematik koçu",
+    "Geliştiriciler için açık kaynak Notion alternatifi",
+    "Evdeki gıda israfını takip eden uygulama",
+    "Küçük işletmeler için online muhasebe platformu",
+    "Evcil hayvan sahipleri için veteriner tele-konsültasyon",
+    "Bağımsız oyun geliştiricileri için yayıncılık platformu",
+  ],
+};
 
 function useTypingPlaceholder(examples: string[], enabled: boolean): string {
   const [text, setText] = useState("");
   const stateRef = useRef({ index: 0, char: 0, phase: "type" as "type" | "delete" | "pause" });
+
+  // Reset animation when examples change (language switch)
+  const examplesKey = examples[0] ?? "";
+  useEffect(() => {
+    stateRef.current = { index: 0, char: 0, phase: "type" };
+    setText("");
+  }, [examplesKey]);
 
   useEffect(() => {
     if (!enabled) { setText(""); return }
@@ -48,6 +74,7 @@ function useTypingPlaceholder(examples: string[], enabled: boolean): string {
     function tick() {
       const s = stateRef.current;
       const current = examples[s.index];
+      if (!current) return;
 
       if (s.phase === "type") {
         s.char++;
@@ -77,7 +104,7 @@ function useTypingPlaceholder(examples: string[], enabled: boolean): string {
     timeout = setTimeout(tick, 500);
     return () => clearTimeout(timeout);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enabled]);
+  }, [enabled, examplesKey]);
 
   return text;
 }
@@ -87,10 +114,10 @@ function useTypingPlaceholder(examples: string[], enabled: boolean): string {
 // ============================================================
 
 export default function Home() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const [viewState, setViewState] = useState<ViewState>("input");
   const [idea, setIdea] = useState("");
-  const typingPlaceholder = useTypingPlaceholder(EXAMPLES, idea.length === 0);
+  const typingPlaceholder = useTypingPlaceholder(EXAMPLES[lang], idea.length === 0);
   const [verdict, setVerdict] = useState<V2Verdict | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [verdictId, setVerdictId] = useState<string | null>(null);
