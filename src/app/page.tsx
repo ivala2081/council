@@ -10,6 +10,7 @@ import { trackEvent } from "@/lib/track-event";
 import { CouncilMark } from "@/components/council-mark";
 import { LoadingDots } from "@/components/loading-dots";
 import { useLang } from "@/lib/i18n";
+import { encodeVerdict, type ShareableVerdict } from "@/lib/verdict-share";
 
 // ============================================================
 // State
@@ -33,6 +34,7 @@ export default function Home() {
   const [idea, setIdea] = useState("");
   const [verdict, setVerdict] = useState<V2Verdict | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [verdictId, setVerdictId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const lastIdeaRef = useRef<string>("");
@@ -92,6 +94,18 @@ export default function Home() {
 
       setVerdict(result.data);
       setViewState("verdict");
+
+      // Generate shareable verdict ID
+      // Truncate texts to keep URL < 500 chars (spec says "shortened")
+      const shorten = (s: string, max: number) => s.length > max ? s.slice(0, max - 1) + "…" : s;
+      const shareable: ShareableVerdict = {
+        v: result.data.verdict,
+        s: shorten(result.data.idea_summary, 80),
+        c: result.data.confidence.score,
+        r: result.data.reasons.map(r => shorten(r.text, 100)).slice(0, 3) as [string, string, string],
+        ...(result.data.pivot_suggestion?.suggestion && { p: shorten(result.data.pivot_suggestion.suggestion, 100) }),
+      }
+      setVerdictId(encodeVerdict(shareable));
 
       // Log meta for debugging (not shown to user)
       console.log("[verdict]", {
@@ -281,13 +295,14 @@ export default function Home() {
               </div>
             </div>
 
-            <VerdictCard verdict={verdict} missionId={null} />
+            <VerdictCard verdict={verdict} missionId={null} verdictId={verdictId} />
 
             <div className="mt-6 text-center">
               <button
                 onClick={() => {
                   setIdea("");
                   setVerdict(null);
+                  setVerdictId(null);
                   setError(null);
                   lastIdeaRef.current = "";
                   setViewState("input");

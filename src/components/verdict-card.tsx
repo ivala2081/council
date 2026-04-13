@@ -64,9 +64,10 @@ const confidenceBarColor = (score: number) =>
 interface VerdictCardProps {
   verdict: V2Verdict;
   missionId?: string | null;
+  verdictId?: string | null;
 }
 
-export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
+export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps) {
   const { t } = useLang();
   const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -91,9 +92,11 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
   };
 
   const handleCopy = () => {
-    const url = missionId
-      ? `${window.location.origin}/brief/${missionId}`
-      : window.location.href;
+    const url = verdictId
+      ? `${window.location.origin}/v/${verdictId}`
+      : missionId
+        ? `${window.location.origin}/brief/${missionId}`
+        : window.location.href;
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -102,7 +105,11 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
 
   const handleTweet = () => {
     const text = verdict.shareable?.tweet ?? `Council verdict: ${verdict.verdict} — ${verdict.idea_summary}`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
+    const url = verdictId ? `${window.location.origin}/v/${verdictId}` : "";
+    const tweetUrl = url
+      ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`
+      : `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(tweetUrl, "_blank");
   };
 
   return (

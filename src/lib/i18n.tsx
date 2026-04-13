@@ -197,6 +197,16 @@ const dict = {
   evidence_pattern: { en: "Pattern", tr: "Örüntü" },
   evidence_training_data: { en: "Known data", tr: "Bilinen veri" },
   evidence_assumption: { en: "Assumption", tr: "Varsayım" },
+
+  // -- Share page --
+  share_cta: {
+    en: "Get your own verdict",
+    tr: "Kendi fikrine cevap al",
+  },
+  share_powered_by: {
+    en: "Powered by Council — AI that tells the truth about your idea",
+    tr: "Council — fikrine kimsenin söylemediği gerçeği söyleyen AI",
+  },
 } as const;
 
 export type DictKey = keyof typeof dict;
