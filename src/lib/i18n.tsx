@@ -197,6 +197,74 @@ const dict = {
   evidence_pattern: { en: "Pattern", tr: "Örüntü" },
   evidence_training_data: { en: "Known data", tr: "Bilinen veri" },
   evidence_assumption: { en: "Assumption", tr: "Varsayım" },
+
+  // -- Share page --
+  share_cta: {
+    en: "Get your own verdict",
+    tr: "Kendi fikrine cevap al",
+  },
+  share_powered_by: {
+    en: "Powered by Council — AI that tells the truth about your idea",
+    tr: "Council — fikrine kimsenin söylemediği gerçeği söyleyen AI",
+  },
+
+  // -- Feedback --
+  feedback_helpful: {
+    en: "Was this helpful?",
+    tr: "Bu faydalı oldu mu?",
+  },
+  feedback_thanks: {
+    en: "Thanks for the feedback!",
+    tr: "Geri bildirim için teşekkürler!",
+  },
+  feedback_comment_placeholder: {
+    en: "Any thoughts? (optional)",
+    tr: "Düşüncen var mı? (isteğe bağlı)",
+  },
+  feedback_send: {
+    en: "Send",
+    tr: "Gönder",
+  },
+
+  // -- History --
+  history_title: {
+    en: "Your past verdicts",
+    tr: "Geçmiş kararların",
+  },
+  history_empty: {
+    en: "No verdicts yet",
+    tr: "Henüz karar yok",
+  },
+  history_re_evaluate: {
+    en: "Re-evaluate",
+    tr: "Tekrar değerlendir",
+  },
+  history_view: {
+    en: "View",
+    tr: "Görüntüle",
+  },
+  history_clear: {
+    en: "Clear history",
+    tr: "Geçmişi temizle",
+  },
+  history_clear_confirm: {
+    en: "Are you sure?",
+    tr: "Emin misin?",
+  },
+  history_ago: {
+    en: "ago",
+    tr: "önce",
+  },
+
+  // -- Re-evaluation --
+  re_eval_badge: {
+    en: "Re-evaluation",
+    tr: "Tekrar değerlendirme",
+  },
+  re_eval_previous: {
+    en: "Previous verdict",
+    tr: "Önceki karar",
+  },
 } as const;
 
 export type DictKey = keyof typeof dict;

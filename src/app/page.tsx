@@ -10,12 +10,25 @@ import { trackEvent } from "@/lib/track-event";
 import { CouncilMark } from "@/components/council-mark";
 import { LoadingDots } from "@/components/loading-dots";
 import { useLang } from "@/lib/i18n";
+import { encodeVerdict, type ShareableVerdict } from "@/lib/verdict-share";
+import { addToHistory, getHistory, clearHistory, type HistoryEntry } from "@/lib/storage";
 
 // ============================================================
 // State
 // ============================================================
 
 type ViewState = "idle" | "input" | "loading" | "verdict";
+
+function formatTimeAgo(timestamp: number): string {
+  const seconds = Math.floor((Date.now() - timestamp) / 1000)
+  if (seconds < 60) return "<1m"
+  const minutes = Math.floor(seconds / 60)
+  if (minutes < 60) return `${minutes}m`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}h`
+  const days = Math.floor(hours / 24)
+  return `${days}d`
+}
 
 const EXAMPLES = [
   { icon: "💡", text: "Instagram clone yapmak istiyorum" },
@@ -33,9 +46,13 @@ export default function Home() {
   const [idea, setIdea] = useState("");
   const [verdict, setVerdict] = useState<V2Verdict | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [verdictId, setVerdictId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const lastIdeaRef = useRef<string>("");
+  const reEvalEntryRef = useRef<HistoryEntry | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   const loadingSteps = [
     { delay: 0, text: t("loading_step_1") },
@@ -48,6 +65,7 @@ export default function Home() {
   // Idle → input on mount
   useEffect(() => {
     setViewState("input");
+    setHistory(getHistory());
   }, []);
 
   // Loading step timers
@@ -73,10 +91,20 @@ export default function Home() {
     setViewState("loading");
 
     try {
+      const fetchBody: Record<string, unknown> = { idea: idea.trim() }
+      if (reEvalEntryRef.current) {
+        fetchBody.previousVerdict = {
+          idea: reEvalEntryRef.current.idea,
+          verdict: reEvalEntryRef.current.verdict,
+          confidence: reEvalEntryRef.current.confidence,
+          ideaSummary: reEvalEntryRef.current.ideaSummary,
+        }
+      }
+
       const res = await fetch("/api/verdict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idea: idea.trim() }),
+        body: JSON.stringify(fetchBody),
       });
 
       const json = await res.json();
@@ -92,6 +120,30 @@ export default function Home() {
 
       setVerdict(result.data);
       setViewState("verdict");
+
+      // Generate shareable verdict ID
+      // Truncate texts to keep URL < 500 chars (spec says "shortened")
+      const shorten = (s: string, max: number) => s.length > max ? s.slice(0, max - 1) + "…" : s;
+      const shareable: ShareableVerdict = {
+        v: result.data.verdict,
+        s: shorten(result.data.idea_summary, 80),
+        c: result.data.confidence.score,
+        r: result.data.reasons.map(r => shorten(r.text, 100)).slice(0, 3) as [string, string, string],
+        ...(result.data.pivot_suggestion?.suggestion && { p: shorten(result.data.pivot_suggestion.suggestion, 100) }),
+      }
+      setVerdictId(encodeVerdict(shareable));
+
+      // Save to history
+      const historyEntry: HistoryEntry = {
+        id: encodeVerdict(shareable),
+        idea: idea.trim().slice(0, 100),
+        verdict: result.data.verdict,
+        confidence: result.data.confidence.score,
+        ideaSummary: result.data.idea_summary,
+        timestamp: Date.now(),
+      }
+      addToHistory(historyEntry)
+      setHistory(getHistory())
 
       // Log meta for debugging (not shown to user)
       console.log("[verdict]", {
@@ -121,6 +173,14 @@ export default function Home() {
     setViewState("input");
   };
 
+  const handleReEvaluate = (entry: HistoryEntry) => {
+    reEvalEntryRef.current = entry;
+    setIdea(entry.idea);
+    setVerdict(null);
+    setError(null);
+    setViewState("input");
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
@@ -139,6 +199,7 @@ export default function Home() {
                   setIdea("");
                   setVerdict(null);
                   setError(null);
+                  reEvalEntryRef.current = null;
                   setViewState("input");
                 }}
                 className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-muted transition-colors"
@@ -210,7 +271,7 @@ export default function Home() {
                     <button
                       key={ex.text}
                       type="button"
-                      onClick={() => setIdea(ex.text)}
+                      onClick={() => { setIdea(ex.text); reEvalEntryRef.current = null }}
                       className="text-[11px] px-3 py-1.5 rounded-full border border-border/60 bg-card hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <span className="mr-1">{ex.icon}</span>
@@ -229,6 +290,80 @@ export default function Home() {
                   >
                     {t("try_again")}
                   </button>
+                </div>
+              )}
+
+              {/* Verdict history */}
+              {history.length > 0 && idea.trim().length === 0 && (
+                <div className="mt-6 border-t border-border/30 pt-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/60">
+                      {t("history_title")}
+                    </p>
+                    {showClearConfirm ? (
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] text-muted-foreground/60">{t("history_clear_confirm")}</span>
+                        <button
+                          onClick={() => { clearHistory(); setHistory([]); setShowClearConfirm(false) }}
+                          className="text-[11px] text-red-500 hover:text-red-400"
+                        >
+                          ✓
+                        </button>
+                        <button
+                          onClick={() => setShowClearConfirm(false)}
+                          className="text-[11px] text-muted-foreground"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setShowClearConfirm(true)}
+                        className="text-[10px] text-muted-foreground/40 hover:text-muted-foreground transition-colors"
+                      >
+                        {t("history_clear")}
+                      </button>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    {history.slice(0, 5).map((entry) => {
+                      const badge = entry.verdict === "GO"
+                        ? "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10"
+                        : entry.verdict === "PIVOT"
+                          ? "text-amber-600 dark:text-amber-400 bg-amber-500/10"
+                          : "text-red-600 dark:text-red-400 bg-red-500/10"
+                      const timeAgo = formatTimeAgo(entry.timestamp)
+
+                      return (
+                        <div
+                          key={entry.id}
+                          className="flex items-center gap-3 p-2.5 rounded-xl border border-border/40 bg-card/50 hover:bg-muted/30 transition-colors group"
+                        >
+                          <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${badge} shrink-0`}>
+                            {entry.verdict === "DONT" ? "DON'T" : entry.verdict}
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-xs text-foreground truncate">{entry.ideaSummary}</p>
+                            <p className="text-[10px] text-muted-foreground/50">{entry.confidence}% · {timeAgo}</p>
+                          </div>
+                          <div className="flex items-center gap-1 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <a
+                              href={`/v/${entry.id}`}
+                              className="text-[10px] px-2 py-1 rounded border border-border/60 text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                              {t("history_view")}
+                            </a>
+                            <button
+                              onClick={() => handleReEvaluate(entry)}
+                              className="text-[10px] px-2 py-1 rounded border border-border/60 text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                              {t("history_re_evaluate")}
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               )}
 
@@ -263,6 +398,18 @@ export default function Home() {
         {/* Verdict */}
         {viewState === "verdict" && verdict && (
           <div className="py-8">
+            {/* Re-evaluation badge */}
+            {reEvalEntryRef.current && (
+              <div className="max-w-xl mx-auto mb-3 px-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs text-blue-600 dark:text-blue-400">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
+                  </svg>
+                  {t("re_eval_badge")} &middot; {t("re_eval_previous")}: {reEvalEntryRef.current.verdict} ({reEvalEntryRef.current.confidence}%)
+                </div>
+              </div>
+            )}
+
             {/* Council heard header */}
             <div className="max-w-xl mx-auto mb-4 px-1">
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground/60 mb-1">
@@ -281,15 +428,17 @@ export default function Home() {
               </div>
             </div>
 
-            <VerdictCard verdict={verdict} missionId={null} />
+            <VerdictCard verdict={verdict} missionId={null} verdictId={verdictId} />
 
             <div className="mt-6 text-center">
               <button
                 onClick={() => {
                   setIdea("");
                   setVerdict(null);
+                  setVerdictId(null);
                   setError(null);
                   lastIdeaRef.current = "";
+                  reEvalEntryRef.current = null;
                   setViewState("input");
                 }}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"

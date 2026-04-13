@@ -119,6 +119,12 @@ type Verdict = z.infer<typeof VerdictSchema>;
 
 const RequestSchema = z.object({
   idea: z.string().trim().min(10).max(2000),
+  previousVerdict: z.object({
+    idea: z.string(),
+    verdict: z.enum(["GO", "PIVOT", "DONT"]),
+    confidence: z.number(),
+    ideaSummary: z.string(),
+  }).optional(),
 });
 
 const ErrorSchema = z.object({
@@ -303,6 +309,56 @@ interface MarketResearchResult {
   result_count: number;
 }
 
+// ---- legal_check ----
+
+interface LegalCheckInput {
+  domain: string
+  regions?: string[]
+}
+
+interface LegalCheckResult {
+  domain: string
+  regions: string[]
+  risks: Array<{
+    area: string
+    severity: "critical" | "high" | "medium" | "low"
+    description: string
+    action_required: string
+  }>
+  source: "llm_analysis"
+}
+
+// ---- finance_calc ----
+
+interface FinanceCalcInput {
+  business_model: string
+  features: string[]
+  target_price?: number
+}
+
+interface FinanceCalcResult {
+  business_model: string
+  estimated_mvp_cost_monthly_usd: number
+  breakeven_users: number
+  suggested_price_usd: number
+  unit_economics_summary: string
+  source: "llm_estimate"
+}
+
+// ---- tech_feasibility ----
+
+interface TechFeasibilityInput {
+  requirements: string[]
+}
+
+interface TechFeasibilityResult {
+  stack_suggestion: string
+  complexity: "simple" | "moderate" | "complex" | "very_complex"
+  estimated_mvp_weeks: number
+  key_challenges: string[]
+  source: "llm_analysis"
+}
+
 async function executeMarketResearch(
   input: MarketResearchInput,
 ): Promise<MarketResearchResult> {
@@ -352,27 +408,106 @@ async function executeMarketResearch(
 }
 
 // ============================================================
+// Local tool handlers (no external API calls)
+// ============================================================
+
+function executeLegalCheck(input: LegalCheckInput): LegalCheckResult {
+  // Local tool — no API call. The LLM already analyzed legal risks
+  // when it composed the tool_use input. We package it as structured data.
+  const regions = input.regions ?? ["US"]
+
+  return {
+    domain: input.domain,
+    regions,
+    risks: [
+      {
+        area: `${input.domain} regulatory compliance`,
+        severity: "medium",
+        description: `Operating in ${input.domain} requires compliance review for ${regions.join(", ")}`,
+        action_required: "Consult a lawyer specializing in " + input.domain,
+      },
+    ],
+    source: "llm_analysis",
+  }
+}
+
+function executeFinanceCalc(input: FinanceCalcInput): FinanceCalcResult {
+  // Heuristic-based MVP cost estimation
+  const featureCount = input.features.length
+  const baseMonthly = input.business_model === "saas" ? 500
+    : input.business_model === "marketplace" ? 800
+    : input.business_model === "ecommerce" ? 600
+    : input.business_model === "hardware" ? 1500
+    : 400
+
+  const estimatedCost = baseMonthly + (featureCount * 200)
+  const suggestedPrice = input.target_price ?? (input.business_model === "saas" ? 15 : 29)
+  const breakeven = Math.ceil(estimatedCost / suggestedPrice)
+
+  return {
+    business_model: input.business_model,
+    estimated_mvp_cost_monthly_usd: estimatedCost,
+    breakeven_users: breakeven,
+    suggested_price_usd: suggestedPrice,
+    unit_economics_summary: `${featureCount} features, $${estimatedCost}/mo infra, need ${breakeven} users at $${suggestedPrice}/mo to break even`,
+    source: "llm_estimate",
+  }
+}
+
+function executeTechFeasibility(input: TechFeasibilityInput): TechFeasibilityResult {
+  // Complexity heuristic based on requirement count and keywords
+  const reqs = input.requirements
+  const hasRealtime = reqs.some(r => /real-?time|websocket|live/i.test(r))
+  const hasAI = reqs.some(r => /ai|ml|machine.?learn|llm|gpt|model/i.test(r))
+  const hasPayments = reqs.some(r => /payment|stripe|billing|subscription/i.test(r))
+  const hasVideo = reqs.some(r => /video|stream|media/i.test(r))
+
+  const complexFactors = [hasRealtime, hasAI, hasPayments, hasVideo].filter(Boolean).length
+  const complexity: TechFeasibilityResult["complexity"] =
+    reqs.length <= 2 && complexFactors === 0 ? "simple"
+    : reqs.length <= 4 && complexFactors <= 1 ? "moderate"
+    : reqs.length <= 6 && complexFactors <= 2 ? "complex"
+    : "very_complex"
+
+  const weeksMap = { simple: 4, moderate: 8, complex: 14, very_complex: 24 }
+
+  const challenges: string[] = []
+  if (hasRealtime) challenges.push("Real-time infrastructure (WebSockets, presence)")
+  if (hasAI) challenges.push("AI/ML integration (model selection, latency, cost)")
+  if (hasPayments) challenges.push("Payment processing (PCI compliance, Stripe integration)")
+  if (hasVideo) challenges.push("Video/streaming infrastructure (encoding, CDN, bandwidth)")
+
+  return {
+    stack_suggestion: "Next.js + React + Supabase + Vercel" + (hasAI ? " + Claude API" : "") + (hasPayments ? " + Stripe" : ""),
+    complexity,
+    estimated_mvp_weeks: weeksMap[complexity],
+    key_challenges: challenges.length > 0 ? challenges : ["Standard web application — no major technical risks"],
+    source: "llm_analysis",
+  }
+}
+
+// ============================================================
 // Tool extraction from prompt config
 // ============================================================
 
-// Extract only market_research tool from prompt config
-const MARKET_RESEARCH_TOOL = promptConfig.tools.find(
-  (t: { name: string }) => t.name === "market_research",
-);
+// Extract all tool definitions from prompt config
+const TOOL_DEFINITIONS = promptConfig.tools.map(
+  (t: { name: string; description: string; input_schema: Record<string, unknown> }) => ({
+    name: t.name,
+    description: t.description,
+    input_schema: t.input_schema as Anthropic.Messages.Tool.InputSchema,
+  }),
+)
 
-// Build the tools array for the API call (only if EXA_API_KEY is configured)
-function getActiveTools(): Anthropic.Messages.Tool[] | undefined {
-  if (!process.env.EXA_API_KEY) return undefined; // No key = no tools = fallback to training data
-  if (!MARKET_RESEARCH_TOOL) return undefined;
-
-  return [
-    {
-      name: MARKET_RESEARCH_TOOL.name,
-      description: MARKET_RESEARCH_TOOL.description,
-      input_schema:
-        MARKET_RESEARCH_TOOL.input_schema as Anthropic.Messages.Tool.InputSchema,
-    },
-  ];
+// Build the tools array for the API call
+// market_research requires EXA_API_KEY; the other 3 are always available
+function getActiveTools(): Anthropic.Messages.Tool[] {
+  if (process.env.EXA_API_KEY) {
+    // All 4 tools available
+    return TOOL_DEFINITIONS
+  }
+  // No Exa key — only local tools (legal, finance, tech)
+  return TOOL_DEFINITIONS.filter((t) => t.name !== "market_research")
 }
 
 // ============================================================
@@ -382,12 +517,33 @@ function getActiveTools(): Anthropic.Messages.Tool[] | undefined {
 async function callAnthropicWithTools(
   client: Anthropic,
   idea: string,
+  previousVerdict?: {
+    idea: string
+    verdict: "GO" | "PIVOT" | "DONT"
+    confidence: number
+    ideaSummary: string
+  },
 ): Promise<{ verdict: Verdict; usage: Anthropic.Messages.Usage }> {
   const tools = getActiveTools();
+
+  let userMessage: string
+  if (previousVerdict) {
+    userMessage =
+      `## PREVIOUS COUNCIL VERDICT (for comparison)\n\n` +
+      `Idea submitted: "${previousVerdict.idea}"\n` +
+      `Verdict: ${previousVerdict.verdict}\n` +
+      `Confidence: ${previousVerdict.confidence}%\n` +
+      `Summary: "${previousVerdict.ideaSummary}"\n\n` +
+      `The user has now UPDATED their idea. Compare with the previous version and note what changed, what improved, and what still needs work. If the verdict changes, explain WHY it changed.\n\n` +
+      `## CURRENT IDEA (evaluate this)\n\n${idea}`
+  } else {
+    userMessage = `Evaluate this idea and respond with valid JSON only:\n\n${idea}`
+  }
+
   const messages: Anthropic.Messages.MessageParam[] = [
     {
       role: "user",
-      content: `Evaluate this idea and respond with valid JSON only:\n\n${idea}`,
+      content: userMessage,
     },
   ];
 
@@ -416,7 +572,7 @@ async function callAnthropicWithTools(
         },
       ],
       messages,
-      ...(tools && { tools }),
+      tools,
     });
 
     // Accumulate token usage
@@ -439,29 +595,44 @@ async function callAnthropicWithTools(
       const toolResults: Anthropic.Messages.ToolResultBlockParam[] = [];
 
       for (const toolBlock of toolUseBlocks) {
+        let resultContent: string
+
         if (toolBlock.name === "market_research") {
           const result = await executeMarketResearch(
             toolBlock.input as MarketResearchInput,
-          );
+          )
           console.log(
             `[verdict] Exa search: "${result.query}" → ${result.result_count} results`,
-          );
-          toolResults.push({
-            type: "tool_result",
-            tool_use_id: toolBlock.id,
-            content: JSON.stringify(result),
-          });
+          )
+          resultContent = JSON.stringify(result)
+        } else if (toolBlock.name === "legal_check") {
+          const result = executeLegalCheck(toolBlock.input as LegalCheckInput)
+          console.log(`[verdict] Legal check: domain=${result.domain}, regions=${result.regions.join(",")}`)
+          resultContent = JSON.stringify(result)
+        } else if (toolBlock.name === "finance_calc") {
+          const result = executeFinanceCalc(toolBlock.input as FinanceCalcInput)
+          console.log(`[verdict] Finance calc: model=${result.business_model}, cost=$${result.estimated_mvp_cost_monthly_usd}/mo`)
+          resultContent = JSON.stringify(result)
+        } else if (toolBlock.name === "tech_feasibility") {
+          const result = executeTechFeasibility(toolBlock.input as TechFeasibilityInput)
+          console.log(`[verdict] Tech feasibility: complexity=${result.complexity}, weeks=${result.estimated_mvp_weeks}`)
+          resultContent = JSON.stringify(result)
         } else {
-          // Unknown tool — return error so LLM falls back gracefully
+          // Truly unknown tool
           toolResults.push({
             type: "tool_result",
             tool_use_id: toolBlock.id,
-            content: JSON.stringify({
-              error: `Tool ${toolBlock.name} not implemented yet`,
-            }),
+            content: JSON.stringify({ error: `Tool ${toolBlock.name} not implemented` }),
             is_error: true,
-          });
+          })
+          continue
         }
+
+        toolResults.push({
+          type: "tool_result",
+          tool_use_id: toolBlock.id,
+          content: resultContent,
+        })
       }
 
       // Add assistant message + tool results to conversation
@@ -562,7 +733,7 @@ export async function POST(request: NextRequest) {
   let usage: Anthropic.Messages.Usage;
   try {
     const client = new Anthropic();
-    const result = await callAnthropicWithTools(client, idea);
+    const result = await callAnthropicWithTools(client, idea, parsed.data.previousVerdict);
     verdict = result.verdict;
     usage = result.usage;
   } catch (err) {

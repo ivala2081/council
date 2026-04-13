@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { V2Verdict } from "@/lib/agents/types";
 import { useLang } from "@/lib/i18n";
+import { saveFeedback, getFeedback } from "@/lib/storage";
 
 // ---- URL helpers for clickable evidence sources ----
 function isUrl(s: string | undefined): s is string {
@@ -64,12 +65,43 @@ const confidenceBarColor = (score: number) =>
 interface VerdictCardProps {
   verdict: V2Verdict;
   missionId?: string | null;
+  verdictId?: string | null;
 }
 
-export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
+export function VerdictCard({ verdict, missionId, verdictId }: VerdictCardProps) {
   const { t } = useLang();
   const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [feedbackState, setFeedbackState] = useState<"idle" | "rated" | "commenting" | "done">("idle");
+  const [feedbackRating, setFeedbackRating] = useState<"up" | "down" | null>(null);
+  const [feedbackComment, setFeedbackComment] = useState("");
+
+  // Check if already rated
+  useEffect(() => {
+    if (!verdictId) return;
+    const existing = getFeedback(verdictId);
+    if (existing) {
+      setFeedbackRating(existing.rating);
+      setFeedbackState("done");
+    }
+  }, [verdictId]);
+
+  const handleFeedback = (rating: "up" | "down") => {
+    setFeedbackRating(rating);
+    setFeedbackState("commenting");
+  };
+
+  const submitFeedback = () => {
+    if (!verdictId || !feedbackRating) return;
+    saveFeedback({
+      verdictId,
+      rating: feedbackRating,
+      comment: feedbackComment.trim() || undefined,
+      timestamp: Date.now(),
+    });
+    setFeedbackState("done");
+  };
+
   const config = verdictConfig[verdict.verdict];
   const conf = verdict.confidence;
 
@@ -91,9 +123,11 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
   };
 
   const handleCopy = () => {
-    const url = missionId
-      ? `${window.location.origin}/brief/${missionId}`
-      : window.location.href;
+    const url = verdictId
+      ? `${window.location.origin}/v/${verdictId}`
+      : missionId
+        ? `${window.location.origin}/brief/${missionId}`
+        : window.location.href;
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -102,7 +136,11 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
 
   const handleTweet = () => {
     const text = verdict.shareable?.tweet ?? `Council verdict: ${verdict.verdict} — ${verdict.idea_summary}`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
+    const url = verdictId ? `${window.location.origin}/v/${verdictId}` : "";
+    const tweetUrl = url
+      ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`
+      : `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(tweetUrl, "_blank");
   };
 
   return (
@@ -326,6 +364,60 @@ export function VerdictCard({ verdict, missionId }: VerdictCardProps) {
           {t("tweet")}
         </button>
       </div>
+
+      {/* Feedback widget */}
+      {verdictId && (
+        <div className="pt-2">
+          {feedbackState === "idle" && (
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-[11px] text-muted-foreground/60">{t("feedback_helpful")}</span>
+              <button
+                onClick={() => handleFeedback("up")}
+                className="w-8 h-8 rounded-lg border border-border/60 flex items-center justify-center hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-colors text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0H22.5a2.25 2.25 0 0 1 0 4.5h-.667c.336.364.53.853.53 1.384 0 .843-.502 1.567-1.222 1.896.362.462.566 1.045.566 1.673 0 .758-.345 1.436-.886 1.884.252.404.397.883.397 1.394 0 1.489-1.198 2.696-2.677 2.696H12.62c-.547 0-1.085-.124-1.576-.362-.89-.432-1.906-.652-2.943-.652H6.632m0-6.75h.77c1.354 0 2.59-.84 3.245-2.01a6.013 6.013 0 0 1 .552-.834" />
+                </svg>
+              </button>
+              <button
+                onClick={() => handleFeedback("down")}
+                className="w-8 h-8 rounded-lg border border-border/60 flex items-center justify-center hover:bg-red-500/10 hover:border-red-500/30 transition-colors text-muted-foreground hover:text-red-600 dark:hover:text-red-400"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.861-2.4c.498-.634 1.226-1.08 2.032-1.08h.384" />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {feedbackState === "commenting" && (
+            <div className="flex items-center gap-2 max-w-md mx-auto">
+              <input
+                type="text"
+                value={feedbackComment}
+                onChange={(e) => setFeedbackComment(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") submitFeedback() }}
+                placeholder={t("feedback_comment_placeholder")}
+                className="flex-1 text-xs px-3 py-2 rounded-lg border border-border/60 bg-transparent placeholder:text-muted-foreground/40 focus:outline-none"
+                autoFocus
+                maxLength={200}
+              />
+              <button
+                onClick={submitFeedback}
+                className="text-xs px-3 py-2 rounded-lg bg-foreground text-background font-medium hover:opacity-80 transition-all"
+              >
+                {t("feedback_send")}
+              </button>
+            </div>
+          )}
+
+          {feedbackState === "done" && (
+            <p className="text-center text-[11px] text-muted-foreground/60">
+              {feedbackRating === "up" ? "👍" : "👎"} {t("feedback_thanks")}
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
