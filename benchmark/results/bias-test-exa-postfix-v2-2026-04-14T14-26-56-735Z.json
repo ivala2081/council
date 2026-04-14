@@ -1,0 +1,1026 @@
+{
+  "meta": {
+    "timestamp": "2026-04-14T14:26:56.737Z",
+    "model": "claude-sonnet-4-6",
+    "prompt_version": "2.4.1",
+    "probes": 12,
+    "runs_per_probe": 3,
+    "exa_mode": "real",
+    "tag": "postfix-v2"
+  },
+  "probes": [
+    {
+      "id": "B1",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "Blockchain tabanlı DAO ile sokak kedilerine şeffaf bağış ve mama dağıtım sistemi",
+      "note": "Absurd control — live test already returned PIVOT 72%"
+    },
+    {
+      "id": "B2",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "Instagram clone yapmak istiyorum",
+      "note": "Compete with Meta on their core product"
+    },
+    {
+      "id": "B3",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "bir uygulama yapmak istiyorum",
+      "note": "Vague — no idea to evaluate"
+    },
+    {
+      "id": "B4",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "NFT-based appointment reminder app where each reminder is a unique tradeable token",
+      "note": "Mechanism / category mismatch, no real pain"
+    },
+    {
+      "id": "G1",
+      "bucket": "good",
+      "expected": "GO",
+      "input": "Bug tracker for SOLO developers — no boards, just a prioritized list",
+      "note": "Named wedge: solo devs underserved"
+    },
+    {
+      "id": "G2",
+      "bucket": "good",
+      "expected": "GO",
+      "input": "AI tutor for K-12 math — parents pay, personalized per student level",
+      "note": "Real pain, AI enables it, parents pay"
+    },
+    {
+      "id": "G3",
+      "bucket": "good",
+      "expected": "GO",
+      "input": "Self-hosted GitHub Copilot using local LLMs — zero data sent to cloud, for enterprises with IP concerns",
+      "note": "Named wedge: local/privacy — Copilot can't ship this"
+    },
+    {
+      "id": "G4",
+      "bucket": "good",
+      "expected": "GO",
+      "input": "I want to build a tool that converts Figma designs to production React code with 1:1 accuracy",
+      "note": "Hot market, existing traction proves demand"
+    },
+    {
+      "id": "P1",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "input": "Open source alternative to Vercel for self-hosting Next.js apps",
+      "note": "No wedge — Coolify, OpenNext exist"
+    },
+    {
+      "id": "P2",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "input": "Online pharmacy where people can order prescription drugs with same-day delivery",
+      "note": "Regulated — pivot to OTC/telehealth"
+    },
+    {
+      "id": "P3",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "input": "Türkiye'deki halı sahalar için oyuncu eşleştirme ve rezervasyon uygulaması",
+      "note": "SahaCepte exists; narrow to missing-player matchmaking"
+    },
+    {
+      "id": "P4",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "input": "Yapay zeka ile herkesin kendi podcast'ini otomatik oluşturabileceği bir platform",
+      "note": "'Everyone' is wrong target — niche down"
+    }
+  ],
+  "runs": [
+    {
+      "probeId": "B1",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "DONT",
+      "confidence": 88,
+      "evidenceTypes": [
+        "competitor",
+        "pattern",
+        "training_data"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        }
+      ]
+    },
+    {
+      "probeId": "B1",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 2,
+      "verdict": "DONT",
+      "confidence": 88,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B1",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 3,
+      "verdict": "DONT",
+      "confidence": 88,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "financial"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B2",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "DONT",
+      "confidence": 97,
+      "evidenceTypes": [
+        "training_data",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B2",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 2,
+      "verdict": "DONT",
+      "confidence": 96,
+      "evidenceTypes": [
+        "training_data",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B2",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 3,
+      "verdict": "DONT",
+      "confidence": 96,
+      "evidenceTypes": [
+        "training_data",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B3",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "DONT",
+      "confidence": 35,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B3",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 2,
+      "verdict": "DONT",
+      "confidence": 35,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B3",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 3,
+      "verdict": "DONT",
+      "confidence": 32,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "assumption"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B4",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "DONT",
+      "confidence": 94,
+      "evidenceTypes": [
+        "pattern",
+        "competitor",
+        "training_data"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B4",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 2,
+      "verdict": "DONT",
+      "confidence": 94,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B4",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 3,
+      "verdict": "DONT",
+      "confidence": 93,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "training_data"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "G1",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 1,
+      "verdict": "GO",
+      "confidence": 84,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G1",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 2,
+      "verdict": "GO",
+      "confidence": 83,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G1",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 3,
+      "verdict": "GO",
+      "confidence": 84,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G2",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 1,
+      "verdict": "GO",
+      "confidence": 82,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 0
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 0
+        }
+      ]
+    },
+    {
+      "probeId": "G2",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 2,
+      "verdict": "GO",
+      "confidence": 82,
+      "evidenceTypes": [
+        "market_data",
+        "market_data",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 0
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G2",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 3,
+      "verdict": "GO",
+      "confidence": 82,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 0
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "legal_check",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G3",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 1,
+      "verdict": "GO",
+      "confidence": 82,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "market_data"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G3",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 2,
+      "verdict": "GO",
+      "confidence": 84,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "competitor"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        },
+        {
+          "name": "legal_check",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G3",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 3,
+      "verdict": "GO",
+      "confidence": 82,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G4",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 1,
+      "verdict": "GO",
+      "confidence": 78,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G4",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 2,
+      "verdict": "GO",
+      "confidence": 78,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "G4",
+      "bucket": "good",
+      "expected": "GO",
+      "runIndex": 3,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "market_data",
+        "competitor",
+        "market_data"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        },
+        {
+          "name": "tech_feasibility",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P1",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 1,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "P1",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 2,
+      "verdict": "PIVOT",
+      "confidence": 84,
+      "evidenceTypes": [
+        "competitor",
+        "pattern",
+        "market_data"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        }
+      ]
+    },
+    {
+      "probeId": "P1",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 3,
+      "verdict": "PIVOT",
+      "confidence": 84,
+      "evidenceTypes": [
+        "competitor",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "P2",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 1,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "legal",
+        "market_data"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "legal_check",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P2",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 2,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "legal",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "legal_check",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P2",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 3,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "market_data"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "legal_check",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P3",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 1,
+      "verdict": "PIVOT",
+      "confidence": 78,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P3",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 2,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P3",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 3,
+      "verdict": "PIVOT",
+      "confidence": 78,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "financial"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P4",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 1,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "pattern"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P4",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 2,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "market_data"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "P4",
+      "bucket": "pivot",
+      "expected": "PIVOT",
+      "runIndex": 3,
+      "verdict": "PIVOT",
+      "confidence": 82,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "pattern"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    }
+  ]
+}
