@@ -1,0 +1,425 @@
+{
+  "spec_id": "v2.5-positioning-fix",
+  "title": "Council v2.5 — Positioning & Landing Fix",
+  "version": "1.2.0",
+  "status": "FROZEN",
+  "frozen_at": "2026-04-15",
+  "review_history": [
+    "v1.0.0 → review 1 → 9 issues (4 CRITICAL, 5 MEDIUM)",
+    "v1.1.0 → review 2 → 6 issues (2 CRITICAL, 4 MEDIUM, all introduced by v1.1.0 edits)",
+    "v1.2.0 → review 3 (critical-only scope) → CLEAN, 0 critical issues"
+  ],
+  "date": "2026-04-15",
+  "owner": "ivala (founder)",
+  "prompt_engineer": "Claude Opus 4.6 (session: council-pm-apr15)",
+  "implementer": "fresh Claude Code session (NEW chat)",
+  "prerequisite_specs": ["v2-step10-launch-polish.md"],
+  "scope_rule": "Landing/hero copy + sample verdict cards + CTA text + pain hook + i18n sync + in-place rename of three existing i18n keys. DO NOT touch verdict API, prompt logic, scoring, backend, or the existing VerdictCard component. If blocked by something outside scope, STOP and report — do not improvise.",
+
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "date": "2026-04-15",
+      "changes": [
+        "N1: Narrowed T0 grep from bare word to regex t\\(\"(headline|subheadline|submit_button)\"\\) — the broad grep would false-positive on unrelated code (genesis, agents, brief) and trigger the blocker rule falsely.",
+        "N2: Fixed TEST-6b same way — was structurally unpassable with bare-word grep because narrative-builder, chapter, brief, and content-writer files all legitimately use 'headline' in non-i18n contexts.",
+        "N3: Removed T1's sample-data-in-dict option — T3 is authoritative. Prevents sequential-implementer wasted work.",
+        "N4: Extended sessionSubmitted protection to handleNotQuite (page.tsx:224-229) in addition to resetAll. Samples must not reappear after 'Not quite?' button either.",
+        "N5: Pain hook may wrap to 2 lines on mobile — 'single line' was physically impossible at 71-80 char content with text-xs at 375px. Removed whitespace-nowrap trap.",
+        "N6: AC13 threshold relaxed from ≥200px to ≥190px per card (option A). Corrected T3 math note from ~213px to ~197px — was using max-w-2xl without accounting for px-6 padding."
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-04-15",
+      "changes": [
+        "C1: Rewrote T1 i18n keys to use { en, tr } dict pattern (matches src/lib/i18n.tsx DictKey type)",
+        "C2: Picked Option A — rename headline→hero_h1, subheadline→hero_h2, submit_button→hero_cta in-place. Added pre-rename grep task (T0) to catch usages outside page.tsx",
+        "C3: Moved SampleVerdicts render location OUTSIDE max-w-lg input wrapper, INSIDE max-w-2xl main column, for card width breathing room",
+        "C4: Picked Option A — build minimal <SampleVerdictCard>, do NOT reuse <VerdictCard>. Added task to read verdict-card.tsx for exact style tokens",
+        "M1: Added sessionSubmitted state variable spec to T3 and clarified AC6",
+        "M2: Changed 'real verdicts' → 'example verdicts' in section subheading (honesty)",
+        "M3: Specified H2 keeps existing text-sm muted-foreground; pain hook gets distinct register (uppercase tracking-wide) to avoid hierarchy collapse",
+        "M4: Confirmed councilpro.vercel.app is canonical; no metadataBase change needed. Corrected product URL in context.",
+        "M5: Corrected technical justification — SampleVerdicts is a client component (page.tsx is 'use client'), not SSR. Intent (no async / no loading UI) preserved.",
+        "Status: FROZEN → DRAFT (was prematurely frozen before review). Will re-FREEZE after final approval."
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-04-15",
+      "changes": ["Initial spec draft"]
+    }
+  ],
+
+  "context": {
+    "product": "Council v2 is a web app where founders paste a startup idea and get a GO / PIVOT / DON'T verdict in ~30 seconds with 3 evidence-backed reasons. Live at https://councilpro.vercel.app (v2.3.1). Built with Next.js + TypeScript.",
+    "validated_problem": "Founder showed current landing to 3 people in person. 3 of 3 asked 'what is this?' after looking at the page. Positioning fails before the user ever types. This is a confirmed message-market fit problem, not a hypothesis.",
+    "root_causes_identified": [
+      "H1 'Honest verdict on your idea' never names the GO/PIVOT/DON'T format",
+      "CTA is a bare '→' with no action word — invisible to scanners",
+      "No sample verdict shown on landing before submit — empty textarea only",
+      "No pain hook above H1 to give context",
+      "OG/meta copy in layout.tsx is already better than on-page H1/H2 — inconsistency"
+    ],
+    "research_summary": {
+      "killed_words_2026": ["validate", "insights", "AI-powered", "brutal (alone)"],
+      "winning_words_2026": ["verdict", "truth", "pivot", "tells you no", "time promise"],
+      "winning_ph_pattern": "mechanic + time + emotional stakes (2 of 3 minimum)",
+      "proof_point": "Lovable Critic — 'The cofounder who actually tells you no' = 1,200 PH upvotes",
+      "wedge": "GO/PIVOT/DON'T framing — no direct competitor uses it",
+      "highest_leverage_fix": "Show 3 sample verdict cards on landing. Winners (Validator AI, RoastMyPage, Roastd) all do this; losers hide output behind input."
+    }
+  },
+
+  "decision": {
+    "hero_variant_selected": "D (Hybrid)",
+    "rationale": "Balances B's clarity ('Should you build it?' = founder's exact inner question → highest 'aha' rate) with C's wedge (GO/PIVOT/DON'T in H2) and A's character ('the AI investor that tells you'). No weak axis, lowest launch risk with meaningful differentiation.",
+    "priority_order": [
+      "1. Sample verdict cards on landing (80% of the 'what is this?' fix)",
+      "2. Explicit CTA text (silent → loud)",
+      "3. Pain hook above H1",
+      "4. H1/H2 swap to Variant D",
+      "5. OG/meta sync to match new on-page copy"
+    ]
+  },
+
+  "critical_context_to_read": [
+    {
+      "path": "src/app/page.tsx",
+      "purpose": "Current hero layout, input form, history section. Full file ~471 lines. Note line 1 declares 'use client' — this is a client component boundary. The animated placeholder lives around lines 31-110. Hero H1/H2 render around lines 281-284. CTA around 306-312. Input wrapper uses max-w-lg (~lines 287-383). Main column uses max-w-2xl (~line 276)."
+    },
+    {
+      "path": "src/lib/i18n.tsx",
+      "purpose": "Bilingual copy source. Pattern: every key is { en: '...', tr: '...' }. Look at existing keys near line 23-38 (headline, subheadline, submit_button) to see the shape. DictKey union type exported around line 309. t() lookup at lines 346-348 reads dict[key]?.[lang]. All new copy MUST follow this pattern — do NOT use language-suffixed flat keys."
+    },
+    {
+      "path": "src/components/verdict-card.tsx",
+      "purpose": "Existing full verdict card component. READ THIS BEFORE building SampleVerdictCard. Copy border, border-radius, padding, and verdict-color tokens EXACTLY from this file into the new minimal card. Do NOT import or reuse this component for samples — it is too heavy."
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "purpose": "Lines 17-35 hold OG/meta. metadataBase at line 18 is already https://councilpro.vercel.app — do NOT change it. Sync page title + meta description to match new H1/H2."
+    },
+    {
+      "path": "src/app/opengraph-image.tsx",
+      "purpose": "OG image generator. Check if subtitle needs update to match new H1."
+    },
+    {
+      "path": "launch/positioning-lab.md",
+      "purpose": "Human-readable exploration doc that led to this decision. Read if you need to understand why Variant D beat A/B/C."
+    }
+  ],
+
+  "implementation_tasks": [
+    {
+      "task_id": "T0",
+      "title": "Pre-rename audit: grep for existing i18n key usages",
+      "priority": "must",
+      "blocks": ["T1", "T2"],
+      "commands": [
+        "Run Grep for the regex `t\\(\"(headline|subheadline|submit_button)\"\\)` across src/. This matches only t(\"headline\")-style i18n call sites — NOT unrelated TS field names, object keys, or prompt strings.",
+        "DO NOT grep for the bare word 'headline' alone. There are many legitimate unrelated usages: src/lib/genesis/narrative-builder.ts (type field), src/components/genesis/chapter.tsx (entry.headline), src/app/brief/[id]/page.tsx (local object field), src/lib/agents/strategist.ts (prompt string), src/lib/agents/content-writer.ts (comment). These are NOT rename targets.",
+        "Expected findings from prior audit: exactly 2 matches — t(\"headline\") at src/app/page.tsx:281 and t(\"subheadline\") at src/app/page.tsx:284. submit_button should produce 0 t(...) call sites."
+      ],
+      "report_back": "List every file:line where the narrowed regex matches. If ANY match appears outside src/app/page.tsx, add it to the T2 rename list. Do NOT proceed to T1 until this audit is complete.",
+      "blocker_rule": "If MORE than the 2 expected matches appear from the narrowed regex, STOP and report — rename scope may need to expand beyond this spec. False positives from the bare-word grep do NOT count toward this threshold."
+    },
+    {
+      "task_id": "T1",
+      "title": "Rename existing i18n keys + add new hero keys",
+      "priority": "must",
+      "file": "src/lib/i18n.tsx",
+      "rename_operations": [
+        "Rename key `headline` → `hero_h1`. Replace both en and tr values with the new Variant D copy below.",
+        "Rename key `subheadline` → `hero_h2`. Replace both en and tr values with the new Variant D copy below.",
+        "Rename key `submit_button` → `hero_cta`. Replace both en and tr values with the new Variant D copy below."
+      ],
+      "new_keys_to_add": [
+        "Add new key `hero_pain_hook` (this has no predecessor — it's new content above H1).",
+        "Add new key `samples_heading` (for the 'See it in action' section title).",
+        "Add new key `samples_subheading` (for the 'Three example verdicts' line).",
+        "Sample verdict data is NOT stored in i18n.tsx. See T3.data_location_note — samples live as a plain `const SAMPLE_VERDICTS` inside src/components/sample-verdicts.tsx. Do NOT add sample-related keys (sample_go_idea, sample_pivot_reasons, etc.) to the dict."
+      ],
+      "copy_bundle": {
+        "hero_pain_hook": {
+          "en": "Before you waste 6 months — ask the investor who won't lie to be nice.",
+          "tr": "6 ay boşa harcamadan — kibar olmak için yalan söylemeyecek yatırımcıya sor."
+        },
+        "hero_h1": {
+          "en": "Should you build it? Get the verdict.",
+          "tr": "Bunu inşa etmeli misin? Kararı al."
+        },
+        "hero_h2": {
+          "en": "The AI investor that tells you GO, PIVOT, or DON'T — in 30 seconds, with 3 reasons why.",
+          "tr": "Sana GO, PIVOT veya DON'T diyen AI yatırımcı — 30 saniyede, 3 sebeple."
+        },
+        "hero_cta": {
+          "en": "Get my verdict",
+          "tr": "Kararımı al"
+        },
+        "samples_heading": {
+          "en": "See it in action",
+          "tr": "Nasıl çalışıyor gör"
+        },
+        "samples_subheading": {
+          "en": "Three example verdicts. The format you'll get.",
+          "tr": "Üç örnek karar. Seninki de aynı formatta gelecek."
+        }
+      },
+      "notes": "Pattern: every key must be { en: '...', tr: '...' }. DictKey type union will auto-update if it's derived from the dict via `keyof typeof dict`. If DictKey is hand-maintained, update it to include hero_pain_hook, hero_h1, hero_h2, hero_cta, samples_heading, samples_subheading. Remove headline, subheadline, submit_button from the union."
+    },
+    {
+      "task_id": "T2",
+      "title": "Wire new copy into page.tsx hero",
+      "priority": "must",
+      "file": "src/app/page.tsx",
+      "changes": [
+        "At the call sites found by T0 grep: replace t('headline') → t('hero_h1'), t('subheadline') → t('hero_h2'), any t('submit_button') → t('hero_cta').",
+        "Above H1 (new element): render pain hook via t('hero_pain_hook'). Element: <p> tag, classes: `text-xs text-foreground/60 uppercase tracking-wide text-left md:text-center`. Wrap to 2 lines on mobile is acceptable — do NOT add `whitespace-nowrap` (the 71-80 char copy cannot fit single-line at text-xs on 375px). Max width: inherit from parent, no new max-w.",
+        "Keep existing H1 element/tag/classes — only the text source changes (now from hero_h1).",
+        "Keep existing H2 element at page.tsx:283 — DO NOT change its classes. Keep text-sm text-muted-foreground. Only the text source changes (now from hero_h2).",
+        "Replace the bare '→' CTA at ~page.tsx:306-312 with: {t('hero_cta')} followed by an arrow icon/span, in that order. Keep the existing disabled-when-<10-chars logic, keep vertical alignment, keep the submit handler unchanged.",
+        "CTA button width should auto-fit text. Add aria-label matching t('hero_cta') for a11y."
+      ],
+      "spacing_rules": [
+        "Preserve existing 12vh top padding on hero",
+        "Pain hook sits between header and H1: 0 margin above, 8px gap below",
+        "Pain hook must NOT be an <h-> tag (it's a kicker, semantic <p>)",
+        "H1 and H2 spacing unchanged"
+      ]
+    },
+    {
+      "task_id": "T3",
+      "title": "Create SampleVerdicts + SampleVerdictCard and render on landing",
+      "priority": "must",
+      "file_create": "src/components/sample-verdicts.tsx (NEW — contains both SampleVerdicts and SampleVerdictCard, colocated)",
+      "file_modify": "src/app/page.tsx (add state variable + render block)",
+      "component_design": {
+        "do_not_reuse_verdict_card": "DO NOT import @/components/verdict-card. That component renders financials, tech snapshot, legal flags, drill-down details, and share buttons — far too heavy for static samples. Build a new minimal SampleVerdictCard colocated in sample-verdicts.tsx.",
+        "read_before_writing": "Open src/components/verdict-card.tsx and extract: the exact border class, border-radius, padding, background, and verdict-color tokens (GO green / PIVOT amber / DON'T red). Copy these tokens verbatim into SampleVerdictCard so the visual family matches.",
+        "card_elements_top_to_bottom": [
+          "Verdict badge (GO / PIVOT / DON'T) with matching color token + confidence % inline",
+          "Idea text (1-2 lines, text-sm, text-foreground)",
+          "3 reasons as bulleted list (text-xs, text-foreground/70)",
+          "NO CTA button, NO 'view full', NO share icons — static cards only"
+        ],
+        "constraints": [
+          "text-xs minimum for any text, /60 opacity minimum for secondary",
+          "No logos, no emoji, no flashy icons",
+          "Visually distinguishable as examples: apply opacity-80 OR subtle desaturation to the whole card (implementer chooses the cleaner of the two)",
+          "No hover states, no transitions, no interactivity"
+        ]
+      },
+      "render_location_in_page_tsx": {
+        "rule": "Place <SampleVerdicts /> as a SIBLING of the max-w-lg input wrapper, NOT a child. It must render inside the max-w-2xl main column so cards span the full 672px main width.",
+        "structural_instruction": "Find the closing </div> of the max-w-lg input wrapper (approximately around line 383, after the textarea + CTA block). Insert <SampleVerdicts /> on the next line, BEFORE the outer max-w-2xl closing div. SampleVerdicts internally may use its own max-w-2xl wrapper — or inherit from the parent — implementer chooses whichever produces the visible layout described below."
+      },
+      "visibility_rule": {
+        "state_variable": "Introduce `const [sessionSubmitted, setSessionSubmitted] = useState(false)` in page.tsx. Set it to true inside the successful-verdict branch of the submit handler. It is NOT reset by `resetAll` ('Try another' at page.tsx:445) NOR by `handleNotQuite` ('Not quite?' at page.tsx:434-438). Once set to true, it stays true until page reload. Do NOT add setSessionSubmitted(false) to either handler.",
+        "render_condition": "viewState === 'input' && !sessionSubmitted && history.length < 2",
+        "meaning": "Samples show on first visit and while history is sparse. Once user submits even one verdict this session, samples stay hidden until page reload. Samples also hide once history has 2+ items."
+      },
+      "layout": {
+        "desktop": "`grid-cols-1 md:grid-cols-3 gap-4` (grid kicks in at 768px viewport). Math: main column is max-w-2xl (672px) with px-6 (48px padding) = 624px content width. Minus gap-4 × 2 (32px) = 592px / 3 cards = ~197px per card at the max-w-2xl cap.",
+        "mobile": "stacked vertically, 1 column, gap-4",
+        "section_header": "Above the grid, render samples_heading as an <h2> (text-base text-foreground) and samples_subheading as a <p> (text-xs text-foreground/60), both centered. Margin-top above the header to create breathing room from input card (e.g. mt-16)."
+      },
+      "data": [
+        {
+          "id": "sample-go",
+          "idea_en": "AI that reads legal contracts for freelancers",
+          "idea_tr": "Freelancerlar için sözleşme okuyan AI",
+          "verdict": "GO",
+          "confidence": 78,
+          "reasons_en": [
+            "Freelance market up 40% YoY — rising pain, rising budgets",
+            "Clear willingness to pay: comparable tools (Ironclad) charge $20-50/mo",
+            "MVP is shippable solo — no moat required to start"
+          ],
+          "reasons_tr": [
+            "Freelance pazar %40 yıllık büyüme — artan acı, artan bütçe",
+            "Ödeme isteği net: benzer araçlar (Ironclad) $20-50/ay",
+            "MVP tek kişi çıkabilir — başlamak için moat gerekmez"
+          ]
+        },
+        {
+          "id": "sample-pivot",
+          "idea_en": "Marketplace connecting local farmers with restaurants",
+          "idea_tr": "Yerel çiftçileri restoranlarla buluşturan pazar yeri",
+          "verdict": "PIVOT",
+          "confidence": 64,
+          "reasons_en": [
+            "Two-sided marketplace = liquidity trap; chicken-and-egg kills most attempts",
+            "Thin margins can't absorb logistics + cold chain costs at early scale",
+            "Pivot lives here: SaaS-for-existing-distributors beats building a marketplace"
+          ],
+          "reasons_tr": [
+            "Çift taraflı pazar = likidite tuzağı; tavuk-yumurta çoğu denemeyi öldürür",
+            "İnce marj erken ölçekte lojistik + soğuk zincir maliyetini kaldıramaz",
+            "Pivot burada: mevcut dağıtıcılara SaaS, sıfırdan pazar inşa etmekten iyi"
+          ]
+        },
+        {
+          "id": "sample-dont",
+          "idea_en": "Instagram clone with blockchain rewards",
+          "idea_tr": "Blockchain ödüllü Instagram klonu",
+          "verdict": "DON'T",
+          "confidence": 91,
+          "reasons_en": [
+            "Social is a winner-take-all duopoly (TikTok, IG) — no entry wedge",
+            "Blockchain doesn't solve a user problem here, only founder's narrative",
+            "Zero distribution advantage — users don't defect for tokens"
+          ],
+          "reasons_tr": [
+            "Sosyal kazan-her-şeyi duopolü (TikTok, IG) — giriş kaması yok",
+            "Blockchain burada kullanıcı problemi çözmüyor, sadece founder anlatısı",
+            "Sıfır dağıtım avantajı — kullanıcılar token için yer değiştirmez"
+          ]
+        }
+      ],
+      "data_location_note": "Hold the samples array as a plain `const SAMPLE_VERDICTS = [...]` inside sample-verdicts.tsx. Do not try to store arrays inside the i18n dict if it complicates the DictKey type — selecting EN/TR strings from the samples array based on current lang is cleaner."
+    },
+    {
+      "task_id": "T4",
+      "title": "Sync OG/meta to new H1/H2",
+      "priority": "must",
+      "file": "src/app/layout.tsx",
+      "changes": {
+        "page_title": "Council — Should you build it? Get the verdict.",
+        "meta_description": "The AI investor that tells you GO, PIVOT, or DON'T on your startup idea — in 30 seconds, with 3 reasons why.",
+        "og_title": "Council — Should you build it? Get the verdict.",
+        "og_description": "The AI investor that tells you GO, PIVOT, or DON'T on your startup idea — in 30 seconds, with 3 reasons why.",
+        "twitter_card": "unchanged (summary_large_image)",
+        "metadataBase": "UNCHANGED — keep https://councilpro.vercel.app"
+      }
+    },
+    {
+      "task_id": "T5",
+      "title": "Update OG image subtitle if needed",
+      "priority": "should",
+      "file": "src/app/opengraph-image.tsx",
+      "changes": "If subtitle currently says 'Honest AI verdict on your startup idea', change to 'Should you build it? GO, PIVOT, or DON'T in 30 seconds.' Keep existing logo + gradient.",
+      "fallback": "If changing would break render, leave as-is and flag in report."
+    },
+    {
+      "task_id": "T6",
+      "title": "Add credibility line (OPTIONAL — ship only if 5-min effort)",
+      "priority": "could",
+      "file": "src/app/page.tsx",
+      "placement": "Between H2 and input textarea, small text, centered",
+      "copy_en": "The same questions real VCs ask in the first meeting.",
+      "copy_tr": "Gerçek VC'lerin ilk toplantıda sorduğu sorular.",
+      "i18n_key": "hero_credibility",
+      "skip_if": "Adds more than 5 minutes of work, crowds the hero visually, or requires new components."
+    }
+  ],
+
+  "what_not_to_build": [
+    "Do NOT change the verdict API or prompt logic — out of scope",
+    "Do NOT modify src/components/verdict-card.tsx — build a separate minimal SampleVerdictCard instead",
+    "Do NOT add analytics, A/B testing frameworks, or experiments — landing is static, ship one version",
+    "Do NOT refactor page.tsx into smaller components unless absolutely necessary for T3",
+    "Do NOT add new sample verdicts beyond the 3 specified",
+    "Do NOT make sample verdict cards clickable or interactive (they are static proof)",
+    "Do NOT add tooltips, modals, or 'learn more' expansions",
+    "Do NOT change fonts, colors, or spacing tokens outside the new elements",
+    "Do NOT touch the animated placeholder — it stays as-is",
+    "Do NOT add loading states, skeletons, transitions, or async data fetching for the sample verdicts — they are static hardcoded data rendered immediately with the page (page.tsx is 'use client', so SampleVerdicts is also a client component — no RSC conversion)",
+    "Do NOT add a CTA button to sample cards or to the section — the only CTA is the main submit button",
+    "Do NOT hardcode English strings anywhere — all copy goes through i18n.tsx (samples array is the one allowed exception, per T3)",
+    "Do NOT change metadataBase in layout.tsx — it is already correct (councilpro.vercel.app)"
+  ],
+
+  "acceptance_criteria": [
+    "AC1: Visiting / shows pain hook → H1 (Variant D) → H2 → input → 3 sample verdict cards, in that vertical order",
+    "AC2: CTA button displays text (Get my verdict / Kararımı al) + arrow icon, not arrow alone. aria-label matches visible text.",
+    "AC3: Language toggle flips pain hook, H1, H2, CTA, section heading, section subheading, and all 3 sample cards (idea + reasons) to TR and back correctly",
+    "AC4: Sample verdict cards display correct verdict colors (GO=green, PIVOT=amber, DON'T=red), confidence %, idea, and 3 reasons",
+    "AC5: Sample cards are visually distinguishable as examples (opacity-80 OR subtle desaturation applied)",
+    "AC6: Sample section hides when sessionSubmitted is true OR history.length >= 2 OR viewState !== 'input'. Clicking 'Try another' does NOT make samples reappear.",
+    "AC7: OG title, meta description, page title all match new H1/H2 wording. metadataBase unchanged.",
+    "AC8: No TypeScript errors, no console errors, no hydration warnings. DictKey type correctly updated to include new keys and exclude renamed ones.",
+    "AC9: Mobile layout at 375px width: pain hook, hero, input, CTA, and stacked sample cards all render correctly with no horizontal scroll",
+    "AC10: All existing functionality (submit flow, history, verdict generation, share) works unchanged",
+    "AC11: text-xs minimum, /60 opacity minimum for secondary text — existing UI/UX rules honored",
+    "AC12: Sample cards use border/radius/padding tokens matching <VerdictCard> (visual family match), but do NOT import <VerdictCard>",
+    "AC13: Desktop sample card width is ≥190px per card at viewport ≥768px (samples inside max-w-2xl with px-6 padding and gap-4 between cards — computed ~197px at the 2xl cap)"
+  ],
+
+  "manual_test_plan": {
+    "setup": "npm run dev, clear localStorage, visit http://localhost:3000",
+    "tests": [
+      {
+        "id": "TEST-1-first-view",
+        "steps": "Open in fresh incognito window. Do not interact for 10 seconds. Count elements visible above fold on a 1440x900 desktop.",
+        "expected": "Pain hook + H1 + H2 + input + CTA all above fold. Sample cards partially or fully visible (acceptable either way)."
+      },
+      {
+        "id": "TEST-2-language-toggle",
+        "steps": "Click EN/TR toggle three times.",
+        "expected": "All hero copy, CTA, section heading/subheading, and sample card content (idea, reasons) switches languages correctly. No flicker, no English leakage in TR mode."
+      },
+      {
+        "id": "TEST-3-submit-flow",
+        "steps": "Type 'AI tool for doctors to summarize patient notes' into textarea. Click CTA.",
+        "expected": "CTA triggers verdict generation as before. Sample verdict section disappears after successful verdict. Real verdict card appears."
+      },
+      {
+        "id": "TEST-3b-try-another",
+        "steps": "After TEST-3 completes, click 'Try another' (page.tsx:445). ",
+        "expected": "viewState resets to 'input' but sample cards DO NOT reappear (sessionSubmitted is still true). Textarea is empty and ready for new input."
+      },
+      {
+        "id": "TEST-4-history-interaction",
+        "steps": "Generate 2 verdicts. Refresh page.",
+        "expected": "Sample verdicts section is hidden (because history ≥2). History section renders normally."
+      },
+      {
+        "id": "TEST-5-mobile",
+        "steps": "DevTools → iPhone 14 viewport (375px) → hard reload.",
+        "expected": "No horizontal scroll. Pain hook, H1, H2, input, CTA, section heading, and sample cards all readable. Sample cards stacked vertically."
+      },
+      {
+        "id": "TEST-6-share-preview",
+        "steps": "curl http://localhost:3000 | grep -E '(og:title|og:description|<title)'",
+        "expected": "All three match new Variant D copy. metadataBase resolves to https://councilpro.vercel.app."
+      },
+      {
+        "id": "TEST-6b-grep-audit",
+        "steps": "Run Grep for the regex `t\\(\"(headline|subheadline|submit_button)\"\\)` across src/, AND Grep for `^\\s+(headline|subheadline|submit_button):\\s*\\{` in src/lib/i18n.tsx only (top-level dict key definitions).",
+        "expected": "Zero matches in both greps. Confirms the three old i18n keys are neither defined nor called anywhere. DO NOT use bare-word grep — narrative-builder, chapter, brief, agents files all legitimately use 'headline' in non-i18n contexts and will produce false positives."
+      },
+      {
+        "id": "TEST-7-stranger-test",
+        "steps": "After implementation, ask 3 people who have never seen Council to look at the landing for 10 seconds and describe what it does.",
+        "expected": "At least 2 of 3 say something like 'it's an AI that tells you if your startup idea is good' or equivalent within 10 seconds. If 0-1 of 3 get it, report and stop — do not ship."
+      }
+    ]
+  },
+
+  "reporting_format": {
+    "instructions": "At end of implementation, paste the following markdown back into the chat that assigned this spec.",
+    "template": "## v2.5 Positioning Fix — Implementation Report\n\n### Completed Tasks\n- [ ] T0 — pre-rename grep audit (report findings)\n- [ ] T1 — i18n rename + new hero keys\n- [ ] T2 — page.tsx hero wiring (including pain hook, H1, H2, CTA)\n- [ ] T3 — SampleVerdicts + SampleVerdictCard component + sessionSubmitted state\n- [ ] T4 — OG/meta sync\n- [ ] T5 — OG image subtitle (if applicable)\n- [ ] T6 — credibility line (if shipped)\n\n### T0 Grep Findings\n[list file:line for every t('headline'), t('subheadline'), t('submit_button') usage found]\n\n### Acceptance Criteria Results\n[AC1-AC13 with ✅ / ❌ / N/A and one-line note each]\n\n### Manual Test Results\n[TEST-1 through TEST-6b with pass/fail — TEST-7 may be pending human test]\n\n### Files Changed\n[list of files with +/- line counts]\n\n### Surprises / Deviations from Spec\n[anything that required judgment call — be specific]\n\n### Blockers / Questions\n[anything that prevented full completion]\n\n### Screenshots / URLs\n[if deploy preview available, paste URL]"
+  },
+
+  "why_this_spec_is_detailed": [
+    "The 'what is this?' problem is validated, not hypothetical — execution must be precise",
+    "Hero copy is load-bearing for PH launch; ambiguity in spec = drift in implementer session",
+    "3/3 confusion means every element below the fold matters less than the first 3 seconds above it",
+    "Sample verdict cards are the #1 leverage — they deserve the most detail in the spec",
+    "Bilingual mirroring must be exact or TR users get a degraded experience",
+    "Research showed 'validate' and 'brutal' alone are dead words in 2026 — the copy choices here are deliberate and research-backed, not stylistic",
+    "v1.0.0 critique flagged 4 critical + 5 medium issues (see changelog) — v1.1.0 addresses each with exact pattern matches, component boundaries, and state rules"
+  ],
+
+  "post_implementation": {
+    "human_validation_required": "Before marking complete and before PH launch: run TEST-7 (3 strangers, 10-second read). Need ≥2/3 to describe the product correctly.",
+    "rollback": "If TEST-7 fails ≤1/3, do NOT launch. Return to prompt engineer (this session) with results. Iterate hero copy or sample card selection.",
+    "next_after_ship": [
+      "Re-run v2.4 confidence bias fix (separate spec, can run parallel to this — not blocking)",
+      "Trigger PH launch checklist once both v2.5 positioning and v2.4 bias fix are live",
+      "Add 'verdict + next step' content (product-level, not landing) — competitor gap analysis flagged this as a retention lever"
+    ]
+  }
+}
