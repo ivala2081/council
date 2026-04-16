@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "timestamp": "2026-04-14T13:25:52.034Z",
+    "model": "claude-sonnet-4-6",
+    "prompt_version": "2.4.0",
+    "probes": 4,
+    "runs_per_probe": 1,
+    "exa_mode": "real",
+    "tag": "prefix"
+  },
+  "probes": [
+    {
+      "id": "B1",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "Blockchain tabanlı DAO ile sokak kedilerine şeffaf bağış ve mama dağıtım sistemi",
+      "note": "Absurd control — live test already returned PIVOT 72%"
+    },
+    {
+      "id": "B2",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "Instagram clone yapmak istiyorum",
+      "note": "Compete with Meta on their core product"
+    },
+    {
+      "id": "B3",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "bir uygulama yapmak istiyorum",
+      "note": "Vague — no idea to evaluate"
+    },
+    {
+      "id": "B4",
+      "bucket": "bad",
+      "expected": "DONT",
+      "input": "NFT-based appointment reminder app where each reminder is a unique tradeable token",
+      "note": "Mechanism / category mismatch, no real pain"
+    }
+  ],
+  "runs": [
+    {
+      "probeId": "B1",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "PIVOT",
+      "confidence": 72,
+      "evidenceTypes": [
+        "competitor",
+        "market_data",
+        "competitor"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "legal_check",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 1
+        },
+        {
+          "name": "finance_calc",
+          "turn": 1
+        }
+      ]
+    },
+    {
+      "probeId": "B2",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "DONT",
+      "confidence": 97,
+      "evidenceTypes": [
+        "competitor",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        }
+      ]
+    },
+    {
+      "probeId": "B3",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "DONT",
+      "confidence": 95,
+      "evidenceTypes": [
+        "pattern",
+        "pattern",
+        "pattern"
+      ],
+      "toolCalls": []
+    },
+    {
+      "probeId": "B4",
+      "bucket": "bad",
+      "expected": "DONT",
+      "runIndex": 1,
+      "verdict": "DONT",
+      "confidence": 92,
+      "evidenceTypes": [
+        "pattern",
+        "market_data",
+        "assumption"
+      ],
+      "toolCalls": [
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        },
+        {
+          "name": "market_research",
+          "turn": 0
+        }
+      ]
+    }
+  ]
+}

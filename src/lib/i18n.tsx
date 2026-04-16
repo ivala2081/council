@@ -20,21 +20,33 @@ export type Lang = "en" | "tr";
 
 const dict = {
   // -- Page: Landing --
-  headline: {
-    en: "Honest verdict on your idea",
-    tr: "Fikrine dürüst cevap",
+  hero_pain_hook: {
+    en: "Before you waste 6 months — ask the investor who won't lie to be nice.",
+    tr: "6 ay boşa harcamadan — kibar olmak için yalan söylemeyecek yatırımcıya sor.",
   },
-  subheadline: {
-    en: "10 seconds, 3 reasons, brutally honest.",
-    tr: "10 saniye, 3 sebep, acımasızca dürüst.",
+  hero_h1: {
+    en: "Should you build it? Get the verdict.",
+    tr: "Bunu inşa etmeli misin? Kararı al.",
+  },
+  hero_h2: {
+    en: "The AI investor that tells you GO, PIVOT, or DON'T — in 30 seconds, with 3 reasons why.",
+    tr: "Sana GO, PIVOT veya DON'T diyen AI yatırımcı — 30 saniyede, 3 sebeple.",
+  },
+  hero_cta: {
+    en: "Get my verdict",
+    tr: "Kararımı al",
+  },
+  samples_heading: {
+    en: "See it in action",
+    tr: "Nasıl çalışıyor gör",
+  },
+  samples_subheading: {
+    en: "Three example verdicts. The format you'll get.",
+    tr: "Üç örnek karar. Seninki de aynı formatta gelecek.",
   },
   placeholder: {
     en: "Describe your idea...",
     tr: "Fikrini anlat...",
-  },
-  submit_button: {
-    en: "Get honest verdict",
-    tr: "Dürüst cevap al",
   },
   try_label: {
     en: "Try:",

@@ -3,6 +3,8 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 import { VerdictCard } from "@/components/verdict-card";
+import { SampleVerdicts } from "@/components/sample-verdicts";
+import { EntropyBg } from "@/components/entropy-bg";
 import { v2VerdictSchema, type V2Verdict } from "@/lib/agents/types";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LangToggle } from "@/components/lang-toggle";
@@ -127,6 +129,7 @@ export default function Home() {
   const reEvalEntryRef = useRef<HistoryEntry | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [sessionSubmitted, setSessionSubmitted] = useState(false);
 
   const loadingSteps = [
     { delay: 0, text: t("loading_step_1") },
@@ -179,6 +182,7 @@ export default function Home() {
 
       setVerdict(result.data);
       setViewState("verdict");
+      setSessionSubmitted(true);
 
       const shorten = (s: string, max: number) => s.length > max ? s.slice(0, max - 1) + "…" : s;
       const shareable: ShareableVerdict = {
@@ -277,11 +281,14 @@ export default function Home() {
         {/* Input */}
         {viewState === "input" && (
           <div className="flex-1 flex flex-col items-center pt-[12vh]">
+            <p className="text-xs text-foreground/60 uppercase tracking-wide text-left md:text-center mb-2 w-full md:w-auto">
+              {t("hero_pain_hook")}
+            </p>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              {t("headline")}
+              {t("hero_h1")}
             </h1>
             <p className="text-sm text-muted-foreground mb-10">
-              {t("subheadline")}
+              {t("hero_h2")}
             </p>
 
             <div className="w-full max-w-lg">
@@ -306,9 +313,11 @@ export default function Home() {
                     <button
                       type="submit"
                       disabled={isLoading || idea.trim().length < 10}
-                      className="px-4 py-1.5 rounded-lg bg-foreground text-background text-sm font-medium disabled:opacity-10 hover:opacity-80 transition-all"
+                      aria-label={t("hero_cta")}
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-foreground text-background text-sm font-medium disabled:opacity-10 hover:opacity-80 transition-all"
                     >
-                      →
+                      <span>{t("hero_cta")}</span>
+                      <span aria-hidden="true">→</span>
                     </button>
                   </div>
                 </div>
@@ -381,13 +390,16 @@ export default function Home() {
                 </div>
               )}
             </div>
+
+            {!sessionSubmitted && history.length < 2 && <SampleVerdicts />}
           </div>
         )}
 
         {/* Loading — minimal */}
         {viewState === "loading" && (
-          <div className="flex-1 flex flex-col items-center justify-center">
-            <div className="space-y-3 text-sm">
+          <div className="relative flex-1 flex flex-col items-center justify-center">
+            <EntropyBg />
+            <div className="relative z-10 space-y-3 text-sm">
               {loadingSteps.slice(0, loadingStep + 1).map((step, i) => (
                 <div key={i} className="flex items-center gap-3">
                   {i < loadingStep ? (
@@ -401,7 +413,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground/60 mt-8">
+            <p className="relative z-10 text-xs text-muted-foreground/60 mt-8">
               {t("loading_estimate")}
             </p>
           </div>
