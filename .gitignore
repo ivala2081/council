@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 test-pipeline.ts
 test-schema.ts
+
+# python (UI/UX Pro Max skill scripts)
+__pycache__/
+*.pyc

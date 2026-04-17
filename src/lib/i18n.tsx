@@ -25,12 +25,12 @@ const dict = {
     tr: "6 ay boşa harcamadan — kibar olmak için yalan söylemeyecek yatırımcıya sor.",
   },
   hero_h1: {
-    en: "Should you build it? Get the verdict.",
-    tr: "Bunu inşa etmeli misin? Kararı al.",
+    en: "Should you build it?",
+    tr: "Bunu inşa etmeli misin?",
   },
   hero_h2: {
-    en: "The AI investor that tells you GO, PIVOT, or DON'T — in 30 seconds, with 3 reasons why.",
-    tr: "Sana GO, PIVOT veya DON'T diyen AI yatırımcı — 30 saniyede, 3 sebeple.",
+    en: "Describe your idea, get an honest investor opinion in 30 seconds.",
+    tr: "Fikrini anlat, 30 saniyede dürüst bir yatırımcı görüşü al.",
   },
   hero_cta: {
     en: "Get my verdict",

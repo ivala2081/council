@@ -132,11 +132,7 @@ export function SampleVerdicts() {
   const { lang, t } = useLang();
 
   return (
-    <section className="mt-16 w-full">
-      <div className="text-center mb-6">
-        <h2 className="text-base text-foreground mb-1">{t("samples_heading")}</h2>
-        <p className="text-xs text-foreground/60">{t("samples_subheading")}</p>
-      </div>
+    <section className="mt-6 w-full">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {SAMPLE_VERDICTS.map((sample) => (
           <SampleVerdictCard key={sample.id} sample={sample} lang={lang} />
