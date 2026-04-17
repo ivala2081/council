@@ -265,16 +265,15 @@ export default function Home() {
       <main className="flex-1 flex flex-col max-w-2xl w-full mx-auto px-6">
         {/* Input */}
         {viewState === "input" && (
-          <div className="flex-1 flex flex-col items-center pt-[12vh]">
-            <p className="text-xs text-foreground/60 uppercase tracking-wide text-left md:text-center mb-2 w-full md:w-auto">
-              {t("hero_pain_hook")}
-            </p>
+          <div className="flex-1 flex flex-col items-center pt-[6vh]">
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
               {t("hero_h1")}
             </h1>
-            <p className="text-sm text-muted-foreground mb-10">
+            <p className="text-sm text-muted-foreground mb-6">
               {t("hero_h2")}
             </p>
+
+            {!sessionSubmitted && history.length < 2 && <SampleVerdicts />}
 
             <div className="w-full max-w-lg">
               <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
@@ -375,8 +374,6 @@ export default function Home() {
                 </div>
               )}
             </div>
-
-            {!sessionSubmitted && history.length < 2 && <SampleVerdicts />}
           </div>
         )}
 

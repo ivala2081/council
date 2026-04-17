@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "name": "v2.6-landing-copy-fix",
+    "description": "Fix landing page copy based on TEST-7 stranger test feedback (3/3 partial fail)",
+    "owner": "prompt-engineer-claude",
+    "implementer": "user (new Claude session)",
+    "prerequisite": "v2.5 positioning ship (commit 0d3afaa)",
+    "scope_rule": "ONLY touch i18n keys + page.tsx layout order. No new components, no new dependencies."
+  },
+
+  "goal": "Fix 3 landing page issues identified by TEST-7 stranger test: (1) pain hook is offensive, (2) H2 jargon nobody understands, (3) sample cards not visible without scrolling. Result: strangers understand what Council does within 10 seconds.",
+
+  "what_not_to_build": [
+    "No new components",
+    "No new routes",
+    "No design system changes",
+    "No changes to verdict flow, API, or prompt",
+    "No changes to SampleVerdicts component internals",
+    "No changes to loading state or entropy animation"
+  ],
+
+  "changes": [
+    {
+      "id": "CHANGE-1",
+      "title": "Remove pain hook",
+      "file": "src/lib/i18n.tsx",
+      "what": "Change hero_pain_hook to empty string for both languages OR remove the <p> element that renders it",
+      "why": "3/3 strangers found 'yalan söylemeyecek yatırımcıya sor' offensive. It implies everyone else lies to them. The H1 already creates curiosity — the pain hook adds friction, not value.",
+      "implementation": "Option A (preferred): In src/app/page.tsx, remove the entire <p> block that renders hero_pain_hook (lines 269-271). Option B: Set both i18n values to empty string. Option A is cleaner — dead code removal."
+    },
+    {
+      "id": "CHANGE-1B",
+      "title": "Shorten H1 — question only",
+      "file": "src/lib/i18n.tsx",
+      "what": "Remove 'Get the verdict' / 'Kararı al' from H1. Keep only the question.",
+      "why": "H1 is stronger as a bare question. The answer comes from the sample cards below, not from the headline itself. 'Kararı al' is redundant — the CTA button already says it.",
+      "old_value": {
+        "en": "Should you build it? Get the verdict.",
+        "tr": "Bunu inşa etmeli misin? Kararı al."
+      },
+      "new_value": {
+        "en": "Should you build it?",
+        "tr": "Bunu inşa etmeli misin?"
+      }
+    },
+    {
+      "id": "CHANGE-2",
+      "title": "Rewrite H2 — remove jargon",
+      "file": "src/lib/i18n.tsx",
+      "what": "Replace hero_h2 with plain-language description",
+      "why": "GO/PIVOT/DON'T are product-internal terms. Nobody understood them on first read. The sample cards will teach these terms visually — H2 should describe the outcome, not the output format.",
+      "old_value": {
+        "en": "The AI investor that tells you GO, PIVOT, or DON'T — in 30 seconds, with 3 reasons why.",
+        "tr": "Sana GO, PIVOT veya DON'T diyen AI yatırımcı — 30 saniyede, 3 sebeple."
+      },
+      "new_value": {
+        "en": "Describe your idea, get an honest investor opinion in 30 seconds.",
+        "tr": "Fikrini anlat, 30 saniyede dürüst bir yatırımcı görüşü al."
+      }
+    },
+    {
+      "id": "CHANGE-3",
+      "title": "Move sample cards up — visible without scrolling",
+      "file": "src/app/page.tsx",
+      "what": "Move <SampleVerdicts /> from below the form to directly below H2, before the textarea. Reduce top padding and sample section margin to ensure cards are visible on first viewport.",
+      "why": "Strangers couldn't see the sample cards ('geçmişini göremiyorlar'). Sample cards are the primary tool for explaining what Council does — they must be above the fold. Users see GO 78% / PIVOT 64% / DON'T 91% cards and instantly understand the product.",
+      "implementation_steps": [
+        "1. Remove <SampleVerdicts /> from its current position (line 379, after the history section)",
+        "2. Add <SampleVerdicts /> immediately after the H2 <p> tag (after line 277), before the form <div>",
+        "3. Reduce pt-[12vh] to pt-[6vh] on the outer flex div (line 268) to give more room",
+        "4. In sample-verdicts.tsx, change mt-16 to mt-6 on the <section> wrapper (line 135) since it no longer needs as much top margin",
+        "5. Remove or simplify samples_heading and samples_subheading — the cards speak for themselves. Change heading to empty or remove the heading div entirely. The GO/PIVOT/DON'T labels on the cards are self-explanatory when placed right after 'get an honest investor opinion'."
+      ]
+    },
+    {
+      "id": "CHANGE-4",
+      "title": "Keep SampleVerdicts visibility logic",
+      "file": "src/app/page.tsx",
+      "what": "Keep the existing condition: {!sessionSubmitted && history.length < 2 && <SampleVerdicts />}",
+      "why": "Sample cards should still hide after first verdict submit (sessionSubmitted) and when user has history. This logic is correct — only the placement changes."
+    }
+  ],
+
+  "final_layout_order": [
+    "H1: 'Bunu inşa etmeli misin?'",
+    "H2: 'Fikrini anlat, 30 saniyede dürüst bir yatırımcı görüşü al.'",
+    "Sample cards: [GO 78%] [PIVOT 64%] [DON'T 91%] — visible without scrolling",
+    "Textarea + CTA button",
+    "History (if exists)",
+    "Footer"
+  ],
+
+  "acceptance_criteria": [
+    "AC-1: Pain hook text is completely removed from rendered page (not just hidden)",
+    "AC-2: H2 contains no GO/PIVOT/DON'T jargon",
+    "AC-3: Sample verdict cards are visible on 1920x1080 without scrolling",
+    "AC-4: Sample verdict cards are visible on 390x844 (iPhone) without scrolling",
+    "AC-5: Cards still hide after first verdict submission (sessionSubmitted=true)",
+    "AC-6: Cards still hide when history has 2+ entries",
+    "AC-7: npm run build passes with zero errors",
+    "AC-8: npx tsc --noEmit passes"
+  ],
+
+  "manual_test_plan": [
+    "1. Open councilpro.vercel.app (or localhost:3000) on desktop",
+    "2. Verify: no pain hook text visible above H1",
+    "3. Verify: H2 says 'Describe your idea...' (EN) or 'Fikrini anlat...' (TR) — no GO/PIVOT/DON'T",
+    "4. Verify: 3 sample cards (GO/PIVOT/DON'T) visible WITHOUT scrolling on desktop",
+    "5. Open on mobile viewport (390px wide) — cards should be visible in scroll but above textarea",
+    "6. Submit a verdict — sample cards should disappear",
+    "7. Refresh page — if history has 2+ items, cards should not show",
+    "8. Toggle language — H2 and cards should switch correctly"
+  ],
+
+  "reporting_format": "Paste: AC-1 through AC-8 with PASS/FAIL. Screenshot of landing page (desktop + mobile) before submitting verdict."
+}
