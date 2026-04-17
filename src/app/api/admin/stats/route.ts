@@ -1,16 +1,21 @@
+import { timingSafeEqual } from "crypto";
 import { supabase } from "@/lib/supabase-server";
 
 const ADMIN_KEY = process.env.ADMIN_KEY;
 
 export async function GET(req: Request) {
-  const url = new URL(req.url);
-  const key = url.searchParams.get("key");
-
   if (!ADMIN_KEY) {
     return Response.json({ error: "Admin endpoint not configured" }, { status: 503 });
   }
 
-  if (key !== ADMIN_KEY) {
+  const auth = req.headers.get("authorization");
+  const key = auth?.startsWith("Bearer ") ? auth.slice(7) : null;
+
+  if (
+    !key ||
+    key.length !== ADMIN_KEY.length ||
+    !timingSafeEqual(Buffer.from(key), Buffer.from(ADMIN_KEY))
+  ) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /eval
+Disallow: /lab/
+
+Sitemap: https://councilpro.vercel.app/sitemap.xml
