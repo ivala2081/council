@@ -1,8 +1,5 @@
-// TODO(v2.1): Add rate limiting via Upstash Redis when we have >100 daily users.
-// In-memory Map does not work on Vercel serverless cold starts.
-// See: https://upstash.com/docs/redis/sdks/ratelimit-ts
-
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 import Anthropic from "@anthropic-ai/sdk";
 import Exa from "exa-js";
 import { z } from "zod";
@@ -720,6 +717,20 @@ export async function POST(request: NextRequest) {
       "INVALID_INPUT",
       parsed.error.issues[0]?.message ?? "Invalid input",
       400,
+    );
+  }
+
+  // Rate limiting — before expensive Anthropic call
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const rateLimitResult = await checkRateLimit(ip);
+  if (!rateLimitResult.allowed) {
+    return NextResponse.json(
+      {
+        error: "RATE_LIMITED",
+        message: "Rate limit exceeded. Maximum 10 verdicts per day.",
+        resetsAt: rateLimitResult.resetsAt.toISOString(),
+      },
+      { status: 429 },
     );
   }
 

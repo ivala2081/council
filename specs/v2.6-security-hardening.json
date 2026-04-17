@@ -1,0 +1,202 @@
+{
+  "spec_id": "v2.6-security-hardening",
+  "title": "Council v2.6 — Security Hardening & Rate Limiting",
+  "version": "1.0.0",
+  "status": "FROZEN",
+  "frozen_at": "2026-04-17",
+  "date": "2026-04-17",
+  "owner": "ivala (founder)",
+  "prompt_engineer": "Claude Opus 4.6 (session: council-pm-apr17)",
+  "implementer": "fresh Claude Code session (NEW chat)",
+  "priority": "CRITICAL — must ship before any public launch or Product Hunt submission",
+
+  "context": {
+    "product": "Council v2.5 is live at https://councilpro.vercel.app. Verdict API uses Claude Sonnet (~$0.03-0.05/call). No rate limiting on the most expensive endpoint. Admin uses query-param auth. Events/feedback endpoints have zero auth.",
+    "validated_problem": "Security audit on 2026-04-17 identified 5 exploitable gaps. Any of these could burn API credits, poison analytics, or leak admin data before/during launch.",
+    "root_causes": [
+      "/api/verdict has ZERO rate limiting — TODO comment since v2.1, never implemented",
+      "/api/admin/stats authenticates via query param ?key=... — logged in browser history, proxies, access logs",
+      "/api/events accepts any payload with no auth — anyone can forge analytics events",
+      "/api/feedback accepts any missionId with no ownership check",
+      "No middleware.ts — no security headers (CSP, X-Frame-Options, etc.)"
+    ]
+  },
+
+  "critical_context_to_read": [
+    {
+      "path": "src/app/api/verdict/route.ts",
+      "purpose": "Lines 1-3 have the TODO comment about Upstash Redis rate limiting. This is the most expensive endpoint (~$0.05/call to Anthropic). Currently has ZERO rate limiting. Read first 30 lines to understand the setup, then lines 700-786 for the POST handler entry point."
+    },
+    {
+      "path": "src/lib/rate-limit.ts",
+      "purpose": "Existing Supabase-based rate limiter used by /api/mission. Uses RPC check_rate_limit. Fails open on error (line 57). This pattern should be reused for /api/verdict with the same 10/day limit, but verdict route currently does NOT call it."
+    },
+    {
+      "path": "src/app/api/admin/stats/route.ts",
+      "purpose": "Lines 3-15: Admin auth uses ADMIN_KEY from env, compared via query param. Must move to Authorization header."
+    },
+    {
+      "path": "src/app/api/events/route.ts",
+      "purpose": "45 lines, zero auth. Accepts arbitrary event_name, owner_token, thread_id, metadata. Must add basic validation."
+    },
+    {
+      "path": "src/app/api/feedback/route.ts",
+      "purpose": "55 lines. Zod validation is good but no ownership check — accepts any missionId. Low risk but should validate."
+    }
+  ],
+
+  "implementation_tasks": [
+    {
+      "task_id": "T1",
+      "title": "Add rate limiting to /api/verdict",
+      "priority": "must",
+      "file": "src/app/api/verdict/route.ts",
+      "changes": [
+        "Import checkRateLimit from @/lib/rate-limit",
+        "At the top of the POST handler (after input validation, before Anthropic API call), extract IP from x-forwarded-for header and owner_token from request body or cookies",
+        "Call checkRateLimit(ip, ownerToken). If not allowed, return 429 with error code 'RATE_LIMITED', message 'Rate limit exceeded. Maximum 10 verdicts per day.', and resetsAt ISO string",
+        "Remove the TODO comment on lines 1-3 (it's now done)"
+      ],
+      "code_pattern": "Copy the exact pattern from src/app/api/mission/route.ts lines 48-54 — that endpoint already uses checkRateLimit correctly. The verdict route should use the same approach.",
+      "test": "Submit 11 verdicts from same IP within 24h. The 11th should return 429."
+    },
+    {
+      "task_id": "T2",
+      "title": "Move admin auth from query param to Authorization header",
+      "priority": "must",
+      "file": "src/app/api/admin/stats/route.ts",
+      "changes": [
+        "Replace line 7 `const key = url.searchParams.get('key')` with `const auth = req.headers.get('authorization')` and `const key = auth?.startsWith('Bearer ') ? auth.slice(7) : null`",
+        "Keep the same ADMIN_KEY comparison on line 13",
+        "Delete the `const url = new URL(req.url)` line (no longer needed for auth)",
+        "Add timing-safe comparison: use crypto.timingSafeEqual instead of !== to prevent timing attacks. Import from 'crypto'. Convert both strings to Buffer before comparing."
+      ],
+      "notes": "After this change, admin requests must use: curl -H 'Authorization: Bearer <key>' /api/admin/stats. Document this in the reporting format."
+    },
+    {
+      "task_id": "T3",
+      "title": "Add basic validation to /api/events",
+      "priority": "must",
+      "file": "src/app/api/events/route.ts",
+      "changes": [
+        "Add a Zod schema for event validation: event_name must be a string with max 100 chars from an allowed list, owner_token optional string, thread_id optional string uuid, mission_id optional string uuid, metadata optional object with max 5 keys",
+        "The allowed event names list: ['verdict_requested', 'verdict_completed', 'verdict_shared', 'verdict_tweeted', 'feedback_submitted', 'link_copied', 'page_view', 'history_cleared', 're_evaluate']. Reject unknown event names.",
+        "Add rate limiting: max 100 events per hour per IP (use a simple in-memory Map with TTL — events are fire-and-forget, not worth a DB call). This is acceptable because events are low-value and losing some on cold start is fine.",
+        "Return 400 on validation failure, 429 on rate limit"
+      ],
+      "notes": "Events are fire-and-forget analytics. The goal is to prevent spam/poisoning, not to add full auth. Keep the implementation simple."
+    },
+    {
+      "task_id": "T4",
+      "title": "Add Next.js middleware with security headers",
+      "priority": "must",
+      "file_create": "src/middleware.ts",
+      "changes": [
+        "Create src/middleware.ts (Next.js middleware runs at the edge before every request)",
+        "Add security headers to all responses: X-Frame-Options: DENY, X-Content-Type-Options: nosniff, Referrer-Policy: strict-origin-when-cross-origin, X-DNS-Prefetch-Control: on, Permissions-Policy: camera=(), microphone=(), geolocation=()",
+        "Do NOT add CSP yet — it requires careful tuning with inline scripts/styles and can break the app. Flag as future improvement.",
+        "Export a config.matcher that excludes static files: ['/((?!_next/static|_next/image|favicon.ico|icon.svg|.*\\.svg$).*)']"
+      ],
+      "notes": "Keep middleware minimal. Its only job is security headers. Do NOT add auth logic here — that stays in individual route handlers."
+    },
+    {
+      "task_id": "T5",
+      "title": "Add robots.txt and basic sitemap",
+      "priority": "should",
+      "files": ["public/robots.txt", "src/app/sitemap.ts"],
+      "robots_txt_content": "User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin/\nDisallow: /eval\nDisallow: /lab/\n\nSitemap: https://councilpro.vercel.app/sitemap.xml",
+      "sitemap_content": "Export a default function that returns an array of { url, lastModified, changeFrequency, priority } objects. Include: / (priority 1.0), /how-we-score (priority 0.5). Do NOT include /api/*, /admin/*, /lab/*, /eval, /v/[id] (dynamic), /thread/[id] (dynamic).",
+      "notes": "Use Next.js built-in sitemap generation (app/sitemap.ts). See Next.js docs for MetadataRoute.Sitemap type."
+    },
+    {
+      "task_id": "T6",
+      "title": "Add minimal privacy and terms pages",
+      "priority": "should",
+      "files_create": ["src/app/privacy/page.tsx", "src/app/terms/page.tsx"],
+      "design": [
+        "Both pages: server components (no 'use client'), simple prose layout with max-w-2xl mx-auto px-6 py-16",
+        "Use the same header (AppHeader or inline Council link + ThemeToggle) as other pages",
+        "Content should be minimal but legally functional — what data is collected (idea text, analytics events, feedback), how it's stored (Supabase), no data selling, contact email for deletion requests",
+        "Terms: service provided as-is, not financial/legal advice, AI verdicts are opinions not guarantees",
+        "Add links to /privacy and /terms in the footer of page.tsx (next to existing GitHub link)"
+      ],
+      "copy_guidelines": [
+        "Keep tone consistent with Council — direct, no legalese",
+        "Privacy: 'We store your idea text to generate a verdict. We track anonymous analytics events. We don't sell your data. Email <founder-email> to request deletion.'",
+        "Terms: 'Council provides AI-generated opinions about startup ideas. These are not investment advice. Use at your own judgment.'"
+      ],
+      "notes": "These don't need to be perfect legal documents — they need to exist for launch credibility. Founder can iterate with a lawyer later."
+    }
+  ],
+
+  "what_not_to_build": [
+    "Do NOT add full OAuth/JWT auth system — overkill for current stage",
+    "Do NOT add CSP headers — requires careful tuning, can break inline styles/scripts",
+    "Do NOT add Upstash Redis — existing Supabase rate limiting is sufficient for launch volume",
+    "Do NOT refactor rate-limit.ts — it works, just needs to be called from verdict route",
+    "Do NOT add CORS middleware — Vercel handles this correctly by default for same-origin",
+    "Do NOT modify the verdict API logic, prompt, or scoring — security only",
+    "Do NOT add user accounts or session management",
+    "Do NOT add request logging or Sentry in this spec — that's a separate concern"
+  ],
+
+  "acceptance_criteria": [
+    "AC1: POST /api/verdict returns 429 after 10 requests from same IP within 24h",
+    "AC2: GET /api/admin/stats returns 401 without Authorization header. Returns 200 with correct Bearer token.",
+    "AC3: GET /api/admin/stats?key=<value> (old query param style) returns 401 — old auth method no longer works",
+    "AC4: POST /api/events with unknown event_name returns 400",
+    "AC5: POST /api/events with valid event_name returns 200",
+    "AC6: All responses include X-Frame-Options, X-Content-Type-Options, Referrer-Policy headers",
+    "AC7: GET /robots.txt returns correct content with Disallow for /api/ and /admin/",
+    "AC8: GET /sitemap.xml returns valid XML with / and /how-we-score",
+    "AC9: /privacy and /terms pages render with correct content",
+    "AC10: Footer links to /privacy and /terms exist",
+    "AC11: No TypeScript errors, build passes, no console errors",
+    "AC12: Existing verdict flow, history, sharing, feedback all work unchanged"
+  ],
+
+  "manual_test_plan": [
+    {
+      "id": "TEST-1-rate-limit",
+      "steps": "Use curl to send 11 POST requests to /api/verdict with a valid idea. Count responses.",
+      "expected": "First 10 return 200 (or normal error). 11th returns 429 with resetsAt timestamp."
+    },
+    {
+      "id": "TEST-2-admin-old-auth",
+      "steps": "curl 'http://localhost:3000/api/admin/stats?key=<admin-key>'",
+      "expected": "Returns 401 Unauthorized (old auth method blocked)"
+    },
+    {
+      "id": "TEST-3-admin-new-auth",
+      "steps": "curl -H 'Authorization: Bearer <admin-key>' http://localhost:3000/api/admin/stats",
+      "expected": "Returns 200 with stats JSON"
+    },
+    {
+      "id": "TEST-4-events-validation",
+      "steps": "curl -X POST http://localhost:3000/api/events -d '{\"event\":\"hacked_event\"}'",
+      "expected": "Returns 400 (unknown event name)"
+    },
+    {
+      "id": "TEST-5-security-headers",
+      "steps": "curl -I http://localhost:3000/ | grep -E 'X-Frame|X-Content-Type|Referrer'",
+      "expected": "All three headers present"
+    },
+    {
+      "id": "TEST-6-robots",
+      "steps": "curl http://localhost:3000/robots.txt",
+      "expected": "Returns robots.txt with Disallow: /api/"
+    },
+    {
+      "id": "TEST-7-legal-pages",
+      "steps": "Visit /privacy and /terms in browser",
+      "expected": "Both render with content, no 404"
+    },
+    {
+      "id": "TEST-8-regression",
+      "steps": "Submit a verdict, check history, share it, give feedback",
+      "expected": "All flows work exactly as before"
+    }
+  ],
+
+  "reporting_format": "## v2.6 Security Hardening — Implementation Report\n\n### Completed Tasks\n- [ ] T1 — Rate limiting on /api/verdict\n- [ ] T2 — Admin auth → Authorization header\n- [ ] T3 — Events endpoint validation\n- [ ] T4 — Security headers middleware\n- [ ] T5 — robots.txt + sitemap\n- [ ] T6 — Privacy + Terms pages\n\n### Acceptance Criteria Results\n[AC1-AC12 with pass/fail]\n\n### Manual Test Results\n[TEST-1 through TEST-8 with pass/fail]\n\n### Files Changed\n[list]\n\n### Surprises / Deviations\n[any judgment calls]\n\n### New Admin Auth Usage\nOld: curl '/api/admin/stats?key=<key>'\nNew: curl -H 'Authorization: Bearer <key>' /api/admin/stats"
+}
