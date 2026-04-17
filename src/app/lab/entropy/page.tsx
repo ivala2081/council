@@ -3,17 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { EntropyBg } from "@/components/entropy-bg";
+import { LoadingSteps, STEPS } from "@/components/loading-steps";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const DURATION_OPTIONS = [10, 20, 30, 45, 60];
-
-const FAKE_STEPS = [
-  { delay: 0, text: "Fikrin okunuyor..." },
-  { delay: 3000, text: "Pazar kontrol ediliyor..." },
-  { delay: 8000, text: "Riskler analiz ediliyor..." },
-  { delay: 15000, text: "Karar oluşturuluyor..." },
-  { delay: 25000, text: "Derin analiz — karmaşık fikirler biraz daha uzun sürer..." },
-];
 
 export default function EntropyLab() {
   const [progress, setProgress] = useState(0);
@@ -49,7 +42,8 @@ export default function EntropyLab() {
     setElapsedMs(value * durationSec * 1000);
   };
 
-  const currentStep = FAKE_STEPS.reduce((acc, s, i) => (elapsedMs >= s.delay ? i : acc), 0);
+  // Compute which step based on elapsed time
+  const currentStep = STEPS.reduce((acc, s, i) => (elapsedMs >= s.delay ? i : acc), 0);
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
@@ -66,21 +60,7 @@ export default function EntropyLab() {
       </header>
 
       <main className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6">
-        <div className="space-y-3 text-sm">
-          {FAKE_STEPS.slice(0, currentStep + 1).map((step, i) => (
-            <div key={i} className="flex items-center gap-3">
-              {i < currentStep ? (
-                <span className="text-emerald-500 w-4 text-center">✓</span>
-              ) : (
-                <span className="w-4 h-4 border-2 border-muted-foreground/30 border-t-foreground rounded-full animate-spin" />
-              )}
-              <span className={i < currentStep ? "text-muted-foreground" : "text-foreground"}>
-                {step.text}
-              </span>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-muted-foreground/60 mt-8">~{durationSec} saniye — gerçek veri biraz zaman alır</p>
+        <LoadingSteps active={true} externalStep={currentStep} />
       </main>
 
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 w-[min(520px,calc(100%-2rem))]">
@@ -131,7 +111,7 @@ export default function EntropyLab() {
           <div className="text-xs text-muted-foreground/60 tabular-nums pt-1 border-t border-border/30">
             <span>t = {(elapsedMs / 1000).toFixed(1)}s</span>
             <span className="mx-2">·</span>
-            <span>front = {(progress * 100).toFixed(0)}% of viewport</span>
+            <span>step = {currentStep + 1}/{STEPS.length}</span>
           </div>
         </div>
       </div>

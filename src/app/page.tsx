@@ -5,6 +5,7 @@ import Link from "next/link";
 import { VerdictCard } from "@/components/verdict-card";
 import { SampleVerdicts } from "@/components/sample-verdicts";
 import { EntropyBg } from "@/components/entropy-bg";
+import { LoadingSteps } from "@/components/loading-steps";
 import { v2VerdictSchema, type V2Verdict } from "@/lib/agents/types";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LangToggle } from "@/components/lang-toggle";
@@ -124,29 +125,13 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [verdictId, setVerdictId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [loadingStep, setLoadingStep] = useState(0);
   const lastIdeaRef = useRef<string>("");
   const reEvalEntryRef = useRef<HistoryEntry | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [sessionSubmitted, setSessionSubmitted] = useState(false);
 
-  const loadingSteps = [
-    { delay: 0, text: t("loading_step_1") },
-    { delay: 3000, text: t("loading_step_2") },
-    { delay: 8000, text: t("loading_step_3") },
-    { delay: 15000, text: t("loading_step_4") },
-    { delay: 25000, text: t("loading_step_5") },
-  ];
-
   useEffect(() => { setHistory(getHistory()) }, []);
-
-  useEffect(() => {
-    if (viewState !== "loading") { setLoadingStep(0); return }
-    const timers = loadingSteps.map((step, i) => setTimeout(() => setLoadingStep(i), step.delay));
-    return () => timers.forEach(clearTimeout);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [viewState]);
 
   const handleSubmit = useCallback(async () => {
     if (!idea.trim() || idea.trim().length < 10 || isLoading) return;
@@ -395,27 +380,13 @@ export default function Home() {
           </div>
         )}
 
-        {/* Loading — minimal */}
+        {/* Loading — card-based with animations */}
         {viewState === "loading" && (
-          <div className="relative flex-1 flex flex-col items-center justify-center">
+          <div className="relative flex-1 flex flex-col items-center justify-center px-4">
             <EntropyBg />
-            <div className="relative z-10 space-y-3 text-sm">
-              {loadingSteps.slice(0, loadingStep + 1).map((step, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  {i < loadingStep ? (
-                    <span className="text-emerald-500 w-4 text-center">✓</span>
-                  ) : (
-                    <span className="w-4 h-4 border-2 border-muted-foreground/30 border-t-foreground rounded-full animate-spin" />
-                  )}
-                  <span className={i < loadingStep ? "text-muted-foreground" : "text-foreground"}>
-                    {step.text}
-                  </span>
-                </div>
-              ))}
+            <div className="relative z-10">
+              <LoadingSteps active={viewState === "loading"} />
             </div>
-            <p className="relative z-10 text-xs text-muted-foreground/60 mt-8">
-              {t("loading_estimate")}
-            </p>
           </div>
         )}
 
